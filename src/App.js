@@ -1,24 +1,47 @@
 import logo from './logo.svg';
 import './App.css';
+import SignUpPage from './pages/SignUpPage';
+import ChooseRolePage from './pages/ChooseRolePage';
+import QuestionnairePage from './pages/QuestionnairePage';
+import HomePage from './pages/HomePage';
+import {
+  BrowserRouter
+  ,Link
+  ,Routes
+  ,Route
+  ,createRoutesFromElements
+  ,createBrowserRouter
+} from 'react-router-dom'
+import SignInPage from './pages/SignUpPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <BrowserRouter>
+        <Routes>
+            <Route path="/choose-role"
+                action={({ params }) => {}}
+                element = {<ChooseRolePage />}
+                exact
+                />;
+            <Route path="/sign-in"
+                action={({ params }) => {}}
+                element = {<SignInPage />}
+                exact
+                />;
+            <Route path="/quest-page"
+                action={({ params }) => {}}
+                element = {<QuestionnairePage />}
+                exact
+                />;
+            <Route path="/home-page"
+                action={({ params }) => {}}
+                element = {<HomePage />}
+                exact
+                />;
+        </Routes>
+    </ BrowserRouter>
+    </>
   );
 }
 
