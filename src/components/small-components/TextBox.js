@@ -7,7 +7,7 @@ const TextBox = ({ title, placeholder }) => {
       id="outlined-basic"
       label={title}
       variant="outlined"
-    //   variant="filled"
+      // variant="filled"
       placeholder={placeholder}
     />
   );

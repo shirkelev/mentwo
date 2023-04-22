@@ -1,9 +1,9 @@
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
 
-const MyAvatar = () => {
+const MyAvatar = (props) => {
   return (
-    <Avatar alt="User Avatar" src="/static/images/avatar/1.jpg" />
+    <Avatar alt="User Avatar" src={props.img} />
   );
 };
 

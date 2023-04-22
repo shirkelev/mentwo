@@ -1,30 +1,35 @@
 import React from 'react';
-import Line from './small-components/Line';
+import Line from './Line';
 import styled from '@emotion/styled';
 import { alignProperty } from '@mui/material/styles/cssUtils';
 
 const LinesWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
-    flexGrow: '1',
+    // flexGrow: '100',
     gap: '10px',
-    width: '100vw',
-    heigth: '100vh',
+    width: '100%',
+    // heigth: '100vh',
     margin: '10px',
-    minHeight:'70%'
+    // minHeight:'70%'
   }));
 
-const HomeContent = () => {
+const HomeContent = ({list}) => {
   const handleInfoClick = () => {
     alert('Info button clicked');
   }
   return (
     <>
     <LinesWrapper>
-      <Line avatarSrc="https://via.placeholder.com/100" avatarAlt="avatar" avatarSize={40} infoOnClick={handleInfoClick} />
-      <Line avatarSrc="" avatarAlt="avatar" avatarSize={40} infoOnClick={handleInfoClick} status={'active'} />
-      <Line avatarSrc="https://via.placeholder.com/100" avatarAlt="avatar" avatarSize={40} infoOnClick={handleInfoClick} />
-      
+      {list.map(x => {
+        return (
+          <>
+          <Line avatarSrc={'../data/images/' + x.img} avatarAlt={x.userName} 
+          avatarSize={40} infoOnClick={handleInfoClick}
+          status={x.status} />
+          </>
+        )
+      })}
     </LinesWrapper>
     </>
   );

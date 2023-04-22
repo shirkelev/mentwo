@@ -9,12 +9,15 @@ import {
   ,Link
   ,Routes
   ,Route
-  ,createRoutesFromElements
-  ,createBrowserRouter
+  // ,createRoutesFromElements
+  // ,createBrowserRouter
 } from 'react-router-dom'
 import SignInPage from './pages/SignUpPage';
+import DataBase from './data/DataBase';
 
 function App() {
+  const data = new DataBase()
+  console.log(data)
   return (
     <>
     <BrowserRouter>
@@ -36,7 +39,7 @@ function App() {
                 />;
             <Route path="/home-page"
                 action={({ params }) => {}}
-                element = {<HomePage />}
+                element = {<HomePage user={data.findByName('Nits')}/>}
                 exact
                 />;
         </Routes>

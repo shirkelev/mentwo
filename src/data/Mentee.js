@@ -1,8 +1,8 @@
-import { User }  from './User.js'
+import User from './User.js'
 
-export class Mentee extends User {
+export default class Mentee extends User {
     constructor(userName, name, lastName, password, img, email) {
-        super(userName, name, lastName, password, img, email);
+        super(userName, name, lastName, password, img, email, 'mentee');
         this.offeredMentors = [];
         this.currentMentor = null;
         this.mentorshipStatus = null;
@@ -15,5 +15,5 @@ export class Mentee extends User {
     }
 }
 
-// export Mentee;
+// // export Mentee;
 // console.log(new Mentee('a','a','a'))

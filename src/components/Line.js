@@ -1,8 +1,8 @@
 import React from 'react';
-import MyAvatar from './MyAvatar';
-import InfoButton from './InfoButton';
+import MyAvatar from './small-components/MyAvatar';
+import InfoButton from './small-components/InfoButton';
 import Divider from '@mui/material/Divider';
-import StatusSign from './StatusSign';
+import StatusSign from './small-components/StatusSign';
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
 
