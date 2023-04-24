@@ -4,6 +4,7 @@ import SignUpPage from './pages/SignUpPage';
 import ChooseRolePage from './pages/ChooseRolePage';
 import QuestionnairePage from './pages/QuestionnairePage';
 import HomePage from './pages/HomePage';
+import ProcessCompletionPage from './pages/ProcessCompletionPage';
 import {
   BrowserRouter
   ,Link
@@ -40,6 +41,11 @@ function App() {
             <Route path="/home-page"
                 action={({ params }) => {}}
                 element = {<HomePage user={data.findByName('Nits')}/>}
+                exact
+                />;
+            <Route path="/process-completion"
+                action={({ params }) => {}}
+                element = {<ProcessCompletionPage user={data.findByName('Yuval')}/>}
                 exact
                 />;
         </Routes>
