@@ -114,11 +114,10 @@ const ProcessCompletionPage = ({user}) => {
 
     const handleShare = (event) => {
         // Share on LinkedIn
-        // const image = `https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Check_mark_icon.svg/1200px-Check_mark_icon.svg.png`;
-        // const shareUrl = `https://www.linkedin.com/sharing/share?url=https://www.example.com&title=${message}&summary=&source=&thumbnail=${image}`;
-        // window.open(shareUrl);
       };
+
     const [selectedOption, setSelectedOption] = useState('');
+    
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
     };
@@ -133,7 +132,7 @@ const ProcessCompletionPage = ({user}) => {
             <FormContainer>
                 
                 <FeedbackContainer>
-                    <Question>Were you able to help your mentee find a job?</Question>
+                    <Question>Have you helped your mentee find a job?</Question>
                     <RadioGroup row>
                         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                         <FormControlLabel value="no" control={<Radio />} label="No" />
@@ -164,6 +163,10 @@ const ProcessCompletionPage = ({user}) => {
                 </FeedbackContainer>
 
                 <ButtonSection>
+                <IconButton  onClick={handleShare} size='small'  color='primary' disabled={selectedOption !== 'yes'} >
+                    Share this process     
+                    <LinkedInIcon fontSize='large' />
+                </IconButton>
                     <ButtonWrapper variant="contained" color="primary" onClick={handleOpen} title='Done' />
                 </ButtonSection>
 
@@ -234,16 +237,6 @@ const ProcessCompletionPage = ({user}) => {
                     <BigContentBox placeholder="Tell us more" />
                 </FeedbackContainer>
 
-            {/* <FeedbackContainer> */}
-
-                {/* <IconButton  onClick={handleShare} size='small'  color='primary' disabled={selectedOption !== 'yes'} >
-                    Share this process     
-                    <LinkedInIcon fontSize='large' />
-                </IconButton> */}
-            {/* </FeedbackContainer> */}
-
-            </FormContainer>
-
                 <ButtonSection>
                 <IconButton  onClick={handleShare} size='small'  color='primary' disabled={selectedOption !== 'yes'} >
                     Share this process     
@@ -252,7 +245,8 @@ const ProcessCompletionPage = ({user}) => {
                     <ButtonWrapper variant="contained" color="primary" onClick={handleOpen} title='Done' />
                 </ButtonSection>
         
-        
+            </FormContainer>
+
             <Dialog
                 open={open}
                 onClose={alertHandleCloseWithNo}

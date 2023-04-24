@@ -45,7 +45,7 @@ function App() {
                 />;
             <Route path="/process-completion"
                 action={({ params }) => {}}
-                element = {<ProcessCompletionPage user={data.findByName('Yuval')}/>}
+                element = {<ProcessCompletionPage user={data.findByName('Nits')}/>}
                 exact
                 />;
         </Routes>
