@@ -4,6 +4,9 @@ import SignUpPage from './pages/SignUpPage';
 import ChooseRolePage from './pages/ChooseRolePage';
 import QuestionnairePage from './pages/QuestionnairePage';
 import HomePage from './pages/HomePage';
+import LandingPage from './pages/LandingPage';
+import ProcessCompletionPage from './pages/ProcessCompletionPage';
+
 import {
   BrowserRouter
   ,Link
@@ -27,6 +30,11 @@ function App() {
                 element = {<ChooseRolePage />}
                 exact
                 />;
+            <Route path="/landing-page"
+                action={({ params }) => {}}
+                element = {<LandingPage />}
+                exact
+                />;
             <Route path="/sign-in"
                 action={({ params }) => {}}
                 element = {<SignInPage />}
@@ -40,6 +48,11 @@ function App() {
             <Route path="/home-page"
                 action={({ params }) => {}}
                 element = {<HomePage user={data.findByName('Nits')}/>}
+                exact
+                />;
+            <Route path="/process-completion"
+                action={({ params }) => {}}
+                element = {<ProcessCompletionPage user={data.findByName('Nits')}/>}
                 exact
                 />;
         </Routes>

@@ -24,7 +24,7 @@ const HomeContent = ({list}) => {
       {list.map(x => {
         return (
           <>
-          <Line avatarSrc={'../data/images/' + x.img} avatarAlt={x.userName} 
+          <Line img={x.img} avatarAlt={x.userName} 
           avatarSize={40} infoOnClick={handleInfoClick}
           status={x.status} />
           </>

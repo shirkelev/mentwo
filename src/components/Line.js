@@ -18,11 +18,11 @@ const LineWrapper = styled('div')(({ theme }) => ({
   }));
 
 const Line = (props) => {
-  const { avatarSrc, avatarAlt, avatarSize, infoOnClick, status } = props;
+  const { img, avatarAlt, avatarSize, infoOnClick, status} = props;
   return (
     <>
     <LineWrapper>
-        <MyAvatar src={avatarSrc} alt={avatarAlt} size={avatarSize} />
+        <MyAvatar src={img} alt='blala' size={avatarSize} avatarAlt={avatarAlt} />
         <StatusSign status={status}/>
         <InfoButton onClick={infoOnClick} />
     </LineWrapper>

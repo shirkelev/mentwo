@@ -3,7 +3,9 @@ import Avatar from '@mui/material/Avatar';
 
 const MyAvatar = (props) => {
   return (
-    <Avatar alt="User Avatar" src={props.img} />
+    <>
+      <Avatar alt={props.name} src={props.src} sx={{border:1}}/>
+    </>
   );
 };
 
