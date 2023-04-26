@@ -8,19 +8,19 @@ export default class DataBase{
             const emailEnd = '@gmail.com';
 
             const nitzan = new Mentor('Nits', 'Nitsan', 'Heiman'
-                , password, 'nitzan.jpeg',  'nitzan' + emailEnd);
+                , password, require('./images/nitzan.jpeg'),  'nitzan' + emailEnd);
 
             const shir = new Mentee('Shik', 'Shir', 'Levran'
-                , password, 'shir.jpeg',  'shir' + emailEnd);
+                , password, require('./images/shir.jpeg'),  'shir' + emailEnd);
 
             const yuvi = new Mentee('Yuval', 'Yuval', 'Yusipov'
-                , password, 'yuvi.jpeg',  'yuvi' + emailEnd);
+                , password, require('./images/yuvi.jpeg'),  'yuvi' + emailEnd);
 
             const omer = new Mentee('omer', 'Omer', 'Getzler'
-                , password, 'omer.jpeg',  'omer' + emailEnd);
+                , password, require('./images/omer.jpeg'),  'omer' + emailEnd);
             
             const bls = new Mentee('bla', 'bla', 'Getzler'
-                , password, 'omer.jpeg',  'omer' + emailEnd);
+                , password, require('./images/omer.jpeg'),  'omer' + emailEnd);
 
             nitzan.addMentee(shir, 'approved');
             nitzan.addMentee(bls, 'approved');

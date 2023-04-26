@@ -4,6 +4,8 @@ import SignUpPage from './pages/SignUpPage';
 import ChooseRolePage from './pages/ChooseRolePage';
 import QuestionnairePage from './pages/QuestionnairePage';
 import HomePage from './pages/HomePage';
+import LandingPage from './pages/LandingPage';
+
 import {
   BrowserRouter
   ,Link
@@ -25,6 +27,11 @@ function App() {
             <Route path="/choose-role"
                 action={({ params }) => {}}
                 element = {<ChooseRolePage />}
+                exact
+                />;
+            <Route path="/landing-page"
+                action={({ params }) => {}}
+                element = {<LandingPage />}
                 exact
                 />;
             <Route path="/sign-in"
