@@ -4,8 +4,12 @@ import SignUpPage from './pages/SignUpPage';
 import ChooseRolePage from './pages/ChooseRolePage';
 import QuestionnairePage from './pages/QuestionnairePage';
 import HomePage from './pages/HomePage';
+<<<<<<< HEAD
 import LandingPage from './pages/LandingPage';
 
+=======
+import ProcessCompletionPage from './pages/ProcessCompletionPage';
+>>>>>>> 0216ea31ae97886f7cc5d48712e9ea9544514475
 import {
   BrowserRouter
   ,Link
@@ -47,6 +51,11 @@ function App() {
             <Route path="/home-page"
                 action={({ params }) => {}}
                 element = {<HomePage user={data.findByName('Nits')}/>}
+                exact
+                />;
+            <Route path="/process-completion"
+                action={({ params }) => {}}
+                element = {<ProcessCompletionPage user={data.findByName('Nits')}/>}
                 exact
                 />;
         </Routes>
