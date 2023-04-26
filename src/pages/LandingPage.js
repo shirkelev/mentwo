@@ -1,32 +1,44 @@
 import React from 'react';
-import { Box, Button, Divider, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
-import Photo from '../data/images/photo.jpeg';
+import backgroung from '../data/images/bg_img.jpeg';
+import Button from '../components/small-components/Button';
+import * as Constants from '../Constants';
 
 function LandingPage() {
   return (
-    <div>
+    <>
+    <Box sx={{
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.5)'
+            ,backgroundColor:'primary',
+          }}>
       {/* Upper bar */}
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', py: 2 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', py: 2 , mr:2, gap:1}}>
         {/* Login and Signup links */}
-        <Box sx={{ mr: 2 }}>
-          <Button color="inherit">Log in</Button>
-          <Button color="inherit">Sign up</Button>
-        </Box>
+            <Button color="inherit" title='Log in' href={Constants.SIGN_IN}/>
+            <Divider orientation="vertical" flexItem='true' />
+            <Button color="inherit" title='Sign Up'  href={Constants.CHOOSE_ROLE_PAGE} />
       </Box>
-
-      {/* Divider */}
       <Divider />
+    </Box>
+      {/* Divider */}
+      
 
       {/* Text box */}
+      
+      <Box
+        sx={{
+          height: '100vh'
+        }}
+      >
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          height: 'calc(100vh - 64px)',
-          backgroundImage: `url(${Photo})`,
+          height: '100vh',
+          backgroundImage: `url(${backgroung})`,
           backgroundSize: 'cover',
         }}
       >
@@ -39,24 +51,38 @@ function LandingPage() {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
-            pt: 10, // add top padding
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+            pt: 6, // add top padding
             px: 10, // add horizontal padding
-            margin: '10%'
+            maxHeight: '70%',
+            margin: '10%',
+            overflow: 'scroll'
           }}
         >
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 5}}>
             <InfoIcon sx={{ mr: 1 }} />
-            <Typography variant="h4">About the app</Typography>
+            <Typography variant="h3">About the app</Typography>
           </Box>
-          <Typography variant="body1">
+          <Box sx={{overflow: 'scroll'}}>
+          <Typography variant="h5" align='justify'>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget bibendum nibh.
+            Vestibulum id bibendum neque, id tempus nisi. Duis auctor, leo nec laoreet volutpat, elit
+            turpis bibendum odio, sed sollicitudin lacus quam a nunc. Etiam id semper mi.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget bibendum nibh.
+            Vestibulum id bibendum neque, id tempus nisi. Duis auctor, leo nec laoreet volutpat, elit
+            turpis bibendum odio, sed sollicitudin lacus quam a nunc. Etiam id semper mi.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget bibendum nibh.
+            Vestibulum id bibendum neque, id tempus nisi. Duis auctor, leo nec laoreet volutpat, elit
+            turpis bibendum odio, sed sollicitudin lacus quam a nunc. Etiam id semper mi.
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eget bibendum nibh.
             Vestibulum id bibendum neque, id tempus nisi. Duis auctor, leo nec laoreet volutpat, elit
             turpis bibendum odio, sed sollicitudin lacus quam a nunc. Etiam id semper mi.
           </Typography>
         </Box>
+        </Box>
+        
       </Box>
-    </div>
+      </Box>
+      </>
   );
 }
 

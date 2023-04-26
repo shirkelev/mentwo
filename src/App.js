@@ -6,7 +6,7 @@ import QuestionnairePage from './pages/QuestionnairePage';
 import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
 import ProcessCompletionPage from './pages/ProcessCompletionPage';
-
+import * as Constants from './Constants';
 import {
   BrowserRouter
   ,Link
@@ -18,6 +18,10 @@ import {
 import SignInPage from './pages/SignUpPage';
 import DataBase from './data/DataBase';
 
+function addSemi(string){
+    return('/' + string)
+}
+
 function App() {
   const data = new DataBase()
   console.log(data)
@@ -25,32 +29,32 @@ function App() {
     <>
     <BrowserRouter>
         <Routes>
-            <Route path="/choose-role"
+            <Route path= {Constants.CHOOSE_ROLE_PAGE}
                 action={({ params }) => {}}
                 element = {<ChooseRolePage />}
                 exact
                 />;
-            <Route path="/landing-page"
+            <Route path={Constants.LANDING_PAGE}
                 action={({ params }) => {}}
                 element = {<LandingPage />}
                 exact
                 />;
-            <Route path="/sign-in"
+            <Route path={Constants.SIGN_IN}
                 action={({ params }) => {}}
-                element = {<SignInPage />}
+                element = {<SignUpPage />}
                 exact
                 />;
-            <Route path="/quest-page"
+            <Route path={Constants.REG_FORM}
                 action={({ params }) => {}}
                 element = {<QuestionnairePage />}
                 exact
                 />;
-            <Route path="/home-page"
+            <Route path={Constants.HOME_PAGE}
                 action={({ params }) => {}}
                 element = {<HomePage user={data.findByName('Nits')}/>}
                 exact
                 />;
-            <Route path="/process-completion"
+            <Route path={Constants.PROCESS_COMPLETION_FORM}
                 action={({ params }) => {}}
                 element = {<ProcessCompletionPage user={data.findByName('Nits')}/>}
                 exact

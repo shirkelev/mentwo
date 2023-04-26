@@ -1,8 +1,10 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-import Button from '../components/small-components/Button'
-import TextBox from '../components/small-components/TextBox'
+import Button from '../components/small-components/Button';
+import TextBox from '../components/small-components/TextBox';
+import * as Constantans from '../Constants';
+
 
 
 const RootContainer = styled(Container)(({ theme }) => ({
@@ -51,6 +53,18 @@ const Question = styled('h3')(({ theme }) => ({
   marginBottom: theme.spacing(1),
 }));
 
+function WrapQuestions(props){
+  const {title, name, placeHolder} = props;
+  return(
+    <QuestionContainer>
+            <Question>{name}</Question>
+            <TextBox title={title} 
+            placeholder={placeHolder} />
+    </QuestionContainer>
+  )
+
+}
+
 const QuestionnairePage = () => {
   return (
     <>
@@ -58,44 +72,17 @@ const QuestionnairePage = () => {
         
         <FormContainer>
             <Title>Tell us about yourself</Title>
-
-        <QuestionContainer>
-            <Question>What is your name?</Question>
-            <TextBox title="Name" placeholder="Enter your name" />
-        </QuestionContainer>
-
-        <QuestionContainer>
-            <Question>What is your email?</Question>
-            <TextBox title="Email" placeholder="Enter your email" />
-        </QuestionContainer>
-
-        <QuestionContainer>
-            <Question>What is your phone number?</Question>
-            <TextBox title="Phone number" placeholder="Enter your phone number" />
-        </QuestionContainer>
-
-        <QuestionContainer>
-            <Question>What is your occupation?</Question>
-            <TextBox title="Occupation" placeholder="Enter your occupation" />
-        </QuestionContainer>
-
-        <QuestionContainer>
-            <Question>What is your area of expertise?</Question>
-            <TextBox title="Area of expertise" placeholder="Enter your area of expertise" />
-        </QuestionContainer>
-
-        <QuestionContainer>
-            <Question>What is your experience level?</Question>
-            <TextBox title="Experience level" placeholder="Enter your experience level" />
-        </QuestionContainer>
-
-        <QuestionContainer>
-            <Question>What are your goals?</Question>
-            <TextBox title="Goals" placeholder="Enter your goals" />
-        </QuestionContainer>
+            {Constantans.MENTEE_QUESTIONS.map(x => 
+            <
+            WrapQuestions
+            title= {x.title}
+            name= {x.name}
+            placeHolder={x.placeHolder}
+            />
+              )}
         <ButtonSection>
-            <ButtonWrapper variant="contained" color="primary" href='choose-role' title='Prev' />
-            <ButtonWrapper variant="contained" color="primary" href='home-page' title='Next' />
+            <ButtonWrapper variant="contained" color="primary" href={Constantans.CHOOSE_ROLE_PAGE} title='Prev' />
+            <ButtonWrapper variant="contained" color="primary" href={Constantans.HOME_PAGE}  title='Next' />
         </ButtonSection>
 
     </FormContainer>
