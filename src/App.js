@@ -14,6 +14,7 @@ import {
 } from 'react-router-dom'
 import SignInPage from './pages/SignUpPage';
 import DataBase from './data/DataBase';
+import ChooseMentorPage from './pages/ChooseMentorPage';
 
 function App() {
   const data = new DataBase()
@@ -42,6 +43,11 @@ function App() {
                 element = {<HomePage user={data.findByName('Nits')}/>}
                 exact
                 />;
+            <Route path="/Choose-Mentor-page"
+              action={({ params }) => {}}
+              element = {<ChooseMentorPage />}
+              exact
+              />;
         </Routes>
     </ BrowserRouter>
     </>
