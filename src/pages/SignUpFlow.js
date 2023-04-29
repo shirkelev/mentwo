@@ -19,7 +19,6 @@ const SignUpFlow = ({props}) => {
     const [role, setRole] = useState(null);
     return (
         <>
-        <h1> {Constants.SIGN_UP_STEPS}  </h1>
         <StepsCounter steps={Constants.SIGN_UP_STEPS} />
         <UserRole.Provider value={{role, setRole}}>
             <Routes>

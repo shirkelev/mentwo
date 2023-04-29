@@ -7,19 +7,26 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-const steps = ['Step1', 'Step2', 'Step3'];
-const completed = [false, false, false];
 
+
+
+function createCompleted(steps){
+    let completed = [];
+    for (let i = 0; i < steps.length; i++) {
+        completed[i] = false;
+    }
+    return completed
+}
  function StepsCounter(props) {
-    // const completed = props.completed;
-    const steps1 = props.steps;
+    const steps = props.steps;
+    const completed = createCompleted(steps);
     const [activeStep, setActiveStep] = React.useState();
     const [skipped, setSkipped] = React.useState();
     
     return (
             <Box sx={{ width: '100%' }}>
             <Stepper nonLinear activeStep={activeStep}>
-                {steps1.map((label, index) => (
+                {steps.map((label, index) => (
                 <Step key={label} completed={completed[index]}>
                     <StepButton color="inherit">
                     {label}
