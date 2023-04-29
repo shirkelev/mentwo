@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import RoundButton from '../components/small-components/RoundButton';
 import * as Constantans from '../Constants';
-import {UserRole } from '../context/UserRole';
+import { SignUpContext } from '../context/SignUpContexts';
 import { Link } from 'react-router-dom';
 // import UserRole from '../context/UserRole';
 
@@ -12,7 +12,9 @@ const RootContainer = styled(Container)(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '100vh',
+
+  // height: '100',
+  padding: '10%',
 }));
 
 const Title = styled('h1')(({ theme }) => ({
@@ -38,10 +40,14 @@ const MenteeButton = styled(RoundButton)(({ theme }) => ({
 
 
 const ChooseRolePage = () => {
-  const {role, setRole} = useContext(UserRole);
-  // const [locRole, setLocRole] = useState('');
-  
-
+  const {role, setRole, step, setStep, completed, setCompleted} = useContext(SignUpContext);
+  function handleClick(role){
+    setRole(role);
+    setStep(step + 1);
+    let newCompleted = completed;
+    newCompleted[step] = true;
+    setCompleted(newCompleted);
+  }
   return (
     
       <RootContainer maxWidth="sm">
@@ -49,18 +55,18 @@ const ChooseRolePage = () => {
         <ButtonsContainer>
             <MentorButton 
               color="primary" 
-              // href={Constantans.REG_FORM}
               onClick={() =>  {
-              setRole('mentor');
-                 }}
-              to={'../' + Constantans.REG_FORM}>
-                Mentor</MentorButton>
+                handleClick('mentor');
+                }}
+              to={'../' + Constantans.REG_FORM}
+              text='Mentor'
+              />
             <MenteeButton 
               color="secondary" 
               onClick={() =>  {
-              setRole('mentee');}}
-              to={'../' + Constantans.REG_FORM}>
-                Mentee</MenteeButton>
+                handleClick('mentee');
+                }}
+              to={'../' + Constantans.REG_FORM} text='Mentee' />
         </ButtonsContainer>
       </RootContainer>
    
