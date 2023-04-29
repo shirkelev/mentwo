@@ -109,7 +109,9 @@ export const DEFAULT_QUESTIONS = [
         title: 'Confirm Password'
     }
 ]
+// Sign Up Form Steps
 
+export const SIGN_UP_STEPS = ['General Info', 'Role', 'Registration Form'];
 
 
 
