@@ -3,6 +3,10 @@ import Line from './Line';
 import styled from '@emotion/styled';
 import { alignProperty } from '@mui/material/styles/cssUtils';
 import Divider from '@mui/material/Divider';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import DoneIcon from '@mui/icons-material/Done';
+import PersonAddDisabledIcon from '@mui/icons-material/PersonAddDisabled';
 
 const LinesWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -15,12 +19,33 @@ const LinesWrapper = styled('div')(({ theme }) => ({
     // minHeight:'70%'
   }));
 
-const HomeContent = ({list}) => {
+const HomeContent = ({headline, list}) => {
   const handleInfoClick = () => {
     alert('Info button clicked');
   }
+
+  let headlineIcon;
+  if (headline === "Pending Requests") {
+    headlineIcon = <PersonAddIcon/>;
+  }
+  if (headline === "In Process") {
+    headlineIcon = <SupervisorAccountIcon/>;
+  }
+  if (headline === "Finished") {
+    headlineIcon = <DoneIcon/>;
+  }
+  if (headline === "Declined") {
+    headlineIcon = <PersonAddDisabledIcon/>;
+  }
+
   return (
     <>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ marginRight: '10px' }}>
+        {headlineIcon}
+      </div>
+      <h3>{headline}</h3>
+    </div>
     <LinesWrapper>
       {list.map(x => {
         return (
