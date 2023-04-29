@@ -53,7 +53,7 @@ const HomeContent = ({headline, list}) => {
         return (
           <>
           <OptionalMentor picturePath={mentee.img} mentorName={mentee.name} 
-          details={"A third year computer science student, work at Mobileye"} />
+          details={"A third year computer science student, works at Mobileye"} />
           </>
         )
       })}
