@@ -11,7 +11,7 @@ export default function LeftPositionedTimeline() {
     <Timeline position="left">
       <TimelineItem>
         <TimelineSeparator>
-          <TimelineDot />
+        <TimelineDot color="primary" />
           <TimelineConnector />
         </TimelineSeparator>
         <TimelineContent>Choose Mentor</TimelineContent>

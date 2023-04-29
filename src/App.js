@@ -4,6 +4,10 @@ import SignUpPage from './pages/SignUpPage';
 import ChooseRolePage from './pages/ChooseRolePage';
 import QuestionnairePage from './pages/QuestionnairePage';
 import HomePage from './pages/HomePage';
+import LandingPage from './pages/LandingPage';
+import ProcessCompletionPage from './pages/ProcessCompletionPage';
+import * as Constants from './Constants';
+
 import {
   BrowserRouter
   ,Link
@@ -15,6 +19,11 @@ import {
 import SignInPage from './pages/SignUpPage';
 import DataBase from './data/DataBase';
 import ChooseMentorPage from './pages/ChooseMentorPage';
+import MenteeStatusPage from './pages/MenteeStatusPage';
+
+function addSemi(string){
+    return('/' + string)
+}
 
 function App() {
   const data = new DataBase()
@@ -23,22 +32,27 @@ function App() {
     <>
     <BrowserRouter>
         <Routes>
-            <Route path="/choose-role"
+            <Route path= {Constants.CHOOSE_ROLE_PAGE}
                 action={({ params }) => {}}
                 element = {<ChooseRolePage />}
                 exact
                 />;
-            <Route path="/sign-in"
+            <Route path={Constants.LANDING_PAGE}
                 action={({ params }) => {}}
-                element = {<SignInPage />}
+                element = {<LandingPage />}
                 exact
                 />;
-            <Route path="/quest-page"
+            <Route path={Constants.SIGN_IN}
+                action={({ params }) => {}}
+                element = {<SignUpPage />}
+                exact
+                />;
+            <Route path={Constants.REG_FORM}
                 action={({ params }) => {}}
                 element = {<QuestionnairePage />}
                 exact
                 />;
-            <Route path="/home-page"
+            <Route path={Constants.HOME_PAGE}
                 action={({ params }) => {}}
                 element = {<HomePage user={data.findByName('Nits')}/>}
                 exact
@@ -48,6 +62,16 @@ function App() {
               element = {<ChooseMentorPage />}
               exact
               />;
+            <Route path="/MenteeStatusPage"
+              action={({ params }) => {}}
+              element = {<MenteeStatusPage picturePath={'./data/images/nitzan.jpeg'} />}
+              exact
+              />;
+            <Route path={Constants.PROCESS_COMPLETION_FORM}
+                action={({ params }) => {}}
+                element = {<ProcessCompletionPage user={data.findByName('Nits')}/>}
+                exact
+                />;
         </Routes>
     </ BrowserRouter>
     </>
