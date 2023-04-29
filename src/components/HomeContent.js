@@ -27,17 +27,22 @@ const HomeContent = ({headline, list}) => {
   }
 
   let headlineIcon;
+  let buttonText;
   if (headline === "Pending Requests") {
     headlineIcon = <PersonAddIcon/>;
+    buttonText = "approve";
   }
   if (headline === "In Process") {
     headlineIcon = <SupervisorAccountIcon/>;
+    buttonText = "finish process";
   }
   if (headline === "Finished") {
     headlineIcon = <DoneIcon/>;
+    buttonText = "leave feedback";
   }
   if (headline === "Declined") {
     headlineIcon = <PersonAddDisabledIcon/>;
+    buttonText = "undecline";
   }
 
   return (
@@ -53,7 +58,8 @@ const HomeContent = ({headline, list}) => {
         return (
           <>
           <OptionalMentor picturePath={mentee.img} mentorName={mentee.name} 
-          details={"A third year computer science student, works at Mobileye"} />
+          details={"A third year computer science student, works at Mobileye"} 
+          buttonText = {buttonText}/>
           </>
         )
       })}

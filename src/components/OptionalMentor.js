@@ -10,7 +10,7 @@ import { Stack } from '@mui/material';
 import DetailsModal from './DetailsModal';
 
 
-export default function ImgMediaCard({mentorName, details, picturePath}) {
+export default function ImgMediaCard({mentorName, details, picturePath, buttonText}) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <Stack 
@@ -27,7 +27,7 @@ export default function ImgMediaCard({mentorName, details, picturePath}) {
       </CardContent>
       <CardActions>
         <Button size="small">About {mentorName}</Button>
-        <Button size="small">Be my Mentor!</Button>
+        <Button size="small">{buttonText}</Button>
       </CardActions>
     </Card>
   );
