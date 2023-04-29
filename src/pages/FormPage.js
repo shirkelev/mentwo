@@ -4,16 +4,18 @@ import Container from '@mui/material/Container';
 import Button from '../components/small-components/Button';
 import TextBox from '../components/small-components/TextBox';
 import * as Constantans from '../Constants';
-// import { U } from './ChooseRolePage';
-import { UserRole } from '../context/UserRole';
+import { SignUpContext } from '../context/SignUpContexts';
+import ConditionalButton from '../components/small-components/ConditionalButton';
+
+
 
 
 const RootContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  paddingTop: theme.spacing(10),
-  paddingBottom: theme.spacing(10),
+  // paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(5),
 }));
 
 const FormContainer = styled('form')(({ theme }) => ({
@@ -25,7 +27,7 @@ const FormContainer = styled('form')(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
 
-const ButtonWrapper = styled(Button)(({ theme }) => ({
+const ButtonWrapper = styled(ConditionalButton)(({ theme }) => ({
   margin: theme.spacing(2),
 }));
 
@@ -70,8 +72,7 @@ function WrapQuestions(props){
 
 const FormPage = (props) => {
   // const {role, setRole} = useContext(UserRole);
-  const {filedsArray, title, nextTo, prevTo} = props
-
+  const {filedsArray, title, nextTo, onSave, condition} = props;
   return (
     <>
     <RootContainer maxWidth="md">
@@ -85,8 +86,8 @@ const FormPage = (props) => {
           />
           )}
       <ButtonSection>
-          <ButtonWrapper variant="contained" color="primary"  title='Prev' to={prevTo} />
-          <ButtonWrapper variant="contained" color="primary" title='Next' to={nextTo} />
+          <ButtonWrapper variant="contained" color="primary" title='Save' to={nextTo} 
+            conditon={condition} onClick={() => onSave()}/>
       </ButtonSection>
 
     </FormContainer>

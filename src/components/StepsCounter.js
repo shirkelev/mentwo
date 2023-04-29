@@ -3,38 +3,61 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import StepButton from '@mui/material/StepButton';
 import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+// import StepLabel from '@mui/material/StepLabel';
+// import Button from '@mui/material/Button';
+// import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
+import { SignUpContext } from '../context/SignUpContexts';
 
 
 
 //Adding Tryout Comment
-function createCompleted(steps){
-    let completed = [];
-    for (let i = 0; i < steps.length; i++) {
-        completed[i] = false;
-    }
-    return completed
-}
+
+
+function MyStep(props){
+    const {label, completed, to} = props;
+    return(
+        <Step key={label} completed={completed}>
+            <Link to={null}>
+                <StepButton color="inherit" onClick={null}>
+                    {label}
+                </StepButton>
+            </Link>
+        </Step>
+    )
+};
+
+
+
  function StepsCounter(props) {
     const steps = props.steps;
-    const completed = createCompleted(steps);
-    const [activeStep, setActiveStep] = React.useState();
-    const [skipped, setSkipped] = React.useState();
-    
-    return (
-            <Box sx={{ width: '100%' }}>
-            <Stepper nonLinear activeStep={activeStep}>
+    const to = props.to;
+    const {step, setStep, completed} = React.useContext(SignUpContext);
+    const handleStep = (step) => () => {
+        setStep(step);
+      };
+    return(
+        <>
+        
+        <Box sx={{ width: '100%' }}>
+            <Stepper nonLinear activeStep={step}>
                 {steps.map((label, index) => (
-                <Step key={label} completed={completed[index]}>
-                    <StepButton color="inherit">
-                    {label}
-                    </StepButton>
-                </Step>
+                    <Step key={label} completed={completed[index]}>
+                        <Link to={to[index]}>
+                        <StepButton color="inherit" onClick={handleStep(index)}>
+                            {label}
+                        </StepButton>
+                        </Link>
+                    </Step>
                 ))}
+                    
             </Stepper>
-            </Box>
-            )};
+        </Box>
+        </>
+        )};
+    // return (
+            
+    //        )
+    //     };
 
-export default StepsCounter
+export default StepsCounter;

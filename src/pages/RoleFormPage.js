@@ -1,6 +1,6 @@
 import React, {useState, useContext} from 'react';
 import * as Constantans from '../Constants';
-import { UserRole } from '../context/UserRole';
+import { SignUpContext } from '../context/SignUpContexts';
 import FormPage from './FormPage';
 
 function questionType(role){
@@ -21,14 +21,30 @@ function questionType(role){
   }
 }
 
-const RoleFormPAge = () => {
-  const {role, setRole} = useContext(UserRole);
+
+
+const RoleFormPAge = ({onSave}) => {
+  const {role} = useContext(SignUpContext);
+
+  function checkRoleForm(form = null){
+    return true;
+  }
+  
+  function handleClickSave(form = null){
+    if(checkRoleForm(form)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
   return (
     <>
     <FormPage filedsArray = {questionType(role)} 
     title = {`Tell Us About Your Preferences as a ${role ? role.toUpperCase() : 'None'}!`}
     nextTo= {'/' + Constantans.HOME_PAGE}
-    prevTo= {'../'} />
+    prevTo= {'../'} 
+    onSave = {() => null} />
     </>
   )
   };
