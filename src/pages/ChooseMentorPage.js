@@ -1,7 +1,7 @@
 import React from 'react';
 import OptionalMentor from '../components/OptionalMentor';
 import { Stack } from '@mui/material';
-// import MenteeProcessTimeline from '../components/MenteeProcessTimeline'
+import MenteeProcessTimeline from '../components/MenteeProcessTimeline'
 import NavigationBar from '../components/NavigationBar';
 
 const ChooseMentorPage = ({user}) => {
@@ -13,7 +13,7 @@ const ChooseMentorPage = ({user}) => {
             justifyContent="center"
             alignItems="center"
             spacing={1}>
-             {/* <MenteeProcessTimeline></MenteeProcessTimeline> */}
+             <MenteeProcessTimeline></MenteeProcessTimeline>
             <Stack
             direction="row"
             justifyContent="center"
