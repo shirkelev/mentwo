@@ -1,8 +1,11 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import RoundButton from '../components/small-components/RoundButton';
 import * as Constantans from '../Constants';
+import {UserRole } from '../context/UserRole';
+import { Link } from 'react-router-dom';
+// import UserRole from '../context/UserRole';
 
 const RootContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
@@ -29,27 +32,41 @@ const MenteeButton = styled(RoundButton)(({ theme }) => ({
   marginLeft: theme.spacing(2),
 }));
 
-const UserRole = React.createContext({
-  userType: '',
-  setUserType: () => {}
-}
-);
+
+
+// export const RoleContext = React.createContext();
+
 
 const ChooseRolePage = () => {
-  const { setUserType } = useContext(UserRole);
+  const {role, setRole} = useContext(UserRole);
+  // const [locRole, setLocRole] = useState('');
+  
+
   return (
-    <RootContainer maxWidth="sm">
-      <Title>Are you a mentor or mentee?</Title>
-      <ButtonsContainer>
-        <MentorButton color="primary" href={Constantans.REG_FORM}
-        onClick={() =>  setUserType('mentor')}
-        >Mentor</MentorButton>
-        <MenteeButton color="secondary" 
-        href={Constantans.REG_FORM}
-        onClick={() =>  setUserType('mentor')} >Mentee</MenteeButton>
-      </ButtonsContainer>
-    </RootContainer>
+    
+      <RootContainer maxWidth="sm">
+        <Title>Are you a mentor or mentee?</Title>
+        <ButtonsContainer>
+            <MentorButton 
+              color="primary" 
+              // href={Constantans.REG_FORM}
+              onClick={() =>  {
+              setRole('mentor');
+                 }}
+              to={'../' + Constantans.REG_FORM}>
+                Mentor</MentorButton>
+            <MenteeButton 
+              color="secondary" 
+              onClick={() =>  {
+              setRole('mentee');}}
+              to={'../' + Constantans.REG_FORM}>
+                Mentee</MenteeButton>
+        </ButtonsContainer>
+      </RootContainer>
+   
+    
   );
 };
+
 
 export default ChooseRolePage;
