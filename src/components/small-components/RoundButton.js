@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-
+import { Link } from 'react-router-dom';
 const StyledButton = styled(Button)(({ theme, color }) => ({
   borderRadius: '50%',
   width: '100px',
@@ -16,11 +16,13 @@ const StyledButton = styled(Button)(({ theme, color }) => ({
   },
 }));
 
-const RoundButton = ({ text, color, href }) => {
+const RoundButton = ({ text, color, href='', onClick , to=''}) => {
   return (
-    <StyledButton variant="contained" color={color} href={href}>
-      {text}
-    </StyledButton>
+    <Link to={to}>
+      <StyledButton variant="contained" color={color} href={href} onClick={onClick}>
+        {text}
+      </StyledButton>
+    </Link>
   );
 };
 

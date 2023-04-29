@@ -4,6 +4,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import backgroung from '../data/images/bg_img.jpeg';
 import Button from '../components/small-components/Button';
 import * as Constants from '../Constants';
+import { Link } from 'react-router-dom';
 
 function LandingPage() {
   return (
@@ -15,9 +16,9 @@ function LandingPage() {
       {/* Upper bar */}
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', py: 2 , mr:2, gap:1}}>
         {/* Login and Signup links */}
-            <Button color="inherit" title='Log in' href={Constants.SIGN_IN}/>
+            <Button color="inherit" title='Log in' to={Constants.SIGN_IN}/>
             <Divider orientation="vertical" flexItem='true' />
-            <Button color="inherit" title='Sign Up'  href={Constants.CHOOSE_ROLE_PAGE} />
+            <Button color="inherit" title='Sign Up' to={Constants.SIGN_UP} />
       </Box>
       <Divider />
     </Box>
