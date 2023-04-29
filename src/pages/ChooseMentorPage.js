@@ -13,7 +13,7 @@ const ChooseMentorPage = ({user}) => {
             justifyContent="center"
             alignItems="center"
             spacing={1}>
-            <MenteeProcessTimeline></MenteeProcessTimeline>
+             <MenteeProcessTimeline></MenteeProcessTimeline>
             <Stack
             direction="row"
             justifyContent="center"
@@ -23,15 +23,18 @@ const ChooseMentorPage = ({user}) => {
                 <OptionalMentor 
                 mentorName={"Nitsan"}
                 details={"A third year computer science student, work at Mobilye"}
-                picturePath={"src\data\images\nitzan.jpeg"}></OptionalMentor>
+                picturePath={"src\data\images\nitzan.jpeg"}
+                buttonText = {"Be my Mentor!"}></OptionalMentor>
                 <OptionalMentor 
                 mentorName={"Yaniv"}
                 details={"A third year computer science student, work at Mobilye"}
-                picturePath={"src\data\images\nitzan.jpeg"}></OptionalMentor>
+                picturePath={"src\data\images\nitzan.jpeg"}
+                buttonText = {"Be my Mentor!"}></OptionalMentor>
                 <OptionalMentor 
                 mentorName={"Yehonatan"}
                 details={"A third year computer science student, work at Mobilye"}
-                picturePath={"src\data\images\nitzan.jpeg"}></OptionalMentor>
+                picturePath={"src\data\images\nitzan.jpeg"}
+                buttonText = {"Be my Mentor!"}></OptionalMentor>
         </Stack>
         </Stack>
         </div>

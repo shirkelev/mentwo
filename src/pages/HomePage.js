@@ -2,6 +2,7 @@ import React from 'react';
 import NavigationBar from '../components/NavigationBar';
 import HomeContent from '../components/HomeContent';
 import CapacityBar from '../components/CapacityBar';
+import TipBox from '../components/small-components/TipBox';
 
 const HomePage = ({user}) => {
 if (user.type === 'mentor') {
@@ -15,14 +16,13 @@ if (user.type === 'mentor') {
         </div>
       </div>
       <div style={{ padding: '10px'}}>
-        <h3>Pending Requests:</h3>
-        <HomeContent list={user.pendingMentees} />
-        <h3>Active:</h3>
-        <HomeContent list={user.approvedMentees} />
-        <h3>Finished:</h3>
-        <HomeContent list={user.finishedMentees} />
-        <h3>Declined:</h3>
-        <HomeContent list={user.declinedMentees} />
+        <HomeContent headline = {"Pending Requests"} list={user.pendingMentees} />
+        <HomeContent headline = {"In Process"} list={user.approvedMentees} />
+        <HomeContent headline = {"Finished"} list={user.finishedMentees} />
+        <HomeContent headline = {"Declined"} list={user.declinedMentees} />
+      </div>
+      <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <TipBox/>
       </div>
     </div>
   );
