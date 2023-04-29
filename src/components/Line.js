@@ -9,11 +9,11 @@ import Container from '@mui/material/Container';
 
 const LineWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems:'center',
     flex: '1',
-    gap: '100px',
+    gap: '10px',
     minHeight:'100%'
   }));
 
@@ -26,7 +26,7 @@ const Line = (props) => {
         <StatusSign status={status}/>
         <InfoButton onClick={infoOnClick} />
     </LineWrapper>
-    <Divider />
+    {/* <Divider /> */}
     </>
   );
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import Line from './Line';
 import styled from '@emotion/styled';
 import { alignProperty } from '@mui/material/styles/cssUtils';
+import Divider from '@mui/material/Divider';
 
 const LinesWrapper = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -31,6 +32,7 @@ const HomeContent = ({list}) => {
         )
       })}
     </LinesWrapper>
+    <Divider />
     </>
   );
 }
