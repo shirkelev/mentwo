@@ -9,7 +9,6 @@ const steps = [
   'Choose Mentor',
   'Mentor Approval',
   'Mentoring Proccess',
-  'Deam Job!'
 ];
 
 export default function StageStepper({activeStage}) {

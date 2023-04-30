@@ -1,14 +1,13 @@
 import React from 'react';
 import NavigationBar from '../components/NavigationBar';
-import HomeContent from '../components/HomeContent';
-import { Grid, Stack, Avatar, Button, Stepper } from '@mui/material';
+import {Stack} from '@mui/material';
 import StageStepper from '../components/StageStepper';
-import TipBox from '../components/small-components/TipBox';
-import CircularProgressBar from '../components/small-components/CircularProgressBar'
-import { width } from '@mui/system';
 import Matching from '../components/Matching';
+import ChooseMentor from '../components/ChooseMentor';
+import MentoringProcess from '../components/MentoringProcess';
+import MentorApproval from '../components/MentorApproval';
 
-const MenteeStatusPage = ({picturePath, status}) => {
+const MenteeStatusPage = ({status}) => {
     return(
         <Stack  direction="column"
         justifyContent="center"
@@ -20,40 +19,19 @@ const MenteeStatusPage = ({picturePath, status}) => {
             <StageStepper activeStage={status} style={{width:'100%'}} />  
 
             {status === 0 && (
-                <Matching></Matching>
-                
-            )}    
+                <Matching></Matching>    
+            )}
+            {status === 1 && (
+                <ChooseMentor></ChooseMentor>
+            )}  
+            {status === 2 && (
+                <MentorApproval/>
+            )}
+            {status === 3 && (
+                <MentoringProcess/>               
+            )}  
         </Stack>
         );
-    // else {
-    // return(
-    // <div style={{ width:'100%', height:'100%'}}>
-    //     
-    //     <Stack
-    //             direction="row"
-    //             justifyContent="center"
-    //             alignItems="center"
-    //             spacing={1}>
-                
-    //             <Stack direction="column"
-    //                 justifyContent="center"
-    //                 alignItems="center"
-    //                 spacing={8}
-    //                 style={{width:'70%'}}>
-    //                 <Grid  container
-    //                     direction="row"
-    //                     justifyContent="center"
-    //                     alignItems="center"
-    //                     spacing={1}
-    //                     style={{width:'70%'}}>
-    //                     <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={picturePath}/></Grid>
-    //                     <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={picturePath}/> </Grid>
-    //                 </Grid>
-    //                 <Button size='large' variant='outlined'>Finish Proccess</Button>
-    //                 <TipBox tipMessege={'Send resume via friend!'}></TipBox>
-    //             </Stack>
-    //         </Stack>
-    // </div>
-    // );
+  
 };
 export default MenteeStatusPage;

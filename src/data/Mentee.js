@@ -6,12 +6,15 @@ export default class Mentee extends User {
         this.offeredMentors = [];
         this.currentMentor = null;
         this.mentorshipStatus = null;
-
+        this.optionalMentors = [];
     }
 
     addMentor(mentor){
         this.currentMentor = mentor;
         this.mentorshipStatus = 'active'
+    }
+    addOptionalMentor(mentor){
+        this.optionalMentors.push(mentor);
     }
 }
 

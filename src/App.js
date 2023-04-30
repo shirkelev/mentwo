@@ -18,7 +18,6 @@ import {
   // ,createBrowserRouter
 } from 'react-router-dom'
 import DataBase from './data/DataBase';
-import ChooseMentorPage from './pages/ChooseMentorPage';
 import MenteeStatusPage from './pages/MenteeStatusPage';
 import { useContext, useState } from 'react';
 //import { UserRole } from './context/UserRole';
@@ -59,11 +58,6 @@ function App() {
                 element = {<MentorPendingsAndRunningPage user={data.findByName('Nits')}/>}
                 exact
                 />;
-            <Route path={Constants.CHOOSE_MENTOR}
-              action={({ params }) => {}}
-              element = {<ChooseMentorPage />}
-              exact
-              />;
             <Route path={Constants.MENTEE_STATUS}
               action={({ params }) => {}}
               element = {<MenteeStatusPage picturePath={'./data/images/nitzan.jpeg'} status={0} />}
