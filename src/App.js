@@ -3,7 +3,7 @@ import './App.css';
 import SignUpPage from './pages/SignInPage';
 import ChooseRolePage from './pages/ChooseRolePage';
 import RoleFormPAge from './pages/RoleFormPage';
-import HomePage from './pages/HomePage';
+import MentorPendingsAndRunning from './pages/MentorPendingsAndRunning';
 import LandingPage from './pages/LandingPage';
 import ProcessCompletionPage from './pages/ProcessCompletionPage';
 import * as Constants from './Constants';
@@ -20,7 +20,7 @@ import DataBase from './data/DataBase';
 import ChooseMentorPage from './pages/ChooseMentorPage';
 import MenteeStatusPage from './pages/MenteeStatusPage';
 import { useContext, useState } from 'react';
-import { UserRole } from './context/UserRole';
+// import { UserRole } from './context/UserRole';
 import SignUpFlow from './pages/SignUpFlow';
 
 
@@ -54,7 +54,7 @@ function App() {
                 />;
             <Route path={Constants.HOME_PAGE}
                 action={({ params }) => {}}
-                element = {<HomePage user={data.findByName('Nits')}/>}
+                element = {<MentorPendingsAndRunning user={data.findByName('Nits')}/>}
                 exact
                 />;
             <Route path="/Choose-Mentor-page"
