@@ -26,6 +26,7 @@ import * as Constants from '../Constants';
   let headlineIcon;
   let buttonText1;
   let buttonText2;
+  let isMatched;
 
   if (headline === Constants.PENDINGS) {
     headlineIcon = <PersonAddIcon/>;
@@ -35,11 +36,13 @@ import * as Constants from '../Constants';
   if (headline === Constants.PROCESS) {
     headlineIcon = <SupervisorAccountIcon/>;
     buttonText1 = Constants.PROCESS_BUTTON;
+    isMatched = true;
   }
   if (headline === Constants.FINISHED) {
     headlineIcon = <DoneIcon/>;
     buttonText1 = Constants.FINISH_BUTTON1;
     buttonText2 = Constants.FINISH_BUTTON2;
+    isMatched = true;
   }
   if (headline === Constants.DECLINED) {
     headlineIcon = <PersonAddDisabledIcon/>;
@@ -54,7 +57,7 @@ import * as Constants from '../Constants';
       </div>
       <h3>{headline}</h3>
     </div>
-    <CardsCarousel list = {list} buttonText1 = {buttonText1} buttonText2 = {buttonText2} />
+    <CardsCarousel list = {list} buttonText1 = {buttonText1} buttonText2 = {buttonText2} isMatched = {isMatched} />
     
     {/* <LinesWrapper>
       {list.map(x => {

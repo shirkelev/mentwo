@@ -6,9 +6,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Avatar } from '@mui/material';
 import { Stack } from '@mui/material';
+import PhoneIcon from '@mui/icons-material/Phone';
 
-
-export default function PersonCard({name, details, picturePath, buttonText1, buttonText2}) {
+export default function PersonCard({name, details, picturePath, buttonText1, buttonText2, isMatched}) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <Stack 
@@ -24,7 +24,7 @@ export default function PersonCard({name, details, picturePath, buttonText1, but
         <Typography variant="body2" color="text.secondary">{details}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">About {name}</Button>
+      {isMatched ? ( <><PhoneIcon />&nbsp;&nbsp;&nbsp;</> ) : ( <Button size="small">About {name}</Button> )}
         <Button size="small">{buttonText1}</Button>
         {buttonText2 !== "" ? ( <Button size="small">{buttonText2}</Button> ) : null}
       </CardActions>
