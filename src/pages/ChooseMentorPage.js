@@ -1,7 +1,7 @@
 import React from 'react';
 import OptionalMentor from '../components/OptionalMentor';
 import { Stack } from '@mui/material';
-import MenteeProcessTimeline from '../components/MenteeProcessTimeline'
+import MenteeProcessTimeline from '../components/StageStepper'
 import NavigationBar from '../components/NavigationBar';
 
 const ChooseMentorPage = ({user}) => {

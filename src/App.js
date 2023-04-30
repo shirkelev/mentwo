@@ -20,8 +20,9 @@ import DataBase from './data/DataBase';
 import ChooseMentorPage from './pages/ChooseMentorPage';
 import MenteeStatusPage from './pages/MenteeStatusPage';
 import { useContext, useState } from 'react';
-import { UserRole } from './context/UserRole';
+//import { UserRole } from './context/UserRole';
 import SignUpFlow from './pages/SignUpFlow';
+
 
 
 function addSemi(string){
@@ -57,14 +58,14 @@ function App() {
                 element = {<HomePage user={data.findByName('Nits')}/>}
                 exact
                 />;
-            <Route path="/Choose-Mentor-page"
+            <Route path={Constants.CHOOSE_MENTOR}
               action={({ params }) => {}}
               element = {<ChooseMentorPage />}
               exact
               />;
-            <Route path="/MenteeStatusPage"
+            <Route path={Constants.MENTEE_STATUS}
               action={({ params }) => {}}
-              element = {<MenteeStatusPage picturePath={'./data/images/nitzan.jpeg'} />}
+              element = {<MenteeStatusPage picturePath={'./data/images/nitzan.jpeg'} status={0} />}
               exact
               />;
             <Route path={Constants.PROCESS_COMPLETION_FORM}

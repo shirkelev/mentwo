@@ -8,6 +8,8 @@ export const HOME_PAGE = 'home-page';
 export const LANDING_PAGE = '/';
 export const CHOOSE_ROLE_PAGE = 'choose-role';
 export const SIGN_UP_FLOW = 'sign-up';
+export const MENTEE_STATUS = "/MenteeStatusPage";
+export const CHOOSE_MENTOR = "/Choose-Mentor-page";
 
 
 
