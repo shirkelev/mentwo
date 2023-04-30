@@ -53,7 +53,7 @@ function App() {
                 element = {<SignUpPage />}
                 exact
                 />;
-            <Route path={Constants.HOME_PAGE}
+            <Route path={Constants.MENTOR_PENDINGS_AND_RUNNING_PAGE}
                 action={({ params }) => {}}
                 element = {<MentorPendingsAndRunningPage user={data.findByName('Nits')}/>}
                 exact
@@ -73,7 +73,7 @@ function App() {
                 element = {<ProcessCompletionPage user={data.findByName('Nits')}/>}
                 exact
                 />;
-            <Route path={"/Mentor-Finished-Page"}
+            <Route path={Constants.MENTOR_FINISHED_PAGE}
                 action={({ params }) => {}}
                 element = {<MentorFinishedPage user={data.findByName('Nits')}/>}
                 exact

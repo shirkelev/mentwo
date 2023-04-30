@@ -4,12 +4,25 @@ export const SIGN_IN = 'sign-in';
 export const SIGN_UP = 'sign-up';
 export const REG_FORM = 'registration-form';
 export const PROCESS_COMPLETION_FORM = 'process-completion';
-export const HOME_PAGE = 'home-page';
+export const MENTOR_PENDINGS_AND_RUNNING_PAGE = 'MentorPendingsAndRunningPage';
 export const LANDING_PAGE = '/';
 export const CHOOSE_ROLE_PAGE = 'choose-role';
 export const SIGN_UP_FLOW = 'sign-up';
+export const MENTOR_FINISHED_PAGE = 'Mentor-Finished-Page';
 
+// HomeContentTypes
+export const PENDINGS = 'Pending Requests';
+export const PROCESS = 'In Process';
+export const FINISHED = 'Finished';
+export const DECLINED = 'Declined';
 
+//Person Card Buttons Text
+export const PENDINGS_BUTTON1 = 'approve';
+export const PENDINGS_BUTTON2 = 'decline';
+export const PROCESS_BUTTON = 'finish process';
+export const FINISH_BUTTON1 = 'leave feedback';
+export const FINISH_BUTTON2 = 'share';
+export const DECLINED_BUTTON = 'undecline';
 
 // Sign Up Form Questions
 

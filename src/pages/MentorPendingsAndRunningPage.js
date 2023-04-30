@@ -4,6 +4,7 @@ import HomeContent from '../components/HomeContent';
 import CapacityBar from '../components/CapacityBar';
 import TipBox from '../components/small-components/TipBox';
 import HamburgerMenu from '../components/HamburgerMenu';
+import * as Constants from '../Constants';
 
 export default function MentorPendingsAndRunningPage ({user}) {
   return (
@@ -17,10 +18,10 @@ export default function MentorPendingsAndRunningPage ({user}) {
         </div>
       </div>
       <div style={{ padding: '10px'}}>
-        <HomeContent headline = {"Pending Requests"} list={user.pendingMentees} />
-        <HomeContent headline = {"In Process"} list={user.approvedMentees} />
-        {/* <HomeContent headline = {"Finished"} list={user.finishedMentees} />
-        <HomeContent headline = {"Declined"} list={user.declinedMentees} /> */}
+        <HomeContent headline = {Constants.PENDINGS} list={user.pendingMentees} />
+        <HomeContent headline = {Constants.PROCESS} list={user.approvedMentees} />
+        {/* <HomeContent headline = {Constants.FINISHED} list={user.finishedMentees} />
+        <HomeContent headline = {Constants.DECLINED} list={user.declinedMentees} /> */}
       </div>
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <TipBox/>

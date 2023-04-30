@@ -5,6 +5,7 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import DoneIcon from '@mui/icons-material/Done';
 import PersonAddDisabledIcon from '@mui/icons-material/PersonAddDisabled';
 import CardsCarousel from './CardsCarousel';
+import * as Constants from '../Constants';
 
 // const LinesWrapper = styled('div')(({ theme }) => ({
 //     display: 'flex',
@@ -25,23 +26,24 @@ import CardsCarousel from './CardsCarousel';
   let headlineIcon;
   let buttonText1;
   let buttonText2;
-  if (headline === "Pending Requests") {
+
+  if (headline === Constants.PENDINGS) {
     headlineIcon = <PersonAddIcon/>;
-    buttonText1 = "approve";
-    buttonText2 = "decline"
+    buttonText1 = Constants.PENDINGS_BUTTON1;
+    buttonText2 = Constants.PENDINGS_BUTTON2;
   }
-  if (headline === "In Process") {
+  if (headline === Constants.PROCESS) {
     headlineIcon = <SupervisorAccountIcon/>;
-    buttonText1 = "finish process";
+    buttonText1 = Constants.PROCESS_BUTTON;
   }
-  if (headline === "Finished") {
+  if (headline === Constants.FINISHED) {
     headlineIcon = <DoneIcon/>;
-    buttonText1 = "leave feedback";
-    buttonText2 = "share"
+    buttonText1 = Constants.FINISH_BUTTON1;
+    buttonText2 = Constants.FINISH_BUTTON2;
   }
-  if (headline === "Declined") {
+  if (headline === Constants.DECLINED) {
     headlineIcon = <PersonAddDisabledIcon/>;
-    buttonText1 = "undecline";
+    buttonText1 = Constants.DECLINED_BUTTON;
   }
 
   return (

@@ -42,7 +42,7 @@ const RoleFormPAge = ({onSave}) => {
     <>
     <FormPage filedsArray = {questionType(role)} 
     title = {`Tell Us About Your Preferences as a ${role ? role.toUpperCase() : 'None'}!`}
-    nextTo= {'/' + Constantans.HOME_PAGE}
+    nextTo= {'/' + Constantans.MENTOR_PENDINGS_AND_RUNNING_PAGE}
     prevTo= {'../'} 
     onSave = {() => null} />
     </>
