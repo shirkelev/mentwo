@@ -3,10 +3,11 @@ import './App.css';
 import SignUpPage from './pages/SignInPage';
 import ChooseRolePage from './pages/ChooseRolePage';
 import RoleFormPAge from './pages/RoleFormPage';
-import HomePage from './pages/HomePage';
+import MentorPendingsAndRunningPage from './pages/MentorPendingsAndRunningPage';
 import LandingPage from './pages/LandingPage';
 import ProcessCompletionPage from './pages/ProcessCompletionPage';
 import * as Constants from './Constants';
+import MentorFinishedPage from './pages/MentorFinishedPage';
 
 import {
   BrowserRouter
@@ -53,9 +54,9 @@ function App() {
                 element = {<SignUpPage />}
                 exact
                 />;
-            <Route path={Constants.HOME_PAGE}
+            <Route path={Constants.MENTOR_PENDINGS_AND_RUNNING_PAGE}
                 action={({ params }) => {}}
-                element = {<HomePage user={data.findByName('Nits')}/>}
+                element = {<MentorPendingsAndRunningPage user={data.findByName('Nits')}/>}
                 exact
                 />;
             <Route path={Constants.CHOOSE_MENTOR}
@@ -71,6 +72,11 @@ function App() {
             <Route path={Constants.PROCESS_COMPLETION_FORM}
                 action={({ params }) => {}}
                 element = {<ProcessCompletionPage user={data.findByName('Nits')}/>}
+                exact
+                />;
+            <Route path={Constants.MENTOR_FINISHED_PAGE}
+                action={({ params }) => {}}
+                element = {<MentorFinishedPage user={data.findByName('Nits')}/>}
                 exact
                 />;
         </Routes>

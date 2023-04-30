@@ -1,5 +1,5 @@
 import React from 'react';
-import OptionalMentor from '../components/OptionalMentor';
+import OptionalMentor from '../components/small-components/PersonCard';
 import { Stack } from '@mui/material';
 import MenteeProcessTimeline from '../components/StageStepper'
 import NavigationBar from '../components/NavigationBar';

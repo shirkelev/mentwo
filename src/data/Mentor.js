@@ -25,6 +25,13 @@ export default class Mentor extends User {
             }
             this.declinedMentees.push(mentee);
         }
+        else if(type === 'finished'){
+            const index = this.pendingMentees.indexOf(mentee);
+            if (index > -1) { 
+                this.pendingMentees.splice(index, 1); 
+            }
+            this.finishedMentees.push(mentee);
+        }
         else{
             const index = this.pendingMentees.indexOf(mentee);
             if (index === -1) { 
