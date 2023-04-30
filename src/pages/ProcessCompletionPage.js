@@ -17,7 +17,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
-import { useState, Icon } from "react";
+import { useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
@@ -90,35 +90,47 @@ const ProcessCompletionPage = ({user}) => {
       
     const navigate = useNavigate();
 
-    const [open, setOpen] = React.useState(false);
+    const [doneDialogOpen, setDoneDialogOpen] = React.useState(false);
 
-    const handleOpen = () => {
-      setOpen(true);
+    const [shareModalOpen, setShareModalOpen] = React.useState(false);
+
+    const doneTapped = () => {
+        setDoneDialogOpen(true);
     };
 
-    const alertHandleCloseWithNo = () => {
-        setOpen('/home-page');
+    const backTapped = () => {
         navigate('/home-page');
-      };
-
-      const alertHandleCloseWithYes = () => {
-        setOpen(false);
-        navigate('/choose-role');
-      };
-
-    const modalHandleClose = () => {
-      setOpen(false);
-      navigate('/home-page');
     };
 
-    const handleShare = (event) => {
+    const shareTapped = (event) => {
+        setShareModalOpen(true);
         // Share on LinkedIn
-      };
+    };
 
-    const [selectedOption, setSelectedOption] = useState('');
+    const menteeDialogClosedWithNo = () => {
+        setDoneDialogOpen(false);
+        navigate('/home-page');
+    };
+
+    const menteeDialogClosedWithYes = () => {
+        setDoneDialogOpen(false);
+        navigate('/choose-role');
+    };
+
+    const mentorDialogClosed = () => {
+        setDoneDialogOpen(false);
+        navigate('/home-page');
+    };
+
+    const shareModalClosed = () => {
+        setShareModalOpen(false);
+        navigate('/home-page');
+    };
+
+    const [selectedRadioOption, setSelectedRadioOption] = useState('');
     
-    const handleOptionChange = (event) => {
-        setSelectedOption(event.target.value);
+    const handleRadioOptionChange = (event) => {
+        setSelectedRadioOption(event.target.value);
     };
 
     if(user.type === 'mentor') {
@@ -134,10 +146,8 @@ const ProcessCompletionPage = ({user}) => {
                     <Question>Have you helped your mentee find a job?</Question>
                     <RadioGroup 
                         row
-                        aria-label='share-options'
-                        name='share-options'
-                        value={selectedOption}
-                        onChange={handleOptionChange}
+                        value={selectedRadioOption}
+                        onChange={handleRadioOptionChange}
                     >
                         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                         <FormControlLabel value="no" control={<Radio />} label="No" />
@@ -168,17 +178,21 @@ const ProcessCompletionPage = ({user}) => {
                 </FeedbackContainer>
 
                 <ButtonSection>
-                <IconButton  onClick={handleShare} size='small'  color='primary' disabled={selectedOption !== 'yes'} >
+                <IconButton  onClick={shareTapped} size='small'  color='primary' disabled={selectedRadioOption !== 'yes'} >
                     Share this process
                     <LinkedInIcon fontSize='large' />
                 </IconButton>
-                    <ButtonWrapper variant="contained" color="primary" onClick={handleOpen} title='Done' />
+                </ButtonSection>
+
+                <ButtonSection>
+                    <ButtonWrapper variant="contained" color="primary" onClick={backTapped} title='Back' />
+                    <ButtonWrapper variant="contained" color="primary" onClick={doneTapped} title='Done' />
                 </ButtonSection>
             </FormContainer>
 
             <Modal
-                open={open}
-                onClose={modalHandleClose}
+                open={doneDialogOpen}
+                onClose={mentorDialogClosed}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -188,6 +202,22 @@ const ProcessCompletionPage = ({user}) => {
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 2 }}>
                         We appreciate your contribution to our community.
+                    </Typography>
+                </Box>
+         </Modal>
+
+         <Modal
+                open={shareModalOpen}
+                onClose={shareModalClosed}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={ModalStyle}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Sharing is caring!
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Your process has been successfully published.
                     </Typography>
                 </Box>
          </Modal>
@@ -208,10 +238,8 @@ const ProcessCompletionPage = ({user}) => {
                     <Question>Did the app help you find a job?</Question>
                     <RadioGroup 
                         row
-                        aria-label='share-options'
-                        name='share-options'
-                        value={selectedOption}
-                        onChange={handleOptionChange}
+                        value={selectedRadioOption}
+                        onChange={handleRadioOptionChange}
                     >
                         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                         <FormControlLabel value="no" control={<Radio />} label="No" />
@@ -242,18 +270,22 @@ const ProcessCompletionPage = ({user}) => {
                 </FeedbackContainer>
 
                 <ButtonSection>
-                <IconButton  onClick={handleShare} size='small'  color='primary' disabled={selectedOption !== 'yes'} >
+                <IconButton  onClick={shareTapped} size='small'  color='primary' disabled={selectedRadioOption !== 'yes'} >
                     Share this process
                     <LinkedInIcon fontSize='large' />
                 </IconButton>
-                    <ButtonWrapper variant="contained" color="primary" onClick={handleOpen} title='Done' />
+                </ButtonSection>
+                
+                <ButtonSection>
+                    <ButtonWrapper variant="contained" color="primary" onClick={backTapped} title='Back' />
+                    <ButtonWrapper variant="contained" color="primary" onClick={doneTapped} title='Done' />
                 </ButtonSection>
         
             </FormContainer>
 
             <Dialog
-                open={open}
-                onClose={alertHandleCloseWithNo}
+                open={doneDialogOpen}
+                onClose={menteeDialogClosedWithNo}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
@@ -266,10 +298,26 @@ const ProcessCompletionPage = ({user}) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions >
-                    <MuiButton onClick={alertHandleCloseWithNo}>NO</MuiButton>
-                    <MuiButton onClick={alertHandleCloseWithYes} autoFocus>Yes</MuiButton>
+                    <MuiButton onClick={menteeDialogClosedWithNo}>NO</MuiButton>
+                    <MuiButton onClick={menteeDialogClosedWithYes} autoFocus>Yes</MuiButton>
                 </DialogActions>
             </Dialog>
+
+            <Modal
+                open={shareModalOpen}
+                onClose={shareModalClosed}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={ModalStyle}>
+                    <Typography id="modal-modal-title" variant="h6" component="h2">
+                        Sharing is caring!
+                    </Typography>
+                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                        Your process has been successfully published.
+                    </Typography>
+                </Box>
+            </Modal>
         
         </RootContainer>
         </>
