@@ -55,7 +55,7 @@ function App() {
                 />;
             <Route path={Constants.MENTOR_PENDINGS_AND_RUNNING_PAGE}
                 action={({ params }) => {}}
-                element = {<MentorPendingsAndRunningPage user={data.findByName('Yuval')}/>}
+                element = {<MentorPendingsAndRunningPage user={data.findByName('Nits')}/>}
                 exact
                 />;
             <Route path={Constants.MENTEE_STATUS}
@@ -65,12 +65,12 @@ function App() {
               />;
             <Route path={Constants.PROCESS_COMPLETION_FORM}
                 action={({ params }) => {}}
-                element = {<ProcessCompletionPage user={data.findByName('Yuval')}/>}
+                element = {<ProcessCompletionPage user={data.findByName('Nits')}/>}
                 exact
                 />;
             <Route path={Constants.MENTOR_FINISHED_PAGE}
                 action={({ params }) => {}}
-                element = {<MentorFinishedPage user={data.findByName('Yuval')}/>}
+                element = {<MentorFinishedPage user={data.findByName('Nits')}/>}
                 exact
                 />;
         </Routes>
