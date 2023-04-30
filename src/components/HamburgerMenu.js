@@ -33,7 +33,6 @@ export default function HamburgerMenu({user}) {
             </Paper>
           );
     }
-
 }
 
 // const HamburgerMenu = ({ isOpen, handleClose }) => {

@@ -26,7 +26,7 @@ export default class DataBase{
             nitsan.addMentee(bls, 'approved');
             shir.addMentor(nitsan);
             nitsan.addMentee(yuvi, 'pending');
-            nitsan.addMentee(omer, 'declined');
+            nitsan.addMentee(omer, 'finished');
 
 
             this.data = 

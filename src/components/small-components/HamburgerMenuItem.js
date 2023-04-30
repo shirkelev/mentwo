@@ -3,7 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
-const HamburgerMenuItem = ({ text, icon: Icon}) => {
+export default function HamburgerMenuItem({ text, icon: Icon}) {
   return (
     <MenuItem>
       <ListItemIcon>
@@ -15,6 +15,4 @@ const HamburgerMenuItem = ({ text, icon: Icon}) => {
       />
     </MenuItem>
   );
-};
-
-export default HamburgerMenuItem;
+}
