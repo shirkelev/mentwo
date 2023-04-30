@@ -17,15 +17,12 @@ import {
   // ,createBrowserRouter
 } from 'react-router-dom'
 import DataBase from './data/DataBase';
-<<<<<<< HEAD
 import ChooseMentorPage from './pages/ChooseMentorPage';
 import MenteeStatusPage from './pages/MenteeStatusPage';
-=======
 import { useContext, useState } from 'react';
-
+import { UserRole } from './context/UserRole';
 import SignUpFlow from './pages/SignUpFlow';
 
->>>>>>> main
 
 function addSemi(string){
     return('/' + string)
