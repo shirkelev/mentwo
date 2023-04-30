@@ -110,7 +110,6 @@ const ProcessCompletionPage = ({user}) => {
       setOpen(false);
       navigate('/home-page');
     };
-    const [message, setMessage] = useState("");
 
     const handleShare = (event) => {
         // Share on LinkedIn
@@ -121,7 +120,7 @@ const ProcessCompletionPage = ({user}) => {
     const handleOptionChange = (event) => {
         setSelectedOption(event.target.value);
     };
-    
+
     if(user.type === 'mentor') {
         return (
             <>
@@ -133,7 +132,13 @@ const ProcessCompletionPage = ({user}) => {
                 
                 <FeedbackContainer>
                     <Question>Have you helped your mentee find a job?</Question>
-                    <RadioGroup row>
+                    <RadioGroup 
+                        row
+                        aria-label='share-options'
+                        name='share-options'
+                        value={selectedOption}
+                        onChange={handleOptionChange}
+                    >
                         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                         <FormControlLabel value="no" control={<Radio />} label="No" />
                         <FormControlLabel value="other" control={<Radio />} label="Other" />
@@ -164,12 +169,11 @@ const ProcessCompletionPage = ({user}) => {
 
                 <ButtonSection>
                 <IconButton  onClick={handleShare} size='small'  color='primary' disabled={selectedOption !== 'yes'} >
-                    Share this process     
+                    Share this process
                     <LinkedInIcon fontSize='large' />
                 </IconButton>
                     <ButtonWrapper variant="contained" color="primary" onClick={handleOpen} title='Done' />
                 </ButtonSection>
-
             </FormContainer>
 
             <Modal
@@ -239,7 +243,7 @@ const ProcessCompletionPage = ({user}) => {
 
                 <ButtonSection>
                 <IconButton  onClick={handleShare} size='small'  color='primary' disabled={selectedOption !== 'yes'} >
-                    Share this process     
+                    Share this process
                     <LinkedInIcon fontSize='large' />
                 </IconButton>
                     <ButtonWrapper variant="contained" color="primary" onClick={handleOpen} title='Done' />

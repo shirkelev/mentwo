@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Button from '../components/small-components/Button';
 import TextBox from '../components/small-components/TextBox';
 import * as Constantans from '../Constants';
+import { SignUpContext } from '../context/SignUpContexts';
+import ConditionalButton from '../components/small-components/ConditionalButton';
+
 
 
 
@@ -11,8 +14,8 @@ const RootContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  paddingTop: theme.spacing(10),
-  paddingBottom: theme.spacing(10),
+  // paddingTop: theme.spacing(10),
+  paddingBottom: theme.spacing(5),
 }));
 
 const FormContainer = styled('form')(({ theme }) => ({
@@ -24,7 +27,7 @@ const FormContainer = styled('form')(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
 
-const ButtonWrapper = styled(Button)(({ theme }) => ({
+const ButtonWrapper = styled(ConditionalButton)(({ theme }) => ({
   margin: theme.spacing(2),
 }));
 
@@ -62,33 +65,36 @@ function WrapQuestions(props){
             placeholder={placeHolder} />
     </QuestionContainer>
   )
+};
 
-}
 
-const QuestionnairePage = () => {
+
+
+const FormPage = (props) => {
+  // const {role, setRole} = useContext(UserRole);
+  const {filedsArray, title, nextTo, onSave, condition} = props;
   return (
     <>
     <RootContainer maxWidth="md">
-        
-        <FormContainer>
-            <Title>Tell us about yourself</Title>
-            {Constantans.MENTEE_QUESTIONS.map(x => 
-            <
-            WrapQuestions
-            title= {x.title}
-            name= {x.name}
-            placeHolder={x.placeHolder}
-            />
-              )}
-        <ButtonSection>
-            <ButtonWrapper variant="contained" color="primary" href={Constantans.CHOOSE_ROLE_PAGE} title='Prev' />
-            <ButtonWrapper variant="contained" color="primary" href={Constantans.HOME_PAGE}  title='Next' />
-        </ButtonSection>
+      <FormContainer>
+          <Title> {title} </Title>
+          {filedsArray.map(x => 
+          <WrapQuestions
+          title= {x.title}
+          name= {x.name}
+          placeHolder={x.placeHolder}
+          />
+          )}
+      <ButtonSection>
+          <ButtonWrapper variant="contained" color="primary" title='Save' to={nextTo} 
+            conditon={condition} onClick={() => onSave()}/>
+      </ButtonSection>
 
     </FormContainer>
-</RootContainer>
+  </RootContainer>
+  
 </>
   );
 };
 
-export default QuestionnairePage;
+export default FormPage;

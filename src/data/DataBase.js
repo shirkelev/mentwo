@@ -7,8 +7,8 @@ export default class DataBase{
             const password = '12345678';
             const emailEnd = '@gmail.com';
 
-            const nitzan = new Mentor('Nits', 'Nitsan', 'Heiman'
-                , password, require('./images/nitzan.jpeg'),  'nitzan' + emailEnd);
+            const nitsan = new Mentor('Nits', 'Nitsan', 'Heiman'
+                , password, require('./images/nitsan.jpeg'),  'nitsan' + emailEnd, 8);
 
             const shir = new Mentee('Shik', 'Shir', 'Levran'
                 , password, require('./images/shir.jpeg'),  'shir' + emailEnd);
@@ -22,16 +22,16 @@ export default class DataBase{
             const bls = new Mentee('bla', 'bla', 'Getzler'
                 , password, require('./images/omer.jpeg'),  'omer' + emailEnd);
 
-            nitzan.addMentee(shir, 'approved');
-            nitzan.addMentee(bls, 'approved');
-            shir.addMentor(nitzan);
-            nitzan.addMentee(yuvi, 'pending');
-            nitzan.addMentee(omer, 'declined');
+            nitsan.addMentee(shir, 'approved');
+            nitsan.addMentee(bls, 'approved');
+            shir.addMentor(nitsan);
+            nitsan.addMentee(yuvi, 'pending');
+            nitsan.addMentee(omer, 'declined');
 
 
             this.data = 
                 [
-                nitzan,
+                nitsan,
                 yuvi,
                 shir,
                 omer

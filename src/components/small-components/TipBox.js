@@ -1,32 +1,16 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import TipsAndUpdatesOutlinedIcon from '@mui/icons-material/TipsAndUpdatesOutlined';
+import {Card, Typography} from '@mui/material';
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
+const TipBox = () => {
+    return (
+        <Card variant="outlined" style={{ maxWidth: 250, textAlign: 'center' }}>
+            <Typography variant="body2" style={{ fontSize: 12, fontWeight: 'bold' }}>
+            Tip of the day from a satisfied customer:
+            </Typography>
+            <Typography variant="body2" style={{ fontSize: 12 }}>
+            I highly recommend that the mentor and mentee will have a weekly Zoom meeting to review the mentee's current progress status.
+            </Typography>
+        </Card>
+    );
+  };
 
-export default function BasicCard({tipMessege}) {
-  return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Tip of the Day </Typography>
-        <Typography variant="body2">{tipMessege}</Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
-  );
-}
+  export default TipBox;

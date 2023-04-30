@@ -1,15 +1,20 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import RoundButton from '../components/small-components/RoundButton';
 import * as Constantans from '../Constants';
+import { SignUpContext } from '../context/SignUpContexts';
+import { Link } from 'react-router-dom';
+// import UserRole from '../context/UserRole';
 
 const RootContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '100vh',
+
+  // height: '100',
+  padding: '10%',
 }));
 
 const Title = styled('h1')(({ theme }) => ({
@@ -29,27 +34,45 @@ const MenteeButton = styled(RoundButton)(({ theme }) => ({
   marginLeft: theme.spacing(2),
 }));
 
-const UserRole = React.createContext({
-  userType: '',
-  setUserType: () => {}
-}
-);
+
+
+// export const RoleContext = React.createContext();
+
 
 const ChooseRolePage = () => {
-  const { setUserType } = useContext(UserRole);
+  const {role, setRole, step, setStep, completed, setCompleted} = useContext(SignUpContext);
+  function handleClick(role){
+    setRole(role);
+    setStep(step + 1);
+    let newCompleted = completed;
+    newCompleted[step] = true;
+    setCompleted(newCompleted);
+  }
   return (
-    <RootContainer maxWidth="sm">
-      <Title>Are you a mentor or mentee?</Title>
-      <ButtonsContainer>
-        <MentorButton color="primary" href={Constantans.REG_FORM}
-        onClick={() =>  setUserType('mentor')}
-        >Mentor</MentorButton>
-        <MenteeButton color="secondary" 
-        href={Constantans.REG_FORM}
-        onClick={() =>  setUserType('mentor')} >Mentee</MenteeButton>
-      </ButtonsContainer>
-    </RootContainer>
+    
+      <RootContainer maxWidth="sm">
+        <Title>Are you a mentor or mentee?</Title>
+        <ButtonsContainer>
+            <MentorButton 
+              color="primary" 
+              onClick={() =>  {
+                handleClick('mentor');
+                }}
+              to={'../' + Constantans.REG_FORM}
+              text='Mentor'
+              />
+            <MenteeButton 
+              color="secondary" 
+              onClick={() =>  {
+                handleClick('mentee');
+                }}
+              to={'../' + Constantans.REG_FORM} text='Mentee' />
+        </ButtonsContainer>
+      </RootContainer>
+   
+    
   );
 };
+
 
 export default ChooseRolePage;

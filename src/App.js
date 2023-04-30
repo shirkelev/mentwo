@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import SignUpPage from './pages/SignUpPage';
+import SignUpPage from './pages/SignInPage';
 import ChooseRolePage from './pages/ChooseRolePage';
-import QuestionnairePage from './pages/QuestionnairePage';
+import RoleFormPAge from './pages/RoleFormPage';
 import HomePage from './pages/HomePage';
 import LandingPage from './pages/LandingPage';
 import ProcessCompletionPage from './pages/ProcessCompletionPage';
@@ -16,10 +16,16 @@ import {
   // ,createRoutesFromElements
   // ,createBrowserRouter
 } from 'react-router-dom'
-import SignInPage from './pages/SignUpPage';
 import DataBase from './data/DataBase';
+<<<<<<< HEAD
 import ChooseMentorPage from './pages/ChooseMentorPage';
 import MenteeStatusPage from './pages/MenteeStatusPage';
+=======
+import { useContext, useState } from 'react';
+
+import SignUpFlow from './pages/SignUpFlow';
+
+>>>>>>> main
 
 function addSemi(string){
     return('/' + string)
@@ -27,14 +33,16 @@ function addSemi(string){
 
 function App() {
   const data = new DataBase()
-  console.log(data)
-  return (
+//   const [role, setRole] = useState('Diif');
+    return (
     <>
+    {/* <h1> { role } </h1>
+    <button onClick={() => setRole(200)}> setRole </button> */}
     <BrowserRouter>
         <Routes>
-            <Route path= {Constants.CHOOSE_ROLE_PAGE}
+            <Route path={Constants.SIGN_UP + '/*'}
                 action={({ params }) => {}}
-                element = {<ChooseRolePage />}
+                element = {<SignUpFlow />}
                 exact
                 />;
             <Route path={Constants.LANDING_PAGE}
@@ -45,11 +53,6 @@ function App() {
             <Route path={Constants.SIGN_IN}
                 action={({ params }) => {}}
                 element = {<SignUpPage />}
-                exact
-                />;
-            <Route path={Constants.REG_FORM}
-                action={({ params }) => {}}
-                element = {<QuestionnairePage />}
                 exact
                 />;
             <Route path={Constants.HOME_PAGE}
@@ -73,7 +76,10 @@ function App() {
                 exact
                 />;
         </Routes>
+        
     </ BrowserRouter>
+    {/* </UserRole.Provider> */}
+    
     </>
   );
 }
