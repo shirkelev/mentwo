@@ -13,7 +13,7 @@ export default function HamburgerMenuItem({ text, icon: Icon, path }) {
         </ListItemIcon>
         <ListItemText
           primary={text}
-          style={{ display: 'inline' }}
+          sx={{ textAlign: 'left', display: 'inline' }}
         />
       </MenuItem>
     </Link>
