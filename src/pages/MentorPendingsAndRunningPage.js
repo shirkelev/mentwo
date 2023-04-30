@@ -5,7 +5,7 @@ import CapacityBar from '../components/CapacityBar';
 import TipBox from '../components/small-components/TipBox';
 import HamburgerMenu from '../components/HamburgerMenu';
 
-const MentorPendingsAndRunning = ({user}) => {
+const MentorPendingsAndRunningPage = ({user}) => {
 if (user.type === 'mentor') {
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
@@ -41,4 +41,4 @@ if (user.type === 'mentor') {
   }
 };
 
-export default MentorPendingsAndRunning;
+export default MentorPendingsAndRunningPage;
