@@ -4,7 +4,7 @@ const TipBox = ({tipMessege}) => {
     return (
         <Card variant="outlined" style={{ maxWidth: 250, textAlign: 'center' }}>
             <Typography variant="body2" style={{ fontSize: 12, fontWeight: 'bold' }}>
-            Tip of the day from a satisfied customer:
+            Tip of the day from a satisfied user:
             </Typography>
             <Typography variant="body2" style={{ fontSize: 12 }}>{tipMessege} </Typography>
         </Card>

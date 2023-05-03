@@ -23,7 +23,22 @@ import { useContext, useState } from 'react';
 //import { UserRole } from './context/UserRole';
 import SignUpFlow from './pages/SignUpFlow';
 
+import {createTheme, ThemeProvider} from '@mui/material';
 
+const theme = createTheme({
+    palette: {
+        mode: 'light',
+        primary: {
+            main: '#b1a5e3',
+        },
+        secondary: {
+            main: '#5797de',
+        },
+        info: {
+            main: '#ffecb3',
+        },
+        },
+})
 
 function addSemi(string){
     return('/' + string)
@@ -33,6 +48,7 @@ function App() {
   const data = new DataBase()
 //   const [role, setRole] = useState('Diif');
     return (
+    <ThemeProvider theme = {theme}>
     <>
     {/* <h1> { role } </h1>
     <button onClick={() => setRole(200)}> setRole </button> */}
@@ -79,6 +95,7 @@ function App() {
     {/* </UserRole.Provider> */}
     
     </>
+    </ThemeProvider>
   );
 }
 
