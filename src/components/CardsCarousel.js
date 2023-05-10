@@ -39,7 +39,7 @@ export default function CardsCarousel ({list, buttonText1, buttonText2, isMatche
       buttonText1 = {buttonText1} buttonText2 = {buttonText2} isMatched = {isMatched} sx={{}}/>
       
       <Box sx={{width:'100%' }}>
-        <MobileStepper
+        {maxSteps ? ! <MobileStepper
           steps={maxSteps}
           position="static"
           activeStep={activeStep}
@@ -66,7 +66,7 @@ export default function CardsCarousel ({list, buttonText1, buttonText2, isMatche
               Back
             </Button>
           }
-      />
+      /> : null}
       </Box>
     </Box>
     </>
