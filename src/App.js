@@ -25,7 +25,7 @@ import { useContext, useState } from 'react';
 import SignUpFlow from './pages/SignUpFlow';
 
 import {createTheme, ThemeProvider} from '@mui/material';
-
+ /*
 const theme = createTheme({
     palette: {
         mode: 'light',
@@ -45,14 +45,35 @@ const theme = createTheme({
         }
     }
 })
+*/
 
+// O.G: According to chatGPT in the Material-UI library, the standard theme object does not include a fonts property.
+// Instead, the typography object within the theme contains properties such as fontFamily, fontSize, etc. 
+// So, if your theme follows the standard Material-UI structure So it should be like this:
+const theme = createTheme({
+    palette: {
+      mode: 'light',
+      primary: {
+        main: '#b1a5e3',
+      },
+      secondary: {
+        main: '#5797de',
+      },
+      info: {
+        main: '#ffecb3',
+      },
+    },
+    typography: {
+      fontFamily: 'Roberto', // Set the primary font
+    },
+  });
 
 function addSemi(string){
     return('/' + string)
 }
 const data = new DataBase()
 
-function App({user = data.findByName('Nits')}) {
+function App({user = data.findByName('Yuval')}) {
     
     const [userType, setUserType] = useState(user.type);
     const [email, setEmail] = useState(user.email);
