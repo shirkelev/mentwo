@@ -1,9 +1,9 @@
 import React, {useContext, useState} from 'react';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-import RoundButton from '../components/small-components/RoundButton';
-import * as Constantans from '../Constants';
-import { SignUpContext } from '../context/SignUpContexts';
+import RoundButton from '../../components/small-components/RoundButton';
+import * as Constantans from '../../Constants';
+import { SignUpContext } from '../../context/SignUpContexts';
 import { Link } from 'react-router-dom';
 // import UserRole from '../context/UserRole';
 
@@ -58,15 +58,16 @@ const ChooseRolePage = () => {
               onClick={() =>  {
                 handleClick('mentor');
                 }}
-              to={'../' + Constantans.REG_FORM}
+              to={''}
               text='Mentor'
               />
+            <div style={{width: '20px'}}></div>
             <MenteeButton 
               color="secondary" 
               onClick={() =>  {
                 handleClick('mentee');
                 }}
-              to={'../' + Constantans.REG_FORM} text='Mentee' />
+              to={''} text='Mentee' />
         </ButtonsContainer>
       </RootContainer>
    

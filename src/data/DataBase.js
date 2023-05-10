@@ -2,6 +2,10 @@
 import Mentee from "./Mentee.js"
 import Mentor from "./Mentor.js"
 
+function defaultMentee(){
+    return new Mentee('Shiroosh')
+}
+
 export default class DataBase{
         constructor(){
             const password = '12345678';
@@ -14,7 +18,7 @@ export default class DataBase{
                 , password, require('./images/shir.jpeg'),  'shir' + emailEnd);
 
             const yuvi = new Mentee('Yuval', 'Yuval', 'Yusipov'
-                , password, require('./images/yuvi.jpeg'),  'yuvi' + emailEnd);
+                , password, require('./images/yuvi.jpeg'),  'yuvi' + emailEnd, 'I am a very long description dsadjbasdkisabdkhjsabdkshabsakhdbsajhkdbashkdbsahdbashidbsadihbashidbsaihdbsaihdbasdihbdasihbdsaih');
 
             const omer = new Mentee('omer', 'Omer', 'Getzler'
                 , password, require('./images/omer.jpeg'),  'omer' + emailEnd);
@@ -27,6 +31,10 @@ export default class DataBase{
             shir.addMentor(nitsan);
             nitsan.addMentee(yuvi, 'pending');
             nitsan.addMentee(omer, 'finished');
+            for(let i = 0; i < 3; i++){
+                nitsan.addMentee(new Mentee('Name' + String(i), 'Name' + String(i), 'Last'
+                , password, '',  'omer' + emailEnd))
+            }
 
 
             this.data = 

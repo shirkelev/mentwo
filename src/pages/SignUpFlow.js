@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import RoleFormPAge from './RoleFormPage';
-import ChooseRolePage from './ChooseRolePage';
+import RoleFormPAge from './sign-up/RoleFormPage';
+import ChooseRolePage from './sign-up/ChooseRolePage';
 import { SignUpContext } from '../context/SignUpContexts';
 import * as Constants from '../Constants';
 import { styled } from '@mui/material/styles';
@@ -12,7 +12,7 @@ import {
     // ,createRoutesFromElements
     // ,createBrowserRouter
     } from 'react-router-dom'
-import MainFormPage from './MainFormPage';
+import MainFormPage from './sign-up/MainFormPage';
 import StepsCounter from '../components/StepsCounter'
 import Box from '@mui/material/Box';
 
@@ -55,13 +55,6 @@ const SignUpFlow = ({props}) => {
     
     const steps = Constants.SIGN_UP_STEPS;
 
-    const SignUpContextObject = {
-        role: null,
-        step: 0,
-        completed: createCompleted(steps),
-    
-    }
-
     const [role, setRole] = useState('Default');
 
     const [step, setStep] = useState(0);
@@ -75,52 +68,33 @@ const SignUpFlow = ({props}) => {
         );
     }
 
-    // function increaseSteps(){
-    //     if(saveSuccess){
-    //         signUpState.step++;
-    //         signUpState.completed[signUpState.step] = true;
-    //         signUpState.role = 'Nothing';
-    //     }
-    //     else{
-    //         alert('Please fill all the fields');
-    //     }
-    // }
 
     const to = ['./', Constants.CHOOSE_ROLE_PAGE, Constants.REG_FORM];
-
-    return (
-        <RootContainer>
-            <SignUpContext.Provider value={{role, setRole, step, setStep, completed, setCompleted}}>
-                <StepsCounter steps={steps} completed={completed} to={to} activeStep={step}/>
-                <ContentContainer>
-                    <Routes>
-                        <Route 
-                            // path= {Constants.CHOOSE_ROLE_PAGE}
-                            path='/'
-                            action={({ props }) => {}}
-                            element = {
-                                <MainFormPage  />
-                            }
-                            />;
-                        <Route 
-                            path= {Constants.CHOOSE_ROLE_PAGE}
-                            action={({ props }) => {}}
-                            element = {
-                                <ChooseRolePage />
-                            }
-                            />;
-                        <Route path= {Constants.REG_FORM}
-                            action={({ props }) => {}}
-                            element = {<RoleFormPAge />}
-                            />;
-                    </Routes>
-                </ContentContainer>
-                <ButtonSection>
-                    <ButtonWrapper variant="contained" color="primary"  title='Prev' to={null} />
-                    <ButtonWrapper variant="contained" color="primary" title='Next' to={null} />
-                </ButtonSection>
-            </ SignUpContext.Provider>
-            
-        </RootContainer>
-  )};
+    
+    const StepContent = () => {
+        switch (step) {
+            case 0:
+                return <MainFormPage  />;
+            case 1:
+                return <ChooseRolePage />;
+            case 2:
+                return <RoleFormPAge />;
+            default:
+                return <MainFormPage  />;
+            }
+    }
+        return (
+            <RootContainer>
+                <SignUpContext.Provider value={{role, setRole, step, setStep, completed, setCompleted}}>
+                    <StepsCounter steps={steps} completed={completed} to={to} activeStep={step}/>
+                    <ContentContainer>
+                        <StepContent />
+                    </ContentContainer>
+                    <ButtonSection>
+                        <ButtonWrapper variant="contained" color="primary"  title='Prev' to={null} />
+                        <ButtonWrapper variant="contained" color="primary" title='Next' to={null} />
+                    </ButtonSection>
+                </ SignUpContext.Provider>
+            </RootContainer>
+            )};
 export default SignUpFlow;

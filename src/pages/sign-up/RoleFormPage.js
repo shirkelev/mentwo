@@ -1,7 +1,8 @@
 import React, {useState, useContext} from 'react';
-import * as Constantans from '../Constants';
-import { SignUpContext } from '../context/SignUpContexts';
-import FormPage from './FormPage';
+import * as Constantans from '../../Constants';
+import { SignUpContext } from '../../context/SignUpContexts';
+import FormPage from '../FormPage';
+import BigContentBox from '../../components/small-components/BigContentBox'
 
 function questionType(role){
   if(role === 'mentor'){
@@ -42,8 +43,8 @@ const RoleFormPAge = ({onSave}) => {
     <>
     <FormPage filedsArray = {questionType(role)} 
     title = {`Tell Us About Your Preferences as a ${role ? role.toUpperCase() : 'None'}!`}
-    nextTo= {'/' + Constantans.MENTOR_PENDINGS_AND_RUNNING_PAGE}
-    prevTo= {'../'} 
+    nextTo= {Constantans.MENTEE_STATUS}
+    prevTo= {''} 
     onSave = {() => null} />
     </>
   )

@@ -1,7 +1,7 @@
 export default class User {
     static latestId = 0;
 
-    constructor(userName, name, lastName, password, img, email, type) {
+    constructor(userName, name, lastName, password, img, email, type, description='I am a shjort description') {
         this.id = User.nextId();
         this.img = img;
         this.userName = userName;
@@ -10,6 +10,7 @@ export default class User {
         this.password = password;
         this.email = email;
         this.type = type;
+        this.description = description;
     }
 
     static nextId() {

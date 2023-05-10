@@ -6,10 +6,13 @@ import TipBox from '../components/small-components/TipBox';
 import HamburgerMenu from '../components/HamburgerMenu';
 import * as Constants from '../Constants';
 
+
 export default function MentorPendingsAndRunningPage ({user}) {
   return (
+    <>
+    <NavigationBar />
     <div style={{ width: '100vw', height: '100vh' }}>
-      <NavigationBar />
+      
       {/* <HamburgerMenu user = {user} /> */}
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <h1 style={{ display: 'inline-block' }}>Hello {user.userName}!</h1>
@@ -27,5 +30,6 @@ export default function MentorPendingsAndRunningPage ({user}) {
         <TipBox/>
       </div>
     </div>
+    </>
   );
 };

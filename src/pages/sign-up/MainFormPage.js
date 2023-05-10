@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
-import * as Constantans from '../Constants';
-import { SignUpContext } from '../context/SignUpContexts';
-import FormPage from './FormPage';
+import * as Constantans from '../../Constants';
+import { SignUpContext } from '../../context/SignUpContexts';
+import FormPage from '../FormPage';
 
 
 const MainFormPage = () => {
@@ -27,7 +27,7 @@ const MainFormPage = () => {
     <>
     <FormPage filedsArray = {Constantans.DEFAULT_QUESTIONS} 
     title='Tell Us About Yourself!'
-    nextTo= {'./' + Constantans.CHOOSE_ROLE_PAGE}
+    nextTo= {''}
     prevTo= {'../'} 
     onSave={() => {handleClickSave()}}
     condition={true}/>

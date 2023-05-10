@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import HamburgerMenu from '../HamburgerMenu';
+import { HamburgerMenuContext } from '../../context/HamburgerMenuContexts';
 
 const HamburgerMenuButton = ({ user }) => {
-  const [showMenu, setShowMenu] = useState(false);
+  const {showMenu, setShowMenu} = useContext(HamburgerMenuContext);
 
   const handleClick = () => {
-    setShowMenu(!showMenu);
+    const val = !showMenu;
+    setShowMenu(val);
   };
 
   return (
@@ -15,7 +17,7 @@ const HamburgerMenuButton = ({ user }) => {
       <IconButton onClick={handleClick}>
         <MenuIcon />
       </IconButton>
-      {showMenu && <HamburgerMenu user={user} />}
+      
     </>
   );
 };

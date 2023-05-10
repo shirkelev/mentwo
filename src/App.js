@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import SignUpPage from './pages/SignInPage';
-import ChooseRolePage from './pages/ChooseRolePage';
-import RoleFormPAge from './pages/RoleFormPage';
+import ChooseRolePage from './pages/sign-up/ChooseRolePage';
+import RoleFormPAge from './pages/sign-up/RoleFormPage';
 import MentorPendingsAndRunningPage from './pages/MentorPendingsAndRunningPage';
 import LandingPage from './pages/LandingPage';
 import ProcessCompletionPage from './pages/ProcessCompletionPage';
@@ -47,17 +47,18 @@ function addSemi(string){
 }
 const data = new DataBase()
 
-function App({user = data.findByName('Yuval')}) {
+function App({user = data.findByName('Nits')}) {
     
     const [userType, setUserType] = useState(user.type);
     const [email, setEmail] = useState(user.email);
     const [name, setName] = useState(user.name);
+    // const [role, setRole] = useState('Default');
 
     return (
     <ThemeProvider theme = {theme}>
     <>
-    {/* <h1> { role } </h1>
-    <button onClick={() => setRole(200)}> setRole </button> */}
+
+    {/* <button onClick={() => setRole(200)}> setRole </button>  */}
     <BrowserRouter>
         <UserContext.Provider value={{userType, setUserType, email, setEmail, name, setName}}>
             <Routes>

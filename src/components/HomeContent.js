@@ -5,6 +5,7 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import DoneIcon from '@mui/icons-material/Done';
 import PersonAddDisabledIcon from '@mui/icons-material/PersonAddDisabled';
 import CardsCarousel from './CardsCarousel';
+import { Badge } from '@mui/material';
 import * as Constants from '../Constants';
 
 // const LinesWrapper = styled('div')(({ theme }) => ({
@@ -51,26 +52,22 @@ import * as Constants from '../Constants';
 
   return (
     <>
+    <div style={{ display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center' }}>
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ marginRight: '10px' }}>
+        {/* <Badge color="secondary" badgeContent="10">
+          {headlineIcon}
+        </Badge> */}
         {headlineIcon}
       </div>
       <h3>{headline}</h3>
+      
     </div>
     <CardsCarousel list = {list} buttonText1 = {buttonText1} buttonText2 = {buttonText2} isMatched = {isMatched} />
+    <Divider style={{ width: '100%' }} />
+    </div>
     
-    {/* <LinesWrapper>
-      {list.map(x => {
-        return (
-          <>
-          <Line img={x.img} avatarAlt={x.userName} 
-          avatarSize={40} infoOnClick={handleInfoClick}
-          status={x.status} />
-          </>
-        )
-      })}
-    </LinesWrapper> */}
-    <Divider />
+    
     </>
   );
 }

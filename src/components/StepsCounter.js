@@ -31,7 +31,6 @@ function MyStep(props){
 
  function StepsCounter(props) {
     const steps = props.steps;
-    const to = props.to;
     const {step, setStep, completed} = React.useContext(SignUpContext);
     const handleStep = (step) => () => {
         setStep(step);
@@ -43,7 +42,7 @@ function MyStep(props){
             <Stepper nonLinear activeStep={step}>
                 {steps.map((label, index) => (
                     <Step key={label} completed={completed[index]}>
-                        <Link to={to[index]}>
+                        <Link to={''}>
                         <StepButton color="inherit" onClick={handleStep(index)}>
                             {label}
                         </StepButton>

@@ -8,7 +8,7 @@ import Battery90Icon from '@mui/icons-material/Battery90';
 import BatteryFullIcon from '@mui/icons-material/BatteryFull';
 
 const CapacityBattery = ({full_fruction}) => {
-    if (full_fruction == 0) {
+    if (full_fruction === 0) {
       return <Battery0BarIcon/>;
     }
     if (full_fruction <= 0.2) {
