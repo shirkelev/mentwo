@@ -31,7 +31,6 @@ const MainFormPage = () => {
     prevTo= {'../'} 
     onSave={() => {handleClickSave()}}
     condition={true}/>
-    
     </>
   )
   };

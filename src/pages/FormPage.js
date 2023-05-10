@@ -14,7 +14,7 @@ const RootContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  // paddingTop: theme.spacing(10),
+  maxWidth: '100%',
   paddingBottom: theme.spacing(5),
 }));
 
@@ -22,7 +22,6 @@ const FormContainer = styled('form')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  width: '100%',
   marginTop: theme.spacing(2),
   marginBottom: theme.spacing(2),
 }));
@@ -67,15 +66,12 @@ function WrapQuestions(props){
   )
 };
 
-
-
-
 const FormPage = (props) => {
   // const {role, setRole} = useContext(UserRole);
   const {filedsArray, title, nextTo, onSave, condition} = props;
   return (
     <>
-    <RootContainer maxWidth="md">
+    <RootContainer >
       <FormContainer>
           <Title> {title} </Title>
           {filedsArray.map(x => 

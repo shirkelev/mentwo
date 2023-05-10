@@ -39,6 +39,11 @@ const theme = createTheme({
             main: '#ffecb3',
         },
         },
+    fonts: {
+        primary: {
+            main: 'Roberto',
+        }
+    }
 })
 
 

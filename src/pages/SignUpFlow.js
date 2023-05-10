@@ -18,12 +18,13 @@ import Box from '@mui/material/Box';
 
 const RootContainer = styled(Container)(({ theme }) => ({
     padding: theme.spacing(5),
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
     
   }));
  //TODO: Make everything exactly in the middle of the page
 const ContentContainer = styled(Container)(({ theme }) => ({
-    minHeight: '500px',
-    minWidth: '500px',
     display: 'flex',
     innerPadding: theme.spacing(5),
   }));
@@ -35,7 +36,8 @@ const ButtonWrapper = styled(Button)(({ theme }) => ({
   const ButtonSection = styled('div')(({theme}) => ({
       display: 'flex',
       flexDirection: 'row',
-      width: '100%',
+      width: '100vw',
+      maxWidth:'100%', 
       alignItems: 'center',
       justifyContent: 'center',
       gap: '20px',
