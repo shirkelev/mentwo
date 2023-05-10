@@ -24,7 +24,22 @@ import { useContext, useState } from 'react';
 //import { UserRole } from './context/UserRole';
 import SignUpFlow from './pages/SignUpFlow';
 
+import {createTheme, ThemeProvider} from '@mui/material';
 
+const theme = createTheme({
+    palette: {
+        mode: 'light',
+        primary: {
+            main: '#b1a5e3',
+        },
+        secondary: {
+            main: '#5797de',
+        },
+        info: {
+            main: '#ffecb3',
+        },
+        },
+})
 
 
 function addSemi(string){
@@ -39,6 +54,7 @@ function App({user = data.findByName('Yuval')}) {
     const [name, setName] = useState(user.name);
 
     return (
+    <ThemeProvider theme = {theme}>
     <>
     {/* <h1> { role } </h1>
     <button onClick={() => setRole(200)}> setRole </button> */}
@@ -87,6 +103,7 @@ function App({user = data.findByName('Yuval')}) {
     {/* </UserRole.Provider> */}
     
     </>
+    </ThemeProvider>
   );
 }
 
