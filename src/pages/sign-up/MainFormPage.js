@@ -1,11 +1,11 @@
 import React, {useState, useContext} from 'react';
 import * as Constantans from '../../Constants';
 import { SignUpContext } from '../../context/SignUpContexts';
-import FormPage from '../FormPage';
+import FormPage from './FormPage';
 
 
 const MainFormPage = () => {
-  const {step, setStep, completed, setCompleted} = useContext(SignUpContext);
+  const {step, setStep, completed, setCompleted, form, setForm} = useContext(SignUpContext);
 
   function checkMainForm(form = null){
     return true;
@@ -22,6 +22,9 @@ const MainFormPage = () => {
       return false;
     }
   }
+
+  
+
   return (
 
     <>
@@ -30,7 +33,7 @@ const MainFormPage = () => {
     nextTo= {''}
     prevTo= {'../'} 
     onSave={() => {handleClickSave()}}
-    condition={true}/>
+    condition={true} />
     </>
   )
   };

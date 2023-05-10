@@ -1,8 +1,12 @@
 import React, {useState, useContext} from 'react';
 import * as Constantans from '../../Constants';
 import { SignUpContext } from '../../context/SignUpContexts';
-import FormPage from '../FormPage';
-import BigContentBox from '../../components/small-components/BigContentBox'
+import FormPage from './FormPage';
+import Mentor from '../../data/Mentor';
+import Mentee from '../../data/Mentee';
+import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router';
+
 
 function questionType(role){
   if(role === 'mentor'){
@@ -22,32 +26,67 @@ function questionType(role){
   }
 }
 
+function createNewUser(form, role){
+  
+  if(role==='mentor'){
+    return (
+      new Mentor(form.userName
+        ,form.firstName
+        ,form.lastName
+        ,form.password
+        ,require('../../data/images/shir.jpeg')
+        ,form.email
+        ,form.capacity
+        ,form.description
+        ,form.profession)
+    )}
+    if(role=== 'mentee'){
+      return (new Mentee(form.userName
+        ,form.firstName
+        ,form.lastName
+        , form.password
+        ,require('../../data/images/omer.jpeg')
+        ,form.email
+        ,form.capacity
+        ,form.description
+        ,form.profession)
+      )
+    }
+    else{
+      alert('You have to choose role first!')
+    } 
+    }
 
 
 const RoleFormPAge = ({onSave}) => {
-  const {role} = useContext(SignUpContext);
-
-  function checkRoleForm(form = null){
-    return true;
-  }
+  const navigate = useNavigate()
+  const {role, saveSuccess, form} = useContext(SignUpContext);
+  const {setUser, dataBase} = useContext(UserContext);
   
   function handleClickSave(form = null){
-    if(checkRoleForm(form)){
-      return true;
+    if(saveSuccess(form)){
+      const newUser = createNewUser(form, role);
+      alert(newUser.firstName + ' ' + newUser.lastName )
+      setUser(newUser);
+      navigate('../' + Constantans.HOME_PAGE);
     }
     else{
       return false;
     }
   }
+  const filedsArray = questionType(role);
   return (
     <>
-    <FormPage filedsArray = {questionType(role)} 
+    {filedsArray.length > 0 ? <FormPage filedsArray = {filedsArray} 
     title = {`Tell Us About Your Preferences as a ${role ? role.toUpperCase() : 'None'}!`}
-    nextTo= {Constantans.MENTEE_STATUS}
+    // nextTo= {'../' + Constantans.HOME_PAGE}
+    nextTo= {''}
     prevTo= {''} 
-    onSave = {() => null} />
+    onSave = {() => handleClickSave(form)} /> : <div sx={{flexGrow:1}}>
+      <h1>You have to choose role first!</h1>
+      </div>}
     </>
   )
   };
-
+ 
 export default RoleFormPAge;

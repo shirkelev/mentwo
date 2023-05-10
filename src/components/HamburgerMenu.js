@@ -10,22 +10,27 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import InfoIcon from '@mui/icons-material/Info';
 import * as Constants from '../Constants';
 import { useState } from 'react';
+import { HamburgerMenuContext } from '../context/HamburgerMenuContexts';
 
 export default function HamburgerMenu({user}) {
+  const {showMenu, setShowMenu} = React.useContext(HamburgerMenuContext);
+  function handleClick() {
+    setShowMenu(false);
+  }
   if (!user || user.type === 'mentor') { // todo: change when we have global var of user!
       return (
           <Paper sx={{ width: '270px' }}>
               <MenuList dense>
               <HamburgerMenuItem text="My Profile" icon = {AccountCircleIcon}
-              path="/" />
+              path="./" onClick={handleClick}/>
               <HamburgerMenuItem text="Pendings & Running Processes" icon = {GroupIcon}
-              path = {'../' + Constants.MENTOR_PENDINGS_AND_RUNNING_PAGE} />
+              path = {'./'} onClick={handleClick}/>
               <HamburgerMenuItem text="Finished Processes" icon = {Check}
-              path = {'../' + Constants.MENTOR_FINISHED_PAGE} />
+              path = {'./' + Constants.MENTOR_FINISHED_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="About" icon = {InfoIcon}
-              path = {"/"} />
+              path = {"/"} onClick={handleClick}/>
               <HamburgerMenuItem text="Log Out" icon = {LogoutIcon}
-              path = {'../' + Constants.SIGN_IN} />
+              path = {'../' + Constants.SIGN_IN} onClick={handleClick}/>
               </MenuList>
           </Paper>
       );

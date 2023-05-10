@@ -19,9 +19,9 @@ export default function NavigationBar({user}) {
     
   };
 
-  const [showMenu, setShowMenu] = React.useState(false);
+  const {showMenu, setShowMenu} = React.useContext(HamburgerMenuContext)
   return (
-    <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
+      <>
       <Box sx={{ flex: 1, style:"position: fixed;" }}>
         <AppBar position="static">
           <Toolbar>
@@ -46,6 +46,6 @@ export default function NavigationBar({user}) {
       <div style={containerStyle}>
         <HamburgerMenu user={user} />
       </div>}
-    </ HamburgerMenuContext.Provider>
+    </>
   );
 }

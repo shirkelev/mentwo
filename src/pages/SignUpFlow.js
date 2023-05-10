@@ -52,6 +52,7 @@ const ButtonWrapper = styled(Button)(({ theme }) => ({
     return completed
 }
 
+
 const SignUpFlow = ({props}) => {
 
     
@@ -63,10 +64,22 @@ const SignUpFlow = ({props}) => {
 
     const [completed, setCompleted] = useState(createCompleted(steps));
 
+    const [form, setForm] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        description: '',
+        capacity: '',
+        img: '',
+        userName: '',
+    });
 
-    function saveSuccess(){
+
+    function saveSuccess(form = null){
         return(
-            false
+            true
         );
     }
 
@@ -87,7 +100,7 @@ const SignUpFlow = ({props}) => {
     }
         return (
             <RootContainer>
-                <SignUpContext.Provider value={{role, setRole, step, setStep, completed, setCompleted}}>
+                <SignUpContext.Provider value={{role, setRole, step, setStep, completed, setCompleted, form, setForm, saveSuccess}}>
                     <StepsCounter steps={steps} completed={completed} to={to} activeStep={step}/>
                     <ContentContainer>
                         <StepContent />
