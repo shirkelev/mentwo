@@ -35,7 +35,7 @@ export default function CardsCarousel ({list, buttonText1, buttonText2, isMatche
 
   return (
     <>
-    <UserModalContext.Provider value={{openUserModal, setOpenUserModal}}>
+    {list.length > 0 ? <UserModalContext.Provider value={{openUserModal, setOpenUserModal}}>
       <Box sx={{display: "flex", flexDirection:'column', alignItems:"center", maxWidth:'100%'}}>
         <PersonCard mentee={list[activeStep]} picturePath={list[activeStep].img} name={list[activeStep].name} 
         details={list[activeStep].description} 
@@ -70,10 +70,10 @@ export default function CardsCarousel ({list, buttonText1, buttonText2, isMatche
             }
         /> : null}
         </Box>
-        <UserCardModal />
+        <UserCardModal user={''}/>
 
       </Box>
-    </UserModalContext.Provider>
+    </UserModalContext.Provider>: null}
     
     </>
   );

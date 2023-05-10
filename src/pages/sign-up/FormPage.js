@@ -1,11 +1,12 @@
 import React, {useState, useContext} from 'react';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
-import Button from '../components/small-components/Button';
-import TextBox from '../components/small-components/TextBox';
-import * as Constantans from '../Constants';
-import { SignUpContext } from '../context/SignUpContexts';
-import ConditionalButton from '../components/small-components/ConditionalButton';
+import Button from '../../components/small-components/Button';
+import TextBox from '../../components/small-components/TextBox';
+import * as Constantans from '../../Constants';
+import { SignUpContext } from '../../context/SignUpContexts';
+import ConditionalButton from '../../components/small-components/ConditionalButton';
+import BigContentBox from '../../components/small-components/BigContentBox';
 
 
 
@@ -56,12 +57,27 @@ const Question = styled('h3')(({ theme }) => ({
 }));
 
 function WrapQuestions(props){
-  const {title, name, placeHolder} = props;
+  const {title, name, placeHolder, onChange, type='short'} = props;
+  let quest;
+  switch(type){
+      case 'short': quest = <TextBox 
+                    title={title} 
+                    placeholder={placeHolder} 
+                    onChange={onChange}
+                    />
+      break;
+      case 'long': quest = <BigContentBox placeholder={placeHolder} />
+      break;
+      default: quest = <TextBox 
+      title={title} 
+      placeholder={placeHolder} 
+      onChange={onChange}
+      /> 
+  }
   return(
     <QuestionContainer>
             <Question>{name}</Question>
-            <TextBox title={title} 
-            placeholder={placeHolder} />
+            {quest}
     </QuestionContainer>
   )
 };
@@ -69,16 +85,26 @@ function WrapQuestions(props){
 const FormPage = (props) => {
   // const {role, setRole} = useContext(UserRole);
   const {filedsArray, title, nextTo, onSave, condition} = props;
+  const {form, setForm} = useContext(SignUpContext);
+
+  function handleChange(id, event){
+    let newForm = form;
+    newForm[id] = event;
+    setForm(newForm);
+  }
+
   return (
     <>
     <RootContainer >
       <FormContainer>
           <Title> {title} </Title>
-          {filedsArray.map(x => 
+          {filedsArray.map(x =>
           <WrapQuestions
           title= {x.title}
           name= {x.name}
           placeHolder={x.placeHolder}
+          onChange={(event) => handleChange(x.id, event.target.value)}
+          type={x.type}
           />
           )}
       <ButtonSection>

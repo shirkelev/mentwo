@@ -70,6 +70,11 @@ export default class DataBase{
             user.password === password
         )
     }
+
+    addUser(user){
+        alert('Adding user')
+        this.data.push(user);
+    }
 }
 // console.log(new DataBase().findById(1))
 

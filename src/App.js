@@ -25,6 +25,7 @@ import { useContext, useState } from 'react';
 import SignUpFlow from './pages/SignUpFlow';
 
 import {createTheme, ThemeProvider} from '@mui/material';
+import HomePageMain from './pages/HomePageMain';
 
 const theme = createTheme({
     palette: {
@@ -43,6 +44,7 @@ const theme = createTheme({
         primary: {
             main: 'Roberto',
         }
+        
     }
 })
 
@@ -52,12 +54,12 @@ function addSemi(string){
 }
 const data = new DataBase()
 
-function App({user = data.findByName('Nits')}) {
-    
+function App() {
+    const [user, setUser] = useState(data.findByName('Nits'));
     const [userType, setUserType] = useState(user.type);
     const [email, setEmail] = useState(user.email);
     const [name, setName] = useState(user.name);
-    // const [role, setRole] = useState('Default');
+    const [dataBase, setDataBase] = useState(data);
 
     return (
     <ThemeProvider theme = {theme}>
@@ -65,7 +67,7 @@ function App({user = data.findByName('Nits')}) {
 
     {/* <button onClick={() => setRole(200)}> setRole </button>  */}
     <BrowserRouter>
-        <UserContext.Provider value={{userType, setUserType, email, setEmail, name, setName}}>
+        <UserContext.Provider value={{userType, setUserType, email, setEmail, name, setName, user, setUser, dataBase}}>
             <Routes>
                 <Route path={Constants.SIGN_UP + '/*'}
                     action={({ params }) => {}}
@@ -82,24 +84,20 @@ function App({user = data.findByName('Nits')}) {
                     element = {<SignUpPage />}
                     exact
                     />;
-                <Route path={Constants.MENTOR_PENDINGS_AND_RUNNING_PAGE}
+                <Route path={Constants.HOME_PAGE + '/*'}
                     action={({ params }) => {}}
-                    element = {<MentorPendingsAndRunningPage user={user}/>}
+                    element = {<HomePageMain user={user}/>}
                     exact
                     />;
-                <Route path={Constants.MENTEE_STATUS}
+                
+                {/* <Route path={Constants.MENTEE_STATUS}
                 action={({ params }) => {}}
                 element = {<MenteeStatusPage picturePath={'./data/images/nitzan.jpeg'} status={0} />}
                 exact
-                />;
+                />; */}
                 <Route path={Constants.PROCESS_COMPLETION_FORM}
                     action={({ params }) => {}}
                     element = {<ProcessCompletionPage user={user}/>}
-                    exact
-                    />;
-                <Route path={Constants.MENTOR_FINISHED_PAGE}
-                    action={({ params }) => {}}
-                    element = {<MentorFinishedPage user={user}/>}
                     exact
                     />;
             </Routes>

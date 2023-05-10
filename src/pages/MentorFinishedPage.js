@@ -7,10 +7,9 @@ import HamburgerMenu from '../components/HamburgerMenu';
 import * as Constants from '../Constants';
 
 export default function MentorFinishedPage ({user}) {
+  
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
-      <NavigationBar />
-      {/* <HamburgerMenu user = {user} /> */}
       <div style={{ padding: '10px'}}>
         <HomeContent headline = {Constants.FINISHED} list={user.finishedMentees} />
       </div>

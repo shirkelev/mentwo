@@ -1,14 +1,14 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 
-const TextBox = ({ title, placeholder }) => {
+const TextBox = ({ title, placeholder, onChange }) => {
   return (
     <TextField
       id="outlined-basic"
       label={title}
       variant="outlined"
-      // variant="filled"
       placeholder={placeholder}
+      onChange = {onChange}
     />
   );
 };

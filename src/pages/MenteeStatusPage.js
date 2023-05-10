@@ -8,6 +8,7 @@ import MentoringProcess from '../components/MentoringProcess';
 import MentorApproval from '../components/MentorApproval';
 
 const MenteeStatusPage = ({status}) => {
+    alert('MentorFinishedPage')
     return(
         <Stack  direction="column"
         justifyContent="center"
@@ -15,7 +16,6 @@ const MenteeStatusPage = ({status}) => {
         spacing={3}
         style={{ width: '100%'}}
         >
-            <NavigationBar style={{ width: '100%'}} />
             <StageStepper activeStage={status} style={{width:'100%'}} />  
 
             {status === 0 && (

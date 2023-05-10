@@ -10,6 +10,7 @@ export const CHOOSE_ROLE_PAGE = 'choose-role';
 export const SIGN_UP_FLOW = 'sign-up';
 export const MENTEE_STATUS = "/MenteeStatusPage";
 export const MENTOR_FINISHED_PAGE = 'Mentor-Finished-Page';
+export const HOME_PAGE = 'home';
 
 // HomeContentTypes
 export const PENDINGS = 'Pending Requests';
@@ -29,96 +30,86 @@ export const DECLINED_BUTTON = 'undecline';
 
 export const MENTOR_QUESTIONS = [
     {
-        name: 'Mentor Question 1',
+        name: 'Adress',
+        id: 'adress',
         placeHolder: 'PlaceHolder',
-        title: 'Title'
+        title: 'Adress'
     },
     {
-        name: 'Question 1',
-        placeHolder: 'PlaceHolder',
-        title: 'Title'
+        name: 'Profession',
+        id: 'profession',
+        placeHolder: 'profession',
+        title: 'What is your profession?'
     },
     {
-        name: 'Question 1',
-        placeHolder: 'PlaceHolder',
-        title: 'Title'
+        name: 'Capacity',
+        id: 'capacity',
+        placeHolder: 'profession',
+        title: 'Capacity'
     },
     {
-        name: 'Question 1',
-        placeHolder: 'PlaceHolder',
-        title: 'Title'
-    },
-    {
-        name: 'Question 1',
-        placeHolder: 'PlaceHolder',
-        title: 'Title'
-    },
-    {
-        name: 'Question 1',
-        placeHolder: 'PlaceHolder',
-        title: 'Title'
+        name: 'Tell Us More About Yourself!',
+        id: 'description',
+        type: 'long',
+        placeHolder: 'Tell Us Anout Yourself',
+        title: 'Tell Us Anout Yourself'
     }
 ]
 export const MENTEE_QUESTIONS = [
     {
-        name: 'Mentee Question 1',
+        name: 'Adress',
+        id: 'adress',
         placeHolder: 'PlaceHolder',
-        title: 'Title'
+        title: 'Adress'
     },
     {
-        name: 'Question 1',
-        placeHolder: 'PlaceHolder',
-        title: 'Title'
+        name: 'Profession',
+        id: 'profession',
+        placeHolder: 'profession',
+        title: 'What would you like to work at?'
     },
     {
-        name: 'Question 1',
-        placeHolder: 'PlaceHolder',
-        title: 'Title'
-    },
-    {
-        name: 'Question 1',
-        placeHolder: 'PlaceHolder',
-        title: 'Title'
-    },
-    {
-        name: 'Question 1',
-        placeHolder: 'PlaceHolder',
-        title: 'Title'
-    },
-    {
-        name: 'Question 1',
-        placeHolder: 'PlaceHolder',
-        title: 'Title'
+        name: 'Tell Us More About Yourself',
+        id: 'description',
+        type: 'long',
+        placeHolder: 'Tell Us Anout Yourself!',
+        title: 'Tell Us Anout Yourself'
     }
 ]
 export const DEFAULT_QUESTIONS = [
     {
         name: 'Name',
+        id: 'firstName',
         placeHolder: 'First Name',
         title: 'Name'
     },
     {
-        name: 'Surname',
-        placeHolder: 'Surname',
+        name: 'Last Name',
+        id: 'lastName',
+        placeHolder: 'Last Name',
         title: 'Surname'
     },
     {
         name: 'User Name',
+        id: 'userName',
         placeHolder: 'User Name',
         title: 'User Name'
     },
     {
         name: 'eMail',
+        id: 'email',
         placeHolder: 'eMail',
         title: 'eMail'
     },
     {
         name: 'Password',
+        id: 'password',
         placeHolder: 'Password',
         title: 'Password'
     },
     {
         name: 'Confirm Password',
+        id: 'confirmPassword',
         placeHolder: 'Confirm Password',
         title: 'Confirm Password'
     }
