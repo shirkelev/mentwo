@@ -8,6 +8,7 @@ import LandingPage from './pages/LandingPage';
 import ProcessCompletionPage from './pages/ProcessCompletionPage';
 import * as Constants from './Constants';
 import MentorFinishedPage from './pages/MentorFinishedPage';
+import { UserContext } from './context/UserContext';
 
 import {
   BrowserRouter
@@ -25,55 +26,62 @@ import SignUpFlow from './pages/SignUpFlow';
 
 
 
+
 function addSemi(string){
     return('/' + string)
 }
+const data = new DataBase()
 
-function App() {
-  const data = new DataBase()
-//   const [role, setRole] = useState('Diif');
+function App({user = data.findByName('Yuval')}) {
+    
+    const [userType, setUserType] = useState(user.type);
+    const [email, setEmail] = useState(user.email);
+    const [name, setName] = useState(user.name);
+
     return (
     <>
     {/* <h1> { role } </h1>
     <button onClick={() => setRole(200)}> setRole </button> */}
     <BrowserRouter>
-        <Routes>
-            <Route path={Constants.SIGN_UP + '/*'}
+        <UserContext.Provider value={{userType, setUserType, email, setEmail, name, setName}}>
+            <Routes>
+                <Route path={Constants.SIGN_UP + '/*'}
+                    action={({ params }) => {}}
+                    element = {<SignUpFlow />}
+                    exact
+                    />;
+                <Route path={Constants.LANDING_PAGE}
+                    action={({ params }) => {}}
+                    element = {<LandingPage />}
+                    exact
+                    />;
+                <Route path={Constants.SIGN_IN}
+                    action={({ params }) => {}}
+                    element = {<SignUpPage />}
+                    exact
+                    />;
+                <Route path={Constants.MENTOR_PENDINGS_AND_RUNNING_PAGE}
+                    action={({ params }) => {}}
+                    element = {<MentorPendingsAndRunningPage user={user}/>}
+                    exact
+                    />;
+                <Route path={Constants.MENTEE_STATUS}
                 action={({ params }) => {}}
-                element = {<SignUpFlow />}
+                element = {<MenteeStatusPage picturePath={'./data/images/nitzan.jpeg'} status={0} />}
                 exact
                 />;
-            <Route path={Constants.LANDING_PAGE}
-                action={({ params }) => {}}
-                element = {<LandingPage />}
-                exact
-                />;
-            <Route path={Constants.SIGN_IN}
-                action={({ params }) => {}}
-                element = {<SignUpPage />}
-                exact
-                />;
-            <Route path={Constants.MENTOR_PENDINGS_AND_RUNNING_PAGE}
-                action={({ params }) => {}}
-                element = {<MentorPendingsAndRunningPage user={data.findByName('Nits')}/>}
-                exact
-                />;
-            <Route path={Constants.MENTEE_STATUS}
-              action={({ params }) => {}}
-              element = {<MenteeStatusPage picturePath={'./data/images/nitzan.jpeg'} status={0} />}
-              exact
-              />;
-            <Route path={Constants.PROCESS_COMPLETION_FORM}
-                action={({ params }) => {}}
-                element = {<ProcessCompletionPage user={data.findByName('Nits')}/>}
-                exact
-                />;
-            <Route path={Constants.MENTOR_FINISHED_PAGE}
-                action={({ params }) => {}}
-                element = {<MentorFinishedPage user={data.findByName('Nits')}/>}
-                exact
-                />;
-        </Routes>
+                <Route path={Constants.PROCESS_COMPLETION_FORM}
+                    action={({ params }) => {}}
+                    element = {<ProcessCompletionPage user={user}/>}
+                    exact
+                    />;
+                <Route path={Constants.MENTOR_FINISHED_PAGE}
+                    action={({ params }) => {}}
+                    element = {<MentorFinishedPage user={user}/>}
+                    exact
+                    />;
+            </Routes>
+        </UserContext.Provider>
         
     </ BrowserRouter>
     {/* </UserRole.Provider> */}

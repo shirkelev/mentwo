@@ -124,6 +124,7 @@ const ProcessCompletionPage = ({user}) => {
     if(user.type === 'mentor') {
         return (
             <>
+            <h1>{user.name}</h1>
             <RootContainer maxWidth="md">
 
             <Title>Tell us about the process</Title>
@@ -198,6 +199,7 @@ const ProcessCompletionPage = ({user}) => {
     } else {
         return (
             <>
+            <h1>{user.type}</h1>
             <RootContainer maxWidth="md">
 
             <Title>Tell us about the process</Title>

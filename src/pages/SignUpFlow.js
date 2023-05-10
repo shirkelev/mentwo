@@ -64,9 +64,9 @@ const SignUpFlow = ({props}) => {
 
     const [role, setRole] = useState('Default');
 
-    const[step, setStep] = useState(0);
+    const [step, setStep] = useState(0);
 
-    const[completed, setCompleted] = useState(createCompleted(steps));
+    const [completed, setCompleted] = useState(createCompleted(steps));
 
 
     function saveSuccess(){
