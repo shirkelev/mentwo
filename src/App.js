@@ -112,11 +112,6 @@ function App() {
                     exact
                     />;
                 
-                {/* <Route path={Constants.MENTEE_STATUS}
-                action={({ params }) => {}}
-                element = {<MenteeStatusPage picturePath={'./data/images/nitzan.jpeg'} status={0} />}
-                exact
-                />; */}
                 <Route path={Constants.PROCESS_COMPLETION_FORM}
                     action={({ params }) => {}}
                     element = {<ProcessCompletionPage user={user}/>}
