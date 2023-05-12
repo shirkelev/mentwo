@@ -4,6 +4,7 @@ import MentorFinishedPage from "./MentorFinishedPage";
 import MenteeStatusPage from "./MenteeStatusPage";
 import MentorPendingsAndRunningPage from "./MentorPendingsAndRunningPage";
 import ProcessCompletionPage from "./ProcessCompletionPage";
+import AboutPage from "./AboutPage";
 import NavigationBar from "../components/NavigationBar";
 import {
    
@@ -30,12 +31,13 @@ export default function HomePageMain() {
         <>
         <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
             <NavCont>
-                <NavigationBar />
+                <NavigationBar user = {user}/>
             </ NavCont>
             <Routes>
                 <Route path="/" element={user.type === 'mentor' ? <MentorPendingsAndRunningPage user={user} /> : <MenteeStatusPage user={user} />} exact/>
                 <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={user} />} />
                 <Route path={CONSTANTS.PROCESS_COMPLETION_FORM} element={<ProcessCompletionPage user={user} />} />
+                <Route path={CONSTANTS.ABOUT_PAGE} element={<AboutPage user={user} />} />
             </Routes>
         </HamburgerMenuContext.Provider>
         </>

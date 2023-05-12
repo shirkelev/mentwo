@@ -11,6 +11,7 @@ export const SIGN_UP_FLOW = 'sign-up';
 export const MENTEE_STATUS = "/MenteeStatusPage";
 export const MENTOR_FINISHED_PAGE = 'Mentor-Finished-Page';
 export const HOME_PAGE = 'home';
+export const ABOUT_PAGE = 'about';
 
 // HomeContentTypes
 export const PENDINGS = 'Pending Requests';

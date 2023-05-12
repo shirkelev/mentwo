@@ -28,7 +28,7 @@ export default function HamburgerMenu({user}) {
               <HamburgerMenuItem text="Finished Processes" icon = {Check}
               path = {'./' + Constants.MENTOR_FINISHED_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="About" icon = {InfoIcon}
-              path = {"/"} onClick={handleClick}/>
+              path = {"./" + Constants.ABOUT_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="Log Out" icon = {LogoutIcon}
               path = {'../' + Constants.SIGN_IN} onClick={handleClick}/>
               </MenuList>
@@ -40,13 +40,13 @@ export default function HamburgerMenu({user}) {
           <Paper sx={{ width: 320 }}>
             <MenuList dense>
               <HamburgerMenuItem text="My Profile" icon = {AccountCircleIcon}
-              path="/" />
+              path="/"  onClick={handleClick}/>
               <HamburgerMenuItem text="Current Status" icon = {AutorenewIcon}
-              path = {'../' + Constants.MENTEE_STATUS} />
+              path = {'../' + Constants.MENTEE_STATUS} onClick={handleClick}/>
               <HamburgerMenuItem text="About" icon = {InfoIcon}
-              path = {"/"} />
+              path = {"./" + Constants.ABOUT_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="Log Out" icon = {LogoutIcon}
-              path = {'../' + Constants.SIGN_IN} />
+              path = {'../' + Constants.SIGN_IN} onClick={handleClick}/>
             </MenuList>
           </Paper>
         );

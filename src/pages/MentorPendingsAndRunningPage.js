@@ -1,9 +1,7 @@
 import React from 'react';
-import NavigationBar from '../components/NavigationBar';
 import HomeContent from '../components/HomeContent';
 import CapacityBar from '../components/CapacityBar';
 import TipBox from '../components/small-components/TipBox';
-import HamburgerMenu from '../components/HamburgerMenu';
 import * as Constants from '../Constants';
 
 
@@ -12,8 +10,6 @@ export default function MentorPendingsAndRunningPage ({user}) {
   return (
     <>
     <div style={{ width: '100vw', height: '100vh' }}>
-      
-      
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <h1 style={{ display: 'inline-block' }}>Hello {user.userName}!</h1>
         <div style={{}}>
