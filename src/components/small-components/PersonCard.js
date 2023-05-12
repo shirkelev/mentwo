@@ -11,6 +11,8 @@ import { UserModalContext } from '../../context/UserModalContext';
 import { useTheme } from '@emotion/react';
 import UserContentDetails from './UserContectDetails';
 import {UserContentDetailsContext} from '../../context/UserContentDetailsContext';
+import * as Constants from '../../Constants';
+import { Link } from 'react-router-dom';
 const maxLength = 25;
 
 
@@ -44,7 +46,8 @@ export default function PersonCard({name, details, picturePath, phone, email, bu
         <CardActions>
         {/* {isMatched ? ( <><PhoneIcon onClick = {UserContentDetails.handleOpenDetails}/>&nbsp;&nbsp;&nbsp;</> ) : ( <Button size="small" onClick={handleClickViewMore}>About {name}</Button> )} */}
         {isMatched ? ( <><PhoneIcon/>&nbsp;&nbsp;&nbsp;</> ) : ( <Button size="small" onClick={handleClickViewMore}>About {name}</Button> )}
-          <Button size="small">{buttonText1}</Button>
+        {isMatched ? ( <Link to={"./" + Constants.PROCESS_COMPLETION_FORM} style={{ textDecoration: 'none' }}><Button size="small"> {buttonText1}</Button> </Link>) :
+         (<Button size="small">{buttonText1}</Button>)}
           {buttonText2 !== "" ? ( <Button size="small" >{buttonText2}</Button> ) : null}
         </CardActions>
 

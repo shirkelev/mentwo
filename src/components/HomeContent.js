@@ -5,7 +5,7 @@ import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import DoneIcon from '@mui/icons-material/Done';
 import PersonAddDisabledIcon from '@mui/icons-material/PersonAddDisabled';
 import CardsCarousel from './CardsCarousel';
-import { Badge } from '@mui/material';
+import { Badge, Typography } from '@mui/material';
 import * as Constants from '../Constants';
 
 // const LinesWrapper = styled('div')(({ theme }) => ({
@@ -60,7 +60,7 @@ import * as Constants from '../Constants';
         </Badge> */}
         {headlineIcon}
       </div>
-      <h3>{headline}</h3>
+      <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{headline}</Typography>
       
     </div>
     <CardsCarousel list = {list} buttonText1 = {buttonText1} buttonText2 = {buttonText2} isMatched = {isMatched} />

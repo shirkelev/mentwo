@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import CustomButton from '../components/small-components/Button';
 import BigContentBox from '../components/small-components/BigContentBox';
+import * as Constants from '../Constants';
 
 const RootContainer = styled(Container)(({ theme }) => ({
    display: 'flex',
@@ -98,7 +99,7 @@ const ProcessCompletionPage = ({user, partner}) => {
     const navigate = useNavigate();
 
     const backTapped = () => {
-        navigate('/home-page');
+        navigate(Constants.HOME_PAGE);
     };
 
     const [doneDialogOpen, setDoneDialogOpen] = React.useState(false);
@@ -109,7 +110,7 @@ const ProcessCompletionPage = ({user, partner}) => {
 
     const menteeDialogClosedWithNo = () => {
         setDoneDialogOpen(false);
-        navigate('/home-page');
+        navigate(Constants.HOME_PAGE);
     };
 
     const menteeDialogClosedWithYes = () => {
@@ -119,7 +120,7 @@ const ProcessCompletionPage = ({user, partner}) => {
 
     const mentorDialogClosed = () => {
         setDoneDialogOpen(false);
-        navigate('/home-page');
+        navigate(Constants.HOME_PAGE);
     };
 
     const [shareModalOpen, setShareModalOpen] = React.useState(false);
@@ -131,7 +132,7 @@ const ProcessCompletionPage = ({user, partner}) => {
     
     const shareModalClosed = () => {
         setShareModalOpen(false);
-        navigate('/home-page');
+        navigate(Constants.HOME_PAGE);
     };
 
     const [selectedRadioOption, setSelectedRadioOption] = useState('');

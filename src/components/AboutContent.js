@@ -17,7 +17,7 @@ function AboutContent() {
               <Typography variant="h5" sx={{ fontWeight: 'bold' }}>About MenTwo</Typography>
             </Box>
           <Box sx={{overflow: 'scroll'}}>
-          <Typography variant="h7" align='justify'>
+          <Typography align='justify'>
           Mentwo is an app that connects mentors and mentees,
           to accompany the process of finding the first job of students or graduates in the high-tech world.
           <br />The application is non-profit, and is designed to facilitate the process of finding the first job and continue a circle of goodness by passing it on.
