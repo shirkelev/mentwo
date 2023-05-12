@@ -9,11 +9,11 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import LogoutIcon from '@mui/icons-material/Logout';
 import InfoIcon from '@mui/icons-material/Info';
 import * as Constants from '../Constants';
-import { useState } from 'react';
 import { HamburgerMenuContext } from '../context/HamburgerMenuContexts';
 
 export default function HamburgerMenu({user}) {
   const {showMenu, setShowMenu} = React.useContext(HamburgerMenuContext);
+
   function handleClick() {
     setShowMenu(false);
   }

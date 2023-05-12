@@ -31,10 +31,10 @@ export const DECLINED_BUTTON = 'undecline';
 
 export const MENTOR_QUESTIONS = [
     {
-        name: 'Adress',
-        id: 'adress',
-        placeHolder: 'PlaceHolder',
-        title: 'Adress'
+        name: 'Address',
+        id: 'address',
+        placeHolder: 'address',
+        title: 'Address'
     },
     {
         name: 'Profession',
@@ -45,8 +45,8 @@ export const MENTOR_QUESTIONS = [
     {
         name: 'Capacity',
         id: 'capacity',
-        placeHolder: 'profession',
-        title: 'Capacity'
+        placeHolder: 'capacity',
+        title: 'How many mentees do you want to mentor parralel?'
     },
     {
         name: 'Tell Us More About Yourself!',
@@ -58,10 +58,10 @@ export const MENTOR_QUESTIONS = [
 ]
 export const MENTEE_QUESTIONS = [
     {
-        name: 'Adress',
-        id: 'adress',
-        placeHolder: 'PlaceHolder',
-        title: 'Adress'
+        name: 'Address',
+        id: 'address',
+        placeHolder: 'address',
+        title: 'Address'
     },
     {
         name: 'Profession',

@@ -1,8 +1,8 @@
 import User from './User.js'
 
 export default class Mentee extends User {
-    constructor(userName, name, lastName, password, img, email, description, profession) {
-        super(userName, name, lastName, password, img, email, 'mentee', description);
+    constructor(userName, name, lastName, password, img, email, phone, description, profession) {
+        super(userName, name, lastName, password, img, email, phone, 'mentee', description);
         this.offeredMentors = [];
         this.currentMentor = null;
         this.mentorshipStatus = null;

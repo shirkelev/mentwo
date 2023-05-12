@@ -12,19 +12,19 @@ export default class DataBase{
             const emailEnd = '@gmail.com';
 
             const nitsan = new Mentor('Nits', 'Nitsan', 'Heiman'
-                , password, require('./images/nitsan.jpeg'),  'nitsan' + emailEnd, 8);
+                , password, require('./images/nitsan.jpeg'),  'nitsan' + emailEnd, '0545535498', 8);
 
             const shir = new Mentee('Shik', 'Shir', 'Levran'
-                , password, require('./images/shir.jpeg'),  'shir' + emailEnd);
+                , password, require('./images/shir.jpeg'),  'shir' + emailEnd, '0529088712');
 
             const yuvi = new Mentee('Yuval', 'Yuval', 'Yusipov'
-                , password, require('./images/yuvi.jpeg'),  'yuvi' + emailEnd, 'I am a very long description dsadjbasdkisabdkhjsabdkshabsakhdbsajhkdbashkdbsahdbashidbsadihbashidbsaihdbsaihdbasdihbdasihbdsaih');
+                , password, require('./images/yuvi.jpeg'),  'yuvi' + emailEnd, '0506783444', 'I am a very long description dsadjbasdkisabdkhjsabdkshabsakhdbsajhkdbashkdbsahdbashidbsadihbashidbsaihdbsaihdbasdihbdasihbdsaih');
 
             const omer = new Mentee('omer', 'Omer', 'Getzler'
-                , password, require('./images/omer.jpeg'),  'omer' + emailEnd);
+                , password, require('./images/omer.jpeg'),  'omer' + emailEnd, '0548221309');
             
             const bls = new Mentee('bla', 'bla', 'Getzler'
-                , password, require('./images/omer.jpeg'),  'omer' + emailEnd);
+                , password, require('./images/omer.jpeg'),  'omer' + emailEnd, '0522345118');
 
             nitsan.addMentee(shir, 'approved');
             nitsan.addMentee(bls, 'approved');
@@ -33,7 +33,7 @@ export default class DataBase{
             nitsan.addMentee(omer, 'finished');
             for(let i = 0; i < 3; i++){
                 nitsan.addMentee(new Mentee('Name' + String(i), 'Name' + String(i), 'Last'
-                , password, '',  'omer' + emailEnd))
+                , password, '',  'omer' + emailEnd, '0509776592'))
             }
 
 
