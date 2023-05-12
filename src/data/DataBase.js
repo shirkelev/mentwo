@@ -31,6 +31,9 @@ export default class DataBase{
             shir.addMentor(nitsan);
             nitsan.addMentee(yuvi, 'pending');
             nitsan.addMentee(omer, 'finished');
+            shir.addOptionalMentor(yuvi);
+            shir.addOptionalMentor(omer);
+            shir.addOptionalMentor(nitsan);
             for(let i = 0; i < 3; i++){
                 nitsan.addMentee(new Mentee('Name' + String(i), 'Name' + String(i), 'Last'
                 , password, '',  'omer' + emailEnd, '0509776592'))
