@@ -8,6 +8,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
 import LogoutIcon from '@mui/icons-material/Logout';
 import InfoIcon from '@mui/icons-material/Info';
+import NextWeekIcon from '@mui/icons-material/NextWeek';
 import * as Constants from '../Constants';
 import { HamburgerMenuContext } from '../context/HamburgerMenuContexts';
 
@@ -27,6 +28,8 @@ export default function HamburgerMenu({user}) {
               path = {'./'} onClick={handleClick}/>
               <HamburgerMenuItem text="Finished Processes" icon = {Check}
               path = {'./' + Constants.MENTOR_FINISHED_PAGE} onClick={handleClick}/>
+              <HamburgerMenuItem text="After Matched Steps" icon = {NextWeekIcon}
+              path = {"./" + Constants.RECOMMENDATINS_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="About" icon = {InfoIcon}
               path = {"./" + Constants.ABOUT_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="Log Out" icon = {LogoutIcon}
@@ -45,6 +48,8 @@ export default function HamburgerMenu({user}) {
               path = {'../' + Constants.MENTEE_STATUS} onClick={handleClick}/>
               <HamburgerMenuItem text="About" icon = {InfoIcon}
               path = {"./" + Constants.ABOUT_PAGE} onClick={handleClick}/>
+              <HamburgerMenuItem text="After Matched Steps" icon = {NextWeekIcon}
+              path = {"./" + Constants.RECOMMENDATINS_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="Log Out" icon = {LogoutIcon}
               path = {'../' + Constants.SIGN_IN} onClick={handleClick}/>
             </MenuList>

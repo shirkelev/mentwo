@@ -5,6 +5,7 @@ import MenteeStatusPage from "./MenteeStatusPage";
 import MentorPendingsAndRunningPage from "./MentorPendingsAndRunningPage";
 import ProcessCompletionPage from "./ProcessCompletionPage";
 import AboutPage from "./AboutPage";
+import Recommendations from "./Recommendations";
 import NavigationBar from "../components/NavigationBar";
 import {
    
@@ -38,6 +39,7 @@ export default function HomePageMain() {
                 <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={user} />} />
                 <Route path={CONSTANTS.PROCESS_COMPLETION_FORM} element={<ProcessCompletionPage user={user} />} />
                 <Route path={CONSTANTS.ABOUT_PAGE} element={<AboutPage user={user} />} />
+                <Route path={CONSTANTS.RECOMMENDATINS_PAGE} element={<Recommendations user={user} />} />
             </Routes>
         </HamburgerMenuContext.Provider>
         </>

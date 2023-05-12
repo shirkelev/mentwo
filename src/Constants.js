@@ -12,6 +12,7 @@ export const MENTEE_STATUS = "/MenteeStatusPage";
 export const MENTOR_FINISHED_PAGE = 'Mentor-Finished-Page';
 export const HOME_PAGE = 'home';
 export const ABOUT_PAGE = 'about';
+export const RECOMMENDATINS_PAGE = 'recommendations';
 
 // HomeContentTypes
 export const PENDINGS = 'Pending Requests';
