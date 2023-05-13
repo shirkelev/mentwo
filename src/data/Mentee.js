@@ -8,6 +8,7 @@ export default class Mentee extends User {
         this.mentorshipStatus = null;
         this.optionalMentors = [];
         this.profession = profession;
+        this.status = 0
     }
 
     addMentor(mentor){
@@ -16,6 +17,10 @@ export default class Mentee extends User {
     }
     addOptionalMentor(mentor){
         this.optionalMentors.push(mentor);
+    }
+
+    changeStatus(status){
+        this.status = status
     }
 }
 

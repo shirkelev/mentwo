@@ -8,11 +8,16 @@ export const MENTOR_PENDINGS_AND_RUNNING_PAGE = 'MentorPendingsAndRunningPage';
 export const LANDING_PAGE = '/';
 export const CHOOSE_ROLE_PAGE = 'choose-role';
 export const SIGN_UP_FLOW = 'sign-up';
-export const MENTEE_STATUS = "/MenteeStatusPage";
+export const MENTEE_STATUS = "MenteeStatusPage";
 export const MENTOR_FINISHED_PAGE = 'Mentor-Finished-Page';
 export const HOME_PAGE = 'home';
 export const ABOUT_PAGE = 'about';
 export const RECOMMENDATINS_PAGE = 'recommendations';
+export const CHOOSE_MENTOR_PAGE = 'chooseMentorPage';
+export const WAIT_MENTOR_APPROVAL_PAGE = 'mantorApprovalWaitPage';
+export const MATCH_SUCCESS_PAGE = 'matchSuccessPage';
+
+
 
 
 

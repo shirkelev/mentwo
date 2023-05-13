@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 
 import MentorFinishedPage from "./MentorFinishedPage";
-import MenteeStatusPage from "./MenteeStatusPage";
+import MenteeMatchingPage from "./MenteeMatchingPage";
 import MentorPendingsAndRunningPage from "./MentorPendingsAndRunningPage";
 import ProcessCompletionPage from "./ProcessCompletionPage";
 import AboutPage from "./AboutPage";
@@ -17,9 +17,9 @@ import { HamburgerMenuContext } from "../context/HamburgerMenuContexts";
 import { styled } from '@mui/material/styles';
 import { UserContext } from "../context/UserContext";
 
-
-// import MentoringProcess from "../components/MentoringProcess";
-// export const MATCH_ = 'match';
+import MentorApproval from "../components/MentorApproval";
+import ChooseMentor from "../components/ChooseMentor";
+import MatchSuccess from "../components/MatchSuccess";
 
 const NavCont = styled('nav')(({ theme }) => ({
     position: 'sticky',
@@ -37,13 +37,15 @@ export default function HomePageMain() {
                 <NavigationBar user = {user}/>
             </ NavCont>
             <Routes>
-                <Route path="/" element={user.type === 'mentor' ? <MentorPendingsAndRunningPage user={user} /> : <MenteeStatusPage user={user} />} exact/>
+                <Route path="/" element={user.type === 'mentor' ? <MentorPendingsAndRunningPage user={user} /> : <MenteeMatchingPage user={user} />} exact/>
                 <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={user} />} />
                 <Route path={CONSTANTS.PROCESS_COMPLETION_FORM} element={<ProcessCompletionPage user={user} />} />
                 <Route path={CONSTANTS.ABOUT_PAGE} element={<AboutPage user={user} />} />
                 <Route path={CONSTANTS.RECOMMENDATINS_PAGE} element={<Recommendations user={user} />} />
-
-                {/* <Route path={MATCH_} element={<MentoringProcess mentee={dataBase.data[2]} />} /> */}
+                <Route path={CONSTANTS.CHOOSE_MENTOR_PAGE} element={<ChooseMentor mentee={dataBase.data[2]} />} />
+                <Route path={CONSTANTS.MENTEE_STATUS} element={<MenteeMatchingPage mentee={dataBase.data[2]} />} />
+                <Route path={CONSTANTS.WAIT_MENTOR_APPROVAL_PAGE} element={<MentorApproval mentee={dataBase.data[2]} />} />
+                <Route path={CONSTANTS.MATCH_SUCCESS_PAGE} element={<MatchSuccess mentee={dataBase.data[2]} />} />
             </Routes>
         </HamburgerMenuContext.Provider>
         </>

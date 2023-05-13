@@ -1,4 +1,5 @@
 
+import { Shield } from "@mui/icons-material";
 import Mentee from "./Mentee.js"
 import Mentor from "./Mentor.js"
 
@@ -34,6 +35,7 @@ export default class DataBase{
             shir.addOptionalMentor(yuvi);
             shir.addOptionalMentor(omer);
             shir.addOptionalMentor(nitsan);
+            shir.status = 1;
             for(let i = 0; i < 3; i++){
                 nitsan.addMentee(new Mentee('Name' + String(i), 'Name' + String(i), 'Last'
                 , password, '',  'omer' + emailEnd, '0509776592'))

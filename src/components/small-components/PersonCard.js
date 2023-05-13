@@ -19,13 +19,16 @@ const maxLength = 25;
 function trimDetail(details){
     return details.slice(0, maxLength) + (details.length > maxLength ? "..." : "");
 }
-export default function PersonCard({name, details, picturePath, phone, email, buttonText1, buttonText2, isMatched}) {
+export default function PersonCard({user,buttonText1, buttonText2, button2onClickFunc, isMatched}) {
   
   const {openUserModal, setOpenUserModal} = React.useContext(UserModalContext);
   // const {showDetails, setShowDetails} = React.useContext(UserContentDetailsContext);
   
   const handleClickViewMore = () => {
     setOpenUserModal(!openUserModal);
+  }
+  const hadleClickChooseMentor = () => {
+    user.changeStatus(2);
   }
   return (
     // <UserContentDetailsContext.Provider value={{showDetails, setShowDetails}}>
@@ -35,20 +38,20 @@ export default function PersonCard({name, details, picturePath, phone, email, bu
         justifyContent="center"
         alignItems="center"
         >
-        <Avatar  sx={{ width: 100, height: 100, border: 1, margin:1}} src={picturePath}  borderStyle='line'/>
+        <Avatar  sx={{ width: 100, height: 100, border: 1, margin:1}} src={user.img}  borderStyle='line'/>
         </Stack>
         
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div"> {name}</Typography>
-          <Typography variant="body2" color="text.secondary">{trimDetail(details)}</Typography>
+          <Typography gutterBottom variant="h5" component="div"> {user.name}</Typography>
+          <Typography variant="body2" color="text.secondary">{trimDetail(user.description)}</Typography>
         </CardContent>
 
         <CardActions>
         {/* {isMatched ? ( <><PhoneIcon onClick = {UserContentDetails.handleOpenDetails}/>&nbsp;&nbsp;&nbsp;</> ) : ( <Button size="small" onClick={handleClickViewMore}>About {name}</Button> )} */}
-        {isMatched ? ( <><PhoneIcon/>&nbsp;&nbsp;&nbsp;</> ) : ( <Button size="small" onClick={handleClickViewMore}>About {name}</Button> )}
+        {isMatched ? ( <><PhoneIcon/>&nbsp;&nbsp;&nbsp;</> ) : ( <Button size="small" onClick={handleClickViewMore}>About {user.name}</Button> )}
         {isMatched ? ( <Link to={"./" + Constants.PROCESS_COMPLETION_FORM} style={{ textDecoration: 'none' }}><Button size="small"> {buttonText1}</Button> </Link>) :
          (<Button size="small">{buttonText1}</Button>)}
-          {buttonText2 !== "" ? ( <Button size="small" >{buttonText2}</Button> ) : null}
+        {buttonText2 === "" ? null : (<Button size="small" onClick={button2onClickFunc}>{buttonText2}</Button> ) }
         </CardActions>
 
         {/* <UserContentDetails name={name} phone={phone} email={email} /> */}

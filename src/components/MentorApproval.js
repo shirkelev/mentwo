@@ -1,10 +1,18 @@
 import React from 'react';
 import {Avatar, Grid, Stack, Button } from '@mui/material';
 import TipBox from './small-components/TipBox';
+import CircularDeterminate from './small-components/CircularDeterminate';
+import StageStepper from './StageStepper';
 
 export default function MentorApproval({mentee}) {
+    function handleClick() {
+        window.history.pushState(null, "", "/home/matchSuccessPage");
+        window.location.reload();
+    }
     return( 
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' , marginTop: '2rem' }}>
+            <StageStepper activeStage={2} style={{width:'100%'}} /> 
+            <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <Stack direction="column"
                     justifyContent="center"
                     alignItems="center"
@@ -18,9 +26,12 @@ export default function MentorApproval({mentee}) {
                         <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.img}/></Grid>
                         <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.currentMentor.img}/> </Grid>
                     </Grid>
-                    <h1>It's a Match!</h1>
-                    <TipBox tipMessege={'Send resume via friend!'}></TipBox>
+                    <h2 style={{ marginTop: '15px', textAlign: 'center' }}>Waiting for your mentor to approve your pending</h2>
+                    <text style={{ marginTop: '12px', textAlign: 'center' }}>Your mentor has 24 hours to approve your request</text>
+                    <CircularDeterminate></CircularDeterminate>
+                    <button onClick={handleClick}>next</button>
                 </Stack>
+            </div>
             </div>
     );
 }
