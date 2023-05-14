@@ -5,11 +5,10 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import Google from '@mui/icons-material/Google';
 import LinkedIn from '@mui/icons-material/LinkedIn';
 import { IconButton } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import TextBox from '../components/small-components/TextBox';
 import SimpleButton from '../components/small-components/Button';
-import { 
-    Link
-    } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as Constants from '../Constants';
 
 const RootContainer = styled(Container)(
@@ -72,7 +71,7 @@ const SignInPage = () => {
   return (
     <>
     <RootContainer>
-        <h1>Sign In</h1>
+    <Typography variant="h5" style={{fontWeight: 'bold'}}>Sign In</Typography>
         <FormContainer >
             <TextContainer>
                 <TextBox title="Username" placeholder="Enter your username" />
@@ -91,7 +90,9 @@ const SignInPage = () => {
                 </SocialButtonWrapper>
             </SocialButtonsContainer>
             <Link to={'../' + Constants.SIGN_UP}>
+            <Typography>
                 <SignUpLink >Sign Up!</SignUpLink>
+            </Typography>
             </Link>
         </ FormContainer>
     </RootContainer>

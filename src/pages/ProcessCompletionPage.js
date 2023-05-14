@@ -202,7 +202,7 @@ const ProcessCompletionPage = ({user, partner}) => {
 
                 <ButtonSection>
                 <IconButton  onClick={shareTapped} size='small' style={{ color: selectedRadioOption !== 'yes' ? 'grey' : '#0A66C2' }} disabled={selectedRadioOption !== 'yes'} >
-                    Share this process
+                <Typography>Share this process</Typography>
                     <LinkedInIcon style={{ color: selectedRadioOption !== 'yes' ? 'grey' : '#0A66C2' }} fontSize="large" />
                 </IconButton>
                 </ButtonSection>

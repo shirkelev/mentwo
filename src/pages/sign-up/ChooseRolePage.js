@@ -1,8 +1,9 @@
 import React, {useContext, useState} from 'react';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import RoundButton from '../../components/small-components/RoundButton';
-import * as Constantans from '../../Constants';
+import * as Constants from '../../Constants';
 import { SignUpContext } from '../../context/SignUpContexts';
 import { Link } from 'react-router-dom';
 // import UserRole from '../context/UserRole';
@@ -51,24 +52,26 @@ const ChooseRolePage = () => {
   return (
     
       <RootContainer maxWidth="sm">
-        <Title>Are you a mentor or mentee?</Title>
-        <ButtonsContainer>
-            <MentorButton 
-              color="primary" 
-              onClick={() =>  {
-                handleClick('mentor');
-                }}
-              to={''}
-              text='Mentor'
-              />
-            <div style={{width: '20px'}}></div>
-            <MenteeButton 
-              color="secondary" 
-              onClick={() =>  {
-                handleClick('mentee');
-                }}
-              to={''} text='Mentee' />
-        </ButtonsContainer>
+        <Typography>
+          <Title>Mentor or Mentee?</Title>
+          <ButtonsContainer>
+              <MentorButton 
+                color="primary" 
+                onClick={() =>  {
+                  handleClick('mentor');
+                  }}
+                to={''}
+                text='Mentor'
+                />
+              <div style={{width: '20px'}}></div>
+              <MenteeButton 
+                color="secondary" 
+                onClick={() =>  {
+                  handleClick('mentee');
+                  }}
+                to={''} text='Mentee' />
+          </ButtonsContainer>
+        </Typography>
       </RootContainer>
    
     
