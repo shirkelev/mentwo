@@ -19,6 +19,7 @@ import {
   // ,createBrowserRouter
 } from 'react-router-dom'
 import DataBase from './data/DataBase';
+
 import { useContext, useState } from 'react';
 //import { UserRole } from './context/UserRole';
 import SignUpFlow from './pages/SignUpFlow';
@@ -66,7 +67,7 @@ const theme = createTheme({
       },
     },
     typography: {
-      fontFamily: 'Roberto', // Set the primary font
+      fontFamily: 'Gruppo, sans-serif', // Set the primary font
     },
   });
 

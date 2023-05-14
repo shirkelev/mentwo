@@ -4,6 +4,7 @@ import TipBox from './small-components/TipBox';
 import StageStepper from './StageStepper';
 import Recommendations from '../pages/Recommendations';
 
+
 export default function MatchSuccess({mentee}) {
     function handleClick() {
         window.history.pushState(null, "", "/home/process-completion");
