@@ -89,7 +89,7 @@ const ModalStyle = styled('div')(({ theme }) => ({
     boxShadow: theme.shadows[6], // Adjust the shadow to your preference
     padding: theme.spacing(4),
     textAlign: 'center',
-    width: 300, // Increase the width to accommodate more space around the text
+    width: 305, // Increase the width to accommodate more space around the text
     maxWidth: '90%', // Optional: Set a maximum width for the modal
     borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
  }));
