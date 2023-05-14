@@ -45,7 +45,7 @@ export default function HamburgerMenu({user}) {
               <HamburgerMenuItem text="My Profile" icon = {AccountCircleIcon}
               path="/"  onClick={handleClick}/>
               <HamburgerMenuItem text="Current Status" icon = {AutorenewIcon}
-              path = {'../' + Constants.MENTEE_STATUS} onClick={handleClick}/>
+              path = {'./' + Constants.MENTEE_STATUS} onClick={handleClick}/>
               <HamburgerMenuItem text="About" icon = {InfoIcon}
               path = {"./" + Constants.ABOUT_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="After Matched Steps" icon = {NextWeekIcon}

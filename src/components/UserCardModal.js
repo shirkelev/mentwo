@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Button, Modal, Box, Typography, Avatar } from '@mui/material';
 import { UserModalContext } from '../context/UserModalContext';
 import { Stack, margin } from '@mui/system';
+import styled from '@emotion/styled';
 
 const h2Styles = {
   maxWidth: '100%',
@@ -11,7 +12,23 @@ const h2Styles = {
   wordWrap: 'break-word' 
 };
 
-const UserCardModal = ({user, open}) => {
+const ModalStyle = styled('div')(({ theme }) => ({
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  backgroundColor: '#FFFFFF', // Set the background color to white
+  border: `2px solid ${theme.palette.primary.main}`, // Use the theme's primary color for the border
+  boxShadow: theme.shadows[6], // Adjust the shadow to your preference
+  padding: theme.spacing(4),
+  textAlign: 'center',
+  width: 250, // Increase the width to accommodate more space around the text
+  maxWidth: '90%', // Optional: Set a maximum width for the modal
+  borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
+}));
+
+const UserCardModal = ({user, variant}) => {
+
     const {openUserModal, setOpenUserModal} = useContext(UserModalContext);
     // const {modalDetails, setModalDetails} = useContext(UserModalContext);
     
@@ -22,40 +39,60 @@ const UserCardModal = ({user, open}) => {
     const handleCloseModal = () => {
       setOpenUserModal(false);
     };
+
+    function ModalContent(){
+      if(variant === 'about'){
+        return(
+        <>
+        <Typography><text style={h2Styles}><br></br>{user.description}</text></Typography>
+        </>
+        )
+      }
+      else{
+        return(
+          <>
+          <Typography variant="body1" sx={{ mb: 1 }}>Email: {user.email}</Typography>
+          <Typography variant="body1" sx={{ mb: 1 }}>Phone: {user.phone}</Typography>
+          {/* <Typography variant="body2" sx={{ mb: 2 }}>{user.description}</Typography> */}
+          
+          </>
+          
+        )
+      }
+    }
   
     return (
 
-        <Modal open={openUserModal} onClose={handleCloseModal}>
-          <Box sx={{ position: 'absolute', top: '50%', left: '50%', 
-                transform: 'translate(-50%, -50%)', maxWidth:'70%', maxHeight:'70%', bgcolor: 'background.paper', boxShadow: 24, p: 4 
-                ,margin:2}}>
-        <Stack 
-          direction="row"
-          justifyContent="flex-start"
-          alignItems="center"
-          spacing={2}
-        >
-          <Avatar src={user.img} />
-          <Typography variant="h4" style={{ fontWeight: 'bold' }}>{user.name}</Typography>
-        </Stack>
-        <Typography><text style={h2Styles}><br></br>{user.description}</text></Typography>
-{ /*
-            <Typography variant="body1" sx={{ mb: 1 }}>Email: {email}</Typography>
-            <Typography variant="body1" sx={{ mb: 1 }}>Phone: {phone}</Typography>
-            <Typography variant="body2" sx={{ mb: 2 }}>{description}</Typography> */}
-
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button variant="contained" onClick={handleCloseModal}>Close</Button>
-            </Box>
-          </Box>
+      <Modal
+        open={openUserModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description">
+          <ModalStyle>
+              <Stack 
+                direction="row"
+                justifyContent="flex-start"
+                alignItems="center"
+                spacing={2}
+                marginBottom={2}
+                    >
+                <Avatar src={user.img} sx={{ width: 56, height: 56 }} borderStyle='line'/>
+                <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
+              </Stack>
+              <ModalContent/>
+              
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop:30}}>
+                <Button variant="outlined" onClick={handleCloseModal} size='small'>Close</Button>
+              </div>
+          </ModalStyle>
         </Modal>
+
+        
     );
   };
   
   export default UserCardModal;
   
-  
- 
   
   
   

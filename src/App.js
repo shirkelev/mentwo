@@ -77,18 +77,26 @@ function addSemi(string){
 const data = new DataBase()
 
 function App() {
-    const [user, setUser] = useState(data.findByName('Nits'));
+    const MnM = [data.findByName('Yuval'), data.findByName('Nits')]
+    const [user, setUser] = useState(data.findByName('Yuval'));
+    const [cur, setCur] = useState(0);
     const [userType, setUserType] = useState(user.type);
     const [email, setEmail] = useState(user.email);
     const [name, setName] = useState(user.name);
     const [dataBase, setDataBase] = useState(data);
-
+    
+    function handelUserChange(){
+        setCur(cur+1)
+        setUser(MnM[(cur + 1) % 2 ]);
+    }
     return (
+    
     <ThemeProvider theme = {theme}>
     <>
-
+    
     {/* <button onClick={() => setRole(200)}> setRole </button>  */}
     <BrowserRouter>
+        <button onClick={handelUserChange}> change flow </button>    
         <UserContext.Provider value={{userType, setUserType, email, setEmail, name, setName, user, setUser, dataBase}}>
             <Routes>
                 <Route path={Constants.SIGN_UP + '/*'}

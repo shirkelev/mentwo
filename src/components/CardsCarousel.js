@@ -12,10 +12,11 @@ import { UserModalContext } from '../context/UserModalContext';
 import UserCardModal from './UserCardModal';
 
 
-export default function CardsCarousel ({list, buttonText1, buttonText2, isMatched}) {
+export default function CardsCarousel ({list, buttonText0, buttonText1, buttonText2, isMatched}) {
 
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
+  const [modalType, setModalType] = useState('contact'); 
   const [openUserModal, setOpenUserModal] = useState(false);
 
   const maxSteps = list.length;
@@ -34,14 +35,19 @@ export default function CardsCarousel ({list, buttonText1, buttonText2, isMatche
 
   return (
     <>
-    {list.length > 0 ? <UserModalContext.Provider value={{openUserModal, setOpenUserModal}}>
+    {list.length > 0 ? <UserModalContext.Provider value={{openUserModal, setOpenUserModal, setModalType, modalType}}>
       <Box sx={{display: "flex", flexDirection:'column', alignItems:"center", maxWidth:'100%'}}>
-        <PersonCard user={list[activeStep]} buttonText1 = {buttonText1} buttonText2 = {buttonText2} isMatched = {isMatched} sx={{}}/>
+        <PersonCard user={list[activeStep]} 
+        buttonText0={buttonText0} 
+        buttonText1 = {buttonText1} 
+        buttonText2 = {buttonText2} 
+        isMatched = {isMatched} sx={{}}/>
         <Box sx={{width:'100%' }}>
           { maxSteps - 1 ? <MobileStepper
             steps={maxSteps}
             position="static"
             activeStep={activeStep}
+           sx={{backgroundColor: 'transparent'}}
             nextButton={
               <Button
                 size="small"
@@ -68,7 +74,7 @@ export default function CardsCarousel ({list, buttonText1, buttonText2, isMatche
             }
         /> : null}
         </Box>
-        <UserCardModal user={list[activeStep]}/>
+        <UserCardModal user={list[activeStep]} variant={modalType}/>
 
       </Box>
     </UserModalContext.Provider>: null}

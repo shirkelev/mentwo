@@ -324,7 +324,7 @@ const ProcessCompletionPage = ({user, partner}) => {
                 </DialogContent>
                 <DialogActions >
 
-                    <Button variant='Outlined' onClick={menteeDialogClosedWithNo}>
+                    <Button variant='outlined' onClick={menteeDialogClosedWithNo}>
                         <Typography variant="body1" fontWeight="bold">
                             No
                         </Typography>

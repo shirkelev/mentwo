@@ -26,11 +26,11 @@ function LandingPage() {
             paddingRight: '5vw', paddingLeft: '5vw', paddingTop: '5vh', paddingBottom: '1vh',
             alignItems: 'center' , gap:1}}>
          {/* Login and Signup links */}
-         <img alt='logo' src={logoW} style={{height:'10vh', width:'40vw'}} />
+         <img alt='logo' src={logoW} style={{height:'4vh', width:'30vw'}} />
          <div style={{flexGrow:1}}></div>
-         <ButtonWrapper variant="contained" color="primary" title='Log In' to={Constants.SIGN_IN} />
+         <ButtonWrapper variant="text" color="primary" title='Log In' to={Constants.SIGN_IN} />
          <Divider orientation="vertical" flexItem='true' />
-         <ButtonWrapper variant="contained" color="primary" title='Sign Up' to={Constants.SIGN_UP} />
+         <ButtonWrapper variant="text" color="primary" title='Sign Up' to={Constants.SIGN_UP} />
     </Box>
     <AboutContent/>
   </>

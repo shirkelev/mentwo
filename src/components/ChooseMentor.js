@@ -10,6 +10,22 @@ export default function ChooseMentor({mentee}) {
     //     window.history.pushState(null, "", "/home/mantorApprovalWaitPage");
     //     window.location.reload();
     // }
+    const buttonText0 = {
+        text: 'About',
+        variant: 'text',
+        color: '',
+    }
+    const buttonText2 = {
+        text: 'Be My Mentor!',
+        color: 'primary',
+        variant: 'outlined',
+    }
+    const buttonText1 = {
+        text: '',
+        color: '',
+        variant: '',
+    }
+    
     return(
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' , marginTop: '2rem'}}>
             <StageStepper activeStage={1} style={{width:'100%'}} /> 
@@ -21,8 +37,18 @@ export default function ChooseMentor({mentee}) {
                 spacing = {5}
                 style={{ width: '80%' }}>
                 <Typography><h1 style={{ fontSize: '1.2rem', textAlign:'center' }} >Take a look on your optional mentors and choose your perfect match!</h1></Typography>
-                <CardsCarousel list = {mentee.optionalMentors} buttonText2 = {'Be My Mentor!'} isMatched = {false} />
-                <Button variant="contained">Change Profile Settings</Button>
+                <CardsCarousel 
+                list = {mentee.optionalMentors} 
+                buttonText0={buttonText0} 
+                buttonText2 = {buttonText2}
+                buttonText1={buttonText1}
+                 isMatched = {false} />
+                <Button variant="text">
+                    <Typography style={{ fontSize: '1rem', textAlign:'center', fontWeight:'bold'
+                ,fontStyle:''}} >
+                        Not a great fit? <br /> update your preferences!
+                    </Typography>
+                </Button>
             </Stack>
         </div>
         </div>

@@ -30,8 +30,8 @@ export const DECLINED = 'Declined';
 //Person Card Buttons Text
 export const PENDINGS_BUTTON1 = 'approve';
 export const PENDINGS_BUTTON2 = 'decline';
-export const PROCESS_BUTTON = 'finish process';
-export const FINISH_BUTTON1 = 'leave feedback';
+export const PROCESS_BUTTON = 'finish';
+export const FINISH_BUTTON1 = 'feedback';
 export const FINISH_BUTTON2 = 'share';
 export const DECLINED_BUTTON = 'undecline';
 
@@ -147,6 +147,12 @@ export const DEFAULT_QUESTIONS = [
         id: 'email',
         placeHolder: 'Email',
         title: 'eMail'
+    },
+    {
+        name: 'Phone Number',
+        id: 'phone',
+        placeHolder: 'Phone Number',
+        title: 'Phone Number'
     },
     {
         name: 'Age',
