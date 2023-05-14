@@ -38,7 +38,7 @@ function MyStep(props){
     return(
         <>
         
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{ width: '100%'}}>
             <Stepper nonLinear activeStep={step}>
                 {steps.map((label, index) => (
                     <Step key={label} completed={completed[index]}>

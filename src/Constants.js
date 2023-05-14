@@ -38,12 +38,7 @@ export const DECLINED_BUTTON = 'undecline';
 // Sign Up Form Questions
 
 export const MENTOR_QUESTIONS = [
-    {
-        name: 'Address',
-        id: 'address',
-        placeHolder: 'address',
-        title: 'Address'
-    },
+    
     {
         name: 'Profession',
         id: 'profession',
@@ -51,10 +46,34 @@ export const MENTOR_QUESTIONS = [
         title: 'What is your profession?'
     },
     {
+        name: 'Company Name',
+        id: 'company',
+        placeHolder: 'Comapny',
+        title: 'Comapny Name'
+    },
+    {
+        name: 'Company Size',
+        id: 'companySize',
+        placeHolder: 'Comapny Size',
+        title: 'Comapny Size'
+    },
+    {
+        name: 'Seniority',
+        id: 'seniority',
+        placeHolder: 'Seniority',
+        title: 'Seniority'
+    },
+    {
+        name: 'Degree In ...',
+        id: 'degree',
+        placeHolder: 'Degree',
+        title: 'Degree'
+    },
+    {
         name: 'Capacity',
         id: 'capacity',
         placeHolder: 'capacity',
-        title: 'How many mentees do you want to mentor parralel?'
+        title: 'Your mentees capacity'
     },
     {
         name: 'Tell Us More About Yourself!',
@@ -65,17 +84,36 @@ export const MENTOR_QUESTIONS = [
     }
 ]
 export const MENTEE_QUESTIONS = [
+    
     {
-        name: 'Address',
-        id: 'address',
-        placeHolder: 'address',
-        title: 'Address'
+        name: 'University',
+        id: 'university',
+        placeHolder: 'University',
+        title: 'University'
     },
     {
-        name: 'Profession',
+        name: 'Degree In ...',
+        id: 'degree',
+        placeHolder: 'Degree',
+        title: 'Degree'
+    },
+    {
+        name: 'Year of Study?',
+        id: 'yearOfStudy',
+        placeHolder: 'Year',
+        title: 'Year'
+    },
+    {
+        name: 'What is your degree?',
+        id: 'degree',
+        placeHolder: 'Degree',
+        title: 'Degree'
+    },
+    {
+        name: 'Requested Profession',
         id: 'profession',
-        placeHolder: 'profession',
-        title: 'What would you like to work at?'
+        placeHolder: 'Requested Profession',
+        title: 'Requested Profession'
     },
     {
         name: 'Tell Us More About Yourself',
@@ -105,10 +143,22 @@ export const DEFAULT_QUESTIONS = [
         title: 'User Name'
     },
     {
-        name: 'eMail',
+        name: 'Email',
         id: 'email',
-        placeHolder: 'eMail',
+        placeHolder: 'Email',
         title: 'eMail'
+    },
+    {
+        name: 'Age',
+        id: 'age',
+        placeHolder: 'Age',
+        title: 'age'
+    },
+    {
+        name: 'Address',
+        id: 'address',
+        placeHolder: 'address',
+        title: 'Address'
     },
     {
         name: 'Password',

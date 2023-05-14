@@ -77,7 +77,6 @@ export default class DataBase{
     }
 
     addUser(user){
-        alert('Adding user')
         this.data.push(user);
     }
 }

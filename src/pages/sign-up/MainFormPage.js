@@ -10,18 +10,13 @@ const MainFormPage = () => {
   function checkMainForm(form = null){
     return true;
   }
-  
-  function handleClickSave(form = null){
-    if(checkMainForm(form)){
-      setStep(step + 1);
-      let newCompleted = completed;
-      newCompleted[step] = true;
-      setCompleted(newCompleted);
-    }
-    else{
-      return false;
-    }
+
+  function handleChange(id, event){
+    let newForm = form;
+    newForm[id] = event;
+    setForm(newForm);
   }
+
 
   
 
@@ -32,7 +27,6 @@ const MainFormPage = () => {
     title='Tell Us About Yourself!'
     nextTo= {''}
     prevTo= {'../'} 
-    onSave={() => {handleClickSave()}}
     condition={true} />
     </>
   )

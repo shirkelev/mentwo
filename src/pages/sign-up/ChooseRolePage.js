@@ -13,7 +13,7 @@ const RootContainer = styled(Container)(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-
+  alignContent: 'center',
   // height: '100',
   padding: '10%',
 }));
@@ -51,7 +51,7 @@ const ChooseRolePage = () => {
   return (
     
       <RootContainer maxWidth="sm">
-        <Typography>
+        <Typography align='center'>
           <Title>Mentor or Mentee?</Title>
           <ButtonsContainer>
               <MentorButton 

@@ -11,7 +11,8 @@ import BigContentBox from '../../components/small-components/BigContentBox';
 const RootContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  alignItems: 'center',
+  alignContent: 'center',
+  justifyContent: 'center',
   maxWidth: '100%',
   paddingBottom: theme.spacing(5),
 }));
@@ -24,22 +25,10 @@ const FormContainer = styled('form')(({ theme }) => ({
   marginBottom: theme.spacing(2),
 }));
 
-const ButtonWrapper = styled(ConditionalButton)(({ theme }) => ({
-  margin: theme.spacing(2),
-}));
-
-const ButtonSection = styled('div')(({theme}) => ({
-    display: 'flex',
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '20px',
-
-}));
 
 const Title = styled('h1')(({ theme }) => ({
   marginBottom: theme.spacing(4),
+  alignItems: 'center',
 }));
 
 const QuestionContainer = styled('div')(({ theme }) => ({
@@ -80,8 +69,7 @@ function WrapQuestions(props){
 };
 
 const FormPage = (props) => {
-  // const {role, setRole} = useContext(UserRole);
-  const {filedsArray, title, nextTo, onSave, condition} = props;
+  const {filedsArray, title} = props;
   const {form, setForm} = useContext(SignUpContext);
 
   function handleChange(id, event){
@@ -94,21 +82,19 @@ const FormPage = (props) => {
     <>
     <RootContainer >
       <FormContainer>
-        <Typography>
-            <Title> {title} </Title>
+        <Typography >
+            <Typography align='center'>
+              <Title> {title} </Title>
+            </Typography>
             {filedsArray.map(x =>
             <WrapQuestions
             title= {x.title}
             name= {x.name}
-            placeHolder={x.placeHolder}
-            onChange={(event) => handleChange(x.id, event.target.value)}
+            placeHolder={x.placeHolder} 
             type={x.type}
+            onChange={(event) => handleChange(x.id, event.target.value)}
             />
             )}
-          <ButtonSection>
-              <ButtonWrapper variant="contained" color="primary" title='Save' to={nextTo} 
-                conditon={condition} onClick={() => onSave()}/>
-          </ButtonSection>
         </Typography>
 
     </FormContainer>
