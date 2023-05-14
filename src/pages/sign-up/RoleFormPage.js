@@ -1,4 +1,5 @@
 import React, {useState, useContext} from 'react';
+import Typography from '@mui/material/Typography';
 import * as Constantans from '../../Constants';
 import { SignUpContext } from '../../context/SignUpContexts';
 import FormPage from './FormPage';
@@ -83,7 +84,7 @@ const RoleFormPAge = ({onSave}) => {
     nextTo= {''}
     prevTo= {''} 
     onSave = {() => handleClickSave(form)} /> : <div sx={{flexGrow:1}}>
-      <h1>You have to choose role first!</h1>
+      <Typography variant = "h3">You have to choose role first!</Typography>
       </div>}
     </>
   )

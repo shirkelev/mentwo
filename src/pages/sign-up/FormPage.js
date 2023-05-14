@@ -1,15 +1,12 @@
 import React, {useState, useContext} from 'react';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import Button from '../../components/small-components/Button';
 import TextBox from '../../components/small-components/TextBox';
-import * as Constantans from '../../Constants';
 import { SignUpContext } from '../../context/SignUpContexts';
 import ConditionalButton from '../../components/small-components/ConditionalButton';
 import BigContentBox from '../../components/small-components/BigContentBox';
-
-
-
 
 const RootContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
@@ -97,20 +94,22 @@ const FormPage = (props) => {
     <>
     <RootContainer >
       <FormContainer>
-          <Title> {title} </Title>
-          {filedsArray.map(x =>
-          <WrapQuestions
-          title= {x.title}
-          name= {x.name}
-          placeHolder={x.placeHolder}
-          onChange={(event) => handleChange(x.id, event.target.value)}
-          type={x.type}
-          />
-          )}
-      <ButtonSection>
-          <ButtonWrapper variant="contained" color="primary" title='Save' to={nextTo} 
-            conditon={condition} onClick={() => onSave()}/>
-      </ButtonSection>
+        <Typography>
+            <Title> {title} </Title>
+            {filedsArray.map(x =>
+            <WrapQuestions
+            title= {x.title}
+            name= {x.name}
+            placeHolder={x.placeHolder}
+            onChange={(event) => handleChange(x.id, event.target.value)}
+            type={x.type}
+            />
+            )}
+          <ButtonSection>
+              <ButtonWrapper variant="contained" color="primary" title='Save' to={nextTo} 
+                conditon={condition} onClick={() => onSave()}/>
+          </ButtonSection>
+        </Typography>
 
     </FormContainer>
   </RootContainer>
