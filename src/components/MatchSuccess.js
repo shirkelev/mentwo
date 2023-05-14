@@ -29,9 +29,9 @@ export default function MatchSuccess({mentee}) {
                         <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.img}/></Grid>
                         <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.currentMentor.img}/> </Grid>
                     </Grid>
-                    <TipBox tipMessege={'Send resume via friend!'}></TipBox>
+                    <Typography><text>{mentee.currentMentor.phone} , {mentee.currentMentor.email}</text></Typography>
+                    <TipBox tipMessege={'Send resume via friend! It will help the HR team see it sooner!'}></TipBox>
                     <Button size='large' variant='outlined' onClick={handleClick}>I Found a Job!</Button>
-                  
                 </Stack>
                 </div>
                 <Recommendations user={mentee}></Recommendations>

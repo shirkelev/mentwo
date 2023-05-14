@@ -38,7 +38,7 @@ export default function PersonCard({user,buttonText1, buttonText2, isMatched}) {
 
   return (
     // <UserContentDetailsContext.Provider value={{showDetails, setShowDetails}}>
-      <Card sx={{ boxShadow:2, margin:1, padding:1, maxWidth:300}}>
+      <Card sx={{ boxShadow:2, margin:1, padding:1, width:280}}>
         <Stack 
         direction="row"
         justifyContent="center"
