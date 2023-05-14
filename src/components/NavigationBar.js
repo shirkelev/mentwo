@@ -10,6 +10,7 @@ import TopBarLogo from './small-components/TopBarLogo';
 import HamburgerMenu from './HamburgerMenu';
 import { HamburgerMenuContext } from '../context/HamburgerMenuContexts';
 
+
 export default function NavigationBar({user}) {
 
   const containerStyle = {
@@ -38,7 +39,6 @@ export default function NavigationBar({user}) {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               <TopBarLogo/>
             </Typography>
-            <MySettingsIcon />
           </Toolbar>
         </AppBar>
       </Box>
