@@ -10,6 +10,8 @@ import TextBox from '../components/small-components/TextBox';
 import SimpleButton from '../components/small-components/Button';
 import { Link } from 'react-router-dom'
 import * as Constants from '../Constants';
+import logoW from '../data/images/logowhite.jpg'
+import { height } from '@mui/system';
 
 const RootContainer = styled(Container)(
     ({ theme }) => ({
@@ -71,6 +73,7 @@ const SignInPage = () => {
   return (
     <>
     <RootContainer>
+    <img src={logoW} style={{height:'90px', width:'200px', marginBottom: '30px'}} />
     <Typography variant="h5" style={{fontWeight: 'bold'}}>Sign In</Typography>
         <FormContainer >
             <TextContainer>

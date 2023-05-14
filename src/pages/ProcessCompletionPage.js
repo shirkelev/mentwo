@@ -53,7 +53,7 @@ const ButtonSection = styled('div')(({ theme }) => ({
 
 const Title = styled('h1')(({ theme }) => ({
     fontSize: 24,
-   marginBottom: theme.spacing(3),
+   marginBottom: theme.spacing(2),
    fontFamily: theme.typography.fontFamily,
 }));
 
@@ -89,7 +89,7 @@ const ModalStyle = styled('div')(({ theme }) => ({
     boxShadow: theme.shadows[6], // Adjust the shadow to your preference
     padding: theme.spacing(4),
     textAlign: 'center',
-    width: 300, // Increase the width to accommodate more space around the text
+    width: 305, // Increase the width to accommodate more space around the text
     maxWidth: '90%', // Optional: Set a maximum width for the modal
     borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
  }));
@@ -161,12 +161,12 @@ const ProcessCompletionPage = ({user, partner}) => {
             <>
             <RootContainer maxWidth="md">
 
-            <Title>Tell us about the process</Title>
+            <Title>Tell us about the process with {user.name}</Title>
 
             <FormContainer>
                 
                 <FeedbackContainer>
-                    <Question>Have you helped your mentee find a job?</Question>
+                    <Question>Did you help {user.name} find a job?</Question>
                     <RadioGroup 
                         row
                         value={selectedRadioOption}
@@ -179,12 +179,13 @@ const ProcessCompletionPage = ({user, partner}) => {
                 </FeedbackContainer>
 
                 <FeedbackContainer>
-                    <Question>Please rate your mentee</Question>
+                    <Question>Please rate how was working with {user.name}</Question>
                     <Rating size="large" defaultValue={0} precision={0.5} />
                 </FeedbackContainer>
 
                 <FeedbackContainer>
-                    <Question>Please tell us about the process with your mentee</Question>
+                    <Statement> Feedback is a gift</Statement>
+                    <Question>Please tell us what {user.name} was good at, what he could improve on?</Question>
                     <BigContentBox placeholder="Enter your feedback" />
                 </FeedbackContainer>
 
