@@ -42,7 +42,7 @@ import * as Constants from '../Constants';
   if (headline === Constants.FINISHED) {
     headlineIcon = <DoneIcon/>;
     buttonText1 = Constants.FINISH_BUTTON1;
-    buttonText2 = Constants.FINISH_BUTTON2;
+    // buttonText2 = Constants.FINISH_BUTTON2;
     isMatched = true;
   }
   if (headline === Constants.DECLINED) {
