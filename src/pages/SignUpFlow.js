@@ -1,32 +1,35 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import RoleFormPAge from './sign-up/RoleFormPage';
 import ChooseRolePage from './sign-up/ChooseRolePage';
 import { SignUpContext } from '../context/SignUpContexts';
 import * as Constants from '../Constants';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
+import AppBar from '@mui/material/AppBar';
 import Button from '../components/small-components/Button';
-import {
-    Routes
-    ,Route
-    // ,createRoutesFromElements
-    // ,createBrowserRouter
-    } from 'react-router-dom'
 import MainFormPage from './sign-up/MainFormPage';
 import StepsCounter from '../components/StepsCounter'
 import Box from '@mui/material/Box';
+import Mentor from '../data/Mentor';
+import Mentee from '../data/Mentee';
+import { UserContext } from '../context/UserContext';
+import { useNavigate } from 'react-router';
+import * as Constantans from '../Constants';
 
 const RootContainer = styled(Container)(({ theme }) => ({
     padding: theme.spacing(5),
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
+    height: '100vh',
     
   }));
  //TODO: Make everything exactly in the middle of the page
 const ContentContainer = styled(Container)(({ theme }) => ({
-    display: 'flex',
-    innerPadding: theme.spacing(5),
+    
+    flexGrow: 1,
+    overflow: 'scroll',
+    height: '80vh',
   }));
 
 const ButtonWrapper = styled(Button)(({ theme }) => ({
@@ -41,6 +44,8 @@ const ButtonWrapper = styled(Button)(({ theme }) => ({
       alignItems: 'center',
       justifyContent: 'center',
       gap: '20px',
+      height: '10vh',
+      
   
   }));
 
@@ -51,11 +56,27 @@ const ButtonWrapper = styled(Button)(({ theme }) => ({
     }
     return completed
 }
+const ProgressContainer = styled('nav')(({ theme }) => ({
+    position: 'fixed',
+    top: '0px', /* Adjust the top position to your desired padding */
+    left: '0',
+    width: '100%',
+    zIndex: 0,
+    backgroundColor: 'white',
+    flexGrow: 1,
+    innerPadding: theme.spacing(3),
+    margin: theme.spacing(2),
+    height: '10vh',
+    
+    }));
 
 
 const SignUpFlow = ({props}) => {
 
-    
+    const navigate = useNavigate();
+
+    const {setUser, dataBase} = useContext(UserContext);
+
     const steps = Constants.SIGN_UP_STEPS;
 
     const [role, setRole] = useState('Default');
@@ -77,19 +98,90 @@ const SignUpFlow = ({props}) => {
     });
 
 
-    function saveSuccess(form = null){
+    function createNewUser(form, role){
+  
+        if(role==='mentor'){
+          return (
+            new Mentor(form.userName
+              ,form.firstName
+              ,form.lastName
+              ,form.password
+              ,require('../data/images/shir.jpeg')
+              ,form.email
+              ,form.capacity
+              ,form.description
+              ,form.profession)
+          )}
+          if(role=== 'mentee'){
+            return (new Mentee(form.userName
+              ,form.firstName
+              ,form.lastName
+              , form.password
+              ,require('../data/images/omer.jpeg')
+              ,form.email
+              ,form.capacity
+              ,form.description
+              ,form.profession)
+            )
+          }
+          else{
+            return (-1);
+          } 
+          }
+
+
+    function saveSuccess(){
         return(
             true
         );
     }
 
+    function handleClickSave(){
+        
+        if(saveSuccess()){
+          const newUser = createNewUser(form, role);
+          if(newUser === -1){ 
+            alert('You have to choose role first!');
+            return false;
+          }
+          else{
+            setUser(newUser);
+            dataBase.addUser(newUser);
+            window.history.pushState(null, "", "/home");
+            window.location.reload();
+          }
+        }
+        else{
+          return false;
+        }
+      }
+
+    function handleNext(){
+        if(step < 2){
+            if(saveSuccess(form)){
+                setStep(step + 1);
+                let newCompleted = completed;
+                newCompleted[step] = true;
+                setCompleted(newCompleted);
+                
+            }
+            
+        }
+        else{
+            handleClickSave()
+        }
+    }
+
+    function handlePrev(){
+        setStep(step - 1);
+    }
 
     const to = ['./', Constants.CHOOSE_ROLE_PAGE, Constants.REG_FORM];
     
     const StepContent = () => {
         switch (step) {
             case 0:
-                return <MainFormPage  />;
+                return <MainFormPage />;
             case 1:
                 return <ChooseRolePage />;
             case 2:
@@ -98,6 +190,7 @@ const SignUpFlow = ({props}) => {
                 return <MainFormPage  />;
             }
     }
+        
         return (
             <div style={{ backgroundColor: '#f8f2ec' }}>
                 <RootContainer>

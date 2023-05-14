@@ -80,7 +80,7 @@ function addSemi(string){
 const data = new DataBase()
 
 function App() {
-    const [user, setUser] = useState(data.findByName('Nits'));
+    const [user, setUser] = useState(data.findByName('Yuval'));
     const [userType, setUserType] = useState(user.type);
     const [email, setEmail] = useState(user.email);
     const [name, setName] = useState(user.name);

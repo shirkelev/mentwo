@@ -18,11 +18,9 @@ const StyledButton = styled(Button)(({ theme, color }) => ({
 
 const RoundButton = ({ text, color, href='', onClick , to=''}) => {
   return (
-    <Link to={to}>
       <StyledButton variant="contained" color={color} href={href} onClick={onClick}>
         {text}
       </StyledButton>
-    </Link>
   );
 };
 
