@@ -16,13 +16,13 @@ export default function MentorPendingsAndRunningPage ({user}) {
           <CapacityBar capacity={user.capacity} mentees_num={user.approvedMentees.length} />
         </div>
       </div>
-      <div style={{ padding: '10px'}}>
+      <div style={{ padding: '10px', backgroundColor: '#f8f2ec'}}>
         <HomeContent headline = {Constants.PENDINGS} list={user.pendingMentees} />
         <HomeContent headline = {Constants.PROCESS} list={user.approvedMentees} />
         {/* <HomeContent headline = {Constants.FINISHED} list={user.finishedMentees} />
         <HomeContent headline = {Constants.DECLINED} list={user.declinedMentees} /> */}
       </div>
-      <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8f2ec' }}>
         <TipBox tipMessege = {"I recommend holding an online meeting once a week between the mentor and the mentee, in which the current status will be aligned and requests, comments or questions can be flooded"}/>
       </div>
     </div>

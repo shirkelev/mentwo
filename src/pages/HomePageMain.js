@@ -31,23 +31,23 @@ export default function HomePageMain() {
     const [showMenu, setShowMenu] = React.useState(false);
     const {user, setUser, dataBase} = useContext(UserContext);
     return (
-        <>
-        <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
-            <NavCont>
-                <NavigationBar user = {user}/>
-            </ NavCont>
-            <Routes>
-                <Route path="/" element={user.type === 'mentor' ? <MentorPendingsAndRunningPage user={user} /> : <MenteeMatchingPage user={user} />} exact/>
-                <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={user} />} />
-                <Route path={CONSTANTS.PROCESS_COMPLETION_FORM} element={<ProcessCompletionPage user={user} />} />
-                <Route path={CONSTANTS.ABOUT_PAGE} element={<AboutPage user={user} />} />
-                <Route path={CONSTANTS.RECOMMENDATINS_PAGE} element={<Recommendations user={user} />} />
-                <Route path={CONSTANTS.CHOOSE_MENTOR_PAGE} element={<ChooseMentor mentee={dataBase.data[2]} />} />
-                <Route path={CONSTANTS.MENTEE_STATUS} element={<MenteeMatchingPage mentee={dataBase.data[2]} />} />
-                <Route path={CONSTANTS.WAIT_MENTOR_APPROVAL_PAGE} element={<MentorApproval mentee={dataBase.data[2]} />} />
-                <Route path={CONSTANTS.MATCH_SUCCESS_PAGE} element={<MatchSuccess mentee={dataBase.data[2]} />} />
-            </Routes>
-        </HamburgerMenuContext.Provider>
-        </>
+        <div style={{ backgroundColor: '#f8f2ec' }}>
+            <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
+                <NavCont>
+                    <NavigationBar user = {user}/>
+                </ NavCont>
+                <Routes>
+                    <Route path="/" element={user.type === 'mentor' ? <MentorPendingsAndRunningPage user={user} /> : <MenteeMatchingPage user={user} />} exact/>
+                    <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={user} />} />
+                    <Route path={CONSTANTS.PROCESS_COMPLETION_FORM} element={<ProcessCompletionPage user={user} />} />
+                    <Route path={CONSTANTS.ABOUT_PAGE} element={<AboutPage user={user} />} />
+                    <Route path={CONSTANTS.RECOMMENDATINS_PAGE} element={<Recommendations user={user} />} />
+                    <Route path={CONSTANTS.CHOOSE_MENTOR_PAGE} element={<ChooseMentor mentee={dataBase.data[2]} />} />
+                    <Route path={CONSTANTS.MENTEE_STATUS} element={<MenteeMatchingPage mentee={dataBase.data[2]} />} />
+                    <Route path={CONSTANTS.WAIT_MENTOR_APPROVAL_PAGE} element={<MentorApproval mentee={dataBase.data[2]} />} />
+                    <Route path={CONSTANTS.MATCH_SUCCESS_PAGE} element={<MatchSuccess mentee={dataBase.data[2]} />} />
+                </Routes>
+            </HamburgerMenuContext.Provider>
+        </div>
     )
 }

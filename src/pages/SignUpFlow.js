@@ -99,17 +99,19 @@ const SignUpFlow = ({props}) => {
             }
     }
         return (
-            <RootContainer>
-                <SignUpContext.Provider value={{role, setRole, step, setStep, completed, setCompleted, form, setForm, saveSuccess}}>
-                    <StepsCounter steps={steps} completed={completed} to={to} activeStep={step}/>
-                    <ContentContainer>
-                        <StepContent />
-                    </ContentContainer>
-                    <ButtonSection>
-                        <ButtonWrapper variant="contained" color="primary"  title='Prev' to={null} />
-                        <ButtonWrapper variant="contained" color="primary" title='Next' to={null} />
-                    </ButtonSection>
-                </ SignUpContext.Provider>
-            </RootContainer>
+            <div style={{ backgroundColor: '#f8f2ec' }}>
+                <RootContainer>
+                    <SignUpContext.Provider value={{role, setRole, step, setStep, completed, setCompleted, form, setForm, saveSuccess}}>
+                        <StepsCounter steps={steps} completed={completed} to={to} activeStep={step}/>
+                        <ContentContainer>
+                            <StepContent />
+                        </ContentContainer>
+                        <ButtonSection>
+                            <ButtonWrapper variant="contained" color="primary"  title='Prev' to={null} />
+                            <ButtonWrapper variant="contained" color="primary" title='Next' to={null} />
+                        </ButtonSection>
+                    </ SignUpContext.Provider>
+                </RootContainer>
+            </div>
             )};
 export default SignUpFlow;

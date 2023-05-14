@@ -71,35 +71,36 @@ const SignUpLink = styled('a')(({ theme }) => ({
 
 const SignInPage = () => {
   return (
-    <>
-    <RootContainer>
-    <img src={logoW} style={{height:'90px', width:'200px', marginBottom: '30px'}} />
-    <Typography variant="h5" style={{fontWeight: 'bold'}}>Sign In</Typography>
-        <FormContainer >
-            <TextContainer>
-                <TextBox title="Username" placeholder="Enter your username" />
-                <TextBox title="Password" placeholder="Enter your password" />
-                <ButtonWrapper variant="contained" color="primary" title='Sign In' />
-            </ TextContainer>
-            <SocialButtonsContainer>
-                <SocialButtonWrapper color="primary">
-                    <Google />
-                </SocialButtonWrapper>
-                <SocialButtonWrapper color="primary">
-                    <FacebookIcon />
-                </SocialButtonWrapper>
-                <SocialButtonWrapper color="primary">
-                    <LinkedIn />
-                </SocialButtonWrapper>
-            </SocialButtonsContainer>
-            <Link to={'../' + Constants.SIGN_UP}>
-            <Typography>
-                <SignUpLink >Sign Up!</SignUpLink>
-            </Typography>
-            </Link>
-        </ FormContainer>
-    </RootContainer>
-    </>
+    // <div style={{ backgroundColor: '#f8f2ec' }}>
+    <div>
+        <RootContainer>
+        <img src={logoW} style={{height:'90px', width:'200px', marginBottom: '30px'}} />
+        <Typography variant="h5" style={{fontWeight: 'bold'}}>Sign In</Typography>
+            <FormContainer >
+                <TextContainer>
+                    <TextBox title="Username" placeholder="Enter your username" />
+                    <TextBox title="Password" placeholder="Enter your password" />
+                    <ButtonWrapper variant="contained" color="primary" title='Sign In' />
+                </ TextContainer>
+                <SocialButtonsContainer>
+                    <SocialButtonWrapper color="primary">
+                        <Google />
+                    </SocialButtonWrapper>
+                    <SocialButtonWrapper color="primary">
+                        <FacebookIcon />
+                    </SocialButtonWrapper>
+                    <SocialButtonWrapper color="primary">
+                        <LinkedIn />
+                    </SocialButtonWrapper>
+                </SocialButtonsContainer>
+                <Link to={'../' + Constants.SIGN_UP}>
+                <Typography>
+                    <SignUpLink >Sign Up!</SignUpLink>
+                </Typography>
+                </Link>
+            </ FormContainer>
+        </RootContainer>
+    </div>
   );
 };
 

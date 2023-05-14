@@ -6,7 +6,7 @@ function AboutContent() {
   return (
     <>
       <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
-          height: '100vh', backgroundColor: '#ddd8f3', backgroundSize: 'cover',}}>
+          height: '100vh', backgroundColor: '#f8f2ec', backgroundSize: 'cover',}}>
         <Box sx={{ p: 4, borderRadius: 4, bgcolor: 'background.paper', display: 'flex', flexDirection: 'column',
             justifyContent: 'center', alignItems: 'center', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
             pt: 3, // add top padding

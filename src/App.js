@@ -65,6 +65,9 @@ const theme = createTheme({
       info: {
         main: '#ffecb3',
       },
+      background: {
+        default: '#f8f2ec',
+      }
     },
     typography: {
       fontFamily: 'Gruppo, sans-serif', // Set the primary font
