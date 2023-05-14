@@ -29,15 +29,16 @@ const UserCardModal = ({user, open}) => {
           <Box sx={{ position: 'absolute', top: '50%', left: '50%', 
                 transform: 'translate(-50%, -50%)', maxWidth:'70%', maxHeight:'70%', bgcolor: 'background.paper', boxShadow: 24, p: 4 
                 ,margin:2}}>
-            <Stack 
-              direction="row"
-              justifyContent="flex-start"
-              alignItems="flex-start"
-              spacing={2}>
-              <Avatar src={user.img}/>
-              <h1>{user.name}</h1>
-            </Stack>
-            <text style={h2Styles}>{user.description}</text>
+        <Stack 
+          direction="row"
+          justifyContent="flex-start"
+          alignItems="center"
+          spacing={2}
+        >
+          <Avatar src={user.img} />
+          <Typography variant="h4" style={{ fontWeight: 'bold' }}>{user.name}</Typography>
+        </Stack>
+        <Typography><text style={h2Styles}><br></br>{user.description}</text></Typography>
 { /*
             <Typography variant="body1" sx={{ mb: 1 }}>Email: {email}</Typography>
             <Typography variant="body1" sx={{ mb: 1 }}>Phone: {phone}</Typography>

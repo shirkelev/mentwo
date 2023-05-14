@@ -1,6 +1,7 @@
 import React from 'react';
 import {Avatar, Grid, Stack, Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 import TipBox from './small-components/TipBox';
 import StageStepper from './StageStepper';
 import Recommendations from '../pages/Recommendations';
@@ -29,10 +30,11 @@ export default function MatchSuccess({mentee}) {
                         <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.img}/></Grid>
                         <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.currentMentor.img}/> </Grid>
                     </Grid>
-                    <Button size='large' variant='outlined' onClick={handleClick}>Finish Proccess</Button>
+                    <Button size='large' variant='outlined' onClick={handleClick} style={{ fontWeight: 'bold' }}>Finish Proccess</Button>
                     <TipBox tipMessege={'Send resume via friend!'}></TipBox>
                 </Stack>
                 </div>
+                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
                 <Recommendations user={mentee}></Recommendations>
             </div>
     );

@@ -17,7 +17,7 @@ export default function StageStepper({activeStage}) {
       <Stepper activeStep={activeStage} alternativeLabel sx={{fontSize:'2px'}}>
         {steps.map((label) => (
           <Step key={label}>
-            <StepLabel sx={{fontSize:'0.8rem'}}>{label}</StepLabel>
+            <StepLabel sx={{ fontSize: '0.8rem', fontWeight: 'bold' }}>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>
