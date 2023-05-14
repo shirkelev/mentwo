@@ -22,6 +22,8 @@ const RootContainer = styled(Container)(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
+    backgroundColor: '#f8f2ec',
+    gap: theme.spacing(10),
     
   }));
  //TODO: Make everything exactly in the middle of the page
@@ -58,14 +60,15 @@ const ProgressContainer = styled('nav')(({ theme }) => ({
     position: 'fixed',
     top: '0px', /* Adjust the top position to your desired padding */
     left: '0',
-    width: '100%',
+    width: '100vw',
     zIndex: 0,
-    backgroundColor: 'white',
     flexGrow: 1,
     innerPadding: theme.spacing(3),
     margin: theme.spacing(2),
     height: '10vh',
-    
+    display: 'flex',
+    overflow: '', 
+    marginBottom: theme.spacing(5),  
     }));
 
 
@@ -192,13 +195,13 @@ const SignUpFlow = ({props}) => {
         return (
             <RootContainer>
                 <SignUpContext.Provider value={{role, setRole, step, setStep, completed, setCompleted, form, setForm, saveSuccess}}>
-                    <StepsCounter steps={steps} completed={completed} to={to} activeStep={step}/>
+                    <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} />
                     <ContentContainer>
                         <StepContent />
                     </ContentContainer>
                     <ButtonSection>
-                        <ButtonWrapper variant="contained" color="primary"  title='Prev' to={null} />
-                        <ButtonWrapper variant="contained" color="primary" title='Next' to={null} />
+                        {step === 1 ? <ButtonWrapper onClick={handlePrev} variant="contained" color="primary"  title='Prev' to={null} /> : null}
+                        <ButtonWrapper onClick={handleNext} variant="contained" color="primary" title={ step === 2 ? 'Submit' : 'Next'} to={null} />
                     </ButtonSection>
                 </ SignUpContext.Provider>
             </RootContainer>

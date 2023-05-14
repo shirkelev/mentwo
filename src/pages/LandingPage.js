@@ -4,10 +4,11 @@ import { Box, Divider, Typography } from '@mui/material';
 import * as Constants from '../Constants';
 import SimpleButton from '../components/small-components/Button';
 import AboutContent from '../components/AboutContent';
+import logoW from '../data/images/logo-removebg-preview.png'
 
 const ButtonWrapper = styled(SimpleButton)(({ theme }) => {
   return ({
-      margin: theme.spacing(2),
+      margin: theme.spacing(10),
       marginTop: theme.spacing(10),
       marginBottom: theme.spacing(3),
   });
@@ -17,15 +18,19 @@ function LandingPage() {
   return (
     <>
     <Box sx={{
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.5)'
-            ,backgroundColor:'#f8f2ec'}}>
-       <Box sx={{ display: 'flex', justifyContent: 'flex-end', justifyContent: 'center', 
-            alignItems: 'center',  alignItems: 'center', py: 2 , mr:2, gap:1}}>
+            boxShadow: '3'
+            ,backgroundColor:'#f8f2ec'
+            ,justifyItems:'center'
+            ,maxHeight:'10vh'
+            , display: 'flex', justifyContent: 'flex-end',
+            paddingRight: '5vw', paddingLeft: '5vw', paddingTop: '5vh', paddingBottom: '1vh',
+            alignItems: 'center' , gap:1}}>
          {/* Login and Signup links */}
+         <img alt='logo' src={logoW} style={{height:'10vh', width:'40vw'}} />
+         <div style={{flexGrow:1}}></div>
          <ButtonWrapper variant="contained" color="primary" title='Log In' to={Constants.SIGN_IN} />
          <Divider orientation="vertical" flexItem='true' />
          <ButtonWrapper variant="contained" color="primary" title='Sign Up' to={Constants.SIGN_UP} />
-       </Box>
     </Box>
     <AboutContent/>
   </>

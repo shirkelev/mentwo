@@ -65,9 +65,6 @@ const theme = createTheme({
       info: {
         main: '#ffecb3',
       },
-      background: {
-        default: '#f8f2ec',
-      }
     },
     typography: {
       fontFamily: 'Gruppo, sans-serif', // Set the primary font
@@ -80,7 +77,7 @@ function addSemi(string){
 const data = new DataBase()
 
 function App() {
-    const [user, setUser] = useState(data.findByName('Yuval'));
+    const [user, setUser] = useState(data.findByName('Nits'));
     const [userType, setUserType] = useState(user.type);
     const [email, setEmail] = useState(user.email);
     const [name, setName] = useState(user.name);
