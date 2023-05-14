@@ -2,6 +2,7 @@ import React from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 
 export default function HamburgerMenuItem({ text, icon: Icon, path, onClick }) {
@@ -9,11 +10,11 @@ export default function HamburgerMenuItem({ text, icon: Icon, path, onClick }) {
     <Link to={path} style={{ textDecoration: 'none' }}>
       <MenuItem>
         <ListItemIcon>
-          <Icon />
+          <Icon/>
         </ListItemIcon>
         <ListItemText
-          primary={text}
-          sx={{ textAlign: 'left', display: 'inline' }}
+          primary={<Typography style={{ fontWeight: 'bold', fontSize: '14.5px'}}>{text}</Typography>}
+          sx={{ textAlign: 'left', display: 'inline', color: '#b1a5e3' }}
           onClick={onClick}
         />
       </MenuItem>

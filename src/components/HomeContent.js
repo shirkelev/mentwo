@@ -64,9 +64,8 @@ import * as Constants from '../Constants';
       
     </div>
     <CardsCarousel list = {list} buttonText1 = {buttonText1} buttonText2 = {buttonText2} isMatched = {isMatched} />
-    <Divider style={{ width: '100%' }} />
+    <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
     </div>
-    
     
     </>
   );

@@ -54,10 +54,10 @@ export default function PersonCard({user,buttonText1, buttonText2, isMatched}) {
 
         <CardActions>
         {/* {isMatched ? ( <><PhoneIcon onClick = {UserContentDetails.handleOpenDetails}/>&nbsp;&nbsp;&nbsp;</> ) : ( <Button size="small" onClick={handleClickViewMore}>About {name}</Button> )} */}
-        {isMatched ? ( <><PhoneIcon/>&nbsp;&nbsp;&nbsp;</> ) : ( <Button size="small" onClick={handleClickViewMore}>About {user.name}</Button> )}
-        {isMatched ? ( <Link to={"./" + Constants.PROCESS_COMPLETION_FORM} style={{ textDecoration: 'none' }}><Button size="small"> {buttonText1}</Button> </Link>) :
-         (<Button size="small">{buttonText1}</Button>)}
-        {buttonText2 === "" ? null : ( user.type === 'mentee' ? (<Button size="small" onClick={handleClickSecondButton}>{buttonText2}</Button> ) : (<Button size="small">{buttonText2}</Button> )) }
+        {isMatched ? ( <><PhoneIcon color = "primary"/>&nbsp;&nbsp;&nbsp;</> ) : ( <Button size="small" onClick={handleClickViewMore} style={{ fontWeight: 'bold' }}>About {user.name}</Button> )}
+        {isMatched ? ( <Link to={"./" + Constants.PROCESS_COMPLETION_FORM} style={{ textDecoration: 'none' }}><Button size="small" style={{ fontWeight: 'bold' }}> {buttonText1}</Button> </Link>) :
+         (<Button size="small" style={{ fontWeight: 'bold' }}>{buttonText1}</Button>)}
+        {buttonText2 === "" ? null : ( user.type === 'mentee' ? (<Button size="small" style={{ fontWeight: 'bold' }} onClick={handleClickSecondButton}>{buttonText2}</Button> ) : (<Button size="small">{buttonText2}</Button> )) }
         </CardActions>
 
         {/* <UserContentDetails name={name} phone={phone} email={email} /> */}
