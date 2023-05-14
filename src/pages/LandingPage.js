@@ -18,8 +18,7 @@ function LandingPage() {
     <>
     <Box sx={{
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.5)'
-            ,backgroundColor:'primary',
-          }}>
+            ,backgroundColor:'#f8f2ec'}}>
        <Box sx={{ display: 'flex', justifyContent: 'flex-end', justifyContent: 'center', 
             alignItems: 'center',  alignItems: 'center', py: 2 , mr:2, gap:1}}>
          {/* Login and Signup links */}
