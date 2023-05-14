@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import CustomButton from '../components/small-components/Button';
 import BigContentBox from '../components/small-components/BigContentBox';
+import * as Constants from '../Constants';
 
 const RootContainer = styled(Container)(({ theme }) => ({
    display: 'flex',
@@ -52,7 +53,7 @@ const ButtonSection = styled('div')(({ theme }) => ({
 
 const Title = styled('h1')(({ theme }) => ({
     fontSize: 24,
-   marginBottom: theme.spacing(3),
+   marginBottom: theme.spacing(2),
    fontFamily: theme.typography.fontFamily,
 }));
 
@@ -98,7 +99,7 @@ const ProcessCompletionPage = ({user, partner}) => {
     const navigate = useNavigate();
 
     const backTapped = () => {
-        navigate('/home-page');
+        navigate(Constants.HOME_PAGE);
     };
 
     const [doneDialogOpen, setDoneDialogOpen] = React.useState(false);
@@ -109,7 +110,7 @@ const ProcessCompletionPage = ({user, partner}) => {
 
     const menteeDialogClosedWithNo = () => {
         setDoneDialogOpen(false);
-        navigate('/home-page');
+        navigate(Constants.HOME_PAGE);
     };
 
     const menteeDialogClosedWithYes = () => {
@@ -119,7 +120,7 @@ const ProcessCompletionPage = ({user, partner}) => {
 
     const mentorDialogClosed = () => {
         setDoneDialogOpen(false);
-        navigate('/home-page');
+        navigate(Constants.HOME_PAGE);
     };
 
     const [shareModalOpen, setShareModalOpen] = React.useState(false);
@@ -131,7 +132,7 @@ const ProcessCompletionPage = ({user, partner}) => {
     
     const shareModalClosed = () => {
         setShareModalOpen(false);
-        navigate('/home-page');
+        navigate(Constants.HOME_PAGE);
     };
 
     const [selectedRadioOption, setSelectedRadioOption] = useState('');
@@ -160,12 +161,12 @@ const ProcessCompletionPage = ({user, partner}) => {
             <>
             <RootContainer maxWidth="md">
 
-            <Title>Tell us about the process</Title>
+            <Title>Tell us about the process with {user.name}</Title>
 
             <FormContainer>
                 
                 <FeedbackContainer>
-                    <Question>Have you helped your mentee find a job?</Question>
+                    <Question>Did you help {user.name} find a job?</Question>
                     <RadioGroup 
                         row
                         value={selectedRadioOption}
@@ -178,12 +179,13 @@ const ProcessCompletionPage = ({user, partner}) => {
                 </FeedbackContainer>
 
                 <FeedbackContainer>
-                    <Question>Please rate your mentee</Question>
+                    <Question>Please rate how was working with {user.name}</Question>
                     <Rating size="large" defaultValue={0} precision={0.5} />
                 </FeedbackContainer>
 
                 <FeedbackContainer>
-                    <Question>Please tell us about the process with your mentee</Question>
+                    <Statement> Feedback is a gift</Statement>
+                    <Question>Please tell us what {user.name} was good at, what he could improve on?</Question>
                     <BigContentBox placeholder="Enter your feedback" />
                 </FeedbackContainer>
 
@@ -201,7 +203,7 @@ const ProcessCompletionPage = ({user, partner}) => {
 
                 <ButtonSection>
                 <IconButton  onClick={shareTapped} size='small' style={{ color: selectedRadioOption !== 'yes' ? 'grey' : '#0A66C2' }} disabled={selectedRadioOption !== 'yes'} >
-                    Share this process
+                <Typography>Share this process</Typography>
                     <LinkedInIcon style={{ color: selectedRadioOption !== 'yes' ? 'grey' : '#0A66C2' }} fontSize="large" />
                 </IconButton>
                 </ButtonSection>
