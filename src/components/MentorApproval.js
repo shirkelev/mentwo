@@ -13,7 +13,7 @@ export default function MentorApproval({mentee}) {
     return( 
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' , marginTop: '2rem' }}>
             <StageStepper activeStage={2} style={{width:'100%'}} /> 
-            <div style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '3.5rem' }}>
             <Stack direction="column"
                     justifyContent="center"
                     alignItems="center"

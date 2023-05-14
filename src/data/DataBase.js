@@ -29,7 +29,7 @@ export default class DataBase{
 
             nitsan.addMentee(shir, 'approved');
             nitsan.addMentee(bls, 'approved');
-            shir.addMentor(nitsan);
+            shir.addMentor(yuvi);
             nitsan.addMentee(yuvi, 'pending');
             nitsan.addMentee(omer, 'finished');
             shir.addOptionalMentor(yuvi);
