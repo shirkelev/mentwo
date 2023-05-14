@@ -46,7 +46,8 @@ export default function CardsCarousel ({list, buttonText1, buttonText2, isMatche
               <Button
                 size="small"
                 onClick={handleNext}
-                disabled={activeStep === maxSteps - 1}>
+                disabled={activeStep === maxSteps - 1}
+                style={{ fontWeight: 'bold' }}>
                 Next
                 {theme.direction === 'rtl' ? (
                   <KeyboardArrowLeft />
@@ -56,7 +57,7 @@ export default function CardsCarousel ({list, buttonText1, buttonText2, isMatche
               </Button>
             }
             backButton={
-              <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+              <Button size="small" onClick={handleBack} disabled={activeStep === 0} style={{ fontWeight: 'bold' }}>
                 {theme.direction === 'rtl' ? (
                   <KeyboardArrowRight />
                 ) : (
