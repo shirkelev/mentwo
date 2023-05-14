@@ -29,7 +29,7 @@ export default function MentorApproval({mentee}) {
                     <h2 style={{ marginTop: '15px', textAlign: 'center' }}>Waiting for your mentor to approve your pending</h2>
                     <text style={{ marginTop: '12px', textAlign: 'center' }}>Your mentor has 24 hours to approve your request</text>
                     <CircularDeterminate></CircularDeterminate>
-                    <button onClick={handleClick}>next</button>
+                    <button style={{backgroundColor: 'white', position: 'absolute', bottom: '16px', right: '16px'}} onClick={handleClick}>next</button>
                 </Stack>
             </div>
             </div>

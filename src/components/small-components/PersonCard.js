@@ -19,7 +19,7 @@ const maxLength = 25;
 function trimDetail(details){
     return details.slice(0, maxLength) + (details.length > maxLength ? "..." : "");
 }
-export default function PersonCard({user,buttonText1, buttonText2, button2onClickFunc, isMatched}) {
+export default function PersonCard({user,buttonText1, buttonText2, isMatched}) {
   
   const {openUserModal, setOpenUserModal} = React.useContext(UserModalContext);
   // const {showDetails, setShowDetails} = React.useContext(UserContentDetailsContext);
@@ -30,6 +30,12 @@ export default function PersonCard({user,buttonText1, buttonText2, button2onClic
   const hadleClickChooseMentor = () => {
     user.changeStatus(2);
   }
+  function handleClickSecondButton() {
+    window.history.pushState(null, "", "/home/mantorApprovalWaitPage");
+    window.location.reload();
+  }
+ 
+
   return (
     // <UserContentDetailsContext.Provider value={{showDetails, setShowDetails}}>
       <Card sx={{ boxShadow:2, margin:1, padding:1, maxWidth:300}}>
@@ -51,7 +57,7 @@ export default function PersonCard({user,buttonText1, buttonText2, button2onClic
         {isMatched ? ( <><PhoneIcon/>&nbsp;&nbsp;&nbsp;</> ) : ( <Button size="small" onClick={handleClickViewMore}>About {user.name}</Button> )}
         {isMatched ? ( <Link to={"./" + Constants.PROCESS_COMPLETION_FORM} style={{ textDecoration: 'none' }}><Button size="small"> {buttonText1}</Button> </Link>) :
          (<Button size="small">{buttonText1}</Button>)}
-        {buttonText2 === "" ? null : (<Button size="small" onClick={button2onClickFunc}>{buttonText2}</Button> ) }
+        {buttonText2 === "" ? null : ( user.type === 'mentee' ? (<Button size="small" onClick={handleClickSecondButton}>{buttonText2}</Button> ) : (<Button size="small">{buttonText2}</Button> )) }
         </CardActions>
 
         {/* <UserContentDetails name={name} phone={phone} email={email} /> */}

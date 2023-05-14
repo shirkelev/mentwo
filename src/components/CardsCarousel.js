@@ -32,7 +32,6 @@ export default function CardsCarousel ({list, buttonText1, buttonText2, isMatche
     setOpenUserModal(val);
   }
 
-
   return (
     <>
     {list.length > 0 ? <UserModalContext.Provider value={{openUserModal, setOpenUserModal}}>
@@ -68,7 +67,7 @@ export default function CardsCarousel ({list, buttonText1, buttonText2, isMatche
             }
         /> : null}
         </Box>
-        <UserCardModal user={''}/>
+        <UserCardModal user={list[activeStep]}/>
 
       </Box>
     </UserModalContext.Provider>: null}

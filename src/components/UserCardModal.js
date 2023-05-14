@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Button, Modal, Box, Typography, Avatar } from '@mui/material';
 import { UserModalContext } from '../context/UserModalContext';
-import { Stack } from '@mui/system';
+import { Stack, margin } from '@mui/system';
 
 const h2Styles = {
   maxWidth: '100%',
@@ -11,7 +11,7 @@ const h2Styles = {
   wordWrap: 'break-word' 
 };
 
-const UserCardModal = ({ name, email, phone, description, imageSrc,open, detailes }) => {
+const UserCardModal = ({user, open}) => {
     const {openUserModal, setOpenUserModal} = useContext(UserModalContext);
     // const {modalDetails, setModalDetails} = useContext(UserModalContext);
     
@@ -34,10 +34,10 @@ const UserCardModal = ({ name, email, phone, description, imageSrc,open, detaile
               justifyContent="flex-start"
               alignItems="flex-start"
               spacing={2}>
-              <Avatar src={imageSrc}/>
-              <h1>{name}Name</h1>
+              <Avatar src={user.img}/>
+              <h1>{user.name}</h1>
             </Stack>
-            <h2 style={h2Styles}>{detailes} some detailes some detailes hahahah</h2>
+            <text style={h2Styles}>{user.description}</text>
 { /*
             <Typography variant="body1" sx={{ mb: 1 }}>Email: {email}</Typography>
             <Typography variant="body1" sx={{ mb: 1 }}>Phone: {phone}</Typography>

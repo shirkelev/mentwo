@@ -29,7 +29,7 @@ const MenteeMatchingPage = ({mentee}) => {
                 >
                     <CircularProgressBar />
                     <h1 style={{ marginTop: '24px', textAlign: 'center' }}>Searching for the best mentors for you!</h1>   
-                    <button onClick={handleClick}>next</button>
+                    <button  style={{backgroundColor: 'white', position: 'absolute', bottom: '16px', right: '16px'}} onClick={handleClick}>next</button>
                 </Stack>
             </div>
         </div>
