@@ -1,5 +1,6 @@
 import React from 'react';
 import {Avatar, Grid, Stack, Button } from '@mui/material';
+import Typography from '@mui/material/Typography';
 import TipBox from './small-components/TipBox';
 import StageStepper from './StageStepper';
 import Recommendations from '../pages/Recommendations';
@@ -19,7 +20,7 @@ export default function MatchSuccess({mentee}) {
                     alignItems="center"
                     spacing={5}
                     style={{width:'70%'}}>
-                    <h1>It's a Match!</h1>
+                    <Typography><h1>It's a Match!</h1></Typography>
                     <Grid  container
                         direction="row"
                         justifyContent="center"
