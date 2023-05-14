@@ -54,6 +54,7 @@ const ButtonSection = styled('div')(({ theme }) => ({
 const Title = styled('h1')(({ theme }) => ({
     fontSize: 24,
    marginBottom: theme.spacing(2),
+   marginTop: theme.spacing(-5),
    fontFamily: theme.typography.fontFamily,
 }));
 
@@ -89,7 +90,7 @@ const ModalStyle = styled('div')(({ theme }) => ({
     boxShadow: theme.shadows[6], // Adjust the shadow to your preference
     padding: theme.spacing(4),
     textAlign: 'center',
-    width: 305, // Increase the width to accommodate more space around the text
+    width: 250, // Increase the width to accommodate more space around the text
     maxWidth: '90%', // Optional: Set a maximum width for the modal
     borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
  }));
@@ -110,17 +111,17 @@ const ProcessCompletionPage = ({user, partner}) => {
 
     const menteeDialogClosedWithNo = () => {
         setDoneDialogOpen(false);
-        navigate(Constants.HOME_PAGE);
+        navigate('../');
     };
 
     const menteeDialogClosedWithYes = () => {
         setDoneDialogOpen(false);
-        navigate('/choose-role');
+        navigate('/' + Constants.SIGN_UP_FLOW, { replace: true });
     };
 
     const mentorDialogClosed = () => {
         setDoneDialogOpen(false);
-        navigate(Constants.HOME_PAGE);
+        navigate('../');
     };
 
     const [shareModalOpen, setShareModalOpen] = React.useState(false);
@@ -132,7 +133,6 @@ const ProcessCompletionPage = ({user, partner}) => {
     
     const shareModalClosed = () => {
         setShareModalOpen(false);
-        navigate(Constants.HOME_PAGE);
     };
 
     const [selectedRadioOption, setSelectedRadioOption] = useState('');
@@ -161,12 +161,12 @@ const ProcessCompletionPage = ({user, partner}) => {
             <>
             <RootContainer maxWidth="md">
 
-            <Title>Tell us about the process with {user.name}</Title>
+            <Title>Tell us about the process</Title>
 
             <FormContainer>
                 
                 <FeedbackContainer>
-                    <Question>Did you help {user.name} find a job?</Question>
+                    <Question>Did you help your mentee find a job?</Question>
                     <RadioGroup 
                         row
                         value={selectedRadioOption}
@@ -179,13 +179,13 @@ const ProcessCompletionPage = ({user, partner}) => {
                 </FeedbackContainer>
 
                 <FeedbackContainer>
-                    <Question>Please rate how was working with {user.name}</Question>
+                    <Question>Please rate your mentee</Question>
                     <Rating size="large" defaultValue={0} precision={0.5} />
                 </FeedbackContainer>
 
                 <FeedbackContainer>
                     <Statement> Feedback is a gift</Statement>
-                    <Question>Please tell us what {user.name} was good at, what he could improve on?</Question>
+                    <Question>Please tell us what your mentee was good at, and what he could improve on</Question>
                     <BigContentBox placeholder="Enter your feedback" />
                 </FeedbackContainer>
 
@@ -277,7 +277,8 @@ const ProcessCompletionPage = ({user, partner}) => {
                 </FeedbackContainer>
         
                 <FeedbackContainer>
-                    <Question>Please tell us about the process with your mentor</Question>
+                <Statement> Feedback is a gift</Statement>
+                    <Question>Please tell us what your mentor was good at, and what he could improve on</Question>
                     <BigContentBox placeholder="Enter your feedback" />
                 </FeedbackContainer>
         
@@ -322,8 +323,17 @@ const ProcessCompletionPage = ({user, partner}) => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions >
-                    <Button onClick={menteeDialogClosedWithNo}>NO</Button>
-                    <Button onClick={menteeDialogClosedWithYes} autoFocus>Yes</Button>
+
+                    <Button variant='Outlined' onClick={menteeDialogClosedWithNo}>
+                        <Typography variant="body1" fontWeight="bold">
+                            No
+                        </Typography>
+                    </Button>
+                    <Button variant='contained' onClick={menteeDialogClosedWithYes} autoFocus>
+                        <Typography variant="body1" fontWeight="bold">
+                            Yes
+                        </Typography>
+                    </Button>
                 </DialogActions>
             </Dialog>
 
