@@ -148,6 +148,7 @@ const SignUpFlow = ({props}) => {
           else{
             setUser(newUser);
             dataBase.addUser(newUser);
+            setUser(newUser);
             window.history.pushState(null, "", "/home");
             window.location.reload();
           }

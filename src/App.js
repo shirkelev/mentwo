@@ -96,7 +96,7 @@ function App() {
     
     {/* <button onClick={() => setRole(200)}> setRole </button>  */}
     <BrowserRouter>
-        <button onClick={handelUserChange}> change flow </button>    
+        <button onClick={handelUserChange}> {user.type} flow </button>    
         <UserContext.Provider value={{userType, setUserType, email, setEmail, name, setName, user, setUser, dataBase}}>
             <Routes>
                 <Route path={Constants.SIGN_UP + '/*'}
