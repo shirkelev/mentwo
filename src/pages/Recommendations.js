@@ -18,7 +18,7 @@ export default function Recommendations({user}) {
     }
   else {
     return (
-        <Box style={{ margin: '20px', height:'85vh' }}>
+        <Box style={{ margin: '20px', height:'105vh' }}>
             <Typography> <span style={{ fontWeight: 'bold' }}>We're glad you found a match! Here are some recommended next steps with your mentor:<br /><br /></span></Typography>
             <SingleRecommendation text="Contact your mentor and set up a time to meet online, in order to get to know each other and discuss your career goals." />
             <SingleRecommendation text="Review your resume with your mentor and be open to their suggestions for improvement." />

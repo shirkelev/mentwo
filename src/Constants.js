@@ -92,7 +92,7 @@ export const MENTEE_QUESTIONS = [
         title: 'University'
     },
     {
-        name: 'Degree In ...',
+        name: 'What is your degree?',
         id: 'degree',
         placeHolder: 'Degree',
         title: 'Degree'
@@ -102,12 +102,6 @@ export const MENTEE_QUESTIONS = [
         id: 'yearOfStudy',
         placeHolder: 'Year',
         title: 'Year'
-    },
-    {
-        name: 'What is your degree?',
-        id: 'degree',
-        placeHolder: 'Degree',
-        title: 'Degree'
     },
     {
         name: 'Requested Profession',
