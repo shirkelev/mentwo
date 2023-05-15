@@ -13,8 +13,9 @@ import Box from '@mui/material/Box';
 import Mentor from '../data/Mentor';
 import Mentee from '../data/Mentee';
 import { UserContext } from '../context/UserContext';
-import { useNavigate } from 'react-router';
+import { useNavigate, redirect} from 'react-router-dom';
 import * as Constantans from '../Constants';
+import { red } from '@mui/material/colors';
 
 const RootContainer = styled(Container)(({ theme }) => ({
     padding: theme.spacing(5),
@@ -149,8 +150,10 @@ const SignUpFlow = ({props}) => {
             setUser(newUser);
             dataBase.addUser(newUser);
             setUser(newUser);
+            // return navigate(-2)
             window.history.pushState(null, "", "/home");
             window.location.reload();
+            
           }
         }
         else{
@@ -170,7 +173,8 @@ const SignUpFlow = ({props}) => {
             
         }
         else{
-            handleClickSave()
+            return handleClickSave()
+            // navigate(Constantans.HOME_PAGE, {replace: true});
         }
     }
 
