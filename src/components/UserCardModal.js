@@ -64,30 +64,6 @@ const UserCardModal = ({user, variant}) => {
   
     return (
 
-      // <Modal
-      //   open={openUserModal}
-      //   onClose={handleCloseModal}
-      //   aria-labelledby="modal-modal-title"
-      //   aria-describedby="modal-modal-description">
-      //     <ModalStyle>
-      //         <Stack 
-      //           direction="row"
-      //           justifyContent="flex-start"
-      //           alignItems="center"
-      //           spacing={2}
-      //           marginBottom={2}
-      //               >
-      //           <Avatar src={user.img} sx={{ width: 56, height: 56 }} borderStyle='line'/>
-      //           <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
-      //         </Stack>
-      //         <ModalContent/>
-              
-      //         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop:30}}>
-      //           <Button variant="outlined" onClick={handleCloseModal} size='small'>Close</Button>
-      //         </div>
-      //     </ModalStyle>
-      //   </Modal>
-
       <Modal
           open={openUserModal}
           onClose={handleCloseModal}
