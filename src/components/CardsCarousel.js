@@ -12,7 +12,7 @@ import { UserModalContext } from '../context/UserModalContext';
 import UserCardModal from './UserCardModal';
 
 
-export default function CardsCarousel ({list, buttonText0, buttonText1, buttonText2, isMatched}) {
+export default function CardsCarousel ({list, variant, isMatched}) {
 
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
@@ -35,12 +35,11 @@ export default function CardsCarousel ({list, buttonText0, buttonText1, buttonTe
 
   return (
     <>
-    {list.length > 0 ? <UserModalContext.Provider value={{openUserModal, setOpenUserModal, setModalType, modalType}}>
+    {list.length > 0 ?
+     <UserModalContext.Provider value={{openUserModal, setOpenUserModal, setModalType, modalType}}>
       <Box sx={{display: "flex", flexDirection:'column', alignItems:"center", maxWidth:'100%'}}>
         <PersonCard user={list[activeStep]} 
-        buttonText0={buttonText0} 
-        buttonText1 = {buttonText1} 
-        buttonText2 = {buttonText2} 
+        variant={variant}
         isMatched = {isMatched} sx={{}}/>
         <Box sx={{width:'100%' }}>
           { maxSteps - 1 ? <MobileStepper
