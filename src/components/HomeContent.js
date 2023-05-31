@@ -104,7 +104,6 @@ if (headline === Constants.DECLINED) {
     color: MAIN_CTA.color
   };
 }
-
 return (
   <>
   <div style={{ display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -118,7 +117,7 @@ return (
     <Typography variant="h5" sx={{ fontWeight: 'bold' }}>{headline}</Typography>
     
   </div>
-  <CardsCarousel list = {list}  buttonText0 = {buttonText0} buttonText1 = {buttonText1} buttonText2 = {buttonText2} isMatched = {isMatched} />
+  <CardsCarousel list = {list} variant={headline} isMatched = {isMatched} />
   <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
   </div>
   
