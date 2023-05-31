@@ -38,10 +38,12 @@ export default function CardsCarousel ({list, variant, isMatched}) {
     {list.length > 0 ?
      <UserModalContext.Provider value={{openUserModal, setOpenUserModal, setModalType, modalType}}>
       <Box sx={{display: "flex", flexDirection:'column', alignItems:"center", maxWidth:'100%'}}>
-        <PersonCard user={list[activeStep]} 
-        variant={variant}
-        isMatched = {isMatched} sx={{}}/>
-        <Box sx={{width:'100%' }}>
+        {list.map((user) => {
+        return(
+          <PersonCard user={user} variant={variant}/>
+        )})}
+
+        {/* <Box sx={{width:'100%' }}>
           { maxSteps - 1 ? <MobileStepper
             steps={maxSteps}
             position="static"
@@ -69,15 +71,11 @@ export default function CardsCarousel ({list, variant, isMatched}) {
                   <KeyboardArrowLeft />
                 )}
                 Back
-              </Button>
-            }
-        /> : null}
+              </Button> */}
         </Box>
-        <UserCardModal user={list[activeStep]} variant={modalType}/>
-
-      </Box>
-    </UserModalContext.Provider>: null}
-    
+        <UserCardModal user={list[activeStep]} variant={modalType}/> 
+    </UserModalContext.Provider>
+    : null}
     </>
   );
   }

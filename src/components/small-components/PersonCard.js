@@ -110,7 +110,7 @@ export default function PersonCard({variant, user}) {
         )
       };
       break
-      default:
+    default:
         ButtonSection = () => {
           <> </>
       };
@@ -118,18 +118,23 @@ export default function PersonCard({variant, user}) {
   
   return (
 
-      <Card sx={{ boxShadow:2, margin:1, padding:1, width:280}}>
+      <Card sx={{ boxShadow:2, margin:1, padding:1, width:280, borderRadius: 8}}>
         <Stack 
         direction="row"
-        justifyContent="center"
+        justifyContent="left"
         alignItems="center"
+
         >
-        <Avatar  sx={{ width: 100, height: 100, border: 1, margin:1}} src={user.img}  borderStyle='line'/>
+          <Avatar  sx={{ width: 70, height: 70, border: 1, margin:2}} src={user.img}  borderStyle='line'/>
+          
+          <Stack direction="column" justifyContent="left" alignItems="center">
+            <Typography gutterBottom variant="h5" component="div" fontWeight={'bold'}> {user.name} {user.lastName} </Typography>
+            <Typography variant="body2" color="text.secondary" fontWeight={'bold'}> {user.profession} </Typography>
+          </ Stack>
         </Stack>
         
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" fontWeight={'bold'}> {user.name}</Typography>
-          <Typography variant="body2" color="text.secondary">{trimDetail(user.description)}</Typography>
+          
         </CardContent>
 
         <CardActions sx={{justifyContent:'center', paddingBottom:2}}>

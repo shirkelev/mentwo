@@ -19,10 +19,10 @@ export default class DataBase{
             , password, require('./images/shir.jpeg'),  'shir' + emailEnd, '0529088712', 'I am interested in the field of data science, I am a student in the second year of studies at Tel Aviv University, looking for a position in this field in a new startup.');
 
         const yuvi = new Mentee('Yuval', 'Yuval', 'Yusipov'
-            , password, require('./images/yuvi.jpeg'),  'yuvi' + emailEnd, '0506783444', 'I am a student in my last year of studies at the Hebrew University of Jerusalem, looking for a position in the field of image processing at a company in the Jerusalem or Tel Aviv area.');
+            , password, require('./images/yuvi.jpeg'),  'yuvi' + emailEnd, '0506783444', 'I am a student in my last year of studies at the Hebrew University of Jerusalem, looking for a position in the field of image processing at a company in the Jerusalem or Tel Aviv area.', 'Software Engineering');
 
         const omer = new Mentee('omer', 'Omer', 'Getzler'
-            , password, require('./images/omer.jpeg'),  'omer' + emailEnd, '0548221309', 'I am studying computer science at the Open University, finishing my studies at the end of the year and looking for a job in the field as a student.');
+            , password, require('./images/omer.jpeg'),  'omer' + emailEnd, '0548221309', 'I am studying computer science at the Open University, finishing my studies at the end of the year and looking for a job in the field as a student.', 'Software Engineering');
         
         const herzl = new Mentee('Theodor', 'Herzl', 'Herzl'
             , password, require('./images/omer.jpeg'),  'herzl' + emailEnd, '0522345118', 'I studied computer science in Vienna and I am currently looking for a job as a junior in the field of operating systems.');

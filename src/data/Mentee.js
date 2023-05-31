@@ -7,7 +7,7 @@ export default class Mentee extends User {
         this.currentMentor = null;
         this.mentorshipStatus = null;
         this.optionalMentors = [];
-        this.profession = profession;
+        this.profession = 'Software Engineering';
         this.status = 0
     }
 
