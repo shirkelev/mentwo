@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
+import * as Constants from '../Constants';
 
 function AboutContent() {
   return (

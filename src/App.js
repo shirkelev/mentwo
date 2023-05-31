@@ -27,32 +27,6 @@ import SignUpFlow from './pages/SignUpFlow';
 import {createTheme, ThemeProvider} from '@mui/material';
 import HomePageMain from './pages/HomePageMain';
 
- /*
-const theme = createTheme({
-    palette: {
-        mode: 'light',
-        primary: {
-            main: '#b1a5e3',
-        },
-        secondary: {
-            main: '#5797de',
-        },
-        info: {
-            main: '#ffecb3',
-        },
-        },
-    fonts: {
-        primary: {
-            main: 'Roberto',
-        }
-        
-    }
-})
-*/
-
-// O.G: According to chatGPT in the Material-UI library, the standard theme object does not include a fonts property.
-// Instead, the typography object within the theme contains properties such as fontFamily, fontSize, etc. 
-// So, if your theme follows the standard Material-UI structure So it should be like this:
 const theme = createTheme({
     palette: {
       mode: 'light',
@@ -65,6 +39,22 @@ const theme = createTheme({
       info: {
         main: '#ffecb3',
       },
+      appBackground: {
+        main: '#f8f2ec',
+      },
+
+      fieldColor: 
+      {
+        main: '#BBDEFB', // $rmd-blue-100
+      },
+      fieldPressedColor: 
+      {
+        main: '#64B5F6', // $rmd-blue-300
+      },
+      fieldHeadlineColor:
+      {
+        main: '#00B0FF' // $rmd-light-blue-a-400
+      },
       techSkillColor:
       {
         main: '#B2EBF2', // $rmd-cyan-100
@@ -73,21 +63,21 @@ const theme = createTheme({
       {
         main: '#4DD0E1', // $rmd-cyan-300
       },
+      techSkillHeadlineColor:
+      {
+        main: '#00E5FF', // $rmd-cyan-a-400
+      },
       softSkillColor:
-      {
-        main: '#BBDEFB', // $rmd-blue-100
-      },
-      softSkillPressedColor:
-      {
-        main: '#64B5F6', // $rmd-blue-300
-      },
-      fieldColor: 
       {
         main: '#B2DFDB', // $rmd-teal-100
       },
-      fieldPressedColor: 
+      softSkillPressedColor:
       {
         main: '#4DB6AC', // $rmd-teal-300
+      },
+      softSkillHeadlineColor:
+      {
+        main: '#1DE9B6', // $rmd-teal-a-400
       },
       agendaColor:
       {
@@ -96,7 +86,12 @@ const theme = createTheme({
       agendaPressedColor:
       {
         main: '#81C784', // $rmd-green-300
+      },
+      agendaHeadlineColor:
+      {
+        main: '#00E676', // $rmd-green-a-400
       }
+
     },
     typography: {
       fontFamily: 'Gruppo, sans-serif', // Set the primary font

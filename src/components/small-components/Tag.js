@@ -1,6 +1,11 @@
 import Fab from '@mui/material/Fab';
 import { useState } from 'react';
 import * as Constants from '../../Constants';
+import styled from 'styled-components';
+
+const NoShadowFab = styled(Fab)`
+  box-shadow: none !important;
+`;
 
 const Tag = ({ category, text, isPressed=false, onClick=()=>{}}) => {
     const [pressed, setPressed] = useState(isPressed);
@@ -35,9 +40,9 @@ const Tag = ({ category, text, isPressed=false, onClick=()=>{}}) => {
     }
 
     return (
-        <Fab variant="extended" size="small" color={color} onClick={handleClick}>
+        <NoShadowFab variant="extended" size="small" color={color} onClick={handleClick}>
             {text}
-        </Fab>
+        </NoShadowFab>
     );
 };
 
