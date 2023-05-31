@@ -88,6 +88,14 @@ const theme = createTheme({
       fieldPressedColor: 
       {
         main: '#4DB6AC', // $rmd-teal-300
+      },
+      agendaColor:
+      {
+        main: '#C8E6C9', // $rmd-green-100
+      },
+      agendaPressedColor:
+      {
+        main: '#81C784', // $rmd-green-300
       }
     },
     typography: {

@@ -17,6 +17,9 @@ const Tag = ({ category, text, isPressed=false, onClick=()=>{}}) => {
             case Constants.FIELD:
                 initialColor = pressed ? 'fieldPressedColor' : 'fieldColor';
                 break;
+            case Constants.AGENDA:
+                initialColor = pressed ? 'agendaPressedColor' : 'agendaColor';
+                break;
             default:
                 initialColor = 'primary';
         }

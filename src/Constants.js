@@ -35,6 +35,7 @@ export const DECLINED_BUTTON = 'undecline';
 export const TECHSKILL = 'techSkill';
 export const SOFTSKILL = 'softSkill';
 export const FIELD = 'field';
+export const AGENDA = 'agenda';
 
 // Sign Up Form Questions
 
