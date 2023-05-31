@@ -32,10 +32,16 @@ export const FINISH_BUTTON2 = 'share';
 export const DECLINED_BUTTON = 'undecline';
 
 // Tag Categories
+export const FIELD = 'field';
 export const TECHSKILL = 'techSkill';
 export const SOFTSKILL = 'softSkill';
-export const FIELD = 'field';
 export const AGENDA = 'agenda';
+
+// Tag Headlines Categories
+export const FIELDS = 'Fields';
+export const TECHSKILLS = 'Tech Skills';
+export const SOFTSKILLS = 'Soft Skills';
+export const AGENDAS = 'Values';
 
 // Sign Up Form Questions
 
