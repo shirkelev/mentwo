@@ -65,6 +65,30 @@ const theme = createTheme({
       info: {
         main: '#ffecb3',
       },
+      techSkillColor:
+      {
+        main: '#B2EBF2', // $rmd-cyan-100
+      },
+      techSkillPressedColor:
+      {
+        main: '#4DD0E1', // $rmd-cyan-300
+      },
+      softSkillColor:
+      {
+        main: '#BBDEFB', // $rmd-blue-100
+      },
+      softSkillPressedColor:
+      {
+        main: '#64B5F6', // $rmd-blue-300
+      },
+      fieldColor: 
+      {
+        main: '#B2DFDB', // $rmd-teal-100
+      },
+      fieldPressedColor: 
+      {
+        main: '#4DB6AC', // $rmd-teal-300
+      }
     },
     typography: {
       fontFamily: 'Gruppo, sans-serif', // Set the primary font

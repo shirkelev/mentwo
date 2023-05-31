@@ -17,23 +17,24 @@ export const CHOOSE_MENTOR_PAGE = 'chooseMentorPage';
 export const WAIT_MENTOR_APPROVAL_PAGE = 'mantorApprovalWaitPage';
 export const MATCH_SUCCESS_PAGE = 'matchSuccessPage';
 
-
-
-
-
 // HomeContentTypes
 export const PENDINGS = 'Pending Requests';
 export const PROCESS = 'In Process';
 export const FINISHED = 'Finished';
 export const DECLINED = 'Declined';
 
-//Person Card Buttons Text
+// Person Card Buttons Text
 export const PENDINGS_BUTTON1 = 'approve';
 export const PENDINGS_BUTTON2 = 'decline';
 export const PROCESS_BUTTON = 'finish';
 export const FINISH_BUTTON1 = 'feedback';
 export const FINISH_BUTTON2 = 'share';
 export const DECLINED_BUTTON = 'undecline';
+
+// Tag Categories
+export const TECHSKILL = 'techSkill';
+export const SOFTSKILL = 'softSkill';
+export const FIELD = 'field';
 
 // Sign Up Form Questions
 
