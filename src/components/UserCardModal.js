@@ -3,6 +3,7 @@ import { Button, Modal, Box, Typography, Avatar } from '@mui/material';
 import { UserModalContext } from '../context/UserModalContext';
 import { Stack, margin } from '@mui/system';
 import styled from '@emotion/styled';
+import Chip from '@mui/material/Chip';
 
 const h2Styles = {
   maxWidth: '100%',
@@ -63,29 +64,56 @@ const UserCardModal = ({user, variant}) => {
   
     return (
 
-      <Modal
-        open={openUserModal}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
-          <ModalStyle>
-              <Stack 
-                direction="row"
-                justifyContent="flex-start"
-                alignItems="center"
-                spacing={2}
-                marginBottom={2}
-                    >
-                <Avatar src={user.img} sx={{ width: 56, height: 56 }} borderStyle='line'/>
-                <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
-              </Stack>
-              <ModalContent/>
+      // <Modal
+      //   open={openUserModal}
+      //   onClose={handleCloseModal}
+      //   aria-labelledby="modal-modal-title"
+      //   aria-describedby="modal-modal-description">
+      //     <ModalStyle>
+      //         <Stack 
+      //           direction="row"
+      //           justifyContent="flex-start"
+      //           alignItems="center"
+      //           spacing={2}
+      //           marginBottom={2}
+      //               >
+      //           <Avatar src={user.img} sx={{ width: 56, height: 56 }} borderStyle='line'/>
+      //           <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
+      //         </Stack>
+      //         <ModalContent/>
               
-              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop:30}}>
-                <Button variant="outlined" onClick={handleCloseModal} size='small'>Close</Button>
-              </div>
-          </ModalStyle>
-        </Modal>
+      //         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop:30}}>
+      //           <Button variant="outlined" onClick={handleCloseModal} size='small'>Close</Button>
+      //         </div>
+      //     </ModalStyle>
+      //   </Modal>
+
+      <Modal
+          open={openUserModal}
+          onClose={handleCloseModal}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+              >
+      <ModalStyle>
+        <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} marginBottom={2}>
+          <Avatar src={user.img} sx={{ width: 56, height: 56 }} borderStyle="line" />
+          <Stack spacing={1}>
+            <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
+            <Typography variant="subtitle1">{user.profession}</Typography>
+            <Stack direction="row" spacing={1}>
+              {/* {user.badges.map((badge, index) => (
+                <Chip key={index} label={badge} /> */}
+                {['A', 'B', 'C'].map((badge, index) => {return <Chip key={index} label={badge} />})}
+            </Stack>
+          </Stack>
+        </Stack>
+        <div>{user.description}</div>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 30 }}>
+          <Button variant="outlined" onClick={handleCloseModal} size="small">Close</Button>
+        </div>
+      </ModalStyle>
+    </Modal>
+
 
         
     );

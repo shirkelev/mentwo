@@ -20,6 +20,7 @@ import { UserContext } from "../context/UserContext";
 import MentorApproval from "../components/MentorApproval";
 import ChooseMentor from "../components/ChooseMentor";
 import MatchSuccess from "../components/MatchSuccess";
+import MentorInProcessPage from "./MentorInProcessPage";
 
 const NavCont = styled('nav')(({ theme }) => ({
     position: 'sticky',
@@ -31,7 +32,7 @@ export default function HomePageMain() {
     const [showMenu, setShowMenu] = React.useState(false);
     const {user, setUser, dataBase} = useContext(UserContext);
     return (
-        <div style={{ backgroundColor: '#f8f2ec' }}>
+        <div style={{ backgroundColor: '#f8f2ec', width: '100%', height: '100%'}}>
             <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
                 <NavCont>
                     <NavigationBar user = {user}/>
@@ -39,6 +40,7 @@ export default function HomePageMain() {
                 <Routes>
                     <Route path="/" element={user.type === 'mentor' ? <MentorPendingsAndRunningPage user={user} /> : <MenteeMatchingPage user={user} />} exact/>
                     <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={user} />} />
+                    <Route path={CONSTANTS.MENTOR_IN_PROCESS_PAGE} element={user.type === 'mentor' ? <MentorInProcessPage user={user} /> : <MenteeMatchingPage user={user} />} />
                     <Route path={CONSTANTS.PROCESS_COMPLETION_FORM} element={<ProcessCompletionPage user={user} />} />
                     <Route path={CONSTANTS.ABOUT_PAGE} element={<AboutPage user={user} />} />
                     <Route path={CONSTANTS.RECOMMENDATINS_PAGE} element={<Recommendations user={user} />} />

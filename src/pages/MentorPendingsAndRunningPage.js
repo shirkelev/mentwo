@@ -9,17 +9,21 @@ export default function MentorPendingsAndRunningPage ({user}) {
   
   return (
     <>
-    <div style={{ width: '100vw', height: '100vh' }}>
+    
+     <div style={{ width: '100vw', height: '100vh' }}>
+
+      {/*
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <Typography variant="h4">Hello {user.userName}!</Typography>
         <div style={{}}>
           <CapacityBar capacity={user.capacity} mentees_num={user.approvedMentees.length} />
         </div>
-      </div>
+      </div> */}
+
       <div style={{ padding: '10px', backgroundColor: '#f8f2ec'}}>
-        <HomeContent headline = {Constants.PENDINGS} list={user.pendingMentees} />
-        <HomeContent headline = {Constants.PROCESS} list={user.approvedMentees} />
-        {/* <HomeContent headline = {Constants.FINISHED} list={user.finishedMentees} />
+        <HomeContent headline = {Constants.PENDINGS} list={user.pendingMentees} user={user}/>
+        {/*<HomeContent headline = {Constants.PROCESS} list={user.approvedMentees}user={user}/>
+         <HomeContent headline = {Constants.FINISHED} list={user.finishedMentees} />
         <HomeContent headline = {Constants.DECLINED} list={user.declinedMentees} /> */}
       </div>
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8f2ec' }}>

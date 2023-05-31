@@ -16,6 +16,7 @@ export const RECOMMENDATINS_PAGE = 'recommendations';
 export const CHOOSE_MENTOR_PAGE = 'chooseMentorPage';
 export const WAIT_MENTOR_APPROVAL_PAGE = 'mantorApprovalWaitPage';
 export const MATCH_SUCCESS_PAGE = 'matchSuccessPage';
+export const MENTOR_IN_PROCESS_PAGE = 'mentorInProcessPage';
 
 // HomeContentTypes
 export const PENDINGS = 'Pending Requests';
