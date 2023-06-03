@@ -9,7 +9,7 @@ import ProcessCompletionPage from './pages/ProcessCompletionPage';
 import * as Constants from './Constants';
 import MentorFinishedPage from './pages/MentorFinishedPage';
 import { UserContext } from './context/UserContext';
-import NewFormPage from './pages/NewFormPage';
+import NewFormPage from './pages/sign-up/NewFormPage';
 
 import {
   BrowserRouter
@@ -153,7 +153,7 @@ function App() {
                     element = {<ProcessCompletionPage user={user}/>}
                     exact
                     />;
-                <Route path={'formMain'}
+                <Route path={Constants.NEW_FORM_PAGE}
                     action={({ params }) => {}}
                     element = {<NewFormPage user={user}/>}
                     exact
