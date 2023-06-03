@@ -9,6 +9,7 @@ import ProcessCompletionPage from './pages/ProcessCompletionPage';
 import * as Constants from './Constants';
 import MentorFinishedPage from './pages/MentorFinishedPage';
 import { UserContext } from './context/UserContext';
+import NewFormPage from './pages/NewFormPage';
 
 import {
   BrowserRouter
@@ -27,32 +28,6 @@ import SignUpFlow from './pages/SignUpFlow';
 import {createTheme, ThemeProvider} from '@mui/material';
 import HomePageMain from './pages/HomePageMain';
 
- /*
-const theme = createTheme({
-    palette: {
-        mode: 'light',
-        primary: {
-            main: '#b1a5e3',
-        },
-        secondary: {
-            main: '#5797de',
-        },
-        info: {
-            main: '#ffecb3',
-        },
-        },
-    fonts: {
-        primary: {
-            main: 'Roberto',
-        }
-        
-    }
-})
-*/
-
-// O.G: According to chatGPT in the Material-UI library, the standard theme object does not include a fonts property.
-// Instead, the typography object within the theme contains properties such as fontFamily, fontSize, etc. 
-// So, if your theme follows the standard Material-UI structure So it should be like this:
 const theme = createTheme({
     palette: {
       mode: 'light',
@@ -65,6 +40,59 @@ const theme = createTheme({
       info: {
         main: '#ffecb3',
       },
+      appBackground: {
+        main: '#f8f2ec',
+      },
+
+      fieldColor: 
+      {
+        main: '#BBDEFB', // $rmd-blue-100
+      },
+      fieldPressedColor: 
+      {
+        main: '#64B5F6', // $rmd-blue-300
+      },
+      fieldHeadlineColor:
+      {
+        main: '#00B0FF' // $rmd-light-blue-a-400
+      },
+      techSkillColor:
+      {
+        main: '#B2EBF2', // $rmd-cyan-100
+      },
+      techSkillPressedColor:
+      {
+        main: '#4DD0E1', // $rmd-cyan-300
+      },
+      techSkillHeadlineColor:
+      {
+        main: '#00E5FF', // $rmd-cyan-a-400
+      },
+      softSkillColor:
+      {
+        main: '#B2DFDB', // $rmd-teal-100
+      },
+      softSkillPressedColor:
+      {
+        main: '#4DB6AC', // $rmd-teal-300
+      },
+      softSkillHeadlineColor:
+      {
+        main: '#1DE9B6', // $rmd-teal-a-400
+      },
+      agendaColor:
+      {
+        main: '#C8E6C9', // $rmd-green-100
+      },
+      agendaPressedColor:
+      {
+        main: '#81C784', // $rmd-green-300
+      },
+      agendaHeadlineColor:
+      {
+        main: '#00E676', // $rmd-green-a-400
+      }
+
     },
     typography: {
       fontFamily: 'Gruppo, sans-serif', // Set the primary font
@@ -123,6 +151,11 @@ function App() {
                 <Route path={Constants.PROCESS_COMPLETION_FORM}
                     action={({ params }) => {}}
                     element = {<ProcessCompletionPage user={user}/>}
+                    exact
+                    />;
+                <Route path={'formMain'}
+                    action={({ params }) => {}}
+                    element = {<NewFormPage user={user}/>}
                     exact
                     />;
             </Routes>

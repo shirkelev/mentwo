@@ -14,6 +14,7 @@ import {UserContentDetailsContext} from '../../context/UserContentDetailsContext
 import * as Constants from '../../Constants';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { RestaurantMenu } from '@mui/icons-material';
 
 
 const maxLength = 70;
@@ -23,102 +24,125 @@ const maxLength = 70;
 function trimDetail(details){
     return details.slice(0, maxLength) + (details.length > maxLength ? "..." : "");
 }
-export default function PersonCard({user, buttonText0, buttonText1, buttonText2, isMatched}) {
+
+export default function PersonCard({variant, user}) {
+
   const navigate = useNavigate();
+
   const {openUserModal, setOpenUserModal, setModalType} = React.useContext(UserModalContext);
-  // const {showDetails, setShowDetails} = React.useContext(UserContentDetailsContext);
-  
+
   const handleClickViewMore = () => {
     setOpenUserModal(!openUserModal);
-    buttonText0.text === 'About' ? setModalType('about') : setModalType('contact');
+    setModalType('about');
   }
+
   const hadleClickChooseMentor = () => {
     user.changeStatus(2);
   }
-  function handleClickSecondButton(text) {
-    if ( text === 'finish') {
-      return(
-        function inner(){
-          navigate('./' + Constants.PROCESS_COMPLETION_FORM);
-        }
-      )
-    }
-    else if(text === 'feedback'){
-      return (
-        function inner(){
-        navigate('../' + Constants.PROCESS_COMPLETION_FORM);
-        }
-      )
-      }
-      
-    else if(text === 'decline'){
-      return(
-        function inner(){
-          navigate('../' );
-        }
-      )
-    }
-    else{
-      return (
-        function inner(){
-        navigate('../' + Constants.WAIT_MENTOR_APPROVAL_PAGE);
-        }
-      )
-      }
-      
-    }
 
+  const handleClickContact = () => {
+    setOpenUserModal(!openUserModal);
+    setModalType('contact');
+  }
+
+  const handleClickDecline = () => {
+    navigate('../' );
+  }
+
+  const handleClickFinish = () => {
+    navigate('./' + Constants.PROCESS_COMPLETION_FORM);
+  }
+
+  const handleClickFeedback = () => {
+    navigate('../' + Constants.PROCESS_COMPLETION_FORM);
+  }
+
+  const handleClickApprove = () => {
+    navigate('../' + Constants.WAIT_MENTOR_APPROVAL_PAGE);
+  }
+
+  const handleClickShare = () => { 
+    return null;
+  }
+
+  const MAIN_CTA = {
+    variant: 'outlined',
+    color: 'primary',
+  };
   
+  const SECONDARY_CTA = {
+    variant: 'text',
+    color: 'primary',
+  }
 
+  let ButtonSection;
+  switch (variant) {
+    case Constants.PENDINGS:
+      ButtonSection = () => {
+        return(
+          <>
+          <Button size="small" onClick={handleClickApprove} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Approve</Button>
+          <Button size="small" onClick={handleClickDecline} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>Decline</Button> 
+          <Button size="small" onClick={handleClickViewMore} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>About</Button> 
+          </>
+        )
+      };
+      break;
+    case Constants.PROCESS:
+      ButtonSection = () => {
+        return(
+          <>
+          <Button size="small" onClick={handleClickContact} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Contact</Button>
+          <Button size="small" onClick={handleClickDecline} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>Decline</Button> 
+          <Button size="small" onClick={handleClickViewMore} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>About</Button> 
+          </>
+        )
+      };
+      break;
+    case Constants.FINISHED:
+      ButtonSection = () => {
+        return(
+          <>
+          <Button size="small" onClick={handleClickContact} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Contact</Button>
+          <div></div> 
+          <Button size="small" onClick={handleClickShare} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>Share</Button> 
+          </>
+        )
+      };
+      break
+    default:
+        ButtonSection = () => {
+          <> </>
+      };
+    };
   
   return (
-    // <UserContentDetailsContext.Provider value={{showDetails, setShowDetails}}>
-      <Card sx={{ boxShadow:2, margin:1, padding:1, width:280}}>
+
+      <Card sx={{ boxShadow:2, margin:1, padding:1, width:280, borderRadius: 8}}>
         <Stack 
         direction="row"
-        justifyContent="center"
+        justifyContent="left"
         alignItems="center"
+
         >
-        <Avatar  sx={{ width: 100, height: 100, border: 1, margin:1}} src={user.img}  borderStyle='line'/>
+          <Avatar  sx={{ width: 70, height: 70, border: 1, margin:2}} src={user.img}  borderStyle='line'/>
+          
+          <Stack direction="column" justifyContent="left" alignItems="center">
+            <Typography gutterBottom variant="h5" component="div" fontWeight={'bold'}> {user.name} {user.lastName} </Typography>
+            <Typography variant="body2" color="text.secondary" fontWeight={'bold'}> {user.profession} </Typography>
+          </ Stack>
         </Stack>
         
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div" fontWeight={'bold'}> {user.name}</Typography>
-          <Typography variant="body2" color="text.secondary">{trimDetail(user.description)}</Typography>
+          
         </CardContent>
 
         <CardActions sx={{justifyContent:'center', paddingBottom:2}}>
-
-        
-        {
-        isMatched ? ( <Button size="small" onClick={handleClickViewMore} variant={buttonText0.variant} style={{ fontWeight: 'bold' }}>{buttonText0.text}</Button> ) 
-        : ( <Button size="small" onClick={handleClickViewMore}  variant={buttonText0.variant} style={{ fontWeight: 'bold' }}>{buttonText0.text} </Button> )
-        }
-
-        {
-        isMatched && buttonText1 ? ( 
-        <Link to={"./" + Constants.PROCESS_COMPLETION_FORM}>
-          <Button size="small" style={{ fontWeight: 'bold' }}> {buttonText1.text} </Button> 
-          </Link>) :
-         (
-         <Button size="small" style={{ fontWeight: 'bold' }} variant={buttonText1.variant} color={buttonText1.color}>{buttonText1.text}</Button>)}
-
-        {typeof buttonText2 === "undefined" ? null : 
-        ( user.type === 'mentee' ?
-         (
-         <Button size="small" style={{ fontWeight: 'bold' }} onClick={handleClickSecondButton(buttonText2.text)} 
-         variant={buttonText2.variant} color = {buttonText2.color}
-         >{buttonText2.text}</Button> 
-         )
-         : (
-         <Button size="small"varian={buttonText2.variant} color = {buttonText2.color} onClick={handleClickSecondButton(buttonText2.text)}
-         style={{ fontWeight: 'bold' }}>{buttonText2.text}</Button> )) }
-
+          <ButtonSection />
         </CardActions>
 
-        {/* <UserContentDetails name={name} phone={phone} email={email} /> */}
 
       </Card>
-    // </UserContentDetailsContext.Provider>
+    
   );
 }

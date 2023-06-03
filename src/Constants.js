@@ -1,5 +1,4 @@
 // Page Names
-
 export const SIGN_IN = 'sign-in';
 export const SIGN_UP = 'sign-up';
 export const REG_FORM = 'registration-form';
@@ -16,10 +15,7 @@ export const RECOMMENDATINS_PAGE = 'recommendations';
 export const CHOOSE_MENTOR_PAGE = 'chooseMentorPage';
 export const WAIT_MENTOR_APPROVAL_PAGE = 'mantorApprovalWaitPage';
 export const MATCH_SUCCESS_PAGE = 'matchSuccessPage';
-
-
-
-
+export const MENTOR_IN_PROCESS_PAGE = 'mentorInProcessPage';
 
 // HomeContentTypes
 export const PENDINGS = 'Pending Requests';
@@ -27,7 +23,7 @@ export const PROCESS = 'In Process';
 export const FINISHED = 'Finished';
 export const DECLINED = 'Declined';
 
-//Person Card Buttons Text
+// Person Card Buttons Text
 export const PENDINGS_BUTTON1 = 'approve';
 export const PENDINGS_BUTTON2 = 'decline';
 export const PROCESS_BUTTON = 'finish';
@@ -35,8 +31,25 @@ export const FINISH_BUTTON1 = 'feedback';
 export const FINISH_BUTTON2 = 'share';
 export const DECLINED_BUTTON = 'undecline';
 
-// Sign Up Form Questions
+// Tag Categories
+export const FIELD = 'field';
+export const TECHSKILL = 'techSkill';
+export const SOFTSKILL = 'softSkill';
+export const AGENDA = 'agenda';
 
+// Tag Headlines Categories
+export const FIELDS = 'Fields';
+export const TECHSKILLS = 'Tech Skills';
+export const SOFTSKILLS = 'Soft Skills';
+export const AGENDAS = 'Values';
+
+// Tags Lists
+export const FIRLDS_LIST = ['Data Analysis', 'Data Science', 'Produce Management', 'Software Engineer', 'UX/UI', 'Web Development', 'Project Managment', 'Algorithm Development', 'Quality Assurance']
+export const TECHSKILLS_LIST = ['Python', 'C', 'C++', 'Java', 'React', 'Figma', 'R', 'SQL', 'JavaScript', 'HTML', 'CSS', 'Node.js', 'Angular', 'Vue.js', 'PHP', 'Swift', 'Kotlin', 'C#', 'Ruby', 'Go']
+export const SOFTSKILLS_LIST = ['', '', '']
+export const AGENDAS_LIST = ['', '', '']
+
+// Sign Up Form Questions
 export const MENTOR_QUESTIONS = [
     
     {
