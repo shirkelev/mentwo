@@ -15,7 +15,7 @@ function AboutContent() {
             maxHeight: '70%', margin: '10%', overflow: 'scroll' }}  >
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 3}}>
               <InfoIcon sx={{ px: 1, color: "#b1a5e3"}} />
-              <Typography variant="h5" sx={{ fontWeight: 'bold' }}>About InternView</Typography>
+              <Typography variant="h5" sx={{ fontWeight: 'bold' }}>About&nbsp;&nbsp;InternView</Typography>
             </Box>
           <Box sx={{overflow: 'scroll'}}>
           <Typography align='justify'>

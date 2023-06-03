@@ -9,6 +9,7 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import LogoutIcon from '@mui/icons-material/Logout';
 import InfoIcon from '@mui/icons-material/Info';
 import NextWeekIcon from '@mui/icons-material/NextWeek';
+import HowToRegIcon from '@mui/icons-material/HowToReg';
 import * as Constants from '../Constants';
 import { HamburgerMenuContext } from '../context/HamburgerMenuContexts';
 
@@ -22,15 +23,17 @@ export default function HamburgerMenu({user}) {
       return (
           <Paper sx={{ width: '270px' }}>
               <MenuList dense>
-              <HamburgerMenuItem text="My Profile" icon = {AccountCircleIcon}
-              path="./" onClick={handleClick}/>
-              <HamburgerMenuItem text="Pendings & Running Processes" icon = {GroupIcon}
+              {/* <HamburgerMenuItem text="My Profile" icon = {AccountCircleIcon}
+              path="./" onClick={handleClick}/> */}
+              <HamburgerMenuItem text="Interviewees Suggestions" icon = {GroupIcon}
               path = {'./'} onClick={handleClick}/>
-              <HamburgerMenuItem text="Finished Processes" icon = {Check}
+              <HamburgerMenuItem text="Approved Interviewees" icon = {HowToRegIcon}
+              path = {'./' + Constants.MENTOR_IN_PROCESS_PAGE} onClick={handleClick}/>
+              <HamburgerMenuItem text="Finished Interviews" icon = {Check}
               path = {'./' + Constants.MENTOR_FINISHED_PAGE} onClick={handleClick}/>
-              <HamburgerMenuItem text="After Matched Steps" icon = {NextWeekIcon}
+              <HamburgerMenuItem text="Mock Interviews Tips" icon = {NextWeekIcon}
               path = {"./" + Constants.RECOMMENDATINS_PAGE} onClick={handleClick}/>
-              <HamburgerMenuItem text="About" icon = {InfoIcon}
+              <HamburgerMenuItem text="About InternView" icon = {InfoIcon}
               path = {"./" + Constants.ABOUT_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="Log Out" icon = {LogoutIcon}
               path = {'../' + Constants.SIGN_IN} onClick={handleClick}/>
@@ -42,14 +45,14 @@ export default function HamburgerMenu({user}) {
       return (
           <Paper sx={{ width: 320 }}>
             <MenuList dense>
-              <HamburgerMenuItem text="My Profile" icon = {AccountCircleIcon}
-              path="/"  onClick={handleClick}/>
+              {/* <HamburgerMenuItem text="My Profile" icon = {AccountCircleIcon}
+              path="/"  onClick={handleClick}/> */}
               <HamburgerMenuItem text="Current Status" icon = {AutorenewIcon}
               path = {'./' + Constants.MENTEE_STATUS} onClick={handleClick}/>
-              <HamburgerMenuItem text="About" icon = {InfoIcon}
-              path = {"./" + Constants.ABOUT_PAGE} onClick={handleClick}/>
-              <HamburgerMenuItem text="After Matched Steps" icon = {NextWeekIcon}
+              <HamburgerMenuItem text="Mock Interviews Tips" icon = {NextWeekIcon}
               path = {"./" + Constants.RECOMMENDATINS_PAGE} onClick={handleClick}/>
+              <HamburgerMenuItem text="About InternView" icon = {InfoIcon}
+              path = {"./" + Constants.ABOUT_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="Log Out" icon = {LogoutIcon}
               path = {'../' + Constants.SIGN_IN} onClick={handleClick}/>
             </MenuList>
