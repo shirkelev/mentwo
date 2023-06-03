@@ -16,9 +16,35 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useNavigate } from 'react-router-dom';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import CustomButton from '../components/small-components/Button';
-import BigContentBox from '../components/small-components/BigContentBox';
-import * as Constants from '../Constants';
+import CustomButton from '../../components/small-components/Button';
+import BigContentBox from '../../components/small-components/BigContentBox';
+import * as Constants from '../../Constants';
+
+import React from 'react';
+import Container from '@mui/material/Container';
+import Chip from '@mui/material/Chip';
+import Box from '@mui/material/Box';
+
+function TagsContainer({ tagsNames }) {
+  return (
+    <Container maxWidth="sm">
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexWrap: 'wrap',
+          '& > :not(style)': {
+            m: 0.5,
+          },
+        }}
+      >
+        {tagsNames.map((tag, index) => (
+          <Chip key={index} label={tag} variant="outlined" />
+        ))}
+      </Box>
+    </Container>
+  );
+}
 
 const RootContainer = styled(Container)(({ theme }) => ({
    display: 'flex',
@@ -41,6 +67,7 @@ const ButtonWrapper = styled(CustomButton)(({ theme }) => ({
    marginBottom: theme.spacing(2),
 }));
 
+
 const ButtonSection = styled('div')(({ theme }) => ({
    display: 'flex',
    flexDirection: 'row',
@@ -53,6 +80,13 @@ const ButtonSection = styled('div')(({ theme }) => ({
 
 const Title = styled('h1')(({ theme }) => ({
     fontSize: 24,
+   marginBottom: theme.spacing(2),
+   marginTop: theme.spacing(-5),
+   fontFamily: theme.typography.fontFamily,
+}));
+
+const Category = styled('h1')(({ theme }) => ({
+    fontSize: 16,
    marginBottom: theme.spacing(2),
    marginTop: theme.spacing(-5),
    fontFamily: theme.typography.fontFamily,
@@ -73,7 +107,7 @@ const Statement = styled('h3')(({ theme }) => ({
    fontFamily: theme.typography.fontFamily,
 }));
 
-const Question = styled('h3')(({ theme }) => ({
+const SubTitle = styled('h3')(({ theme }) => ({
    marginBottom: theme.spacing(1),
    fontSize: 17,
    fontFamily: theme.typography.fontFamily,
@@ -95,7 +129,7 @@ const ModalStyle = styled('div')(({ theme }) => ({
     borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
  }));
 
-const ProcessCompletionPage = ({user, partner}) => {
+const NewFormPage = ({user}) => {
       
     const navigate = useNavigate();
 
@@ -135,12 +169,6 @@ const ProcessCompletionPage = ({user, partner}) => {
         setShareModalOpen(false);
     };
 
-    const [selectedRadioOption, setSelectedRadioOption] = useState('');
-    
-    const handleRadioOptionChange = (event) => {
-        setSelectedRadioOption(event.target.value);
-    };
-
     useEffect(() => {
         if (shareModalOpen) {
           const timer = setTimeout(shareModalClosed, 3000);
@@ -148,73 +176,71 @@ const ProcessCompletionPage = ({user, partner}) => {
         }
       }, [shareModalOpen]);
 
-      useEffect(() => {
+    useEffect(() => {
         if (doneDialogOpen && user.type == 'mentor') {
           const timer = setTimeout(mentorDialogClosed, 3000);
           return () => clearTimeout(timer); // Clear the timer if the modal is closed before the timeout
         }
       }, [doneDialogOpen]);
       
+    const technicalSkillsNames = ["C", "C++", "Python"];
+    const softSkillsNames = ["English", "Communication"];
+    const socialAgendasNames = ["English", "Communication"];
+    const ProfessionalFieldsNames = ["Software Engineering", "Hardware Engineering", "Data Analysis", "Data Science" ]
 
     if(user.type === 'mentor') {
         return (
             <>
             <RootContainer maxWidth="md">
 
-            <Title>Tell us about the process</Title>
+            <Title>Hey {user.name},</Title>
+            <SubTitle>Tell us about yourself so we can find you the right interviewee</SubTitle>
 
             <FormContainer>
+
+            <FeedbackContainer>
+                    {/* <Statement> What skills would you like to help improve?</Statement> */}
+                    <Category>Your choices</Category>
+                    <TagsContainer />
+                </FeedbackContainer>
+
+                <FeedbackContainer>
+                    <Statement> In which professional fields would you like to conduct an interview?</Statement>
+                    <Category>Professional Fields</Category>
+                    <TagsContainer />
+                </FeedbackContainer>
+
+                <FeedbackContainer>
+                    <Statement> What technical skills would you like to interview about?</Statement>
+                    <Category>Technical Skills</Category>
+                    <TagsContainer />
+                </FeedbackContainer>
+
+                <FeedbackContainer>
+                    <Statement>What social agendas are important to you and would you like to promote?</Statement>
+                    <Category>Social Agendas</Category>
+                    <TagsContainer />
+                </FeedbackContainer>
                 
                 <FeedbackContainer>
-                    <Question>Did you help your mentee find a job?</Question>
-                    <RadioGroup 
-                        row
-                        value={selectedRadioOption}
-                        onChange={handleRadioOptionChange}
-                    >
-                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="No" />
-                        <FormControlLabel value="other" control={<Radio />} label="Other" />
-                    </RadioGroup>
+                    <Statement> What soft skills would you like to emphasize as an interviewer?</Statement>
+                    <Category>Soft Skills</Category>
+                    <TagsContainer />
                 </FeedbackContainer>
 
                 <FeedbackContainer>
-                    <Question>Please rate your mentee</Question>
-                    <Rating size="large" defaultValue={0} precision={0.5} />
+                    <Statement> Information you would like to share about yourself with the interviewees? </Statement>
+                    <Category>About Yourself</Category>
+                    <BigContentBox placeholder="For example, workplace, specialties, areas of interest, etc" />
                 </FeedbackContainer>
-
-                <FeedbackContainer>
-                    <Statement> Feedback is a gift</Statement>
-                    <Question>Please tell us what your mentee was good at, and what he could improve on</Question>
-                    <BigContentBox placeholder="Enter your feedback" />
-                </FeedbackContainer>
-
-                <FeedbackContainer>
-                    <Statement> Your experience can help others</Statement>
-                    <Question>Do you have any tips to help future generations succeed?</Question>
-                    <BigContentBox placeholder="Enter your Tips" />
-                </FeedbackContainer>
-
-                <FeedbackContainer>
-                    <Statement> We will be happy to improve </Statement>
-                    <Question>Is there anything else you would like to tell us?</Question>
-                    <BigContentBox placeholder="Tell us more" />
-                </FeedbackContainer>
-
-                <ButtonSection>
-                <IconButton  onClick={shareTapped} size='small' style={{ color: selectedRadioOption !== 'yes' ? 'grey' : '#0A66C2' }} disabled={selectedRadioOption !== 'yes'} >
-                    <Typography>Share this process</Typography>
-                    <LinkedInIcon style={{ color: selectedRadioOption !== 'yes' ? 'grey' : '#0A66C2' }} fontSize="large" />
-                </IconButton>
-                </ButtonSection>
 
                 <ButtonSection>
                     <ButtonWrapper variant="outlined" color="primary" onClick={backTapped} title='Back' />
-                    <ButtonWrapper variant="contained" color="primary" onClick={doneTapped} title='Done' />
+                    <ButtonWrapper variant="contained" color="primary" onClick={doneTapped} title='Done!' />
                 </ButtonSection>
             </FormContainer>
 
-            <Modal
+            {/* <Modal
                 open={doneDialogOpen}
                 onClose={mentorDialogClosed}
                 aria-labelledby="modal-modal-title"
@@ -244,7 +270,7 @@ const ProcessCompletionPage = ({user, partner}) => {
                         Your process has been successfully published.
                     </Typography>
                 </ModalStyle>
-            </Modal>
+            </Modal> */}
 
         </RootContainer>
         </>
@@ -252,63 +278,56 @@ const ProcessCompletionPage = ({user, partner}) => {
     } else {
         return (
             <>
-            <RootContainer maxWidth="md">
+<RootContainer maxWidth="md">
 
-            <Title>Tell us about the process</Title>
-        
+            <Title>Hey {user.name},</Title>
+            <SubTitle>Tell us about yourself so we can find you the right interviewer</SubTitle>
+
             <FormContainer>
-                
-                <FeedbackContainer>
-                    <Question>Did the app help you find a job?</Question>
-                    <RadioGroup 
-                        row
-                        value={selectedRadioOption}
-                        onChange={handleRadioOptionChange}
-                    >
-                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="No" />
-                        <FormControlLabel value="other" control={<Radio />} label="Other" />
-                    </RadioGroup>
-                </FeedbackContainer>
-        
-                <FeedbackContainer>
-                    <Question>Please rate your mentor</Question>
-                    <Rating size="large" defaultValue={0} precision={0.5} />
-                </FeedbackContainer>
-        
-                <FeedbackContainer>
-                <Statement> Feedback is a gift</Statement>
-                    <Question>Please tell us what your mentor was good at, and what he could improve on</Question>
-                    <BigContentBox placeholder="Enter your feedback" />
-                </FeedbackContainer>
-        
-                <FeedbackContainer>
-                    <Statement> Your experience can help others</Statement>
-                    <Question>Do you have any tips to help future generations succeed?</Question>
-                    <BigContentBox placeholder="Enter your Tips" />
-                </FeedbackContainer>
-        
-                <FeedbackContainer>
-                    <Statement> We will be happy to improve </Statement>
-                    <Question>Is there anything else you would like to tell us?</Question>
-                    <BigContentBox placeholder="Tell us more" />
+
+            <FeedbackContainer>
+                    {/* <Statement> What skills would you like to help improve?</Statement> */}
+                    <Category>Your choices</Category>
+                    <TagsContainer />
                 </FeedbackContainer>
 
-                <ButtonSection>
-                <IconButton  onClick={shareTapped} size='small' style={{ color: selectedRadioOption !== 'yes' ? 'grey' : '#0A66C2' }} disabled={selectedRadioOption !== 'yes'} >
-                    <Typography>Share this process</Typography>
-                    <LinkedInIcon style={{ color: selectedRadioOption !== 'yes' ? 'grey' : '#0A66C2' }} fontSize="large" />
-                </IconButton>
-                </ButtonSection>
+                <FeedbackContainer>
+                    <Statement>In which professional fields would you like to be interviewed?</Statement>
+                    <Category>Professional Fields</Category>
+                    <TagsContainer />
+                </FeedbackContainer>
+
+                <FeedbackContainer>
+                    <Statement> What technical skills would you like to be interviewed about?</Statement>
+                    <Category>Technical Skills</Category>
+                    <TagsContainer />
+                </FeedbackContainer>
+
+                <FeedbackContainer>
+                    <Statement>Your personal background matters so that we can find you the right interviewer</Statement>
+                    <SubTitle>Personal Background</SubTitle>
+                    <TagsContainer />
+                </FeedbackContainer>
                 
+                <FeedbackContainer>
+                    <Statement> What soft skills would you like to focus on in the interview?</Statement>
+                    <Category>Soft Skills</Category>
+                    <TagsContainer />
+                </FeedbackContainer>
+
+                <FeedbackContainer>
+                    <Statement> Information you would like to share about yourself with the interviewers? </Statement>
+                    <Category>About Yourself</Category>
+                    <BigContentBox placeholder="For example, areas of interest, education, etc" />
+                </FeedbackContainer>
+
                 <ButtonSection>
                     <ButtonWrapper variant="outlined" color="primary" onClick={backTapped} title='Back' />
-                    <ButtonWrapper variant="contained" color="primary" onClick={doneTapped} title='Done' />
+                    <ButtonWrapper variant="contained" color="primary" onClick={doneTapped} title='Done!' />
                 </ButtonSection>
-        
             </FormContainer>
 
-            <Dialog
+            {/* <Dialog
                 open={doneDialogOpen}
                 onClose={menteeDialogClosedWithNo}
                 aria-labelledby="alert-dialog-title"
@@ -352,11 +371,11 @@ const ProcessCompletionPage = ({user, partner}) => {
                     </Typography>
                 </ModalStyle>
             </Modal>
-        
+         */}
         </RootContainer>
         </>
         );
     }  
 };
 
-export default ProcessCompletionPage;
+export default NewFormPage;
