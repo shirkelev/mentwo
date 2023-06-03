@@ -1,5 +1,4 @@
 // Page Names
-
 export const SIGN_IN = 'sign-in';
 export const SIGN_UP = 'sign-up';
 export const REG_FORM = 'registration-form';
@@ -44,8 +43,13 @@ export const TECHSKILLS = 'Tech Skills';
 export const SOFTSKILLS = 'Soft Skills';
 export const AGENDAS = 'Values';
 
-// Sign Up Form Questions
+// Tags Lists
+export const FIRLDS_LIST = ['Data Analysis', 'Data Science', 'Produce Management', 'Software Engineer', 'UX/UI', 'Web Development', 'Project Managment', 'Algorithm Development', 'Quality Assurance']
+export const TECHSKILLS_LIST = ['Python', 'C', 'C++', 'Java', 'React', 'Figma', 'R', 'SQL', 'JavaScript', 'HTML', 'CSS', 'Node.js', 'Angular', 'Vue.js', 'PHP', 'Swift', 'Kotlin', 'C#', 'Ruby', 'Go']
+export const SOFTSKILLS_LIST = ['', '', '']
+export const AGENDAS_LIST = ['', '', '']
 
+// Sign Up Form Questions
 export const MENTOR_QUESTIONS = [
     
     {
