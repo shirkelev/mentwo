@@ -88,7 +88,7 @@ export const MENTOR_QUESTIONS = [
         name: 'Capacity',
         id: 'capacity',
         placeHolder: 'capacity',
-        title: 'Your mentees capacity'
+        title: 'Your interviewee capacity'
     },
     {
         name: 'Tell Us More About Yourself!',

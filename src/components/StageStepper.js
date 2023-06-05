@@ -6,9 +6,8 @@ import StepLabel from '@mui/material/StepLabel';
 
 const steps = [
   'Matching',
-  'Choose Mentor',
-  'Mentor Approval',
-  'Mentoring Proccess',
+  'Approve Match',
+  'Interview Proccess',
 ];
 
 export default function StageStepper({activeStage}) {

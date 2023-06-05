@@ -166,7 +166,7 @@ const ProcessCompletionPage = ({user, partner}) => {
             <FormContainer>
                 
                 <FeedbackContainer>
-                    <Question>Did you help your mentee find a job?</Question>
+                    <Question>Did you help your interviewee find a job?</Question>
                     <RadioGroup 
                         row
                         value={selectedRadioOption}
@@ -179,13 +179,13 @@ const ProcessCompletionPage = ({user, partner}) => {
                 </FeedbackContainer>
 
                 <FeedbackContainer>
-                    <Question>Please rate your mentee</Question>
+                    <Question>Please rate your interviewee</Question>
                     <Rating size="large" defaultValue={0} precision={0.5} />
                 </FeedbackContainer>
 
                 <FeedbackContainer>
                     <Statement> Feedback is a gift</Statement>
-                    <Question>Please tell us what your mentee was good at, and what he could improve on</Question>
+                    <Question>Please tell us what your interviewee was good at, and what he could improve on</Question>
                     <BigContentBox placeholder="Enter your feedback" />
                 </FeedbackContainer>
 
@@ -272,13 +272,13 @@ const ProcessCompletionPage = ({user, partner}) => {
                 </FeedbackContainer>
         
                 <FeedbackContainer>
-                    <Question>Please rate your mentor</Question>
+                    <Question>Please rate your interviewer</Question>
                     <Rating size="large" defaultValue={0} precision={0.5} />
                 </FeedbackContainer>
         
                 <FeedbackContainer>
                 <Statement> Feedback is a gift</Statement>
-                    <Question>Please tell us what your mentor was good at, and what he could improve on</Question>
+                    <Question>Please tell us what your interviewer was good at, and what he could improve on</Question>
                     <BigContentBox placeholder="Enter your feedback" />
                 </FeedbackContainer>
         

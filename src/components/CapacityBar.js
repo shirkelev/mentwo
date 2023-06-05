@@ -6,7 +6,7 @@ const CapacityBar = ({capacity, mentees_num}) => {
         <Typography component="div" variant="body1" align="center">
         <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center'}}>
         <CapacityBattery full_fruction = {mentees_num / capacity}/>
-        <span>{mentees_num}/{capacity} Mentees</span>
+        <span>{mentees_num}/{capacity} interviewee</span>
         </div>
         </Typography>
     )

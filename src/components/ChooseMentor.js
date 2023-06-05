@@ -11,12 +11,12 @@ export default function ChooseMentor({mentee}) {
     //     window.location.reload();
     // }
     const buttonText0 = {
-        text: 'About',
-        variant: 'text',
+        text: '',
+        variant: '',
         color: '',
     }
     const buttonText2 = {
-        text: 'Be My Mentor!',
+        text: 'Continue!',
         color: 'primary',
         variant: 'outlined',
     }
@@ -36,7 +36,7 @@ export default function ChooseMentor({mentee}) {
                 alignItems="center" 
                 spacing = {5}
                 style={{ width: '80%' }}>
-                <Typography><h1 style={{ fontSize: '1.2rem', textAlign:'center' }} >Take a look on your optional mentors and choose your perfect match!</h1></Typography>
+                <Typography><h1 style={{ fontSize: '1.2rem', textAlign:'center' }} >Take a look on your interviewer detailds</h1></Typography>
                 <CardsCarousel 
                 list = {mentee.optionalMentors} 
                 buttonText0={buttonText0} 

@@ -14,7 +14,7 @@ export default function MentorInProcessPage ({user}) {
         <HomeContent headline = {Constants.PROCESS} list={user.approvedMentees}user={user}/>
       </div>
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <TipBox tipMessege={"After the process is over, I recommend that the mentor ask the mentee for a short feedback on his mentoring so that he can improve in his next mentoring processes."}/>
+        <TipBox tipMessege={"After the process is over, I recommend that the  interviewer ask the interviewee for a short feedback on his mentoring so that he can improve in his next mentoring processes."}/>
       </div>
     </div>
   );

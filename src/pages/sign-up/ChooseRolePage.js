@@ -52,7 +52,7 @@ const ChooseRolePage = () => {
     
       <RootContainer maxWidth="sm">
         <Typography align='center'>
-          <Title>Mentor or Mentee?</Title>
+          <Title>Interviewer or Interviewee?</Title>
           <ButtonsContainer>
               <MentorButton 
                 color="primary" 
@@ -60,7 +60,7 @@ const ChooseRolePage = () => {
                   handleClick('mentor');
                   }}
                 to={''}
-                text='Mentor'
+                text='Interviewer'
                 />
               <div style={{width: '20px'}}></div>
               <MenteeButton 
@@ -68,7 +68,7 @@ const ChooseRolePage = () => {
                 onClick={() =>  {
                   handleClick('mentee');
                   }}
-                to={''} text='Mentee' />
+                to={''} text='Interviewee' />
           </ButtonsContainer>
         </Typography>
       </RootContainer>
