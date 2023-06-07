@@ -25,9 +25,6 @@ const handleInfoClick = () => {
 }
 
 let headlineIcon;
-let buttonText0;
-let buttonText1;
-let buttonText2;
 let isMatched;
 
 if(headline === Constants.PENDINGS) {
