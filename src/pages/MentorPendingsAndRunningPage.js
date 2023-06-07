@@ -20,7 +20,7 @@ export default function MentorPendingsAndRunningPage ({user}) {
         </div>
       </div> */}
 
-      <div style={{ padding: '10px', backgroundColor: '#f8f2ec'}}>
+      <div style={{ padding: '10px'}}>
         <HomeContent headline = {Constants.PENDINGS} list={user.pendingMentees} user={user}/>
         {/*<HomeContent headline = {Constants.PROCESS} list={user.approvedMentees}user={user}/>
          <HomeContent headline = {Constants.FINISHED} list={user.finishedMentees} />

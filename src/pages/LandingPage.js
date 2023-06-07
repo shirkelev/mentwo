@@ -19,7 +19,7 @@ function LandingPage() {
     <>
     <Box sx={{
             boxShadow: '3'
-            ,backgroundColor:'#f8f2ec'
+            ,backgroundColor:'#FEFCFF'
             ,justifyItems:'center'
             ,maxHeight:'10vh'
             , display: 'flex', justifyContent: 'flex-end',

@@ -20,7 +20,7 @@ const RootContainer = styled(Container)(
   alignItems: 'center',
   paddingTop: theme.spacing(10),
   paddingBottom: theme.spacing(10),
-  backgroundColor: '#f8f2ec',
+  backgroundColor: '#FEFCFF',
   height: '100vh',
 }));
 
@@ -73,7 +73,6 @@ const SignUpLink = styled('a')(({ theme }) => ({
 
 const SignInPage = () => {
   return (
-    // <div style={{ backgroundColor: '#f8f2ec' }}>
     <div>
         <RootContainer>
         <img alt='logo' src={logoW} style={{height:'90px', width:'200px', marginBottom: '30px'}} />

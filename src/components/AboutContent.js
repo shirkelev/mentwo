@@ -2,12 +2,16 @@ import React from 'react';
 import { Box, Typography } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import * as Constants from '../Constants';
+import { useTheme } from '@mui/material/styles';
 
 function AboutContent() {
+  const theme = useTheme();
+  
   return (
     <>
+      {/* {console.log(theme.appBackground)} */}
       <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',
-          height: '90vh', backgroundColor: '#f8f2ec', backgroundSize: 'cover',}}>
+          height: '90vh', backgroundSize: 'cover',}}>
         <Box sx={{ p: 4, borderRadius: 4, bgcolor: 'background.paper', display: 'flex', flexDirection: 'column',
             justifyContent: 'center', alignItems: 'center', boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
             pt: 3, // add top padding
