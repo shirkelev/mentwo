@@ -13,16 +13,16 @@ const Tag = ({ category, text, isPressed=false, onClick=()=>{}}) => {
     const updateColor = (pressed) => {
         let initialColor;
         switch (category) {
-            case Constants.TECHSKILL:
+            case Constants.TECHSKILLS:
                 initialColor = pressed ? 'techSkillPressedColor' : 'techSkillColor';
                 break;
-            case Constants.SOFTSKILL:
+            case Constants.SOFTSKILLS:
                 initialColor = pressed ? 'softSkillPressedColor' : 'softSkillColor'; 
                 break;
-            case Constants.FIELD:
+            case Constants.FIELDS:
                 initialColor = pressed ? 'fieldPressedColor' : 'fieldColor';
                 break;
-            case Constants.AGENDA:
+            case Constants.AGENDAS:
                 initialColor = pressed ? 'agendaPressedColor' : 'agendaColor';
                 break;
             default:

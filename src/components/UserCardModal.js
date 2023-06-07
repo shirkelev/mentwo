@@ -82,9 +82,6 @@ const UserCardModal = ({user, onClose}) => {
         </div>
       </ModalStyle>
       </Modal>
-
-
-        
     );
   };
   
