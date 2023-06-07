@@ -4,6 +4,9 @@ import { UserModalContext } from '../context/UserModalContext';
 import { Stack, margin } from '@mui/system';
 import styled from '@emotion/styled';
 import Chip from '@mui/material/Chip';
+import Tag from './small-components/Tag';
+import * as Constants from '../Constants';
+import TagsCategory from './small-components/TagsCategory';
 
 const h2Styles = {
   maxWidth: '100%',
@@ -28,12 +31,12 @@ const ModalStyle = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
 }));
 
-const UserCardModal = ({user, variant, onClose}) => {
+const UserCardModal = ({user, onClose}) => {
 
-    const { openUserModal, setOpenUserModal } = useContext(UserModalContext);
+    const { openUserModal, setOpenUserModal, modalType, setModalType } = useContext(UserModalContext);
 
-    function ModalContent(){
-      if(variant === 'about'){
+    function ModalContent({modalType}){
+      if(modalType === 'about'){
         return(
         <>
         <Typography><text style={h2Styles}><br></br>{user.description}</text></Typography>
@@ -65,14 +68,15 @@ const UserCardModal = ({user, variant, onClose}) => {
           <Stack spacing={1}>
             <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
             <Typography variant="subtitle1">{user.profession}</Typography>
-            {variant === 'about' ? 
+            {modalType === 'about' ? 
               <Stack direction="row" spacing={1}>
-                {['A', 'B', 'C'].map((badge, index) => {return <Chip key={index} label={badge} />})}
+                <TagsCategory category={Constants.TECHSKILLS} num={3}/>
+                {['A', 'B', 'C'].map((badge, index) => {return <Tag text='CPP' category={Constants.TECHSKILL}/>})}
               </Stack>
                 : null}
           </Stack>
         </Stack>
-        <ModalContent />
+        <ModalContent modalType={modalType}/>
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 30 }}>
           <Button variant="outlined" onClick={onClose} size="small">Close</Button>
         </div>

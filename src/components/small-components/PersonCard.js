@@ -32,9 +32,12 @@ export default function PersonCard({variant, user}) {
 
   // const {openUserModal, setOpenUserModal, setModalType} = React.useContext(UserModalContext);
   const [openUserModal, setOpenUserModal] = React.useState(false);
+  const [modalType, setModalType] = React.useState('contact');
 
   const handleClickViewMore = () => {
+    setModalType('about');
     setOpenUserModal(!openUserModal);
+    
   }
 
   const hadleClickChooseMentor = () => {
@@ -42,7 +45,9 @@ export default function PersonCard({variant, user}) {
   }
 
   const handleClickContact = () => {
+    setModalType('contact');
     setOpenUserModal(!openUserModal);
+    
   }
 
   const handleClickDecline = () => {
@@ -74,11 +79,9 @@ export default function PersonCard({variant, user}) {
     variant: 'text',
     color: 'primary',
   }
-  let modalType;
   let ButtonSection;
   switch (variant) {
     case Constants.PENDINGS:
-      modalType = 'about';
       ButtonSection = () => {
         
         return(
@@ -92,7 +95,6 @@ export default function PersonCard({variant, user}) {
       break;
     case Constants.PROCESS:
       ButtonSection = () => {
-        const modalType = 'contact';
         return(
           <>
           <Button size="small" onClick={handleClickContact} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Contact</Button>
@@ -103,7 +105,6 @@ export default function PersonCard({variant, user}) {
       };
       break;
     case Constants.FINISHED:
-      modalType = 'contact';
       ButtonSection = () => {
         return(
           <>
@@ -115,7 +116,6 @@ export default function PersonCard({variant, user}) {
       };
       break;
     default:
-      modalType = 'about';
       ButtonSection = () => {
           <> </>
       };
@@ -123,7 +123,7 @@ export default function PersonCard({variant, user}) {
   
   return (
       <>
-      <UserModalContext.Provider value={{openUserModal, setOpenUserModal, modalType}}>
+      <UserModalContext.Provider value={{openUserModal, setOpenUserModal, modalType, setModalType}}>
         <Card sx={{ boxShadow:2, margin:1, padding:1, width:280, borderRadius: 8}}>
           <Stack 
           direction="row"

@@ -7,6 +7,7 @@ import ProcessCompletionPage from "./ProcessCompletionPage";
 import AboutPage from "./AboutPage";
 import Recommendations from "./Recommendations";
 import NavigationBar from "../components/NavigationBar";
+import MentorInProcessPage from "./MentorInProcessPage";
 import {
    
     Routes,
@@ -40,6 +41,7 @@ export default function HomePageMain() {
                 <Routes>
                     <Route path="/" element={user.type === 'mentor' ? <MentorPendingsAndRunningPage user={user} /> : <MenteeMatchingPage user={user} />} exact/>
                     <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={user} />} />
+                    <Route path={CONSTANTS.MENTOR_IN_PROCESS_PAGE} element={<MentorInProcessPage user={user} />} />
                     <Route path={CONSTANTS.PROCESS_COMPLETION_FORM} element={<ProcessCompletionPage user={user} />} />
                     <Route path={CONSTANTS.ABOUT_PAGE} element={<AboutPage user={user} />} />
                     <Route path={CONSTANTS.RECOMMENDATINS_PAGE} element={<Recommendations user={user} />} />
