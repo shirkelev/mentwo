@@ -10,7 +10,7 @@ export default function CardsCarousel ({list, variant, isMatched}) {
 
   return (
     <>
-    {list.length > 0 ?
+    {typeof list !== "undefined" && list.length > 0 ?
       <Box sx={{display: "flex", flexDirection:'column', alignItems:"center", maxWidth:'100%'}}>
         {list.map((user) => {
         return(
