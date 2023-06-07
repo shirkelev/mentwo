@@ -1,4 +1,5 @@
 import User from './User.js'
+import * as CONSTANTS from '../Constants';
 
 export default class Mentor extends User {
     constructor(userName, name, lastName, password, img, email, phone,available, description, profession='I am a proffesion') {
@@ -9,6 +10,10 @@ export default class Mentor extends User {
         this.declinedMentees = [];
         this.available = available;
         this.profession = profession;
+        this.filed_list = Array(CONSTANTS.FIELDS_LIST.length).fill(null);
+        this.filed_list = Array(CONSTANTS.TECHSKILLS_LIST.length).fill(null);
+        this.filed_list = Array(CONSTANTS.SOFTSKILLS_LIST.length).fill(null);
+        this.filed_list = Array(CONSTANTS.AGENDAS_LIST.length).fill(null);
     };
 
     addMentee(mentee, type) {

@@ -1,26 +1,19 @@
 import User from './User.js'
+import * as CONSTANTS from '../Constants';
 
 export default class Mentee extends User {
     constructor(userName, name, lastName, password, img, email, phone, description, profession) {
         super(userName, name, lastName, password, img, email, phone, 'mentee', description);
-        this.offeredMentors = [];
+        this.filed_list = Array(CONSTANTS.FIELDS_LIST.length).fill(null);
+        this.filed_list = Array(CONSTANTS.TECHSKILLS_LIST.length).fill(null);
+        this.filed_list = Array(CONSTANTS.SOFTSKILLS_LIST.length).fill(null);
+        this.filed_list = Array(CONSTANTS.AGENDAS_LIST.length).fill(null);
         this.currentMentor = null;
-        this.mentorshipStatus = null;
-        this.optionalMentors = [];
-        this.profession = 'Software Engineering';
-        this.status = 0
+        this.profession = profession;
     }
 
     addMentor(mentor){
         this.currentMentor = mentor;
-        this.mentorshipStatus = 'active'
-    }
-    addOptionalMentor(mentor){
-        this.optionalMentors.push(mentor);
-    }
-
-    changeStatus(status){
-        this.status = status
     }
 }
 
