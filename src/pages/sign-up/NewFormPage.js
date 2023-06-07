@@ -87,7 +87,7 @@ const Statement = styled('h3')(({ theme }) => ({
    fontFamily: theme.typography.fontFamily,
 }));
 
-const NewFormPage = ({user}) => {
+const NewFormPage = ({role, name}) => {
 
     const [fields, setFields] = useState([]);
     const [techSkills, setTechSkills] = useState([]);
@@ -185,13 +185,13 @@ const NewFormPage = ({user}) => {
     ];
 
 
-    if(user.type === 'mentor') {
+    if(role === 'mentor') {
         
         return (
             <>
             <RootContainer maxWidth="md">
 
-                <Title>Hey {user.name},</Title>
+                <Title>Hey {name},</Title>
                 <SubTitle>Tell1 us about yourself so we can find you the right interviewee</SubTitle>
                 {
                     mentorTags.map((tag) => (
@@ -219,7 +219,7 @@ const NewFormPage = ({user}) => {
             <>
             <RootContainer maxWidth="md">
 
-                <Title>Hey {user.name},</Title>
+                <Title>Hey {name},</Title>
                 <SubTitle>Tell us about yourself so we can find you the right interviewer</SubTitle>
                 {
                     menteeTags.map((tag) => (
