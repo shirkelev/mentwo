@@ -15,7 +15,7 @@ import Mentee from '../data/Mentee';
 import { UserContext } from '../context/UserContext';
 import { useNavigate, redirect} from 'react-router-dom';
 import * as Constantans from '../Constants';
-import { red } from '@mui/material/colors';
+import NewFormPage from './sign-up/NewFormPage';
 
 const RootContainer = styled(Container)(({ theme }) => ({
     padding: theme.spacing(5),
@@ -33,6 +33,7 @@ const ContentContainer = styled(Container)(({ theme }) => ({
     flexGrow: 1,
     overflow: 'scroll',
     height: '80vh',
+    margin: theme.spacing(2),
   }));
 
 const ButtonWrapper = styled(Button)(({ theme }) => ({
@@ -47,7 +48,7 @@ const ButtonWrapper = styled(Button)(({ theme }) => ({
       alignItems: 'center',
       justifyContent: 'center',
       gap: '20px',
-  
+      padding: theme.spacing(2),
   }));
 
   function createCompleted(steps){
@@ -94,6 +95,7 @@ const SignUpFlow = ({props}) => {
         password: '',
         confirmPassword: '',
         description: '',
+        capacity: '',
         img: '',
         userName: '',
     });
@@ -149,7 +151,6 @@ const SignUpFlow = ({props}) => {
             setUser(newUser);
             dataBase.addUser(newUser);
             setUser(newUser);
-            // return navigate(-2)
             window.history.pushState(null, "", "/home");
             window.location.reload();
             
@@ -186,11 +187,12 @@ const SignUpFlow = ({props}) => {
     const StepContent = () => {
         switch (step) {
             case 0:
-                return <MainFormPage />;
-            case 1:
+                // return <MainFormPage />;
                 return <ChooseRolePage />;
-            case 2:
-                return <RoleFormPAge />;
+            case 1:
+                return <NewFormPage role={role}/>;
+            // case 2:
+                // return <RoleFormPAge />;
             default:
                 return <MainFormPage  />;
             }
@@ -203,10 +205,13 @@ const SignUpFlow = ({props}) => {
                     <ContentContainer>
                         <StepContent />
                     </ContentContainer>
-                    <ButtonSection>
-                        {step === 1 ? <ButtonWrapper onClick={handlePrev} variant="contained" color="primary"  title='Prev' to={null} /> : null}
-                        <ButtonWrapper onClick={handleNext} variant="contained" color="primary" title={ step === 2 ? 'Submit' : 'Next'} to={null} />
-                    </ButtonSection>
+                    {/* <ButtonSection>
+                        {step === 1 ? 
+                        <>
+                        <ButtonWrapper onClick={handlePrev} variant="outlined" color="secondary"  title='Back' to={null} /> 
+                        <ButtonWrapper onClick={handleNext} variant="contained" color="primary" title={ step === 1 ? 'Done!' : 'Next'} to={null} />
+                        </> : null}
+                    </ButtonSection> */}
                 </ SignUpContext.Provider>
             </RootContainer>
             )};
