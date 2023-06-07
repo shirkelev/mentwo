@@ -191,7 +191,7 @@ const NewFormPage = ({role, name}) => {
             <>
             <RootContainer maxWidth="md">
 
-            <Title>Hi {user.name},</Title>
+            <Title>Hi {name},</Title>
             <SubTitle>Tell us about yourself so we can find you the right interviewee</SubTitle>
 
                 <QuestionContainer>
