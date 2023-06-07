@@ -14,14 +14,14 @@ const MenteeMatchingPage = ({mentee}) => {
     };
 
     function handleClick() {
-        window.history.pushState(null, "", "/home/chooseMentorPage");
+        window.history.pushState(null, "", "/home/matchSuccessPage");
         window.location.reload();
     }
 
     return(
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' , marginTop: '2rem' }}>
             <Typography>
-            <StageStepper activeStage={0} style={{width:'100%'}} /> 
+            {/* <StageStepper activeStage={0} style={{width:'100%'}} />  */}
             <div style={{ marginTop: '4rem' }}>
                 <Stack  direction="column"
                 justifyContent="center"

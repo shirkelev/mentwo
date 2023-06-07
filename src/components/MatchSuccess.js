@@ -14,7 +14,7 @@ export default function MatchSuccess({mentee}) {
     }
     return( 
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' , marginTop: '2rem' }}>
-            <StageStepper activeStage={2} style={{width:'100%'}} /> 
+            {/* <StageStepper activeStage={2} style={{width:'100%'}} />  */}
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop: '1rem', marginBottom: '5rem' }}>
             <Stack direction="column"
                     justifyContent="center"
