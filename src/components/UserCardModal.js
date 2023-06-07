@@ -30,7 +30,7 @@ const ModalStyle = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
 }));
 
-const TagsWithHeadlineContainer = ({headlineCategory, tagsCategory}) => {
+const TagsWithHeadlineContainer = ({category}) => {
   return (
     <div style={{ display: 'flex', overflowX: 'auto', marginTop: 12 }}>
       {/* <Stack spacing={1}>
@@ -44,9 +44,9 @@ const TagsWithHeadlineContainer = ({headlineCategory, tagsCategory}) => {
         </Box>
       </Stack> */}
         <Box display="flex" flexWrap="wrap" gap={1}>
-          <TagsCategory category={headlineCategory} num={3} />
+          <TagsCategory category={category} num={3} />
           {['A', 'B', 'C', 'A'].map((badge, index) =>
-          <Tag text={'CPP'} category={tagsCategory}/>
+          <Tag text={'CPP'} category={category}/>
           )}
         </Box>
     </div>
@@ -94,10 +94,10 @@ const UserCardModal = ({user, onClose}) => {
         </Stack>
         {modalType === 'about' ? 
         <>
-            <TagsWithHeadlineContainer headlineCategory = {Constants.FIELDS} tagsCategory = {Constants.FIELD}/>
-            <TagsWithHeadlineContainer headlineCategory = {Constants.TECHSKILLS} tagsCategory = {Constants.TECHSKILL}/>
-            <TagsWithHeadlineContainer headlineCategory = {Constants.SOFTSKILLS} tagsCategory = {Constants.SOFTSKILL}/>
-            <TagsWithHeadlineContainer headlineCategory = {Constants.AGENDAS} tagsCategory = {Constants.AGENDA}/>
+            <TagsWithHeadlineContainer category = {Constants.FIELDS}/>
+            <TagsWithHeadlineContainer category = {Constants.TECHSKILLS}/>
+            <TagsWithHeadlineContainer category = {Constants.SOFTSKILLS}/>
+            <TagsWithHeadlineContainer category = {Constants.AGENDAS}/>
         </>
                 : null}
                 
