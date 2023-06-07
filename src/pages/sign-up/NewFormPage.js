@@ -8,11 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import BigContentBox from '../../components/small-components/BigContentBox';
 import * as Constants from '../../Constants';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 
 function TagsContainer({ tagsNames, category, onTagClick, isPressedFunc}) {
     return (
-        <Box display="flex" flexWrap="wrap" gap={2} sx={{justifyContent: 'center', 
-        alignItems: 'center'}}>
+        <Box display="flex" flexWrap="wrap" gap={1}>
             {tagsNames.map((tag, index) => (
                 <>
                 <Tag
@@ -26,7 +26,7 @@ function TagsContainer({ tagsNames, category, onTagClick, isPressedFunc}) {
             ))}
         </Box>
     );
-}
+};
 
 const RootContainer = styled(Container)(({ theme }) => ({
    display: 'flex',
@@ -191,6 +191,40 @@ const NewFormPage = ({role, name}) => {
             <>
             <RootContainer maxWidth="md">
 
+            <Title>Hi {user.name},</Title>
+            <SubTitle>Tell us about yourself so we can find you the right interviewee</SubTitle>
+
+                <QuestionContainer>
+                <Category>Your choices:</Category>
+                </QuestionContainer>
+
+                <QuestionContainer>
+                    <TagsCategory category= {Constants.FIELDS}/>
+                    <Statement> In which professional fields would you like to interview? </Statement>
+                    <TagsContainer tagsNames={Constants.FIELDS_LIST} category={Constants.FIELD} />
+                </QuestionContainer>
+
+                <QuestionContainer>
+                    <TagsCategory category= {Constants.TECHSKILLS}/>
+                    <Statement> What technical skills would you like to interview about?</Statement>
+                    <TagsContainer tagsNames={Constants.TECHSKILLS_LIST} category={Constants.TECHSKILL} />
+                </QuestionContainer>
+
+                <QuestionContainer>
+                    <TagsCategory category= {Constants.SOFTSKILLS}/>
+                    <Statement> What soft skills do you want to focus on as an interviewer?</Statement>
+                    <TagsContainer tagsNames={Constants.SOFTSKILLS_LIST} category={Constants.SOFTSKILL} />
+                </QuestionContainer>
+
+                
+                <QuestionContainer>
+                    <TagsCategory category= {Constants.AGENDAS}/>
+                    <Statement>What social agendas are important to you and would you like to promote?</Statement>
+                    <TagsContainer tagsNames={Constants.AGENDAS_LIST} category={Constants.AGENDA} />
+                </QuestionContainer>
+
+                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
+
                 <Title>Hey {name},</Title>
                 <SubTitle>Tell1 us about yourself so we can find you the right interviewee</SubTitle>
                 {
@@ -227,6 +261,10 @@ const NewFormPage = ({role, name}) => {
                             tagsNames={tag.tagsNames} isPressedFunc={isPressed} onTagClick={onTagClick}/>    
                     ))           
                 }
+
+                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
+
+                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
 
                 <QuestionContainer>
                     <Category>About Yourself</Category>

@@ -52,10 +52,12 @@ export default function PersonCard({variant, mainUser, cardUser}) {
 
   const handleClickDecline = () => {
     mainUser.addMentee(cardUser, 'declined');
+    // todo: DB update
   }
 
   const handleClickFinish = () => {
     mainUser.addMentee(cardUser, 'finished');
+    // todo: DB update
   }
 
   const handleClickFeedback = () => {
@@ -64,10 +66,12 @@ export default function PersonCard({variant, mainUser, cardUser}) {
 
   const HandleClickApprove = () => {
     mainUser.addMentee(cardUser, 'approved');
+    // todo: DB update
   }
 
   const handleClickShare = () => { 
     return null;
+    // todo: do something (modal?)
   }
 
   const MAIN_CTA = {

@@ -46,7 +46,7 @@ const theme = createTheme({
 
       fieldColor: 
       {
-        main: '#BBDEFB', // $rmd-blue-100
+        main: '#d6f1fe', // $rmd-blue-70~
       },
       fieldPressedColor: 
       {
@@ -58,7 +58,7 @@ const theme = createTheme({
       },
       techSkillColor:
       {
-        main: '#B2EBF2', // $rmd-cyan-100
+        main: '#d4f4f8', // $rmd-cyan-70~
       },
       techSkillPressedColor:
       {
@@ -70,7 +70,7 @@ const theme = createTheme({
       },
       softSkillColor:
       {
-        main: '#B2DFDB', // $rmd-teal-100
+        main: '#d4edec', // $rmd-teal-70~
       },
       softSkillPressedColor:
       {
@@ -82,7 +82,7 @@ const theme = createTheme({
       },
       agendaColor:
       {
-        main: '#C8E6C9', // $rmd-green-100
+        main: '#e0f1e1', // $rmd-green-70~
       },
       agendaPressedColor:
       {
