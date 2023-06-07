@@ -28,18 +28,9 @@ const ModalStyle = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
 }));
 
-const UserCardModal = ({user, variant}) => {
+const UserCardModal = ({user, variant, onClose}) => {
 
-    const {openUserModal, setOpenUserModal} = useContext(UserModalContext);
-    // const {modalDetails, setModalDetails} = useContext(UserModalContext);
-    
-    const handleOpenModal = () => {
-      setOpenUserModal(true);
-    };
-  
-    const handleCloseModal = () => {
-      setOpenUserModal(false);
-    };
+    const { openUserModal, setOpenUserModal } = useContext(UserModalContext);
 
     function ModalContent(){
       if(variant === 'about'){
@@ -54,8 +45,6 @@ const UserCardModal = ({user, variant}) => {
           <>
           <Typography variant="body1" sx={{ mb: 1 }}>Email: {user.email}</Typography>
           <Typography variant="body1" sx={{ mb: 1 }}>Phone: {user.phone}</Typography>
-          {/* <Typography variant="body2" sx={{ mb: 2 }}>{user.description}</Typography> */}
-          
           </>
           
         )
@@ -66,7 +55,7 @@ const UserCardModal = ({user, variant}) => {
 
       <Modal
           open={openUserModal}
-          onClose={handleCloseModal}
+          onClose={onClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
               >
@@ -76,19 +65,19 @@ const UserCardModal = ({user, variant}) => {
           <Stack spacing={1}>
             <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
             <Typography variant="subtitle1">{user.profession}</Typography>
-            <Stack direction="row" spacing={1}>
-              {/* {user.badges.map((badge, index) => (
-                <Chip key={index} label={badge} /> */}
+            {variant === 'about' ? 
+              <Stack direction="row" spacing={1}>
                 {['A', 'B', 'C'].map((badge, index) => {return <Chip key={index} label={badge} />})}
-            </Stack>
+              </Stack>
+                : null}
           </Stack>
         </Stack>
-        <div>{user.description}</div>
+        <ModalContent />
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 30 }}>
-          <Button variant="outlined" onClick={handleCloseModal} size="small">Close</Button>
+          <Button variant="outlined" onClick={onClose} size="small">Close</Button>
         </div>
       </ModalStyle>
-    </Modal>
+      </Modal>
 
 
         
