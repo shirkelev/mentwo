@@ -32,7 +32,7 @@ export default function HomePageMain() {
     const [showMenu, setShowMenu] = React.useState(false);
     const {user, setUser, dataBase} = useContext(UserContext);
     return (
-        <div style={{ backgroundColor: '#f8f2ec' }}>
+        <div style={{ backgroundColor: '#FEFCFF' }}>
             <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
                 <NavCont>
                     <NavigationBar user = {user}/>

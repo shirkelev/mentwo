@@ -100,6 +100,7 @@ const NewFormPage = ({user}) => {
     if(user.type === 'mentor') {
         return (
             <>
+            <div style={{ backgroundColor: '#FEFCFF' }}>
             <RootContainer maxWidth="md">
 
             <Title>Hey {user.name},</Title>
@@ -112,25 +113,26 @@ const NewFormPage = ({user}) => {
                 <QuestionContainer>
                     <TagsCategory category= {Constants.FIELDS}/>
                     <Statement> In which professional fields would you like to interview? </Statement>
-                    <TagsContainer tagsNames={Constants.FIELDS_LIST} category={Constants.FIELDS_LIST} />
+                    <TagsContainer tagsNames={Constants.FIELDS_LIST} category={Constants.FIELD} />
                 </QuestionContainer>
 
                 <QuestionContainer>
                     <TagsCategory category= {Constants.TECHSKILLS}/>
                     <Statement> What technical skills would you like to interview about?</Statement>
-                    <TagsContainer tagsNames={Constants.TECHSKILLS_LIST} category={Constants.TECHSKILLS} />
-                </QuestionContainer>
-
-                <QuestionContainer>
-                    <TagsCategory category= {Constants.AGENDAS}/>
-                    <Statement>What social agendas are important to you and would you like to promote?</Statement>
-                    <TagsContainer tagsNames={Constants.AGENDAS_LIST} category={Constants.AGENDAS_LIST} />
+                    <TagsContainer tagsNames={Constants.TECHSKILLS_LIST} category={Constants.TECHSKILL} />
                 </QuestionContainer>
 
                 <QuestionContainer>
                     <TagsCategory category= {Constants.SOFTSKILLS}/>
                     <Statement> What soft skills do you want to focus on as an interviewer?</Statement>
-                    <TagsContainer tagsNames={Constants.SOFTSKILLS_LIST} category={Constants.SOFTSKILLS_LIST} />
+                    <TagsContainer tagsNames={Constants.SOFTSKILLS_LIST} category={Constants.SOFTSKILL} />
+                </QuestionContainer>
+
+                
+                <QuestionContainer>
+                    <TagsCategory category= {Constants.AGENDAS}/>
+                    <Statement>What social agendas are important to you and would you like to promote?</Statement>
+                    <TagsContainer tagsNames={Constants.AGENDAS_LIST} category={Constants.AGENDA} />
                 </QuestionContainer>
 
                 <QuestionContainer>
@@ -145,11 +147,13 @@ const NewFormPage = ({user}) => {
                 </ButtonSection> 
 
         </RootContainer>
+        </div>
         </>
         );
     } else {
         return (
             <>
+            <div style={{ backgroundColor: '#FEFCFF' }}>
             <RootContainer maxWidth="md">
 
             <Title>Hey {user.name},</Title>
@@ -162,25 +166,25 @@ const NewFormPage = ({user}) => {
                 <QuestionContainer>
                     <TagsCategory category= {Constants.FIELDS}/>
                     <Statement>In which professional fields would you like to be interviewed?</Statement>
-                    <TagsContainer tagsNames={Constants.FIELDS_LIST} category={Constants.FIELDS_LIST} />
+                    <TagsContainer tagsNames={Constants.FIELDS_LIST} category={Constants.FIELD} />
                 </QuestionContainer>
 
                 <QuestionContainer>
                     <TagsCategory category= {Constants.TECHSKILLS}/>
                     <Statement> What technical skills would you like to be interviewed about?</Statement>
-                    <TagsContainer tagsNames={Constants.TECHSKILLS_LIST} category={Constants.TECHSKILLS} />
-                </QuestionContainer>
-
-                <QuestionContainer>
-                    <TagsCategory category= {Constants.AGENDAS}/>
-                    <Statement>Your personal background matters so that we can find you the right interviewer</Statement>
-                    <TagsContainer tagsNames={Constants.AGENDAS_LIST} category={Constants.AGENDAS_LIST} />
+                    <TagsContainer tagsNames={Constants.TECHSKILLS_LIST} category={Constants.TECHSKILL} />
                 </QuestionContainer>
 
                 <QuestionContainer>
                     <TagsCategory category= {Constants.SOFTSKILLS}/>
                     <Statement> What soft skills would you like to focus on in the interview?</Statement>
-                    <TagsContainer tagsNames={Constants.SOFTSKILLS_LIST} category={Constants.SOFTSKILLS_LIST} />
+                    <TagsContainer tagsNames={Constants.SOFTSKILLS_LIST} category={Constants.SOFTSKILL} />
+                </QuestionContainer>
+
+                <QuestionContainer>
+                    <TagsCategory category= {Constants.AGENDAS}/>
+                    <Statement>Your personal background matters so that we can find you the right interviewer</Statement>
+                    <TagsContainer tagsNames={Constants.AGENDAS_LIST} category={Constants.AGENDA} />
                 </QuestionContainer>
 
                 <QuestionContainer>
@@ -195,6 +199,7 @@ const NewFormPage = ({user}) => {
                 </ButtonSection>
 
         </RootContainer>
+        </div>
         </>
         );
     }  

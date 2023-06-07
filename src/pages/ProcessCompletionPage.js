@@ -159,6 +159,7 @@ const ProcessCompletionPage = ({user, partner}) => {
     if(user.type === 'mentor') {
         return (
             <>
+            <div style={{ backgroundColor: '#FEFCFF' }}>
             <RootContainer maxWidth="md">
 
             <Title>Tell us about the process</Title>
@@ -247,11 +248,13 @@ const ProcessCompletionPage = ({user, partner}) => {
             </Modal>
 
         </RootContainer>
+        </div>
         </>
         );
     } else {
         return (
             <>
+            <div style={{ backgroundColor: '#FEFCFF' }}>
             <RootContainer maxWidth="md">
 
             <Title>Tell us about the process</Title>
@@ -354,6 +357,7 @@ const ProcessCompletionPage = ({user, partner}) => {
             </Modal>
         
         </RootContainer>
+        </div>
         </>
         );
     }  
