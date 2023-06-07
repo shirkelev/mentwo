@@ -15,6 +15,7 @@ import * as Constants from '../../Constants';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { RestaurantMenu } from '@mui/icons-material';
+import UserCardModal from '../UserCardModal';
 
 
 const maxLength = 70;
@@ -29,11 +30,11 @@ export default function PersonCard({variant, user}) {
 
   const navigate = useNavigate();
 
-  const {openUserModal, setOpenUserModal, setModalType} = React.useContext(UserModalContext);
+  // const {openUserModal, setOpenUserModal, setModalType} = React.useContext(UserModalContext);
+  const [openUserModal, setOpenUserModal] = React.useState(false);
 
   const handleClickViewMore = () => {
     setOpenUserModal(!openUserModal);
-    setModalType('about');
   }
 
   const hadleClickChooseMentor = () => {
@@ -42,7 +43,6 @@ export default function PersonCard({variant, user}) {
 
   const handleClickContact = () => {
     setOpenUserModal(!openUserModal);
-    setModalType('contact');
   }
 
   const handleClickDecline = () => {
@@ -74,11 +74,13 @@ export default function PersonCard({variant, user}) {
     variant: 'text',
     color: 'primary',
   }
-
+  let modalType;
   let ButtonSection;
   switch (variant) {
     case Constants.PENDINGS:
+      modalType = 'about';
       ButtonSection = () => {
+        
         return(
           <>
           <Button size="small" onClick={handleClickApprove} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Approve</Button>
@@ -90,6 +92,7 @@ export default function PersonCard({variant, user}) {
       break;
     case Constants.PROCESS:
       ButtonSection = () => {
+        const modalType = 'contact';
         return(
           <>
           <Button size="small" onClick={handleClickContact} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Contact</Button>
@@ -100,6 +103,7 @@ export default function PersonCard({variant, user}) {
       };
       break;
     case Constants.FINISHED:
+      modalType = 'contact';
       ButtonSection = () => {
         return(
           <>
@@ -109,40 +113,43 @@ export default function PersonCard({variant, user}) {
           </>
         )
       };
-      break
+      break;
     default:
-        ButtonSection = () => {
+      modalType = 'about';
+      ButtonSection = () => {
           <> </>
       };
     };
   
   return (
+      <>
+      <UserModalContext.Provider value={{openUserModal, setOpenUserModal, modalType}}>
+        <Card sx={{ boxShadow:2, margin:1, padding:1, width:280, borderRadius: 8}}>
+          <Stack 
+          direction="row"
+          justifyContent="left"
+          alignItems="center"
 
-      <Card sx={{ boxShadow:2, margin:1, padding:1, width:280, borderRadius: 8}}>
-        <Stack 
-        direction="row"
-        justifyContent="left"
-        alignItems="center"
-
-        >
-          <Avatar  sx={{ width: 70, height: 70, border: 1, margin:2}} src={user.img}  borderStyle='line'/>
+          >
+            <Avatar  sx={{ width: 70, height: 70, border: 1, margin:2}} src={user.img}  borderStyle='line'/>
+            
+            <Stack direction="column" justifyContent="left" alignItems="center">
+              <Typography gutterBottom variant="h5" component="div" fontWeight={'bold'}> {user.name} {user.lastName} </Typography>
+              <Typography variant="body2" color="text.secondary" fontWeight={'bold'}> {user.profession} </Typography>
+            </ Stack>
+          </Stack>
           
-          <Stack direction="column" justifyContent="left" alignItems="center">
-            <Typography gutterBottom variant="h5" component="div" fontWeight={'bold'}> {user.name} {user.lastName} </Typography>
-            <Typography variant="body2" color="text.secondary" fontWeight={'bold'}> {user.profession} </Typography>
-          </ Stack>
-        </Stack>
-        
-        <CardContent>
-          
-        </CardContent>
+          <CardContent>
+            
+          </CardContent>
 
-        <CardActions sx={{justifyContent:'center', paddingBottom:2}}>
-          <ButtonSection />
-        </CardActions>
-
-
-      </Card>
+          <CardActions sx={{justifyContent:'center', paddingBottom:2}}>
+            <ButtonSection />
+          </CardActions>
+        </Card>
+        <UserCardModal user={user} variant={modalType} onClose={() => {setOpenUserModal(!openUserModal)}}/>
+      </UserModalContext.Provider>
+      </>
     
   );
 }
