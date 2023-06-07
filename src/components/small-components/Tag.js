@@ -2,9 +2,11 @@ import Fab from '@mui/material/Fab';
 import { useState } from 'react';
 import * as Constants from '../../Constants';
 import styled from 'styled-components';
+import { Typography } from '@mui/material';
 
 const NoShadowFab = styled(Fab)`
   box-shadow: none !important;
+  height: 26px;
 `;
 
 const Tag = ({ category, text, isPressed=false, onClick=()=>{}}) => {
@@ -41,7 +43,9 @@ const Tag = ({ category, text, isPressed=false, onClick=()=>{}}) => {
 
     return (
         <NoShadowFab variant="extended" size="small" color={color} onClick={handleClick}>
-            {text}
+            <Typography variant="body2" style={{ fontSize: '13px' }}>
+                {text}
+            </Typography>
         </NoShadowFab>
     );
 };

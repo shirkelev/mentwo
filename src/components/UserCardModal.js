@@ -3,7 +3,6 @@ import { Button, Modal, Box, Typography, Avatar } from '@mui/material';
 import { UserModalContext } from '../context/UserModalContext';
 import { Stack, margin } from '@mui/system';
 import styled from '@emotion/styled';
-import Chip from '@mui/material/Chip';
 import Tag from './small-components/Tag';
 import * as Constants from '../Constants';
 import TagsCategory from './small-components/TagsCategory';
@@ -22,14 +21,37 @@ const ModalStyle = styled('div')(({ theme }) => ({
   left: '50%',
   transform: 'translate(-50%, -50%)',
   backgroundColor: '#FFFFFF', // Set the background color to white
-  border: `2px solid ${theme.palette.primary.main}`, // Use the theme's primary color for the border
+  border: `px solid ${theme.palette.primary.main}`, // Use the theme's primary color for the border
   boxShadow: theme.shadows[6], // Adjust the shadow to your preference
-  padding: theme.spacing(4),
+  padding: theme.spacing(2),
   textAlign: 'center',
   width: 250, // Increase the width to accommodate more space around the text
   maxWidth: '90%', // Optional: Set a maximum width for the modal
   borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
 }));
+
+const TagsWithHeadlineContainer = ({headlineCategory, tagsCategory}) => {
+  return (
+    <div style={{ display: 'flex', overflowX: 'auto', marginTop: 12 }}>
+      {/* <Stack spacing={1}>
+        <span style={{ display: 'inline-block', textAlign: 'left' }}>
+          <TagsCategory category={headlineCategory} num={3} />
+        </span>
+        <Box display="flex" flexWrap="wrap" gap={1}>
+          {['A', 'B', 'C', 'A', 'B', 'C'].map((badge, index) =>
+          <Tag text={'CPP'} category={tagsCategory}/>
+          )}
+        </Box>
+      </Stack> */}
+        <Box display="flex" flexWrap="wrap" gap={1}>
+          <TagsCategory category={headlineCategory} num={3} />
+          {['A', 'B', 'C', 'A'].map((badge, index) =>
+          <Tag text={'CPP'} category={tagsCategory}/>
+          )}
+        </Box>
+    </div>
+  )
+}
 
 const UserCardModal = ({user, onClose}) => {
 
@@ -68,16 +90,19 @@ const UserCardModal = ({user, onClose}) => {
           <Stack spacing={1}>
             <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
             <Typography variant="subtitle1">{user.profession}</Typography>
-            {modalType === 'about' ? 
-              <Stack direction="row" spacing={1}>
-                <TagsCategory category={Constants.TECHSKILLS} num={3}/>
-                {['A', 'B', 'C'].map((badge, index) => {return <Tag text='CPP' category={Constants.TECHSKILL}/>})}
-              </Stack>
-                : null}
           </Stack>
         </Stack>
+        {modalType === 'about' ? 
+        <>
+            <TagsWithHeadlineContainer headlineCategory = {Constants.FIELDS} tagsCategory = {Constants.FIELD}/>
+            <TagsWithHeadlineContainer headlineCategory = {Constants.TECHSKILLS} tagsCategory = {Constants.TECHSKILL}/>
+            <TagsWithHeadlineContainer headlineCategory = {Constants.SOFTSKILLS} tagsCategory = {Constants.SOFTSKILL}/>
+            <TagsWithHeadlineContainer headlineCategory = {Constants.AGENDAS} tagsCategory = {Constants.AGENDA}/>
+        </>
+                : null}
+                
         <ModalContent modalType={modalType}/>
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 30 }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 10 }}>
           <Button variant="outlined" onClick={onClose} size="small">Close</Button>
         </div>
       </ModalStyle>

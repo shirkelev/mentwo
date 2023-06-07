@@ -9,6 +9,8 @@ import Badge from '@mui/material/Badge';
 
 const NoShadowFab = styled(Fab)`
   box-shadow: none !important;
+  height: 26px;
+  pointer-events: none;
 `;
 
 const TagsCategory = ({ category, num=null, onClick=()=>{}}) => {

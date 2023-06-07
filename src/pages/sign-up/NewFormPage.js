@@ -9,10 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import BigContentBox from '../../components/small-components/BigContentBox';
 import * as Constants from '../../Constants';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 
-function TagsContainer({ tagsNames, category, onTagClick }) {
+const TagsContainer = ({ tagsNames, category, onTagClick }) => {
     return (
-        <Box display="flex" flexWrap="wrap" gap={2}>
+        <Box display="flex" flexWrap="wrap" gap={1}>
             {tagsNames.map((tag, index) => (
                 <Tag
                     key={index}
@@ -22,7 +23,7 @@ function TagsContainer({ tagsNames, category, onTagClick }) {
             ))}
         </Box>
     );
-}
+};
 
 const RootContainer = styled(Container)(({ theme }) => ({
    display: 'flex',
@@ -103,8 +104,8 @@ const NewFormPage = ({user}) => {
             <div style={{ backgroundColor: '#FEFCFF' }}>
             <RootContainer maxWidth="md">
 
-            <Title>Hey {user.name},</Title>
-            <SubTitle>Tell1 us about yourself so we can find you the right interviewee</SubTitle>
+            <Title>Hi {user.name},</Title>
+            <SubTitle>Tell us about yourself so we can find you the right interviewee</SubTitle>
 
                 <QuestionContainer>
                 <Category>Your choices:</Category>
@@ -134,6 +135,8 @@ const NewFormPage = ({user}) => {
                     <Statement>What social agendas are important to you and would you like to promote?</Statement>
                     <TagsContainer tagsNames={Constants.AGENDAS_LIST} category={Constants.AGENDA} />
                 </QuestionContainer>
+
+                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
 
                 <QuestionContainer>
                     <Category>About Yourself</Category>
@@ -186,6 +189,8 @@ const NewFormPage = ({user}) => {
                     <Statement>Your personal background matters so that we can find you the right interviewer</Statement>
                     <TagsContainer tagsNames={Constants.AGENDAS_LIST} category={Constants.AGENDA} />
                 </QuestionContainer>
+
+                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
 
                 <QuestionContainer>
                     <Category>About Yourself</Category>
