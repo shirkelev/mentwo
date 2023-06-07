@@ -85,12 +85,6 @@ export const MENTOR_QUESTIONS = [
         title: 'Degree'
     },
     {
-        name: 'Capacity',
-        id: 'capacity',
-        placeHolder: 'capacity',
-        title: 'Your interviewee capacity'
-    },
-    {
         name: 'Tell Us More About Yourself!',
         id: 'description',
         type: 'long',

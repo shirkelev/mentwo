@@ -94,7 +94,6 @@ const SignUpFlow = ({props}) => {
         password: '',
         confirmPassword: '',
         description: '',
-        capacity: '',
         img: '',
         userName: '',
     });
