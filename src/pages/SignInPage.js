@@ -12,6 +12,9 @@ import { Link } from 'react-router-dom'
 import * as Constants from '../Constants';
 import logoW from '../data/images/logo-removebg-preview.png'
 import { height } from '@mui/system';
+import { GoogleLogin } from 'react-google-login';
+
+
 
 const RootContainer = styled(Container)(
     ({ theme }) => ({
@@ -71,6 +74,21 @@ const SignUpLink = styled('a')(({ theme }) => ({
   marginTop: theme.spacing(2),
 }));
 
+const responseGoogle = (response) => {
+    console.log(response);
+    console.log("WELCOME ##");
+    if (response.profileObj) {
+        const { email, familyName, givenName, googleId, imageUrl, name } = response.profileObj;
+        console.log('Name: ' + name);
+        console.log('Email: ' + email);
+        // ...use these details to authenticate or register the user in your database.
+    } else if (response.error === 'popup_closed_by_user') {
+        console.log('Google Sign-In popup was closed before sign-in could complete.');
+    } else {
+        console.error('Google Sign-In failed:', response.error);
+    }
+}
+
 const SignInPage = () => {
   return (
     <div>
@@ -84,9 +102,18 @@ const SignInPage = () => {
                     <ButtonWrapper variant="contained" color="primary" title='Sign In' />
                 </ TextContainer>
                 <SocialButtonsContainer>
-                    <SocialButtonWrapper color="primary">
-                        <Google />
-                    </SocialButtonWrapper>
+                        <GoogleLogin
+                            clientId="41053088816-i7iobtb6tibnoue87lf5kh7nodb1p1ks.apps.googleusercontent.com"
+                            render={renderProps => (
+                                <SocialButtonWrapper color="primary" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+                                    <Google />
+                                </SocialButtonWrapper>
+                            )}
+                            buttonText="Login with Google"
+                            onSuccess={responseGoogle}
+                            onFailure={responseGoogle}
+                            cookiePolicy={'single_host_origin'}
+                        />
                     <SocialButtonWrapper color="primary">
                         <FacebookIcon />
                     </SocialButtonWrapper>
