@@ -26,7 +26,7 @@ export default function MentorPendingsAndRunningPage ({user}) {
          <HomeContent headline = {Constants.FINISHED} list={user.finishedMentees} />
         <HomeContent headline = {Constants.DECLINED} list={user.declinedMentees} /> */}
       </div>
-      <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8f2ec' }}>
+      <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <TipBox tipMessege = {"I recommend holding an online meeting once a week between the interviewer and the interviewee, in which the current status will be aligned and requests, comments or questions can be flooded"}/>
       </div>
     </div>

@@ -26,7 +26,7 @@ function trimDetail(details){
     return details.slice(0, maxLength) + (details.length > maxLength ? "..." : "");
 }
 
-export default function PersonCard({variant, user}) {
+export default function PersonCard({variant, mainUser, cardUser}) {
 
   const navigate = useNavigate();
 
@@ -40,8 +40,8 @@ export default function PersonCard({variant, user}) {
     
   }
 
-  const hadleClickChooseMentor = () => {
-    user.changeStatus(2);
+  const handleClickChooseMentor = () => {
+    cardUser.changeStatus(2);
   }
 
   const handleClickContact = () => {
@@ -51,23 +51,27 @@ export default function PersonCard({variant, user}) {
   }
 
   const handleClickDecline = () => {
-    navigate('../' );
+    mainUser.addMentee(cardUser, 'declined');
+    // todo: DB update
   }
 
   const handleClickFinish = () => {
-    navigate('./' + Constants.PROCESS_COMPLETION_FORM);
+    mainUser.addMentee(cardUser, 'finished');
+    // todo: DB update
   }
 
   const handleClickFeedback = () => {
     navigate('../' + Constants.PROCESS_COMPLETION_FORM);
   }
 
-  const handleClickApprove = () => {
-    navigate('../' + Constants.WAIT_MENTOR_APPROVAL_PAGE);
+  const HandleClickApprove = () => {
+    mainUser.addMentee(cardUser, 'approved');
+    // todo: DB update
   }
 
   const handleClickShare = () => { 
     return null;
+    // todo: do something (modal?)
   }
 
   const MAIN_CTA = {
@@ -86,7 +90,7 @@ export default function PersonCard({variant, user}) {
         
         return(
           <>
-          <Button size="small" onClick={handleClickApprove} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Approve</Button>
+          <Button size="small" onClick={HandleClickApprove} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Approve</Button>
           <Button size="small" onClick={handleClickDecline} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>Decline</Button> 
           <Button size="small" onClick={handleClickViewMore} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>About</Button> 
           </>
@@ -98,7 +102,7 @@ export default function PersonCard({variant, user}) {
         return(
           <>
           <Button size="small" onClick={handleClickContact} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Contact</Button>
-          <Button size="small" onClick={handleClickDecline} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>Decline</Button> 
+          <Button size="small" onClick={handleClickFinish} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>Finish</Button> 
           <Button size="small" onClick={handleClickViewMore} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>About</Button> 
           </>
         )
@@ -131,11 +135,11 @@ export default function PersonCard({variant, user}) {
           alignItems="center"
 
           >
-            <Avatar  sx={{ width: 70, height: 70, border: 1, margin:2}} src={user.img}  borderStyle='line'/>
+            <Avatar  sx={{ width: 70, height: 70, border: 1, margin:2}} src={cardUser.img}  borderStyle='line'/>
             
             <Stack direction="column" justifyContent="left" alignItems="center">
-              <Typography gutterBottom variant="h5" component="div" fontWeight={'bold'}> {user.name} {user.lastName} </Typography>
-              <Typography variant="body2" color="text.secondary" fontWeight={'bold'}> {user.profession} </Typography>
+              <Typography gutterBottom variant="h5" component="div" fontWeight={'bold'}> {cardUser.name} {cardUser.lastName} </Typography>
+              <Typography variant="body2" color="text.secondary" fontWeight={'bold'}> {cardUser.profession} </Typography>
             </ Stack>
           </Stack>
           
@@ -147,7 +151,7 @@ export default function PersonCard({variant, user}) {
             <ButtonSection />
           </CardActions>
         </Card>
-        <UserCardModal user={user} variant={modalType} onClose={() => {setOpenUserModal(!openUserModal)}}/>
+        <UserCardModal user={cardUser} variant={modalType} onClose={() => {setOpenUserModal(!openUserModal)}}/>
       </UserModalContext.Provider>
       </>
     

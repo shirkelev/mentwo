@@ -25,9 +25,6 @@ const handleInfoClick = () => {
 }
 
 let headlineIcon;
-let buttonText0;
-let buttonText1;
-let buttonText2;
 let isMatched;
 
 if(headline === Constants.PENDINGS) {
@@ -60,7 +57,7 @@ return (
     <Typography variant="h4" sx={{ fontWeight: 'bold' }}>{headline}</Typography>
     
   </div>
-  <CardsCarousel list = {list} variant={headline} isMatched = {isMatched} />
+  <CardsCarousel list = {list} variant={headline} isMatched = {isMatched} user = {user} />
   <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
   </div>
   

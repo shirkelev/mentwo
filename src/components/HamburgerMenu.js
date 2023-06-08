@@ -48,7 +48,11 @@ export default function HamburgerMenu({user}) {
               {/* <HamburgerMenuItem text="My Profile" icon = {AccountCircleIcon}
               path="/"  onClick={handleClick}/> */}
               <HamburgerMenuItem text="Current Status" icon = {AutorenewIcon}
-              path = {'./' + Constants.MENTEE_STATUS} onClick={handleClick}/>
+                path={
+                  user.currentMentor != null
+                    ? Constants.MATCH_SUCCESS_PAGE
+                    : Constants.MENTEE_STATUS
+                } onClick={handleClick}/>
               <HamburgerMenuItem text="Mock Interviews Tips" icon = {NextWeekIcon}
               path = {"./" + Constants.RECOMMENDATINS_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="About InternView" icon = {InfoIcon}

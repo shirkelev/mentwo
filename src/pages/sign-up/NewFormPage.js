@@ -5,24 +5,28 @@ import Button from '../../components/small-components/Button';
 import Tag from '../../components/small-components/Tag';
 import TagsCategory from '../../components/small-components/TagsCategory';
 import { useNavigate } from 'react-router-dom';
-
 import BigContentBox from '../../components/small-components/BigContentBox';
 import * as Constants from '../../Constants';
 import Box from '@mui/material/Box';
+import Divider from '@mui/material/Divider';
 
-function TagsContainer({ tagsNames, category, onTagClick }) {
+function TagsContainer({ tagsNames, category, onTagClick, isPressedFunc}) {
     return (
-        <Box display="flex" flexWrap="wrap" gap={2}>
+        <Box display="flex" flexWrap="wrap" gap={1}>
             {tagsNames.map((tag, index) => (
+                <>
                 <Tag
                     key={index}
                     text={tag}
                     category={category}
-                    onClick={() => onTagClick(index)} />
+                    onClick={() => onTagClick(tag, category)} 
+                    isPressed={isPressedFunc(tag,category)}
+                    />
+                </>
             ))}
         </Box>
     );
-}
+};
 
 const RootContainer = styled(Container)(({ theme }) => ({
    display: 'flex',
@@ -83,7 +87,66 @@ const Statement = styled('h3')(({ theme }) => ({
    fontFamily: theme.typography.fontFamily,
 }));
 
-const NewFormPage = ({user}) => {
+const NewFormPage = ({role, name}) => {
+
+    const [fields, setFields] = useState([]);
+    const [techSkills, setTechSkills] = useState([]);
+    const [softSkills, setSoftSkills] = useState([]);
+    const [agendas, setAgendas] = useState([]);
+
+    function onTagClick(tag, category){
+        let list;
+        let setFunc;
+        switch(category){
+            case Constants.FIELDS:
+                list = fields;
+                setFunc = setFields;
+                break;
+            case Constants.TECHSKILLS:
+                list = techSkills;
+                setFunc = setTechSkills;
+                break;
+            case Constants.SOFTSKILLS:
+                list = softSkills;
+                setFunc = setSoftSkills;
+                break;
+            case Constants.AGENDAS:
+                list = agendas;
+                setFunc = setAgendas;
+                break;
+            default:
+                list =[];
+                setFunc = () => {};
+                break;
+        }
+        if(list.includes(tag)){
+            setFunc(list.filter((item) => item !== tag));
+        } else {
+            setFunc([...list, tag]);
+        }
+    }
+
+    function isPressed(tag, category){
+        let list;
+        switch(category){
+            case Constants.FIELDS:
+                list = fields;
+                break;
+            case Constants.TECHSKILLS:
+                list = techSkills;
+                break;
+            case Constants.SOFTSKILLS:
+                list = softSkills;
+                break;
+            case Constants.AGENDAS:
+                list = agendas;
+                break;
+            default:
+                list =[];
+                break;
+        }
+        return list.includes(tag);
+    }
       
     const navigate = useNavigate();
 
@@ -97,14 +160,39 @@ const NewFormPage = ({user}) => {
         setDoneDialogOpen(true);
     };
 
-    if(user.type === 'mentor') {
+    function TagsSection({category, statement, tagsNames, isPressedFunc, onTagClick}) {
+        return (
+            <QuestionContainer>
+                <TagsCategory category= {category}/>
+                <Statement>{statement}</Statement>
+                <TagsContainer tagsNames={tagsNames} category={category} onTagClick={onTagClick} isPressedFunc={isPressed}/>
+            </QuestionContainer>
+        );
+    }
+
+    const mentorTags = [
+        {category: Constants.FIELDS, statement: 'In which professional fields would you like to interview?', tagsNames: Constants.FIELDS_LIST},
+        {category: Constants.TECHSKILLS, statement:'What technical skills would you like to interview about?', tagsNames: Constants.TECHSKILLS_LIST},
+        {category: Constants.SOFTSKILLS, statement:'What soft skills do you want to focus on as an interviewer?', tagsNames: Constants.SOFTSKILLS_LIST},
+        {category: Constants.AGENDAS, statement:'What agendas would you like to interview about?', tagsNames: Constants.AGENDAS_LIST}
+    ];
+
+    const menteeTags = [
+        {category: Constants.FIELDS, statement: 'In which professional fields would you like to be interviewed?', tagsNames: Constants.FIELDS_LIST},
+        {category: Constants.TECHSKILLS, statement:'What technical skills would you like to be interviewed about?', tagsNames: Constants.TECHSKILLS_LIST},
+        {category: Constants.SOFTSKILLS, statement:'What soft skills do you want to focus on as an interviewee?', tagsNames: Constants.SOFTSKILLS_LIST},
+        {category: Constants.AGENDAS, statement:'What agendas would you like to be interviewed about?', tagsNames: Constants.AGENDAS_LIST}
+    ];
+
+
+    if(role === 'mentor') {
+        
         return (
             <>
-            <div style={{ backgroundColor: '#FEFCFF' }}>
             <RootContainer maxWidth="md">
 
-            <Title>Hey {user.name},</Title>
-            <SubTitle>Tell1 us about yourself so we can find you the right interviewee</SubTitle>
+            <Title>Hi {name},</Title>
+            <SubTitle>Tell us about yourself so we can find you the right interviewee</SubTitle>
 
                 <QuestionContainer>
                 <Category>Your choices:</Category>
@@ -135,6 +223,17 @@ const NewFormPage = ({user}) => {
                     <TagsContainer tagsNames={Constants.AGENDAS_LIST} category={Constants.AGENDA} />
                 </QuestionContainer>
 
+                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
+
+                <Title>Hey {name},</Title>
+                <SubTitle>Tell1 us about yourself so we can find you the right interviewee</SubTitle>
+                {
+                    mentorTags.map((tag) => (
+                            <TagsSection category={tag.category} statement={tag.statement} 
+                            tagsNames={tag.tagsNames} isPressedFunc={isPressed} onTagClick={onTagClick}/>   
+                    ))           
+                }
+
                 <QuestionContainer>
                     <Category>About Yourself</Category>
                     <Statement> Information you would like to share about yourself with the interviewees? </Statement>
@@ -147,45 +246,25 @@ const NewFormPage = ({user}) => {
                 </ButtonSection> 
 
         </RootContainer>
-        </div>
         </>
         );
     } else {
         return (
             <>
-            <div style={{ backgroundColor: '#FEFCFF' }}>
             <RootContainer maxWidth="md">
 
-            <Title>Hey {user.name},</Title>
-            <SubTitle>Tell us about yourself so we can find you the right interviewer</SubTitle>
+                <Title>Hey {name},</Title>
+                <SubTitle>Tell us about yourself so we can find you the right interviewer</SubTitle>
+                {
+                    menteeTags.map((tag) => (
+                            <TagsSection category={tag.category} statement={tag.statement} 
+                            tagsNames={tag.tagsNames} isPressedFunc={isPressed} onTagClick={onTagClick}/>    
+                    ))           
+                }
 
-                <QuestionContainer>
-                    <Category>Your choices:</Category>
-                </QuestionContainer>
+                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
 
-                <QuestionContainer>
-                    <TagsCategory category= {Constants.FIELDS}/>
-                    <Statement>In which professional fields would you like to be interviewed?</Statement>
-                    <TagsContainer tagsNames={Constants.FIELDS_LIST} category={Constants.FIELD} />
-                </QuestionContainer>
-
-                <QuestionContainer>
-                    <TagsCategory category= {Constants.TECHSKILLS}/>
-                    <Statement> What technical skills would you like to be interviewed about?</Statement>
-                    <TagsContainer tagsNames={Constants.TECHSKILLS_LIST} category={Constants.TECHSKILL} />
-                </QuestionContainer>
-
-                <QuestionContainer>
-                    <TagsCategory category= {Constants.SOFTSKILLS}/>
-                    <Statement> What soft skills would you like to focus on in the interview?</Statement>
-                    <TagsContainer tagsNames={Constants.SOFTSKILLS_LIST} category={Constants.SOFTSKILL} />
-                </QuestionContainer>
-
-                <QuestionContainer>
-                    <TagsCategory category= {Constants.AGENDAS}/>
-                    <Statement>Your personal background matters so that we can find you the right interviewer</Statement>
-                    <TagsContainer tagsNames={Constants.AGENDAS_LIST} category={Constants.AGENDA} />
-                </QuestionContainer>
+                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
 
                 <QuestionContainer>
                     <Category>About Yourself</Category>
@@ -199,7 +278,6 @@ const NewFormPage = ({user}) => {
                 </ButtonSection>
 
         </RootContainer>
-        </div>
         </>
         );
     }  
