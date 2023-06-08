@@ -14,8 +14,6 @@ import logoW from '../data/images/logo-removebg-preview.png'
 import { height } from '@mui/system';
 import { GoogleLogin } from 'react-google-login';
 
-
-
 const RootContainer = styled(Container)(
     ({ theme }) => ({
   display: 'flex',
@@ -90,6 +88,7 @@ const responseGoogle = (response) => {
 }
 
 const SignInPage = () => {
+
   return (
     <div>
         <RootContainer>
@@ -102,18 +101,9 @@ const SignInPage = () => {
                     <ButtonWrapper variant="contained" color="primary" title='Sign In' />
                 </ TextContainer>
                 <SocialButtonsContainer>
-                        <GoogleLogin
-                            clientId="41053088816-i7iobtb6tibnoue87lf5kh7nodb1p1ks.apps.googleusercontent.com"
-                            render={renderProps => (
-                                <SocialButtonWrapper color="primary" onClick={renderProps.onClick} disabled={renderProps.disabled}>
-                                    <Google />
-                                </SocialButtonWrapper>
-                            )}
-                            buttonText="Login with Google"
-                            onSuccess={responseGoogle}
-                            onFailure={responseGoogle}
-                            cookiePolicy={'single_host_origin'}
-                        />
+                    <SocialButtonWrapper color="primary">
+                        <Google />
+                    </SocialButtonWrapper>
                     <SocialButtonWrapper color="primary">
                         <FacebookIcon />
                     </SocialButtonWrapper>
