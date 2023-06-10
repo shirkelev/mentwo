@@ -34,15 +34,26 @@ const Title = styled('h1')(({ theme }) => ({
 
 const ButtonsContainer = styled('div')(({ theme }) => ({
   display: 'flex',
+  flexDirection: 'column',
   justifyContent: 'center',
 }));
 
 const MentorButton = styled(RoundButton)(({ theme }) => ({
   marginRight: theme.spacing(2),
+  display: 'flex',
+  flexDirection: 'column',
+  maxWidth: '70%',
+  maxHeight: '10%',
+  justifyContent: 'center',
 }));
 
 const MenteeButton = styled(RoundButton)(({ theme }) => ({
   marginLeft: theme.spacing(2),
+  display: 'flex',
+  flexDirection: 'column',
+  maxWidth: '70%',
+  maxHeight: '10%',
+  justifyContent: 'center',
 }));
 
 
@@ -66,18 +77,20 @@ const ChooseRolePage = () => {
               <MentorButton 
                 color="primary"
                 onClick={() =>  {
-                  handleClick('mentor');
+                  handleClick(Constants.INTERVIEWERS_DB_NAME);
                   }}
                 to={''}
                 text='Interviewer'
+                img={MentorImg}
                 />
               <div style={{width: '20px'}}></div>
               <MenteeButton 
                 color="secondary" 
                 onClick={() =>  {
-                  handleClick('mentee');
+                  handleClick(Constants.INTERVIEWEES_DB_NAME);
                   }}
-                to={''} text='Interviewee' />
+                to={''} text='Interviewee' 
+                img={MenteeImg}/>
           </ButtonsContainer>
         </Typography>
       </RootContainer>

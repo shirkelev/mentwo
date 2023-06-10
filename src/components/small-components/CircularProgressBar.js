@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 
 export default function CircularProgressBar() {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex'}}>
       <CircularProgress size={100} strokeWidth={8} animationDuration={2000} />
     </Box>
   );

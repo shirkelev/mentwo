@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { styled } from '@mui/system';
 import Container from '@mui/material/Container';
 import Button from '../../components/small-components/Button';
@@ -9,6 +9,7 @@ import BigContentBox from '../../components/small-components/BigContentBox';
 import * as Constants from '../../Constants';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
+import { SignUpContext } from '../../context/SignUpContexts';
 
 function TagsContainer({ tagsNames, category, onTagClick, isPressedFunc}) {
     return (
@@ -87,13 +88,16 @@ const Statement = styled('h3')(({ theme }) => ({
    fontFamily: theme.typography.fontFamily,
 }));
 
-const NewFormPage = ({role, name}) => {
+const NewFormPage = ({role, name, onClickSubmit}) => {
 
-    const [fields, setFields] = useState([]);
-    const [techSkills, setTechSkills] = useState([]);
-    const [softSkills, setSoftSkills] = useState([]);
-    const [agendas, setAgendas] = useState([]);
 
+    const {form, setForm, step, setStep} = useContext(SignUpContext);
+    const [fields, setFields] = useState(form.fields ? form.fields : []);
+    const [techSkills, setTechSkills] = useState(form.techSkills ? form.techSkills : []);
+    const [softSkills, setSoftSkills] = useState(form.softSkills ? form.softSkills : []);
+    const [agendas, setAgendas] = useState(form.agendas ? form.agendas : []);
+    const [description, setDescription] = useState(form.description ? form.description : '');
+    
     function onTagClick(tag, category){
         let list;
         let setFunc;
@@ -151,13 +155,21 @@ const NewFormPage = ({role, name}) => {
     const navigate = useNavigate();
 
     const backTapped = () => {
-        navigate(Constants.HOME_PAGE);
+        setForm({fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description});
+        setStep(step - 1);
     };
 
     const [doneDialogOpen, setDoneDialogOpen] = React.useState(false);
 
     const doneTapped = () => {
-        setDoneDialogOpen(true);
+        setForm({fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description});
+        console.log("Starting write new Records in fata set");
+        onClickSubmit();
+        
+    };
+
+    const chengedDescription = (event) => {
+        setDescription(event.target.value);
     };
 
     function TagsSection({category, statement, tagsNames, isPressedFunc, onTagClick}) {
@@ -165,7 +177,7 @@ const NewFormPage = ({role, name}) => {
             <QuestionContainer>
                 <TagsCategory category= {category}/>
                 <Statement>{statement}</Statement>
-                <TagsContainer tagsNames={tagsNames} category={category} onTagClick={onTagClick} isPressedFunc={isPressed}/>
+                <TagsContainer tagsNames={tagsNames} category={category} onTagClick={onTagClick} isPressedFunc={isPressedFunc}/>
             </QuestionContainer>
         );
     }
@@ -185,45 +197,11 @@ const NewFormPage = ({role, name}) => {
     ];
 
 
-    if(role === 'mentor') {
+    if(role === Constants.INTERVIEWERS_DB_NAME) {
         
         return (
             <>
             <RootContainer maxWidth="md">
-
-            <Title>Hi {name},</Title>
-            <SubTitle>Tell us about yourself so we can find you the right interviewee</SubTitle>
-
-                <QuestionContainer>
-                <Category>Your choices:</Category>
-                </QuestionContainer>
-
-                <QuestionContainer>
-                    <TagsCategory category= {Constants.FIELDS}/>
-                    <Statement> In which professional fields would you like to interview? </Statement>
-                    <TagsContainer tagsNames={Constants.FIELDS_LIST} category={Constants.FIELD} />
-                </QuestionContainer>
-
-                <QuestionContainer>
-                    <TagsCategory category= {Constants.TECHSKILLS}/>
-                    <Statement> What technical skills would you like to interview about?</Statement>
-                    <TagsContainer tagsNames={Constants.TECHSKILLS_LIST} category={Constants.TECHSKILL} />
-                </QuestionContainer>
-
-                <QuestionContainer>
-                    <TagsCategory category= {Constants.SOFTSKILLS}/>
-                    <Statement> What soft skills do you want to focus on as an interviewer?</Statement>
-                    <TagsContainer tagsNames={Constants.SOFTSKILLS_LIST} category={Constants.SOFTSKILL} />
-                </QuestionContainer>
-
-                
-                <QuestionContainer>
-                    <TagsCategory category= {Constants.AGENDAS}/>
-                    <Statement>What social agendas are important to you and would you like to promote?</Statement>
-                    <TagsContainer tagsNames={Constants.AGENDAS_LIST} category={Constants.AGENDA} />
-                </QuestionContainer>
-
-                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
 
                 <Title>Hey {name},</Title>
                 <SubTitle>Tell1 us about yourself so we can find you the right interviewee</SubTitle>
@@ -234,10 +212,14 @@ const NewFormPage = ({role, name}) => {
                     ))           
                 }
 
+                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
+
+                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
+
                 <QuestionContainer>
                     <Category>About Yourself</Category>
                     <Statement> Information you would like to share about yourself with the interviewees? </Statement>
-                    <BigContentBox placeholder="For example, workplace, specialties, areas of interest, etc" />
+                    <BigContentBox placeholder="For example, workplace, specialties, areas of interest, etc" onBlur={chengedDescription}/>
                 </QuestionContainer>
 
                 <ButtonSection>
@@ -248,7 +230,7 @@ const NewFormPage = ({role, name}) => {
         </RootContainer>
         </>
         );
-    } else {
+    } else if (role === Constants.INTERVIEWEES_DB_NAME) {
         return (
             <>
             <RootContainer maxWidth="md">
@@ -269,7 +251,7 @@ const NewFormPage = ({role, name}) => {
                 <QuestionContainer>
                     <Category>About Yourself</Category>
                     <Statement> Information you would like to share about yourself with the interviewers? </Statement>
-                    <BigContentBox placeholder="For example, workplace, specialties, areas of interest, etc" />
+                    <BigContentBox placeholder="For example, workplace, specialties, areas of interest, etc" onBlur={chengedDescription}/>
                 </QuestionContainer>
                 
                 <ButtonSection>
@@ -281,6 +263,13 @@ const NewFormPage = ({role, name}) => {
         </>
         );
     }  
+    else {
+        return (
+            <>
+            <h1>Choose Role First!</h1>
+            </>
+        )
+    }
 };
 
 export default NewFormPage;
