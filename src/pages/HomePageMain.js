@@ -18,10 +18,11 @@ import { HamburgerMenuContext } from "../context/HamburgerMenuContexts";
 import { styled } from '@mui/material/styles';
 import { UserContext } from "../context/UserContext";
 
-import MentorApproval from "../components/MentorApproval";
+import ProfilePage from "../components/ProfilePage";
 import ChooseMentor from "../components/ChooseMentor";
 import MatchSuccess from "../components/MatchSuccess";
 import NewFormPage from "./sign-up/NewFormPage";
+import ButtonBar from "../components/ButtomBar.js"
 
 const NavCont = styled('nav')(({ theme }) => ({
     position: 'sticky',
@@ -47,10 +48,11 @@ export default function HomePageMain() {
                     <Route path={CONSTANTS.RECOMMENDATINS_PAGE} element={<Recommendations user={user} />} />
                     <Route path={CONSTANTS.CHOOSE_MENTOR_PAGE} element={<ChooseMentor mentee={dataBase.data[2]} />} />
                     <Route path={CONSTANTS.MENTEE_STATUS} element={<MenteeMatchingPage mentee={dataBase.data[2]} />} />
-                    <Route path={CONSTANTS.WAIT_MENTOR_APPROVAL_PAGE} element={<MentorApproval mentee={dataBase.data[2]} />} />
+                    <Route path={CONSTANTS.PROFILE_PAGE} element={<ProfilePage user={user} />} />
                     <Route path={CONSTANTS.MATCH_SUCCESS_PAGE} element={<MatchSuccess mentee={dataBase.data[2]} />} />
                     <Route path={CONSTANTS.NEW_FORM_PAGE} element={<NewFormPage user={user} />} />
                 </Routes>
+            <ButtonBar></ButtonBar>
             </HamburgerMenuContext.Provider>
         </div>
     )
