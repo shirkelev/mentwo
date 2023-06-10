@@ -3,7 +3,7 @@ import {Stack} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import StageStepper from '../components/StageStepper';
 import CircularProgressBar from '../components/small-components/CircularProgressBar';
-import ButtomBar from '../components/ButtomBar.js';
+
 
 const MenteeMatchingPage = ({mentee}) => {
     const containerStyles = {
@@ -36,7 +36,6 @@ const MenteeMatchingPage = ({mentee}) => {
                 </Stack>
             </div>
             </Typography>
-        <ButtomBar></ButtomBar>
         </div>
         );
 };

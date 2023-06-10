@@ -15,10 +15,6 @@ export default class Mentee extends User {
     addMentor(mentor){
         this.currentMentor = mentor;
     }
-
-    isAvailable(){
-        return this.currentMentor == null;
-    }
 }
 
 // // export Mentee;
