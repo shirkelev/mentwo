@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 
-const TextBox = ({ title, placeholder, onChange }) => {
+const TextBox = ({ title, placeholder, onChange, onBlur=() => {}}) => {
   return (
     <TextField
       id="outlined-basic"
@@ -9,6 +9,7 @@ const TextBox = ({ title, placeholder, onChange }) => {
       variant="outlined"
       placeholder={placeholder}
       onChange = {onChange}
+      onBlur = {onBlur}
     />
   );
 };
