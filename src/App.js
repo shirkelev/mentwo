@@ -1,27 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
 import SignUpPage from './pages/SignInPage';
-import ChooseRolePage from './pages/sign-up/ChooseRolePage';
-import RoleFormPAge from './pages/sign-up/RoleFormPage';
-import MentorPendingsAndRunningPage from './pages/MentorPendingsAndRunningPage';
 import LandingPage from './pages/LandingPage';
 import ProcessCompletionPage from './pages/ProcessCompletionPage';
 import * as Constants from './Constants';
-import MentorFinishedPage from './pages/MentorFinishedPage';
 import { UserContext } from './context/UserContext';
 import NewFormPage from './pages/sign-up/NewFormPage';
-
+import { DB } from './data/firebase';
 import {
   BrowserRouter
   ,Link
   ,Routes
   ,Route
-  // ,createRoutesFromElements
-  // ,createBrowserRouter
+  ,Navigate
 } from 'react-router-dom'
 import DataBase from './data/DataBase';
+import { UserAuth } from './context/AuthContext';
 
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect, Children } from 'react';
 //import { UserRole } from './context/UserRole';
 import SignUpFlow from './pages/SignUpFlow';
 
@@ -99,73 +94,117 @@ const theme = createTheme({
     },
   });
 
-function addSemi(string){
-    return('/' + string)
-}
 const data = new DataBase()
 
 function App() {
-    const MnM = [data.findByName('Yuval'), data.findByName('Nits')]
-    const [user, setUser] = useState(data.findByName('Yuval'));
-    const [cur, setCur] = useState(0);
-    const [userType, setUserType] = useState(user.type);
-    const [email, setEmail] = useState(user.email);
-    const [name, setName] = useState(user.name);
-    const [dataBase, setDataBase] = useState(data);
-    
-    function handelUserChange(){
-        setCur(cur+1)
-        setUser(MnM[(cur + 1) % 2 ]);
-    }
-    return (
-    
-    <ThemeProvider theme = {theme}>
+  const MnM = [data.findByName('Yuval'), data.findByName('Nits')]
+  const {user, setUser, userData, setUserData, logOut, fetchExtraData} = UserAuth();
+  console.log(user?.uid ?  user.uid : null, 'Here')
+  // const [users, setUsers] = useState([]);
+  const [cur, setCur] = useState(0);
+  // const [dataBase, setDataBase] = useState(DB);
+
+  
+  const ProtectedSignUp = ({children}) => {
+    if(!user){
+      return <Navigate to={'../' + Constants.SIGN_IN} />;
+    } else if(user && userData && userData.signedUp) {
+      return <Navigate to={'../' + Constants.HOME_PAGE + user.uid} />;
+    } else {
+      return children;
+    }}
+
+  const ProtectedSignIn = ({children}) => {
+    if(user){
+      return <Navigate to='/' />
+    } else {
+      return children;
+    }}
+  
+  const ProtectedLanding = ({children}) => {
+    if(user && userData && userData.isSignUp ? true : false){
+      return <Navigate to={Constants.HOME_PAGE + user.uid} />;
+    } else if(user) {
+      return <Navigate to={Constants.SIGN_UP} />;
+    } else {
+      return children;
+    }}
+  
+  const ProtectedHomePage = ({children}) => {
+    if(!(user && userData)){
+      return <Navigate to='/' />;
+    } else {
+      return children;
+    }}
+  
+  function handelUserChange(){
+      setCur(cur+1)
+      setUser(MnM[(cur + 1) % 2 ]);
+  }
+
+  return(  
     <>
-    
-    {/* <button onClick={() => setRole(200)}> setRole </button>  */}
+    <ThemeProvider theme = {theme}>
     <BrowserRouter>
-        <button onClick={handelUserChange}> {user.type} flow </button>    
-        <UserContext.Provider value={{userType, setUserType, email, setEmail, name, setName, user, setUser, dataBase}}>
+        <button onClick={handelUserChange}> change flow </button>
+        <button onClick={logOut}> LgOut </button>     
+        <UserContext.Provider value={{}}>
             <Routes>
-                <Route path={Constants.SIGN_UP + '/*'}
-                    action={({ params }) => {}}
-                    element = {<SignUpFlow />}
-                    exact
-                    />;
-                <Route path={Constants.LANDING_PAGE}
-                    action={({ params }) => {}}
-                    element = {<LandingPage />}
-                    exact
-                    />;
-                <Route path={Constants.SIGN_IN}
-                    action={({ params }) => {}}
-                    element = {<SignUpPage />}
-                    exact
-                    />;
-                <Route path={Constants.HOME_PAGE + '/*'}
-                    action={({ params }) => {}}
-                    element = {<HomePageMain user={user}/>}
-                    exact
-                    />;
-                
-                <Route path={Constants.PROCESS_COMPLETION_FORM}
-                    action={({ params }) => {}}
-                    element = {<ProcessCompletionPage user={user}/>}
-                    exact
-                    />;
-                <Route path={Constants.NEW_FORM_PAGE}
-                    action={({ params }) => {}}
-                    element = {<NewFormPage user={user}/>}
-                    exact
-                    />;
+              <Route path={Constants.LANDING_PAGE}
+                      action={({ params }) => {}}
+                      element = {
+                      <ProtectedLanding>
+                        <LandingPage />
+                      </ProtectedLanding>
+                    }
+                      exact
+                      />;
+              <Route path={Constants.SIGN_UP}
+                  action={({ params }) => {}}
+                  element = {
+                  <ProtectedSignUp>
+                    <SignUpFlow />
+                  </ProtectedSignUp>                      
+                }
+                  exact
+                  />;
+              
+              <Route path={Constants.SIGN_IN}
+                  action={({ params }) => {}}
+                  element = {
+                  <ProtectedSignIn>
+                    <SignUpPage />
+                  </ProtectedSignIn>
+                }
+                  exact
+                  />;
+              
+              <Route path={Constants.HOME_PAGE + (user ? user.uid : '') + '/*'}
+                  action={({ params }) => {}}
+                  element = {
+                    <ProtectedHomePage>
+                      <HomePageMain user={user}/>
+                    </ProtectedHomePage>
+                }
+                  exact />;
+              
+              <Route path={Constants.PROCESS_COMPLETION_FORM}
+                  action={({ params }) => {}}
+                  element = {<ProcessCompletionPage user={user}/>}
+                  exact
+                  />;
+              <Route path={Constants.NEW_FORM_PAGE}
+                  action={({ params }) => {}}
+                  element = {<NewFormPage user={user}/>}
+                  exact
+                  />;
+        
             </Routes>
         </UserContext.Provider>
         
-    </ BrowserRouter>
-    {/* </UserRole.Provider> */}
-    
+      </ BrowserRouter>
+      </ThemeProvider>
     </>
-    </ThemeProvider>
   );
 }
 

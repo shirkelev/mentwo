@@ -16,11 +16,12 @@ const StyledButton = styled(Button)(({ theme, color }) => ({
   },
 }));
 
-const RoundButton = ({ text, color, href='', onClick , to=''}) => {
+const RoundButton = ({ text, color, href='', onClick , to='', img}) => {
   return (
-      <StyledButton variant="contained" color={color} href={href} onClick={onClick}>
-        {text}
-      </StyledButton>
+      <>
+      <img src={img} alt="icon" style={{width: '100%', height:'20%'}} onClick={onClick}/>
+      <h3 onClick={onClick}> {text} </h3>
+      </>
   );
 };
 

@@ -15,7 +15,11 @@ import Mentee from '../data/Mentee';
 import { UserContext } from '../context/UserContext';
 import { useNavigate, redirect} from 'react-router-dom';
 import * as Constantans from '../Constants';
+import SignUpLoading from './sign-up/SignUpLoading';
 import NewFormPage from './sign-up/NewFormPage';
+import { UserAuth } from '../context/AuthContext';
+import { DB } from '../data/firebase';
+
 
 const RootContainer = styled(Container)(({ theme }) => ({
     padding: theme.spacing(5),
@@ -76,6 +80,8 @@ const ProgressContainer = styled('nav')(({ theme }) => ({
 
 const SignUpFlow = ({props}) => {
 
+    const {user, userData, loading, setLoading} = UserAuth();
+
     const navigate = useNavigate();
 
     const {setUser, dataBase} = useContext(UserContext);
@@ -88,34 +94,32 @@ const SignUpFlow = ({props}) => {
 
     const [completed, setCompleted] = useState(createCompleted(steps));
 
-    const [form, setForm] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        description: '',
-        capacity: '',
-        img: '',
-        userName: '',
-    });
+    const [localLoading, setLocalLoading] = useState(false);
 
+    const [form, setForm] = useState({
+        fields: [],
+        techSkills: [],
+        softSkills: [],
+        agendas: [],
+        description: '',
+    });
 
     function createNewUser(form, role){
   
-        if(role==='mentor'){
+        if(role===Constantans.INTERVIEWERS_DB_NAME){
           return (
-            new Mentor(form.userName
-              ,form.firstName
-              ,form.lastName
-              ,form.password
-              ,require('../data/images/shir.jpeg')
-              ,form.email
-              ,form.capacity
-              ,form.description
-              ,form.profession)
+            new Mentor(
+                user.name
+                ,form.firstName
+                ,form.lastName
+                ,form.password
+                // ,require('../data/images/shir.jpeg')
+                ,form.email
+                ,form.capacity
+                ,form.description
+                ,form.profession)
           )}
-          if(role=== 'mentee'){
+          if(role=== Constantans.INTERVIEWEES_DB_NAME){
             return (new Mentee(form.userName
               ,form.firstName
               ,form.lastName
@@ -135,30 +139,49 @@ const SignUpFlow = ({props}) => {
 
     function saveSuccess(){
         return(
-            true
+            role !== 'Default' 
         );
     }
 
-    function handleClickSave(){
+    const handleClickSave = async () => {
         
         if(saveSuccess()){
-          const newUser = createNewUser(form, role);
-          if(newUser === -1){ 
+            setLocalLoading(true);
+
+            let userAdditionData = {
+                fieldsList: form.fields,
+                techSkillsList: form.techSkills,
+                softSkillsList: form.softSkills,
+                agendas: form.agendas,
+                description: form.description
+                };
+            if(role === Constantans.INTERVIEWERS_DB_NAME){
+                userAdditionData = {...userAdditionData,
+                    available: true,
+                    finishedMentees: [],
+                    pendingMentees: [],
+                    declinedMentees: [],
+                    approvedMentess: [],
+                    profession: null,
+                } 
+                await DB.addInterviewer(user.uid, userAdditionData);
+            } else if(role === Constantans.INTERVIEWEES_DB_NAME){
+                userAdditionData = {...userAdditionData,
+                    currentMwntor: null,
+                    isMatched: false,
+                    profession: '',
+                }
+                await DB.addInterviewee(user.uid, userAdditionData);
+            }
+            
+            setLocalLoading(false);
+            navigate('../' + Constantans.HOME_PAGE + user.uid);
+            return true;
+        } else { 
             alert('You have to choose role first!');
             return false;
-          }
-          else{
-            setUser(newUser);
-            dataBase.addUser(newUser);
-            setUser(newUser);
-            window.history.pushState(null, "", "/home");
-            window.location.reload();
-            
-          }
         }
-        else{
-          return false;
-        }
+         
       }
 
     function handleNext(){
@@ -185,21 +208,31 @@ const SignUpFlow = ({props}) => {
     const to = ['./', Constants.CHOOSE_ROLE_PAGE, Constants.REG_FORM];
     
     const StepContent = () => {
-        switch (step) {
-            case 0:
-                // return <MainFormPage />;
-                return <ChooseRolePage />;
-            case 1:
-                return <NewFormPage role={role}/>;
-            // case 2:
-                // return <RoleFormPAge />;
-            default:
-                return <MainFormPage  />;
+
+        //Genetate content only after data has gotten from the server
+        if(!loading && !localLoading){
+            switch (step) {
+                case 0:
+                    // return <MainFormPage />;
+                    return <ChooseRolePage />;
+                case 1:
+                    return <NewFormPage role={role} onClickSubmit={handleClickSave}/>;
+                // case 2:
+                    // return <RoleFormPAge />;
+                default:
+                    return <ChooseRolePage />;
+                }
+            }else{
+                return <SignUpLoading text="Loading you data..."/>;
             }
+        
     }
         
         return (
+            
             <RootContainer>
+                {/* {console.log(userData, user)} */}
+                {/* {console.log(form)} */}
                 <SignUpContext.Provider value={{role, setRole, step, setStep, completed, setCompleted, form, setForm, saveSuccess}}>
                     <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} />
                     <ContentContainer>
