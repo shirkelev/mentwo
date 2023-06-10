@@ -6,7 +6,13 @@ import RoundButton from '../../components/small-components/RoundButton';
 import * as Constants from '../../Constants';
 import { SignUpContext } from '../../context/SignUpContexts';
 import { Link } from 'react-router-dom';
+import interviwerIm from '../../data/images/interviewer.png';
+import interviweeIm from '../../data/images/interveiwee.png';
+import Button from '../../components/small-components/Button';
+import { Stack, fontSize } from '@mui/system';
 // import UserRole from '../context/UserRole';
+
+
 
 const RootContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
@@ -29,10 +35,15 @@ const ButtonsContainer = styled('div')(({ theme }) => ({
 
 const MentorButton = styled(RoundButton)(({ theme }) => ({
   marginRight: theme.spacing(2),
+  width: '200px', 
+  height: '200px', 
+  backgroundSize: 'contain',
 }));
 
 const MenteeButton = styled(RoundButton)(({ theme }) => ({
   marginLeft: theme.spacing(2),
+  width: '100px',
+  height: '100px',
 }));
 
 
@@ -49,18 +60,18 @@ const ChooseRolePage = () => {
     setCompleted(newCompleted);
   }
   return (
-    
       <RootContainer maxWidth="sm">
         <Typography align='center'>
-          <Title>Interviewer or Interviewee?</Title>
+          <Title style={{fontSize: '25px'}}>Choose Your Role</Title>
           <ButtonsContainer>
               <MentorButton 
-                color="primary" 
+                color="primary"
                 onClick={() =>  {
                   handleClick('mentor');
                   }}
                 to={''}
                 text='Interviewer'
+                backgroundImage={interviwerIm}
                 />
               <div style={{width: '20px'}}></div>
               <MenteeButton 
@@ -68,7 +79,8 @@ const ChooseRolePage = () => {
                 onClick={() =>  {
                   handleClick('mentee');
                   }}
-                to={''} text='Interviewee' />
+                to={''} text='Interviewee'
+                backgroundImage={interviweeIm} />
           </ButtonsContainer>
         </Typography>
       </RootContainer>

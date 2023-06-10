@@ -2,6 +2,7 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import interviweeIm from '../../data/images/interviewer.png';
 const StyledButton = styled(Button)(({ theme, color }) => ({
   borderRadius: '50%',
   width: '100px',
@@ -16,11 +17,19 @@ const StyledButton = styled(Button)(({ theme, color }) => ({
   },
 }));
 
-const RoundButton = ({ text, color, href='', onClick , to=''}) => {
+const RoundButton = ({ text, color, href='', onClick , to='', backgroundImage}) => {
   return (
-      <StyledButton variant="contained" color={color} href={href} onClick={onClick}>
-        {text}
+    <div>
+      <StyledButton variant="contained" color={color} href={href} onClick={onClick} style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        width: '130px',
+        height: '130px',
+        }}>
       </StyledButton>
+      {text}
+      </div>
   );
 };
 
