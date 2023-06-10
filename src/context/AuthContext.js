@@ -12,6 +12,7 @@ import {
 } from 'firebase/auth';
 import { auth, db } from '../data/firebase';
 import { DB } from '../data/firebase';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
@@ -43,9 +44,13 @@ export const AuthContextProvider = ({ children }) => {
 
 
   const logOut = () => {
-      signOut(auth)
+    signOut(auth)
     };
-
+  
+  const NavigateOut = () => {
+    const navigate = useNavigate();
+    return <Navigate to="../" />;
+  }
   const emailSignIn = async (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {

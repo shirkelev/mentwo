@@ -100,37 +100,33 @@ class DataBase {
   }
 
   async addInterviewer(id, interviewer) {
-    setDoc(doc(this.db, Constants.INTERVIEWERS_DB_NAME, id), interviewer)
-    .then(() => {
-      console.log("Interviewer with ID ", id, " is added");
-    }).catch((error) => {
-      console.log("Error adding interviewer with ID ", id, error);
+    try{
+      return setDoc(doc(this.db, Constants.INTERVIEWERS_DB_NAME, id), interviewer)
+    } catch (e) {
+      console.log("Error adding interviewer with ID ", id, e);
       return null;
-    });
-    return this.updateUserProp(id, true, interviewer.description, 'mentor');
+    }
   }
 
   
   async addInterviewee(id, interviewee) {
     try{
-      await setDoc(doc(this.db, Constants.INTERVIEWEES_DB_NAME, id), interviewee)
+      return setDoc(doc(this.db, Constants.INTERVIEWEES_DB_NAME, id), interviewee)
     } catch (e) {
       console.log("Error adding interviewee with ID ", id, e);
-      return null;
-    }
-    try{
-      return this.updateUserProp(id, true, interviewee.description, 'mentee');
-    } catch (e) {
-      console.log("Error updating user with ID ", id, e);
       return null;
     }
   }
 
   async updateUserProp(id, signedUp, description, type) {
-    const userRef = doc(this.db, Constants.USERS_DB_NAME, id);
-    await updateDoc(userRef, {type: type});
-    await updateDoc(userRef, {description: description});
-    await updateDoc(userRef, {signedUp: signedUp});
+    try{
+      console.log("Updating user with ID ", id);
+      const userRef = doc(this.db, Constants.USERS_DB_NAME, id);
+      return updateDoc(userRef, {type: type, description: description, signedUp: signedUp});
+    } catch (e) {
+      console.log("Error updating user with ID ", id, e);
+      return null;
+    }
   }
 
   async getRoleData(id) {

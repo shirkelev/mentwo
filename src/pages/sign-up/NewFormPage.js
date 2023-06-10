@@ -163,7 +163,7 @@ const NewFormPage = ({role, name, onClickSubmit}) => {
 
     const doneTapped = () => {
         setForm({fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description});
-        console.log("Starting write new Records in fata set");
+        console.log("Starting write new Records in data set");
         onClickSubmit();
         
     };

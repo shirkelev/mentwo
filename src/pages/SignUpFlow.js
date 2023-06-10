@@ -155,32 +155,43 @@ const SignUpFlow = ({props}) => {
                 agendas: form.agendas,
                 description: form.description
                 };
-            if(role === Constantans.INTERVIEWERS_DB_NAME){
-                userAdditionData = {...userAdditionData,
-                    available: true,
-                    finishedMentees: [],
-                    pendingMentees: [],
-                    declinedMentees: [],
-                    approvedMentess: [],
-                    profession: null,
-                } 
-                await DB.addInterviewer(user.uid, userAdditionData);
-            } else if(role === Constantans.INTERVIEWEES_DB_NAME){
-                userAdditionData = {...userAdditionData,
-                    currentMwntor: null,
-                    isMatched: false,
-                    profession: '',
+            try{
+                if(role === Constantans.INTERVIEWERS_DB_NAME){
+                    userAdditionData = {
+                        ...userAdditionData,
+                        available: true,
+                        finishedMentees: [],
+                        pendingMentees: [],
+                        declinedMentees: [],
+                        approvedMentess: [],
+                        profession: null,
+                    } 
+                    await DB.addInterviewer(user.uid, userAdditionData)
+                    await DB.updateUserProp(user.uid, true, form.description, 'mentor')
+                    
+                } else if(role === Constantans.INTERVIEWEES_DB_NAME){
+                    userAdditionData = {
+                        ...userAdditionData,
+                        currentMwntor: null,
+                        isMatched: false,
+                        profession: '',
+                    }
+                    await DB.addInterviewee(user.uid, userAdditionData)
+                    await DB.updateUserProp(user.uid, true, form.description, 'mentee')
+                    console.log('added interviewee')
                 }
-                await DB.addInterviewee(user.uid, userAdditionData);
+                
+                setLocalLoading(false);
+                navigate('../' + Constantans.HOME_PAGE + user.uid);
+            } catch(error){
+                console.log(error);
             }
-            
-            setLocalLoading(false);
-            navigate('../' + Constantans.HOME_PAGE + user.uid);
-            return true;
-        } else { 
-            alert('You have to choose role first!');
-            return false;
-        }
+        
+            } else { 
+                alert('You have to choose role first!');
+                return false;
+            }
+        
          
       }
 
@@ -232,7 +243,7 @@ const SignUpFlow = ({props}) => {
             
             <RootContainer>
                 {/* {console.log(userData, user)} */}
-                {/* {console.log(form)} */}
+                {console.log(form, role)}
                 <SignUpContext.Provider value={{role, setRole, step, setStep, completed, setCompleted, form, setForm, saveSuccess}}>
                     <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} />
                     <ContentContainer>
