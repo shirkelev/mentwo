@@ -2,10 +2,7 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
 import interviweeIm from '../../data/images/interviewer.png';
-=======
->>>>>>> 1b5caaaf0 (Shir Backend)
 
 const StyledButton = styled(Button)(({ theme, color }) => ({
   borderRadius: '50%',
