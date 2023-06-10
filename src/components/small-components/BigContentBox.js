@@ -1,10 +1,7 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 
-const BigContentBox = ({ placeholder
-    , onClick=() => {}
-    ,onBlur=() => {}
-    ,onChange=() => {}}) => {
+const BigContentBox = ({ placeholder }) => {
   return (
     <TextField
     id="filled-multiline-flexible"
@@ -12,9 +9,6 @@ const BigContentBox = ({ placeholder
     multiline
     rows={4}
     variant="outlined"
-    onClick={onClick}
-    onBlur={onBlur}
-    onChange={onChange}
   />
 
   );

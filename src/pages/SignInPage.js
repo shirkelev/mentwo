@@ -4,15 +4,15 @@ import Container from '@mui/material/Container';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import Google from '@mui/icons-material/Google';
 import LinkedIn from '@mui/icons-material/LinkedIn';
-import { IconButton, Stack } from '@mui/material';
+import { IconButton } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import TextBox from '../components/small-components/TextBox';
 import SimpleButton from '../components/small-components/Button';
 import { Link } from 'react-router-dom'
 import * as Constants from '../Constants';
-import logoW from '../data/images/new_logo.png'
-import { UserAuth } from '../context/AuthContext';
-import { useEffect, navigate } from 'react';
+import logoW from '../data/images/logo-removebg-preview.png'
+import { height } from '@mui/system';
+import { GoogleLogin } from 'react-google-login';
 
 const RootContainer = styled(Container)(
     ({ theme }) => ({
@@ -33,7 +33,7 @@ const FormContainer = styled('form')(({ theme }) => ({
     marginBottom: theme.spacing(3),
     marginInline: theme.spacing(5),
     marginBlock: theme.spacing(3),
-    gap: theme.spacing(3),
+    // gap: theme.spacing(3),
     // paddingInline: theme.spacing(3),
     
     
@@ -61,6 +61,7 @@ const TextContainer = styled('text')(({ theme }) => {
 const SocialButtonsContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
+  marginTop: theme.spacing(2),
 }));
 
 const SocialButtonWrapper = styled(IconButton)(({ theme }) => ({
@@ -71,92 +72,54 @@ const SignUpLink = styled('a')(({ theme }) => ({
   marginTop: theme.spacing(2),
 }));
 
+const responseGoogle = (response) => {
+    console.log(response);
+    console.log("WELCOME ##");
+    if (response.profileObj) {
+        const { email, familyName, givenName, googleId, imageUrl, name } = response.profileObj;
+        console.log('Name: ' + name);
+        console.log('Email: ' + email);
+        // ...use these details to authenticate or register the user in your database.
+    } else if (response.error === 'popup_closed_by_user') {
+        console.log('Google Sign-In popup was closed before sign-in could complete.');
+    } else {
+        console.error('Google Sign-In failed:', response.error);
+    }
+}
 
 const SignInPage = () => {
 
-    const [email, setEmail] = React.useState(null);
-    const [password, setPassword] = React.useState(null);
-    
-
-    const {googleSignIn, emailSignIn, user, emailSignUp, error} = UserAuth();
-
-    function handleChangeEmail(e){
-        setEmail(e.target.value);
-    }
-
-    function handleChangePassword(e){
-        setPassword(e.target.value);
-    }
-
-    async function handleClickSignIn(){
-       const response = await emailSignIn(email, password);
-       console.log("This is the response: ", response);
-    }
-
-    async function handleSignUpWithEmail(){
-        console.log("Sign up with email");
-        await emailSignUp(email, password);
-    }
-
-    const handleGoogleSignIn = async () => {
-        try {
-          await googleSignIn();
-        } catch (error) {
-          console.log(error);
-        }
-      };
-    
-    useEffect(() => {
-        if (user != null) {
-        //   navigate('/account');
-        console.log("User is not null", user);
-        }
-      }, [user]);
-
-    return (
-        
-        <div>
-            {console.log("This is the cur user: ", user, email, password)}
-            <RootContainer>
-            <img alt='logo' src={logoW} style={{height:'90px', width:'200px', marginBottom: '30px'}} />
-            <Typography variant="h5" style={{fontWeight: 'bold'}}>Sign In</Typography>
-                <FormContainer >
-                    <TextContainer>
-                        <Typography variant="h6" style={{color: 'red'}}>{error}</Typography>
-                        <TextBox title="Email" placeholder="Enter your email" onBlur={handleChangeEmail}/>
-                        <TextBox title="Password" placeholder="Enter your password" onBlur={handleChangePassword}/>
-                        <Stack direction="row" spacing={2}>
-                            <ButtonWrapper variant="contained" color="primary" title='Sign In' onClick={handleClickSignIn}/>
-                            <ButtonWrapper variant="outlined" color="secondary" title='Sign Up' onClick={handleSignUpWithEmail}/>
-                        </Stack>
-                    </ TextContainer>
-                    <div sx={{paddingTop: '20px'}}>
-                        <Typography>
-                            <SignUpLink >Sign In/Up using the followings</SignUpLink>
-                        </Typography>
-                    </div>
-                    <SocialButtonsContainer>
-                        <SocialButtonWrapper color="primary">
-                            <Google onClick={handleGoogleSignIn}/>
-                        </SocialButtonWrapper>
-                        <SocialButtonWrapper color="primary">
-                            <FacebookIcon />
-                        </SocialButtonWrapper>
-                        <SocialButtonWrapper color="primary">
-                            <LinkedIn />
-                        </SocialButtonWrapper>
-                    </SocialButtonsContainer>
-                    
-                    {/* old sign up link */}
-                    {/* <Link to={'../' + Constants.SIGN_UP}>
-                        <Typography>
-                            <SignUpLink >Sign Up!</SignUpLink>
-                        </Typography>
-                    </Link> */}
-                </ FormContainer>
-            </RootContainer>
-        </div>
-    );
+  return (
+    <div>
+        <RootContainer>
+        <img alt='logo' src={logoW} style={{height:'90px', width:'200px', marginBottom: '30px'}} />
+        <Typography variant="h5" style={{fontWeight: 'bold'}}>Sign In</Typography>
+            <FormContainer >
+                <TextContainer>
+                    <TextBox title="Username" placeholder="Enter your username" />
+                    <TextBox title="Password" placeholder="Enter your password" />
+                    <ButtonWrapper variant="contained" color="primary" title='Sign In' />
+                </ TextContainer>
+                <SocialButtonsContainer>
+                    <SocialButtonWrapper color="primary">
+                        <Google />
+                    </SocialButtonWrapper>
+                    <SocialButtonWrapper color="primary">
+                        <FacebookIcon />
+                    </SocialButtonWrapper>
+                    <SocialButtonWrapper color="primary">
+                        <LinkedIn />
+                    </SocialButtonWrapper>
+                </SocialButtonsContainer>
+                <Link to={'../' + Constants.SIGN_UP}>
+                <Typography>
+                    <SignUpLink >Sign Up!</SignUpLink>
+                </Typography>
+                </Link>
+            </ FormContainer>
+        </RootContainer>
+    </div>
+  );
 };
 
 export default SignInPage;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import logo from '../../data/images/new_logo.png' 
+import logo from '../../data/images/new_logo.jpg' 
 
 const TopBarLogo = ({ title, onClick, color='primary' }) => {
   return (

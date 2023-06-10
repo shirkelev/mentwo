@@ -11,7 +11,7 @@ export default function MentorFinishedPage ({user}) {
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <div style={{ padding: '10px'}}>
-        <HomeContent headline = {Constants.FINISHED} list={user.finishedMentees ? user.finishedMentees : []} user={user}/>
+        <HomeContent headline = {Constants.FINISHED} list={user.finishedMentees} user={user}/>
       </div>
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <TipBox tipMessege={"After the process is over, I recommend that the interviewer ask the interviewee for a short feedback on his mentoring so that he can improve in his next mentoring processes."}/>

@@ -41,9 +41,9 @@ return (
   <>
   
   <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-    <Typography variant="h4">Hello {user.name}!</Typography>
+    <Typography variant="h4">Hello {user.userName}!</Typography>
     <div style={{}}>
-      <CapacityBar capacity={user.capacity} mentees_num={user.approvedMetees ? user.approvedMetees.length : 0} />
+      <CapacityBar capacity={user.capacity} mentees_num={user.approvedMentees.length} />
     </div>
   </div>
   <div style={{ display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -57,7 +57,7 @@ return (
     <Typography variant="h4" sx={{ fontWeight: 'bold' }}>{headline}</Typography>
     
   </div>
-  <CardsCarousel list = {list ? list : []} variant={headline} isMatched = {isMatched} user = {user} />
+  <CardsCarousel list = {list} variant={headline} isMatched = {isMatched} user = {user} />
   <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
   </div>
   

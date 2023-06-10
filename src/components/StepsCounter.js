@@ -42,9 +42,11 @@ function MyStep(props){
             <Stepper nonLinear activeStep={step}>
                 {steps.map((label, index) => (
                     <Step key={label} completed={completed[index]}>
-                        <StepButton disabled color="inherit" >
+                        <Link to={''}>
+                        <StepButton color="inherit" onClick={handleStep(index)}>
                             {label}
                         </StepButton>
+                        </Link>
                     </Step>
                 ))}
                     
