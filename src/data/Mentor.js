@@ -10,10 +10,10 @@ export default class Mentor extends User {
         this.declinedMentees = [];
         this.available = available;
         this.profession = profession;
-        this.filed_list = Array(CONSTANTS.FIELDS_LIST.length).fill(null);
-        this.filed_list = Array(CONSTANTS.TECHSKILLS_LIST.length).fill(null);
-        this.filed_list = Array(CONSTANTS.SOFTSKILLS_LIST.length).fill(null);
-        this.filed_list = Array(CONSTANTS.AGENDAS_LIST.length).fill(null);
+        this.filedsList = Array(CONSTANTS.FIELDS_LIST.length).fill(null);
+        this.techSkills = Array(CONSTANTS.TECHSKILLS_LIST.length).fill(null);
+        this.softSkills = Array(CONSTANTS.SOFTSKILLS_LIST.length).fill(null);
+        this.agendas = Array(CONSTANTS.AGENDAS_LIST.length).fill(null);
     };
 
     addMentee(mentee, type) {

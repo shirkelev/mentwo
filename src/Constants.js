@@ -184,4 +184,4 @@ export const DEFAULT_QUESTIONS = [
 ]
 // Sign Up Form Steps
 
-export const SIGN_UP_STEPS = ['Choose Role', 'Personal Info'];
+export const SIGN_UP_STEPS = ['Role', 'Personal Info'];
