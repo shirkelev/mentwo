@@ -191,6 +191,6 @@ export const SIGN_UP_STEPS = ['Role', 'Personal Info'];
 
 export const FIREBASE_CONFIG = {}
 export const USERS_DB_NAME = 'users';
-export const INTERVIEWERS_DB_NAME = 'interviewers';
+export const INTERVIEWERS_DB_NAME = 'interviewers'; 
 // export const MENTEES_DB_NAME = 'mentees';
 export const INTERVIEWEES_DB_NAME = 'interviewee';

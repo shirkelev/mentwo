@@ -146,6 +146,9 @@ const SignUpFlow = ({props}) => {
     const handleClickSave = async () => {
         
         if(saveSuccess()){
+
+            console.log('form', form)  
+
             setLocalLoading(true);
 
             let userAdditionData = {
@@ -165,16 +168,19 @@ const SignUpFlow = ({props}) => {
                         declinedMentees: [],
                         approvedMentess: [],
                         profession: null,
-                    } 
+                    }
+                    console.log('before update', form)
+                    await DB.updateUserProp(user.uid, form.description, 'mentor')
+                    const afterUpdate = await DB.getUser('After Update: ',user.uid)
+                    console.log(afterUpdate.data())
                     await DB.addInterviewer(user.uid, userAdditionData)
-
                     // add get and see what comes back
-                    await DB.updateUserProp(user.uid, true, form.description, 'mentor')
+                    
                     
                 } else if(role === Constantans.INTERVIEWEES_DB_NAME){
                     userAdditionData = {
                         ...userAdditionData,
-                        currentMwntor: null,
+                        currentMentor: null,
                         isMatched: false,
                         profession: '',
                     }

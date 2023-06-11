@@ -163,6 +163,8 @@ const NewFormPage = ({role, name, onClickSubmit}) => {
 
     const doneTapped = () => {
         setForm({fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description});
+        console.log('Form in NeFoem', form)
+        console.log('Fields in NeFoem', fields, techSkills, softSkills, agendas, description)
         console.log("Starting write new Records in data set");
         onClickSubmit();
         
@@ -204,6 +206,7 @@ const NewFormPage = ({role, name, onClickSubmit}) => {
             <RootContainer maxWidth="md">
 
                 <Title>Hey {name},</Title>
+                
                 <SubTitle>Tell1 us about yourself so we can find you the right interviewee</SubTitle>
                 {
                     mentorTags.map((tag) => (
@@ -236,6 +239,7 @@ const NewFormPage = ({role, name, onClickSubmit}) => {
             <RootContainer maxWidth="md">
 
                 <Title>Hey {name},</Title>
+                
                 <SubTitle>Tell us about yourself so we can find you the right interviewer</SubTitle>
                 {
                     menteeTags.map((tag) => (
