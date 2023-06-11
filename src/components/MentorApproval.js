@@ -24,8 +24,8 @@ export default function MentorApproval({mentee}) {
                         justifyContent="center"
                         alignItems="center"
                         >
-                        <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.img}/></Grid>
-                        <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.currentMentor.img}/> </Grid>
+                        <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.img ? mentee.img : null}/></Grid>
+                        <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.currentMentorData.img ? mentee.currentMentorData.img : null}/> </Grid>
                     </Grid>
                     <Typography>
                         <h2 style={{ marginTop: '15px', textAlign: 'center' }}>Waiting for your mentor to approve your pending</h2>

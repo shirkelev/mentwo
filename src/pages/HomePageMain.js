@@ -33,54 +33,60 @@ const NavCont = styled('nav')(({ theme }) => ({
 
 export default function HomePageMain() {
     const [showMenu, setShowMenu] = React.useState(false);
-    const [localLoading, setLocalLoading] = React.useState(true);
-    const [dataFetched, setDataFetched] = React.useState(false);
-    const [feedData, setFeedData] = React.useState(null);
     // const {user, setUser, dataBase} = useContext(UserContext);
-    const {user, setUser, userData, setUserData, loading, setLoading} = UserAuth();
+    const {user, setUser, userData, setUserData, loading, setLoading, setEnterHome} = UserAuth();
 
-    const fetchData = async () => {
-        if(!dataFetched) {
-            try{
-                console.log("Fetching Extra User Data ", user.uid, " ...", userData);
-                const userExtraData = await DB.getRoleData(user.uid);
-                console.log("New User Data", userExtraData.data());
-                // setUserData({...userData, ...userExtraData.data()});
-                setFeedData({...userData, ...userExtraData.data()});
-                setLocalLoading(false);
+    // const fetchData = async () => {
+    //     if(!dataFetched) {
+    //     try{
+    //         console.log("Fetching Extra User Data ", user.uid, " ...", userData);
+    //         console.log("first update cur user data");
+    //         const newUser = await DB.getUser(user.uid);
+    //         const userExtraData = await DB.getRoleData(user.uid, newUser.data().type);
+    //         console.log("New User Data", userExtraData.data());
+    //         // setUserData({...newUser.data(), ...userExtraData.data()});
+    //         // setFeedData({...newUser.data(), ...userExtraData.data()});
+    //         // setDataFetched(true);
+    //         // setLocalLoading(false);
 
-            } catch (error) {
-                console.log(error);
-                setLoading(false);
-            };
-        }
-        if(!dataFetched && feedData) {
-            console.log("Setting User Data", feedData);
-            setUserData(feedData);
-            setDataFetched(true);
-        }
-    }
+    //     } catch (error) {
+    //         console.log(error);
+    //         setLocalLoading(false);
+    //         setDataFetched(true);
+    //     };
+    // }
+    //     if(!dataFetched && feedData) {
+    //         console.log("Setting User Data", feedData);
+    //         setDataFetched(true);
+    //         setUserData(feedData);
+            
+    //     }
+    
 
     useEffect(() => {
-        console.log("Trying to fetch data")
-        fetchData();
+        console.log("User is logged in and signed up, fetching data");
+        setEnterHome(true);
+        
     }, []);
 
 
     return (
         <div style={{ backgroundColor: '#FEFCFF' }}>
-            {console.log("User Data", userData, feedData, localLoading, feedData, dataFetched)}
+            {console.log("User Data", userData)}
             <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
                 <NavCont>
                     <NavigationBar user = {userData ? userData : null}/>
                 </ NavCont>
                 {
-                localLoading ? 
+                loading ? 
                     ( <div> Loading... </div> )
                     :
                     (
                     <Routes>
-                        <Route path="/" element={userData.type === 'mentor' ? <MentorPendingsAndRunningPage user={userData} /> : <MenteeMatchingPage user={userData} />} exact/>
+                        <Route path="/" element={
+                            userData.type === 'mentor' ? <MentorPendingsAndRunningPage user={userData} /> : 
+                            userData.isMatched ? <MenteeMatchingPage user={userData} /> : <MenteeMatchingPage user={userData} /> } exact/>
+                            {/* // : <MentorApproval mentee={userData} /> } exact/> */}
                         <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={userData} />} />
                         <Route path={CONSTANTS.MENTOR_IN_PROCESS_PAGE} element={<MentorInProcessPage user={userData} />} />
                         <Route path={CONSTANTS.PROCESS_COMPLETION_FORM} element={<ProcessCompletionPage user={userData} />} />

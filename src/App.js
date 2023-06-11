@@ -11,12 +11,13 @@ import {
   ,Link
   ,Routes
   ,Route
-  ,Navigate
+  ,Navigate,
+  useNavigate
 } from 'react-router-dom'
 import DataBase from './data/DataBase';
 import { UserAuth } from './context/AuthContext';
 
-import { useContext, useState, useEffect, Children } from 'react';
+import { useContext, useState, useEffect, Children} from 'react';
 //import { UserRole } from './context/UserRole';
 import SignUpFlow from './pages/SignUpFlow';
 
@@ -142,12 +143,17 @@ function App() {
       setUser(MnM[(cur + 1) % 2 ]);
   }
 
+  function handelSignOut(){
+    logOut();
+    return <Navigate to='../' />;
+  }
+
   return(  
     <>
     <ThemeProvider theme = {theme}>
     <BrowserRouter>
         <button onClick={handelUserChange}> change flow </button>
-        <button onClick={logOut}> LgOut </button>     
+        <button onClick={handelSignOut}> LgOut </button>     
         <UserContext.Provider value={{}}>
             <Routes>
               <Route path={Constants.LANDING_PAGE}

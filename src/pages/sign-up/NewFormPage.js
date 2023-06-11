@@ -88,10 +88,10 @@ const Statement = styled('h3')(({ theme }) => ({
    fontFamily: theme.typography.fontFamily,
 }));
 
-const NewFormPage = ({role, name, onClickSubmit}) => {
+const NewFormPage = ({name, onClickSubmit}) => {
 
 
-    const {form, setForm, step, setStep} = useContext(SignUpContext);
+    const {form, setForm, step, setStep, role} = useContext(SignUpContext);
     const [fields, setFields] = useState(form.fields ? form.fields : []);
     const [techSkills, setTechSkills] = useState(form.techSkills ? form.techSkills : []);
     const [softSkills, setSoftSkills] = useState(form.softSkills ? form.softSkills : []);
@@ -159,14 +159,16 @@ const NewFormPage = ({role, name, onClickSubmit}) => {
         setStep(step - 1);
     };
 
-    const [doneDialogOpen, setDoneDialogOpen] = React.useState(false);
+    // const [doneDialogOpen, setDoneDialogOpen] = React.useState(false);
 
-    const doneTapped = () => {
-        setForm({fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description});
-        console.log('Form in NeFoem', form)
-        console.log('Fields in NeFoem', fields, techSkills, softSkills, agendas, description)
+    const doneTapped = async () => {
+        // await setForm();
+        const curForm = {fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description};
+        console.log('Form in NewFoem', curForm)
+        console.log('Form in NewFoem', form)
+        console.log('Fields in NewFoem', fields, techSkills, softSkills, agendas, description)
         console.log("Starting write new Records in data set");
-        onClickSubmit();
+        await onClickSubmit(curForm, role);
         
     };
 
@@ -197,7 +199,11 @@ const NewFormPage = ({role, name, onClickSubmit}) => {
         {category: Constants.SOFTSKILLS, statement:'What soft skills do you want to focus on as an interviewee?', tagsNames: Constants.SOFTSKILLS_LIST},
         {category: Constants.AGENDAS, statement:'What agendas would you like to be interviewed about?', tagsNames: Constants.AGENDAS_LIST}
     ];
-
+    
+    useEffect(() => {
+        // This will log the form data whenever it changes
+        console.log('Form in NewFoem', form)
+    }, [form]);
 
     if(role === Constants.INTERVIEWERS_DB_NAME) {
         

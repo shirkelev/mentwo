@@ -149,8 +149,6 @@ const SignUpFlow = ({props}) => {
 
             console.log('form', form)  
 
-            setLocalLoading(true);
-
             let userAdditionData = {
                 fieldsList: form.fields,
                 techSkillsList: form.techSkills,
@@ -158,6 +156,8 @@ const SignUpFlow = ({props}) => {
                 agendas: form.agendas,
                 description: form.description
                 };
+            
+            console.log('Additional Data ', userAdditionData)
             try{
                 if(role === Constantans.INTERVIEWERS_DB_NAME){
                     userAdditionData = {
@@ -167,15 +167,8 @@ const SignUpFlow = ({props}) => {
                         pendingMentees: [],
                         declinedMentees: [],
                         approvedMentess: [],
-                        profession: null,
+                        profession: '',
                     }
-                    console.log('before update', form)
-                    await DB.updateUserProp(user.uid, form.description, 'mentor')
-                    const afterUpdate = await DB.getUser('After Update: ',user.uid)
-                    console.log(afterUpdate.data())
-                    await DB.addInterviewer(user.uid, userAdditionData)
-                    // add get and see what comes back
-                    
                     
                 } else if(role === Constantans.INTERVIEWEES_DB_NAME){
                     userAdditionData = {
@@ -184,24 +177,65 @@ const SignUpFlow = ({props}) => {
                         isMatched: false,
                         profession: '',
                     }
-                    await DB.addInterviewee(user.uid, userAdditionData)
-                    await DB.updateUserProp(user.uid, true, form.description, 'mentee')
-                    console.log('added interviewee')
                 }
-                
-                setLocalLoading(false);
-                navigate('../' + Constantans.HOME_PAGE + user.uid);
+                console.log('Before Update', userAdditionData);
+                await writeAndUpdate(userAdditionData, role);
             } catch(error){
                 console.log(error);
             }
-        
-            } else { 
-                alert('You have to choose role first!');
-                return false;
-            }
-        
-         
+        } else { 
+            alert('You have to choose role first!');
+            return false;
+        }
       }
+
+    const writeAndUpdate = async (curForm, type) => {
+        let userType;
+        switch(type){
+            case Constantans.INTERVIEWERS_DB_NAME:
+                userType = 'mentor';
+                break;
+            case Constantans.INTERVIEWEES_DB_NAME:
+                userType = 'mentee';
+                break;
+            default:
+                userType = 'default';
+                break
+        }
+        setLocalLoading(true);
+        try{
+            if(type === Constantans.INTERVIEWERS_DB_NAME){
+                curForm =  {
+                    ...curForm,
+                    available: true,
+                    finishedMentees: [],
+                    pendingMentees: [],
+                    declinedMentees: [],
+                    approvedMentess: [],
+                    profession: '',
+                }
+                await DB.addInterviewer(user.uid, curForm)
+                console.log('added interviewee')
+            } else if(type === Constantans.INTERVIEWEES_DB_NAME){
+                curForm = {
+                    ...curForm,
+                    currentMentor: null,
+                    isMatched: false,
+                    profession: '',
+                }
+                await DB.addInterviewee(user.uid, curForm)
+                console.log('added interviewee')
+            }
+            await DB.updateUserProp(user.uid, true, curForm.description, userType)
+            navigate('../' + Constantans.HOME_PAGE + user.uid);
+            
+        } catch(error){
+            console.log(error);
+        }
+        finally{
+            setLocalLoading(false);
+        }
+    }
 
     function handleNext(){
         if(step < 2){
@@ -209,10 +243,8 @@ const SignUpFlow = ({props}) => {
                 setStep(step + 1);
                 let newCompleted = completed;
                 newCompleted[step] = true;
-                setCompleted(newCompleted);
-                
+                setCompleted(newCompleted);   
             }
-            
         }
         else{
             return handleClickSave()
@@ -235,7 +267,7 @@ const SignUpFlow = ({props}) => {
                     // return <MainFormPage />;
                     return <ChooseRolePage />;
                 case 1:
-                    return <NewFormPage role={role} onClickSubmit={handleClickSave}/>;
+                    return <NewFormPage role={role} onClickSubmit={writeAndUpdate}/>;
                 // case 2:
                     // return <RoleFormPAge />;
                 default:
