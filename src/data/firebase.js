@@ -111,7 +111,8 @@ class DataBase {
   
   async addInterviewee(id, interviewee) {
     try{
-      return setDoc(doc(this.db, Constants.INTERVIEWEES_DB_NAME, id), interviewee)
+      const docRef = doc(this.db, Constants.INTERVIEWEES_DB_NAME, id)
+      return setDoc(docRef, interviewee)
     } catch (e) {
       console.log("Error adding interviewee with ID ", id, e);
       return null;

@@ -167,6 +167,8 @@ const SignUpFlow = ({props}) => {
                         profession: null,
                     } 
                     await DB.addInterviewer(user.uid, userAdditionData)
+
+                    // add get and see what comes back
                     await DB.updateUserProp(user.uid, true, form.description, 'mentor')
                     
                 } else if(role === Constantans.INTERVIEWEES_DB_NAME){
