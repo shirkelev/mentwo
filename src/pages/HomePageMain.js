@@ -33,6 +33,7 @@ const NavCont = styled('nav')(({ theme }) => ({
 
 export default function HomePageMain() {
     const [showMenu, setShowMenu] = React.useState(false);
+    const [bottomNavValue, setBottomNavValue] = React.useState(0);
     // const {user, setUser, dataBase} = useContext(UserContext);
     const {user, setUser, userData, setUserData, loading, setLoading, setEnterHome} = UserAuth();
 
@@ -85,7 +86,7 @@ export default function HomePageMain() {
                     <Routes>
                         <Route path="/" element={
                             userData.type === 'mentor' ? <MentorPendingsAndRunningPage user={userData} /> : 
-                            userData.isMatched ? <MenteeMatchingPage user={userData} /> : <MenteeMatchingPage user={userData} /> } exact/>
+                            !userData.isMatched ? <MenteeMatchingPage user={userData} /> : <MatchSuccess mentee={userData} /> } exact/>
                             {/* // : <MentorApproval mentee={userData} /> } exact/> */}
                         <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={userData} />} />
                         <Route path={CONSTANTS.MENTOR_IN_PROCESS_PAGE} element={<MentorInProcessPage user={userData} />} />
