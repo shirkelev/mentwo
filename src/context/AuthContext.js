@@ -12,6 +12,7 @@ import {
 } from 'firebase/auth';
 import { auth, db } from '../data/firebase';
 import { DB } from '../data/firebase';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
@@ -20,7 +21,8 @@ export const AuthContextProvider = ({ children }) => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [exData, setExData] = useState(false);
+  const [fullDataFetched, setFullDataFetched] = useState(false);
+  const [enterHome, setEnterHome] = useState(false);
 
   const provider = new GoogleAuthProvider();
 
@@ -43,7 +45,9 @@ export const AuthContextProvider = ({ children }) => {
 
 
   const logOut = () => {
-      signOut(auth)
+    signOut(auth)
+    window.history.pushState(null, "", "/sign-in");
+    window.location.reload();
     };
 
   const emailSignIn = async (email, password) => {
@@ -66,7 +70,8 @@ const emailSignUp =  (email, password) => {
 
 const fetchUserData = async (user) => {
   setLoading(true);
-  if(user.metadata.creationTime === user.metadata.lastSignInTime) {
+  const exists = await DB.userExists(user.uid);
+  if(!exists) {
     await DB.addUser(user);
   }
   const userData = await DB.getUser(user.uid);
@@ -75,27 +80,7 @@ const fetchUserData = async (user) => {
   setLoading(false);
 }
 
-const fetchExtraData = async () => {
-  if(userData && userData.signedUp && !exData){
-    try{
-      console.log("Fetching Extra User Data ", user.uid, " ...", userData);
-      setLoading(true);
-      const userExtraData = await DB.getRoleData(user.uid);
-      console.log("User Data Gotten", userData.data());
-      
-      setUserData({...userData, ...userExtraData.data()});
-      setExData(true);
-      setLoading(false);
-    
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  } else {
-    console.log("No Extra User Data");
-    return;
-    }
-  }
+
 
 
 
@@ -109,11 +94,75 @@ useEffect( () => {
       console.log("User is logged out");
       setUser(null);
     };
+
   });
   return () => {
     unsubscribe();
+    <Navigate to="../" />;
   };
 }, []);
+
+useEffect(() => {
+  const fetchExtraData = async () => {
+    try{
+      console.log("Fetching Extra User Data ", user.uid, " ...", userData);
+      console.log("first update cur user data");
+      const newUser = await DB.getUser(user.uid);
+      console.log("The user Role is ", newUser.data().type);
+      let userExtraData = await DB.getRoleData(user.uid, newUser.data().type);
+      userExtraData = userExtraData.data();
+      console.log("User Extra Data", userExtraData);
+      switch (newUser.data().type) {
+        case "mentor":
+          console.log("Starting to fetch interviewees data")
+          console.log("Pending Mentees", userExtraData.pendingMentees ? userExtraData.pendingMentees : [])
+          console.log("Approved Mentees", userExtraData.approvedMentess ? userExtraData.approvedMentess : [])
+          console.log("Finished Mentees", userExtraData.finishedMentees ? userExtraData.finishedMentees : [])
+          const pendingInterviewees = await DB.getPendingInterviewees(userExtraData.pendingMentees ? userExtraData.pendingMentees : [] );
+          const approvedMentess = await DB.getProcessedInterviewees(userExtraData.approvedMentess ? userExtraData.approvedMentess : []);
+          const finishedMentees = await DB.getFinishedInterviewees(userExtraData.finishedMentees ? userExtraData.finishedMentees : []);
+          userExtraData = {...userExtraData
+            , pendingMenteesData: pendingInterviewees
+            , approvedMentessData: approvedMentess,
+             finishedMenteesData: finishedMentees
+            };
+          break;
+        case "mentee":
+          console.log("Starting to fetch mentors data")
+          let currentMentor = null;
+          if(userExtraData.currentMentor) {
+            currentMentor = await DB.getInterviewerData(userExtraData.currentMentor);
+          }
+          userExtraData.currentMentorData = currentMentor;
+          break;
+        case "admin":
+          console.log("Admin Data", userExtraData.data());
+          break;
+        default:
+          console.log("No User Data");
+          break;
+      }
+      console.log("New User Data", userExtraData);
+      setUserData({...newUser.data(), ...userExtraData});
+      setFullDataFetched(true);
+      setLoading(false);
+    } catch (error) {
+        console.log(error);
+    };
+  }
+  const onEnterHome = async () => {
+    if(enterHome && !fullDataFetched){
+      console.log("User is logged in and signed up, fetching data");
+      setLoading(true);
+      await fetchExtraData();
+    } else if (enterHome && fullDataFetched) {
+      console.log("User is logged in and signed up, data already fetched");
+    } else {
+      console.log("???", enterHome, fullDataFetched);
+    }
+  }
+  onEnterHome();
+}, [enterHome, fullDataFetched, user, userData]);
 
 
 
@@ -121,7 +170,8 @@ useEffect( () => {
   return (
     <AuthContext.Provider value={{ 
       googleSignIn, emailSignIn, logOut, user, setUser, 
-      emailSignUp, error, userData, setUserData, loading, setLoading, fetchExtraData
+      emailSignUp, error, userData, setUserData, loading, setLoading, 
+      setEnterHome
       }}>
       {children}
     </AuthContext.Provider>

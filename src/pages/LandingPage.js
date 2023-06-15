@@ -4,8 +4,8 @@ import { Box, Divider, Typography } from '@mui/material';
 import * as Constants from '../Constants';
 import SimpleButton from '../components/small-components/Button';
 import AboutContent from '../components/AboutContent';
-import logoW from '../data/images/logo-removebg-preview.png'
-import 
+import logoW from '../data/images/new_logo.png'
+import peopleImg from '../data/images/pepole.png'
 
 const ButtonWrapper = styled(SimpleButton)(({ theme }) => {
   return ({

@@ -146,7 +146,8 @@ const SignUpFlow = ({props}) => {
     const handleClickSave = async () => {
         
         if(saveSuccess()){
-            setLocalLoading(true);
+
+            console.log('form', form)  
 
             let userAdditionData = {
                 fieldsList: form.fields,
@@ -155,34 +156,86 @@ const SignUpFlow = ({props}) => {
                 agendas: form.agendas,
                 description: form.description
                 };
-            if(role === Constantans.INTERVIEWERS_DB_NAME){
-                userAdditionData = {...userAdditionData,
+            
+            console.log('Additional Data ', userAdditionData)
+            try{
+                if(role === Constantans.INTERVIEWERS_DB_NAME){
+                    userAdditionData = {
+                        ...userAdditionData,
+                        available: true,
+                        finishedMentees: [],
+                        pendingMentees: [],
+                        declinedMentees: [],
+                        approvedMentess: [],
+                        profession: '',
+                    }
+                    
+                } else if(role === Constantans.INTERVIEWEES_DB_NAME){
+                    userAdditionData = {
+                        ...userAdditionData,
+                        currentMentor: null,
+                        isMatched: false,
+                        profession: '',
+                    }
+                }
+                console.log('Before Update', userAdditionData);
+                await writeAndUpdate(userAdditionData, role);
+            } catch(error){
+                console.log(error);
+            }
+        } else { 
+            alert('You have to choose role first!');
+            return false;
+        }
+      }
+
+    const writeAndUpdate = async (curForm, type) => {
+        let userType;
+        switch(type){
+            case Constantans.INTERVIEWERS_DB_NAME:
+                userType = 'mentor';
+                break;
+            case Constantans.INTERVIEWEES_DB_NAME:
+                userType = 'mentee';
+                break;
+            default:
+                userType = 'default';
+                break
+        }
+        setLocalLoading(true);
+        try{
+            if(type === Constantans.INTERVIEWERS_DB_NAME){
+                curForm =  {
+                    ...curForm,
                     available: true,
                     finishedMentees: [],
                     pendingMentees: [],
                     declinedMentees: [],
                     approvedMentess: [],
-                    profession: null,
-                } 
-                await DB.addInterviewer(user.uid, userAdditionData);
-            } else if(role === Constantans.INTERVIEWEES_DB_NAME){
-                userAdditionData = {...userAdditionData,
-                    currentMwntor: null,
+                    profession: '',
+                }
+                await DB.addInterviewer(user.uid, curForm)
+                console.log('added interviewee')
+            } else if(type === Constantans.INTERVIEWEES_DB_NAME){
+                curForm = {
+                    ...curForm,
+                    currentMentor: null,
                     isMatched: false,
                     profession: '',
                 }
-                await DB.addInterviewee(user.uid, userAdditionData);
+                await DB.addInterviewee(user.uid, curForm)
+                console.log('added interviewee')
             }
-            
-            setLocalLoading(false);
+            await DB.updateUserProp(user.uid, true, curForm.description, userType)
             navigate('../' + Constantans.HOME_PAGE + user.uid);
-            return true;
-        } else { 
-            alert('You have to choose role first!');
-            return false;
+            
+        } catch(error){
+            console.log(error);
         }
-         
-      }
+        finally{
+            setLocalLoading(false);
+        }
+    }
 
     function handleNext(){
         if(step < 2){
@@ -190,10 +243,8 @@ const SignUpFlow = ({props}) => {
                 setStep(step + 1);
                 let newCompleted = completed;
                 newCompleted[step] = true;
-                setCompleted(newCompleted);
-                
+                setCompleted(newCompleted);   
             }
-            
         }
         else{
             return handleClickSave()
@@ -216,7 +267,7 @@ const SignUpFlow = ({props}) => {
                     // return <MainFormPage />;
                     return <ChooseRolePage />;
                 case 1:
-                    return <NewFormPage role={role} onClickSubmit={handleClickSave}/>;
+                    return <NewFormPage role={role} onClickSubmit={writeAndUpdate}/>;
                 // case 2:
                     // return <RoleFormPAge />;
                 default:
@@ -232,7 +283,7 @@ const SignUpFlow = ({props}) => {
             
             <RootContainer>
                 {/* {console.log(userData, user)} */}
-                {/* {console.log(form)} */}
+                {console.log(form, role)}
                 <SignUpContext.Provider value={{role, setRole, step, setStep, completed, setCompleted, form, setForm, saveSuccess}}>
                     <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} />
                     <ContentContainer>

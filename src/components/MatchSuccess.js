@@ -27,8 +27,8 @@ export default function MatchSuccess({mentee}) {
                         justifyContent="center"
                         alignItems="center"
                         >
-                        <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.img}/></Grid>
-                        <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.currentMentor.img}/> </Grid>
+                        <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.img ? mentee.img : null}/></Grid>
+                        <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.currentMentorData.img ? mentee.currentMentorData.img : null}/> </Grid>
                     </Grid>
                     <Typography><text>{mentee.currentMentor.phone} , {mentee.currentMentor.email}</text></Typography>
                     <TipBox tipMessege={'Send resume via friend! It will help the HR team see it sooner!'}></TipBox>

@@ -21,7 +21,7 @@ export default function MentorPendingsAndRunningPage ({user}) {
       </div> */}
 
       <div style={{ padding: '10px'}}>
-        <HomeContent headline = {Constants.PENDINGS} list={user.pendingMentees ? user.pendingMentees : []} user={user}/>
+        <HomeContent headline = {Constants.PENDINGS} list={user.pendingMenteesData ? user.pendingMenteesData : []} user={user}/>
         {/*<HomeContent headline = {Constants.PROCESS} list={user.approvedMentees}user={user}/>
          <HomeContent headline = {Constants.FINISHED} list={user.finishedMentees} />
         <HomeContent headline = {Constants.DECLINED} list={user.declinedMentees} /> */}

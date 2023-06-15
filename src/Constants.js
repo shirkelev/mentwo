@@ -49,7 +49,7 @@ export const AGENDAS = 'Values';
 export const FIELDS_LIST = ['Data Analysis', 'Data Science', 'Produce Management', 'Software Engineer', 'UX/UI', 'Web Development', 'Project Managment', 'Algorithm Development', 'Quality Assurance']
 export const TECHSKILLS_LIST = ['Python', 'C', 'C++', 'Java', 'React', 'Figma', 'R', 'SQL', 'JavaScript', 'HTML', 'CSS', 'Node.js', 'Angular', 'Vue.js', 'PHP', 'Swift', 'Kotlin', 'C#', 'Ruby', 'Go']
 export const SOFTSKILLS_LIST = ['Articulation', 'English', 'Confidence' ,'Communication', 'Self-Presentation', 'Small Talk', 'Formulation', 'Pressure Management', 'Orderly Answer', 'Enthusiasm', 'Motivation']
-export const AGENDAS_LIST = ['Combat Soldier', 'Woman', 'Religious Zionists', 'Haredi', 'Man', 'Young', 'Adult', 'Arabic', 'Professional conversion', 'Handicapped']
+export const AGENDAS_LIST = ['Combat Soldier', 'Woman', 'Religious Zionists', 'Haredi', 'Man', 'Inexperienced', 'Periphery ', 'Arabic', 'Professional conversion','LGBT', 'Handicapped']
 
 // Sign Up Form Questions
 export const MENTOR_QUESTIONS = [
@@ -185,3 +185,12 @@ export const DEFAULT_QUESTIONS = [
 // Sign Up Form Steps
 
 export const SIGN_UP_STEPS = ['Role', 'Personal Info'];
+
+
+//FireBase
+
+export const FIREBASE_CONFIG = {}
+export const USERS_DB_NAME = 'users';
+export const INTERVIEWERS_DB_NAME = 'interviewers'; 
+// export const MENTEES_DB_NAME = 'mentees';
+export const INTERVIEWEES_DB_NAME = 'interviewee';
