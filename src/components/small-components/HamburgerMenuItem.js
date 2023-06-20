@@ -14,7 +14,7 @@ export default function HamburgerMenuItem({ text, icon: Icon, path, onClick }) {
         </ListItemIcon>
         <ListItemText
           primary={<Typography style={{ fontWeight: 'bold', fontSize: '14.5px'}}>{text}</Typography>}
-          sx={{ textAlign: 'left', display: 'inline', color: '#b1a5e3' }}
+          sx={{ textAlign: 'left', display: 'inline', color: '#91D8E4' }}
           onClick={onClick}
         />
       </MenuItem>

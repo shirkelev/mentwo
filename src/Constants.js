@@ -43,13 +43,13 @@ export const AGENDA = 'agenda';
 export const FIELDS = 'Fields';
 export const TECHSKILLS = 'Tech Skills';
 export const SOFTSKILLS = 'Soft Skills';
-export const AGENDAS = 'Values';
+export const AGENDAS = 'Characteristics';
 
 // Tags Lists
-export const FIELDS_LIST = ['Data Analysis', 'Data Science', 'Produce Management', 'Software Engineer', 'UX/UI', 'Web Development', 'Project Managment', 'Algorithm Development', 'Quality Assurance']
-export const TECHSKILLS_LIST = ['Python', 'C', 'C++', 'Java', 'React', 'Figma', 'R', 'SQL', 'JavaScript', 'HTML', 'CSS', 'Node.js', 'Angular', 'Vue.js', 'PHP', 'Swift', 'Kotlin', 'C#', 'Ruby', 'Go']
-export const SOFTSKILLS_LIST = ['Articulation', 'English', 'Confidence' ,'Communication', 'Self-Presentation', 'Small Talk', 'Formulation', 'Pressure Management', 'Orderly Answer', 'Enthusiasm', 'Motivation']
-export const AGENDAS_LIST = ['Combat Soldier', 'Woman', 'Religious Zionists', 'Haredi', 'Man', 'Inexperienced', 'Periphery ', 'Arabic', 'Professional conversion','LGBT', 'Handicapped']
+export const FIELDS_LIST = ['Data Analysis', 'UX', 'UI', 'Data Science', 'Produce Management', 'QA', 'Software Engineer', 'Web Development', 'Project Managment', 'Algorithm Development']
+export const TECHSKILLS_LIST = ['Python', 'C', 'C++', 'Java', 'React', 'Figma', 'R', 'SQL', 'JavaScript', 'HTML', 'CSS', 'Node.js', 'Vue.js', 'PHP', 'Swift', 'C#', 'Ruby', 'Go']
+export const SOFTSKILLS_LIST = ['Articulation', 'English' , 'Self-Presentation', 'Small Talk', 'Formulation', 'Pressure Management', 'Orderly Answer', 'Enthusiasm', 'Motivation']
+export const AGENDAS_LIST = ['Combat Soldier', 'Woman', 'Man', 'Haredi', 'Religious Zionist', 'Professional conversion', 'Inexperienced', 'Periphery resident', 'ethnic minority', 'Handicapped']
 
 // Sign Up Form Questions
 export const MENTOR_QUESTIONS = [
