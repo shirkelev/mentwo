@@ -190,14 +190,14 @@ const NewFormPage = ({name, onClickSubmit}) => {
         {category: Constants.FIELDS, statement: 'In which professional fields would you like to interview?', tagsNames: Constants.FIELDS_LIST},
         {category: Constants.TECHSKILLS, statement:'What technical skills would you like to interview about?', tagsNames: Constants.TECHSKILLS_LIST},
         {category: Constants.SOFTSKILLS, statement:'What soft skills do you want to focus on as an interviewer?', tagsNames: Constants.SOFTSKILLS_LIST},
-        {category: Constants.AGENDAS, statement:'What agendas would you like to interview about?', tagsNames: Constants.AGENDAS_LIST}
+        {category: Constants.AGENDAS, statement:'Which populations would you like to promote and integrate into the industry?', tagsNames: Constants.AGENDAS_LIST}
     ];
 
     const menteeTags = [
         {category: Constants.FIELDS, statement: 'In which professional fields would you like to be interviewed?', tagsNames: Constants.FIELDS_LIST},
         {category: Constants.TECHSKILLS, statement:'What technical skills would you like to be interviewed about?', tagsNames: Constants.TECHSKILLS_LIST},
         {category: Constants.SOFTSKILLS, statement:'What soft skills do you want to focus on as an interviewee?', tagsNames: Constants.SOFTSKILLS_LIST},
-        {category: Constants.AGENDAS, statement:'What agendas would you like to be interviewed about?', tagsNames: Constants.AGENDAS_LIST}
+        {category: Constants.AGENDAS, statement:'Share your personal characteristics so you can stand out from other interviewees', tagsNames: Constants.AGENDAS_LIST}
     ];
     
     useEffect(() => {
