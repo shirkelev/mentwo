@@ -30,13 +30,14 @@ const ModalStyle = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
 }));
 
-const TagsWithHeadlineContainer = ({category}) => {
+const TagsWithHeadlineContainer = ({category, list}) => {
+  const attList = list ? list : [];
   return (
     <div style={{ display: 'flex', overflowX: 'auto', marginTop: 12 }}>
         <Box display="flex" flexWrap="wrap" gap={1}>
-          <TagsCategory category={category} num={3} />
-          {['A', 'B', 'C', 'A'].map((badge, index) =>
-          <Tag text={'CPP'} category={category}/>
+          <TagsCategory category={category} num={attList.length} />
+          {attList.map((badge, index) =>
+          <Tag text={badge} category={category}/>
           )}
         </Box>
     </div>
@@ -84,10 +85,10 @@ const UserCardModal = ({user, onClose}) => {
         </Stack>
         {modalType === 'about' ? 
         <>
-            <TagsWithHeadlineContainer category = {Constants.FIELDS}/>
-            <TagsWithHeadlineContainer category = {Constants.TECHSKILLS}/>
-            <TagsWithHeadlineContainer category = {Constants.SOFTSKILLS}/>
-            <TagsWithHeadlineContainer category = {Constants.AGENDAS}/>
+            <TagsWithHeadlineContainer category = {Constants.FIELDS}  list={user.mutualTags.fields ? user.mutualTags.fields : []}/>
+            <TagsWithHeadlineContainer category = {Constants.TECHSKILLS} list={user.mutualTags.techSkills ? user.mutualTags.techSkills : []}/>
+            <TagsWithHeadlineContainer category = {Constants.SOFTSKILLS} list={user.mutualTags.softSkills ? user.mutualTags.softSkills : []}/>
+            <TagsWithHeadlineContainer category = {Constants.AGENDAS} list={user.mutualTags.agendas ? user.mutualTags.agendas : []}/>
         </>
                 : null}
                 

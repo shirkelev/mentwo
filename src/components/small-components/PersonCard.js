@@ -14,8 +14,9 @@ import {UserContentDetailsContext} from '../../context/UserContentDetailsContext
 import * as Constants from '../../Constants';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { RestaurantMenu } from '@mui/icons-material';
+import { RestaurantMenu, Tag } from '@mui/icons-material';
 import UserCardModal from '../UserCardModal';
+import TagsCategory from './TagsCategory';
 
 
 const maxLength = 70;
@@ -124,6 +125,17 @@ export default function PersonCard({variant, mainUser, cardUser}) {
           <> </>
       };
     };
+    
+    const CardInsideContent = () => {
+      return(
+        <>
+        <TagsCategory category = {Constants.FIELDS}  num={cardUser.mutualTags.fields ? cardUser.mutualTags.fields.length : 0}/>
+        <TagsCategory category = {Constants.TECHSKILLS} num={cardUser.mutualTags.techSkills ? cardUser.mutualTags.techSkills.length : 0}/>
+        <TagsCategory category = {Constants.SOFTSKILLS} num={cardUser.mutualTags.softSkills ? cardUser.mutualTags.softSkills.length : 0}/>
+        <TagsCategory category = {Constants.AGENDAS} num={cardUser.mutualTags.agendas ? cardUser.mutualTags.agendas.length : 0}/>
+        </>
+      )
+    }
   
   return (
       <>
@@ -144,9 +156,9 @@ export default function PersonCard({variant, mainUser, cardUser}) {
           </Stack>
           
           <CardContent>
-            
+            <CardInsideContent />
           </CardContent>
-
+          
           <CardActions sx={{justifyContent:'center', paddingBottom:2}}>
             <ButtonSection />
           </CardActions>

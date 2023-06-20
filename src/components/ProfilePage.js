@@ -16,7 +16,7 @@ const TagsWithHeadlineContainer = ({category, list}) => {
       <div style={{ display: 'flex', overflowX: 'auto', marginTop: 12 }}>
           <Box display="flex" flexWrap="wrap" gap={1}>
             {list.map((badge, index) =>
-            <Tag text={'CPP'} category={category}/>
+            <Tag text={badge} category={category}/>
             )}
           </Box>
       </div>

@@ -216,7 +216,9 @@ class DataBase {
         const intervieweeBaseData = await getDoc(doc(this.db, Constants.USERS_DB_NAME, pendingList[i]));
         const intervieweeExtraData = await getDoc(doc(this.db, Constants.INTERVIEWEES_DB_NAME, pendingList[i]));
         const interviewee = {...intervieweeBaseData.data(), ...intervieweeExtraData.data()};
-        pendingInterviewees.push(interviewee);
+        if(!interviewee.isMatched){
+          pendingInterviewees.push(interviewee);
+        }
       }
       console.log("All pending interviewees are added");
       return pendingInterviewees;
@@ -225,6 +227,25 @@ class DataBase {
       return [];
     }
 
+  }
+
+  async getUnmatchedInterviewees(){
+    let intervieweesList = [];
+    try{
+      const allDocs = await getDocs(this.interviewess);
+      console.log("All interviewees are fetched");
+      allDocs.forEach(doc => {
+        if(!doc.data().isMatched){
+          const interveiweeData = {...doc.data(), id: doc.id};
+          console.log('Getting all intervieww, interview: ', interveiweeData);
+          intervieweesList.push(interveiweeData);
+        }
+      });
+      console.log("All unmatched interviewees are added");
+    } catch (e) {
+      console.log("Error getting all interviewees");
+    }
+    return intervieweesList;
   }
 
   async getFinishedInterviewees(finishedList) {

@@ -129,23 +129,35 @@ useEffect(() => {
           console.log("Pending Mentees", userExtraData.pendingMentees ? userExtraData.pendingMentees : [])
           console.log("Approved Mentees", userExtraData.approvedMentess ? userExtraData.approvedMentess : [])
           console.log("Finished Mentees", userExtraData.finishedMentees ? userExtraData.finishedMentees : [])
+          if(userExtraData.pendingMentees.length === 0) {
+            const availbleInterviewees = await DB.getUnmatchedInterviewees();
+            console.log("Available Interviewees", availbleInterviewees);
+            const matches = matchInterviewer(userExtraData, availbleInterviewees);
+            console.log("Matches", matches);
+            userExtraData.pendingMentees = matches? matches.matches : [];
+            
+            // Todo update pending interviewees for interviewer in DB
+          }
           const pendingInterviewees = await DB.getPendingInterviewees(userExtraData.pendingMentees ? userExtraData.pendingMentees : [] );
           const approvedMentess = await DB.getProcessedInterviewees(userExtraData.approvedMentess ? userExtraData.approvedMentess : []);
           const finishedMentees = await DB.getFinishedInterviewees(userExtraData.finishedMentees ? userExtraData.finishedMentees : []);
+          
+          
           userExtraData = {...userExtraData
             , pendingMenteesData: pendingInterviewees
             , approvedMentessData: approvedMentess,
              finishedMenteesData: finishedMentees
             };
-          console.log('My Int', userExtraData.pendingMenteesData)
+          console.log('Aprroved', userExtraData.approvedMentessData, userExtraData.approvedMentessData.length)
           for(let i = 0; i < userExtraData.pendingMenteesData.length; i++) {
             console.log("Pending Mentee", userExtraData.pendingMenteesData[i]);
-            userExtraData.pendingMenteesData[i].mutualTags = getMutualTags(userExtraData.pendingMenteesData[i], userExtraData);
+            userExtraData.pendingMenteesData[i].mutualTags = getMutualTags(userExtraData, userExtraData.pendingMenteesData[i]);
           }
-          for(let i = 0; i < userExtraData.approvedMentessData.length; i++) {
-            console.log("Approved Mentee", userExtraData.approvedMentessData[i])
-            userExtraData.approvedMentessData[i].mutualTags = getMutualTags(userExtraData.approvedMentessData[i], userExtraData);
-          }
+          // console.log('My Int', userExtraData.approvedMentess, userExtraData.approvedMentess.length)
+          // for(let i = 0; i < userExtraData.approvedMentessData.length; i++) {
+          //   console.log("Approved Mentee", userExtraData.approvedMentessData[i])
+          //   userExtraData.approvedMentessData[i].mutualTags = getMutualTags(userExtraData, userExtraData.approvedMentessData[i]);
+          // }
           break;
         case "mentee":
           console.log("Starting to fetch mentors data")
