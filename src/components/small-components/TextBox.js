@@ -1,8 +1,19 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 
-const TextBox = ({ title, placeholder, onChange, onBlur=() => {}}) => {
+const TextBox = ({ title, placeholder, onChange, onBlur=() => {}, isDisabled=false}) => {
+  
   return (
+    isDisabled? 
+    <TextField
+      id="outlined-basic"
+      label={title}
+      variant="filled"
+      placeholder={placeholder}
+      onChange = {onChange}
+      onBlur = {onBlur}
+      disabled
+    /> :
     <TextField
       id="outlined-basic"
       label={title}
@@ -10,7 +21,7 @@ const TextBox = ({ title, placeholder, onChange, onBlur=() => {}}) => {
       placeholder={placeholder}
       onChange = {onChange}
       onBlur = {onBlur}
-    />
+    /> 
   );
 };
 
