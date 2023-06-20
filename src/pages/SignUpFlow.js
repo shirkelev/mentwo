@@ -27,7 +27,7 @@ const RootContainer = styled(Container)(({ theme }) => ({
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
-    backgroundColor: '#FEFCFF',
+    backgroundColor: '#F8FFFF',
     gap: theme.spacing(10),
     
   }));

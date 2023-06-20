@@ -28,17 +28,23 @@ const theme = createTheme({
     palette: {
       mode: 'light',
       primary: {
-        main: '#00B0FF',
+        main: '#91D8E4',
       },
+      // 91D8E4
+      // 62B6B7
+      // 408E91
+      // B8E8FC
       secondary: {
-        main: '#00B0FF',
+        main: '#BFEAF5',
       },
       info: {
         main: '#80D8FF',
       },
       appBackground: {
-        main: '#FEFCFF',
+        main: '#EAFDFC',
       },
+      // EAFDFC
+      //FEFCFF
 
       fieldColor: 
       {

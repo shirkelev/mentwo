@@ -24,6 +24,7 @@ import MentorApproval from "../components/MentorApproval";
 import ChooseMentor from "../components/ChooseMentor";
 import MatchSuccess from "../components/MatchSuccess";
 import NewFormPage from "./sign-up/NewFormPage";
+import ButtomBar from "../components/ButtomBar";
 
 const NavCont = styled('nav')(({ theme }) => ({
     position: 'sticky',
@@ -72,7 +73,7 @@ export default function HomePageMain() {
 
 
     return (
-        <div style={{ backgroundColor: '#FEFCFF' }}>
+        <div style={{ backgroundColor: '#F8FFFF' }}>
             {console.log("User Data", userData)}
             <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
                 <NavCont>
@@ -101,7 +102,10 @@ export default function HomePageMain() {
                     </Routes>
                     )
                 }
+                 <ButtomBar user={userData}></ButtomBar>
             </HamburgerMenuContext.Provider>
+           
+
         </div>
     )
 }
