@@ -1,7 +1,6 @@
 import React from 'react';
 import {Stack} from '@mui/material';
 import Typography from '@mui/material/Typography';
-import StageStepper from '../components/StageStepper';
 import CircularProgressBar from '../components/small-components/CircularProgressBar';
 
 

@@ -26,6 +26,7 @@ import MatchSuccess from "../components/MatchSuccess";
 import NewFormPage from "./sign-up/NewFormPage";
 import ButtomBar from "../components/ButtomBar";
 import ProfilePage from "../components/ProfilePage";
+import SignUpLoading from "./sign-up/SignUpLoading";
 
 const NavCont = styled('nav')(({ theme }) => ({
     position: 'sticky',
@@ -82,7 +83,7 @@ export default function HomePageMain() {
                 </ NavCont>
                 {
                 loading ? 
-                    ( <div> Loading... </div> )
+                    ( <SignUpLoading text={"Loading..."}></SignUpLoading> )
                     :
                     (
                     <Routes>
