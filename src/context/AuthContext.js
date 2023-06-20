@@ -15,6 +15,11 @@ import { DB } from '../data/firebase';
 import { Navigate, useNavigate } from 'react-router-dom';
 import IntreviwerImg from '../data/images/interviewer.png';
 import IntrevieweeImg from '../data/images/interveiwee.png';
+import { 
+  matchAll
+  ,matchInterviewer
+  ,getMutualTags
+} from '../Algorithm/MatchingAlgorithm'
 
 
 const AuthContext = createContext();
@@ -132,6 +137,15 @@ useEffect(() => {
             , approvedMentessData: approvedMentess,
              finishedMenteesData: finishedMentees
             };
+          console.log('My Int', userExtraData.pendingMenteesData)
+          for(let i = 0; i < userExtraData.pendingMenteesData.length; i++) {
+            console.log("Pending Mentee", userExtraData.pendingMenteesData[i]);
+            userExtraData.pendingMenteesData[i].mutualTags = getMutualTags(userExtraData.pendingMenteesData[i], userExtraData);
+          }
+          for(let i = 0; i < userExtraData.approvedMentessData.length; i++) {
+            console.log("Approved Mentee", userExtraData.approvedMentessData[i])
+            userExtraData.approvedMentessData[i].mutualTags = getMutualTags(userExtraData.approvedMentessData[i], userExtraData);
+          }
           break;
         case "mentee":
           console.log("Starting to fetch mentors data")
