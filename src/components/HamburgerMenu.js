@@ -16,7 +16,7 @@ export default function HamburgerMenu({user}) {
     setShowMenu(false);
   }
       return (
-          <Paper sx={{ width: '270px' }}>
+          <Paper sx={{ width: '230px' }}>
               <MenuList dense>
               <HamburgerMenuItem text="My Profile" icon = {AccountCircleIcon}
               path="./" onClick={handleClick}/>

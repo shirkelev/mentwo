@@ -10,6 +10,7 @@ import * as Constants from '../Constants';
 import CapacityBar from './CapacityBar';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
 import GroupsIcon from '@mui/icons-material/Groups';
+import AvailableToggle from './AvailableToggle';
 
 
 const MAIN_CTA = {
@@ -45,8 +46,8 @@ return (
   
   <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
     <Typography variant="h5" color='primary' fontWeight="bold">Hello {user.name}!</Typography>
-    <div style={{}}>
-      <CapacityBar capacity={user.capacity} mentees_num={user.approvedMetees ? user.approvedMetees.length : 0} />
+    <div style={{marginTop:'10px'}}>
+      <AvailableToggle></AvailableToggle>
     </div>
   </div>
   <div style={{ display: 'flex', flexDirection:'column', alignItems: 'center', justifyContent: 'center' }}>
