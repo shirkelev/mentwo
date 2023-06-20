@@ -69,6 +69,7 @@ const FormPage = (props) => {
     if(userInfo[qid]){
       curPlaceHolder = userInfo[qid];
     }
+    console.log('WrapQuestions', curPlaceHolder)
     let quest;
     switch(type){
         case 'short': quest = <TextBox 
