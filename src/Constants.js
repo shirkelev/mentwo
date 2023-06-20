@@ -51,6 +51,12 @@ export const TECHSKILLS_LIST = ['Python', 'C', 'C++', 'Java', 'React', 'Figma', 
 export const SOFTSKILLS_LIST = ['Articulation', 'English' , 'Self-Presentation', 'Small Talk', 'Formulation', 'Pressure Management', 'Orderly Answer', 'Enthusiasm', 'Motivation']
 export const AGENDAS_LIST = ['Combat Soldier', 'Woman', 'Man', 'Haredi', 'Religious Zionist', 'Professional conversion', 'Inexperienced', 'Periphery resident', 'ethnic minority', 'Handicapped']
 
+// Algorithm constants:
+export const AGENDA_WEIGHT = 2;
+export const TECHSKILLS_WEIGHT = 1;
+export const SOFTSKILLS_WEIGHT = 1;
+export const NUM_OF_MATCHES = 5;
+
 // Sign Up Form Questions
 export const MENTOR_QUESTIONS = [
     

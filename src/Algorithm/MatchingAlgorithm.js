@@ -1,7 +1,4 @@
-const AGENDA_WEIGHT = 2;
-const TECHSKILLS_WEIGHT = 1;
-const SOFTSKILLS_WEIGHT = 1;
-const NUM_OF_MATCHES = 5;
+import * as Constants from './Constants';
 
 // let yuval = {id: 1, agendas: ["women"], filedsList: ["PM", "QA"], softSkills: ["English"], techSkills: ["Python", "Java", "C"]};
 // let shir = {id: 2, agendas: ["man"], filedsList: ["PM", "DS"], softSkills: [], techSkills: ["Java", "C", "C++"]};
@@ -26,9 +23,9 @@ function matchInterviewer(interviewer, interviewees) {
     let intervieweesScores = initIntervieweesScoresAccordingToFields(interviewer, interviewees);
 
     for (let i = 0; i < intervieweesScores.length; i++) {
-        intervieweesScores[i][1] += calcScore(interviewer.agendas, intervieweesScores[i][0].agendas, AGENDA_WEIGHT);
-        intervieweesScores[i][1] += calcScore(interviewer.techSkills, intervieweesScores[i][0].techSkills, TECHSKILLS_WEIGHT);
-        intervieweesScores[i][1] += calcScore(interviewer.softSkills, intervieweesScores[i][0].softSkills, SOFTSKILLS_WEIGHT);
+        intervieweesScores[i][1] += calcScore(interviewer.agendas, intervieweesScores[i][0].agendas, Constants.AGENDA_WEIGHT);
+        intervieweesScores[i][1] += calcScore(interviewer.techSkills, intervieweesScores[i][0].techSkills, Constants.TECHSKILLS_WEIGHT);
+        intervieweesScores[i][1] += calcScore(interviewer.softSkills, intervieweesScores[i][0].softSkills, Constants.SOFTSKILLS_WEIGHT);
         // console.log("final score for : " + intervieweesScores[i][0].id + " = " + intervieweesScores[i][1]);
     }
 
@@ -38,7 +35,7 @@ function matchInterviewer(interviewer, interviewees) {
 
     // console.log("matches for interviewer " + interviewer.id + " :");
     let matches = [];
-    for (let i = 0; i < Math.min(intervieweesScores.length, NUM_OF_MATCHES); i++) {
+    for (let i = 0; i < Math.min(intervieweesScores.length, Constants.NUM_OF_MATCHES); i++) {
         matches.push(intervieweesScores[i][0].id);
         // console.log("match " + i + ": id "+  matches[i]);
     }
@@ -73,4 +70,29 @@ function calcScore(interViewerTags, intervieweeTags, weight) {
         }
     }
     return score;
+}
+
+function getMutualTags(interviewer, interviewee) {
+    let mutualTags = {filedsList: [], techSkills: [], softSkills: [], agendas: []};
+    for (let i = 0; i < interviewer.filedsList.length; i++) {
+        if (interviewee.filedsList.includes(interviewer.filedsList[i])) {
+            mutualTags.filedsList.push(interviewer.filedsList[i]);
+        }
+    }
+    for (let i = 0; i < interviewer.techSkills.length; i++) {
+        if (interviewee.techSkills.includes(interviewer.techSkills[i])) {
+            mutualTags.techSkills.push(interviewer.techSkills[i]);
+        }
+    }
+    for (let i = 0; i < interviewer.softSkills.length; i++) {
+        if (interviewee.softSkills.includes(interviewer.softSkills[i])) {
+            mutualTags.softSkills.push(interviewer.softSkills[i]);
+        }
+    }
+    for (let i = 0; i < interviewer.agendas.length; i++) {
+        if (interviewee.agendas.includes(interviewer.agendas[i])) {
+            mutualTags.agendas.push(interviewer.softSkills[i]);
+        }
+    }
+    return mutualTags;
 }

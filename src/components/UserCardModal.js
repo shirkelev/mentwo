@@ -33,16 +33,6 @@ const ModalStyle = styled('div')(({ theme }) => ({
 const TagsWithHeadlineContainer = ({category}) => {
   return (
     <div style={{ display: 'flex', overflowX: 'auto', marginTop: 12 }}>
-      {/* <Stack spacing={1}>
-        <span style={{ display: 'inline-block', textAlign: 'left' }}>
-          <TagsCategory category={headlineCategory} num={3} />
-        </span>
-        <Box display="flex" flexWrap="wrap" gap={1}>
-          {['A', 'B', 'C', 'A', 'B', 'C'].map((badge, index) =>
-          <Tag text={'CPP'} category={tagsCategory}/>
-          )}
-        </Box>
-      </Stack> */}
         <Box display="flex" flexWrap="wrap" gap={1}>
           <TagsCategory category={category} num={3} />
           {['A', 'B', 'C', 'A'].map((badge, index) =>
