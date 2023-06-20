@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import RoleFormPAge from './sign-up/RoleFormPage';
 import ChooseRolePage from './sign-up/ChooseRolePage';
 import { SignUpContext } from '../context/SignUpContexts';
@@ -102,6 +102,13 @@ const SignUpFlow = ({props}) => {
         softSkills: [],
         agendas: [],
         description: '',
+    });
+
+    const [userInfo, setUserInfo] = useState({
+        name: userData?.name ? userData.name : null,
+        lastName: userData?.lastName ? userData.lastName : null,
+        phone: userData?.phone ? userData.phone : null,
+        img: userData?.img ? userData.img : null,
     });
 
     function createNewUser(form, role){
@@ -258,15 +265,17 @@ const SignUpFlow = ({props}) => {
 
     const to = ['./', Constants.CHOOSE_ROLE_PAGE, Constants.REG_FORM];
     
+    
     const StepContent = () => {
 
         //Genetate content only after data has gotten from the server
         if(!loading && !localLoading){
             switch (step) {
                 case 0:
-                    // return <MainFormPage />;
-                    return <ChooseRolePage />;
+                    return <MainFormPage />;
                 case 1:
+                    return <ChooseRolePage />;
+                case 2:
                     return <NewFormPage role={role} onClickSubmit={writeAndUpdate}/>;
                 // case 2:
                     // return <RoleFormPAge />;
@@ -278,25 +287,31 @@ const SignUpFlow = ({props}) => {
             }
         
     }
+    useEffect(() => {
+        if(!loading){
+            setUserInfo(userData);
+        }
+    }, [loading])
         
-        return (
-            
-            <RootContainer>
-                {/* {console.log(userData, user)} */}
-                {console.log(form, role)}
-                <SignUpContext.Provider value={{role, setRole, step, setStep, completed, setCompleted, form, setForm, saveSuccess}}>
-                    <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} />
-                    <ContentContainer>
-                        <StepContent />
-                    </ContentContainer>
-                    {/* <ButtonSection>
-                        {step === 1 ? 
-                        <>
-                        <ButtonWrapper onClick={handlePrev} variant="outlined" color="secondary"  title='Back' to={null} /> 
-                        <ButtonWrapper onClick={handleNext} variant="contained" color="primary" title={ step === 1 ? 'Done!' : 'Next'} to={null} />
-                        </> : null}
-                    </ButtonSection> */}
-                </ SignUpContext.Provider>
-            </RootContainer>
-            )};
+    return (
+        
+        <RootContainer>
+            {/* {console.log(userData, user)} */}
+            {console.log(form, role, userData, "UserInfo",userInfo)}
+            <SignUpContext.Provider value={{role, setRole, step, setStep, completed, 
+                                        setCompleted, form, setForm, saveSuccess, userInfo, setUserInfo}}>
+                <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} />
+                <ContentContainer>
+                    <StepContent />
+                </ContentContainer>
+                {/* <ButtonSection>
+                    {step === 1 ? 
+                    <>
+                    <ButtonWrapper onClick={handlePrev} variant="outlined" color="secondary"  title='Back' to={null} /> 
+                    <ButtonWrapper onClick={handleNext} variant="contained" color="primary" title={ step === 1 ? 'Done!' : 'Next'} to={null} />
+                    </> : null}
+                </ButtonSection> */}
+            </ SignUpContext.Provider>
+        </RootContainer>
+        )};
 export default SignUpFlow;
