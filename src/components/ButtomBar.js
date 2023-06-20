@@ -13,6 +13,8 @@ import AutorenewIcon from '@mui/icons-material/Autorenew';
 import { useNavigate } from 'react-router-dom';
 import { HamburgerMenuContext } from '../context/HamburgerMenuContexts';
 import { Box } from '@mui/material';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import GroupsIcon from '@mui/icons-material/Groups';
 
 
 
@@ -37,13 +39,13 @@ export default function BottomAppBar({user}) {
             <AppBar position="fixed" color="primary" sx={{ top: 'auto', bottom: 0 }}>
                 <StyledToolbar>
                 <IconButton color="inherit" aria-label="Interviewees Suggestions"  onClick={() => handleClick('./')}>
-                    <GroupIcon />
+                    <PersonAddIcon />
                 </IconButton>
                 <IconButton color="inherit" aria-label="Approved Interviewees"  onClick = {() => handleClick('./' + Constants.MENTOR_IN_PROCESS_PAGE)} >
-                    <HowToRegIcon/ >
+                    <GroupsIcon/ >
                 </IconButton>
                 <IconButton color="inherit" aria-label="Finished Interviews"  onClick = {() => handleClick('./' + Constants.MENTOR_FINISHED_PAGE)} >
-                    <Check/ >
+                    <HowToRegIcon/ >
                 </IconButton>
                 <IconButton color="inherit" aria-label="Mock Interviews Tips"  onClick = {() => handleClick("./" + Constants.RECOMMENDATINS_PAGE)} >
                     <NextWeekIcon/ >
