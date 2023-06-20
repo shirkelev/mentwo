@@ -8,6 +8,7 @@ import { SignUpContext } from '../../context/SignUpContexts';
 import BigContentBox from '../../components/small-components/BigContentBox';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import SaveIcon from '@mui/icons-material/Save';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 
 
@@ -78,6 +79,7 @@ const FormPage = (props) => {
     // get selected file
     const selectedFile = event.target.files[0];
     setFile(selectedFile);
+    setBasicInfo({...basicInfo, img: selectedFile})
     console.log(selectedFile);
     // Continue with upload process
   };
@@ -128,10 +130,16 @@ const FormPage = (props) => {
     )
   };
 
+  const UploadIcon = () => {
+    if(!file){
+      return <AddAPhotoIcon />
+    }
+    return <CheckCircleIcon />
+  }
 
   return (
     <>
-    {console.log('FormPage', basicInfo)}
+    {console.log('FormPage', file)}
     <RootContainer >
       <FormContainer>
         <Typography >
@@ -153,7 +161,7 @@ const FormPage = (props) => {
             imgButton ?
             (
             <ImgButtonContainer>
-              <Button variant="outlined" endIcon={<AddAPhotoIcon />} siz onClick={handleFileOpen}>
+              <Button variant="outlined" endIcon={<UploadIcon />} siz onClick={handleFileOpen}>
                 Add Image
               </Button>
               <input
