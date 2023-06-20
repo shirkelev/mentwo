@@ -1,4 +1,4 @@
-import * as Constants from './Constants';
+import * as Constants from '../Constants';
 
 // let yuval = {id: 1, agendas: ["women"], filedsList: ["PM", "QA"], softSkills: ["English"], techSkills: ["Python", "Java", "C"]};
 // let shir = {id: 2, agendas: ["man"], filedsList: ["PM", "DS"], softSkills: [], techSkills: ["Java", "C", "C++"]};
