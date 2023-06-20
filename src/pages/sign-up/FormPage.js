@@ -7,6 +7,8 @@ import TextBox from '../../components/small-components/TextBox';
 import { SignUpContext } from '../../context/SignUpContexts';
 import BigContentBox from '../../components/small-components/BigContentBox';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import SaveIcon from '@mui/icons-material/Save';
+
 
 
 const RootContainer = styled(Container)(({ theme }) => ({
@@ -24,7 +26,7 @@ const FormContainer = styled('form')(({ theme }) => ({
   alignItems: 'center',
   marginTop: theme.spacing(2),
   marginBottom: theme.spacing(2),
-  gap: theme.spacing(2),
+  gap: theme.spacing(3),
 }));
 
 
@@ -54,36 +56,52 @@ const Question = styled('h3')(({ theme }) => ({
 
 
 const FormPage = (props) => {
-  const {filedsArray, title, imgButton} = props;
+  const {filedsArray, title, imgButton, onSave} = props;
   const {form, setForm, userInfo, setUserInfo} = useContext(SignUpContext);
+  const [basicInfo, setBasicInfo] = useState({
+    name: userInfo.name ? userInfo.name : '',
+    lastName: userInfo.lastName ? userInfo.lastName : '',
+    phone: userInfo.phone ? userInfo.phone : '',
+    img: userInfo.img ? userInfo.img : '',
+  });
+
+  const onClickSave = () => {
+    setUserInfo({...basicInfo});
+    onSave();
+  }
 
   function handleChange(id, event){
-    let newForm = form;
+    let newForm = basicInfo;
     newForm[id] = event;
-    setForm(newForm);
+    setBasicInfo(newForm);
   }
 
   function WrapQuestions(props){
     const {title, name, placeHolder, onChange, type='short',qid} = props;
     let curPlaceHolder = placeHolder;
+    let isDisabled = false;
+   
     if(userInfo[qid]){
       curPlaceHolder = userInfo[qid];
+      isDisabled = true;
     }
-    console.log('WrapQuestions', curPlaceHolder)
     let quest;
     switch(type){
-        case 'short': quest = <TextBox 
-                      title={title} 
-                      placeholder={curPlaceHolder} 
-                      onChange={onChange}
-                      />
+        case 'short': quest = 
+        <TextBox 
+            title={curPlaceHolder} 
+            placeholder={curPlaceHolder} 
+            onBlur={onChange}
+            isDisabled={isDisabled}
+            />
         break;
         case 'long': quest = <BigContentBox placeholder={curPlaceHolder} />
         break;
         default: quest = <TextBox 
-        title={title} 
+        title={curPlaceHolder} 
         placeholder={curPlaceHolder} 
-        onChange={onChange}
+        onBlur={onChange}
+        isDisabled={isDisabled}
         /> 
     }
     return(
@@ -124,6 +142,12 @@ const FormPage = (props) => {
             </ImgButtonContainer>
             ) : null
           }
+          <ImgButtonContainer>
+            <Button variant="contained" color="primary"  endIcon={<SaveIcon />} siz
+              onClick={onClickSave}>
+                Save
+            </Button>
+          </ImgButtonContainer>
         </Typography>
         
     </FormContainer>
