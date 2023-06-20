@@ -11,7 +11,9 @@ import * as Constants from './Constants';
 // let interviewees = [shir, omer, yuval, dan];
 // matchAll(interviewers, interviewees);
 
-function matchAll(interviewers, interviewees) {
+// 	getMutualTags(nitsan, yuval);
+
+export function matchAll(interviewers, interviewees) {
     let allMatches = [];
     for (let i = 0; i < interviewers.length; i++) {
         allMatches.push(matchInterviewer(interviewers[i], interviewees));
@@ -19,7 +21,7 @@ function matchAll(interviewers, interviewees) {
     return allMatches;
 }
 
-function matchInterviewer(interviewer, interviewees) {
+export function matchInterviewer(interviewer, interviewees) {
     let intervieweesScores = initIntervieweesScoresAccordingToFields(interviewer, interviewees);
 
     for (let i = 0; i < intervieweesScores.length; i++) {
@@ -40,7 +42,6 @@ function matchInterviewer(interviewer, interviewees) {
         // console.log("match " + i + ": id "+  matches[i]);
     }
     
-
     return {interviewerId: interviewer.id, matches: matches};
 }
 
@@ -72,7 +73,7 @@ function calcScore(interViewerTags, intervieweeTags, weight) {
     return score;
 }
 
-function getMutualTags(interviewer, interviewee) {
+export function getMutualTags(interviewer, interviewee) {
     let mutualTags = {filedsList: [], techSkills: [], softSkills: [], agendas: []};
     for (let i = 0; i < interviewer.filedsList.length; i++) {
         if (interviewee.filedsList.includes(interviewer.filedsList[i])) {
