@@ -13,6 +13,8 @@ import {
 import { auth, db } from '../data/firebase';
 import { DB } from '../data/firebase';
 import { Navigate, useNavigate } from 'react-router-dom';
+import IntreviwerImg from '../data/images/interviewer.png';
+import IntrevieweeImg from '../data/images/interveiwee.png';
 
 const AuthContext = createContext();
 
@@ -76,7 +78,10 @@ const fetchUserData = async (user) => {
   }
   const userData = await DB.getUser(user.uid);
   console.log("User Data Gotten", userData.data());
-  setUserData(userData.data());
+  let data = userData.data();
+  // const img = require(data.img? data.img : '');
+  // data.img = img;
+  setUserData(data);
   setLoading(false);
 }
 
