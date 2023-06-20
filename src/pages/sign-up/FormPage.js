@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useRef} from 'react';
 import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -56,8 +56,10 @@ const Question = styled('h3')(({ theme }) => ({
 
 
 const FormPage = (props) => {
+
   const {filedsArray, title, imgButton, onSave} = props;
   const {form, setForm, userInfo, setUserInfo} = useContext(SignUpContext);
+  
   const [basicInfo, setBasicInfo] = useState({
     name: userInfo.name ? userInfo.name : '',
     lastName: userInfo.lastName ? userInfo.lastName : '',
@@ -65,9 +67,23 @@ const FormPage = (props) => {
     img: userInfo.img ? userInfo.img : '',
   });
 
-  const onClickSave = () => {
-    setUserInfo({...basicInfo});
-    onSave();
+  const [file, setFile] = useState(null);
+  const fileInput = useRef();
+
+  const handleFileOpen = () => {
+    fileInput.current.click();
+  };
+
+  const handleFileChange = (event) => {
+    // get selected file
+    const selectedFile = event.target.files[0];
+    setFile(selectedFile);
+    console.log(selectedFile);
+    // Continue with upload process
+  };
+
+  const onClickSave = async () => {
+    await onSave(basicInfo);
   }
 
   function handleChange(id, event){
@@ -112,9 +128,10 @@ const FormPage = (props) => {
     )
   };
 
+
   return (
     <>
-    {console.log('FormPage', userInfo['name'])}
+    {console.log('FormPage', basicInfo)}
     <RootContainer >
       <FormContainer>
         <Typography >
@@ -128,7 +145,7 @@ const FormPage = (props) => {
             name= {x.name}
             placeHolder={userInfo[x.qid]? userInfo[x.qid] : x.placeHolder} 
             type={x.type}
-            onChange={(event) => handleChange(x.id, event.target.value)}
+            onChange={(e) => handleChange(x.qid, e.target.value)}
             qid={x.qid}
             />
             )}
@@ -136,16 +153,27 @@ const FormPage = (props) => {
             imgButton ?
             (
             <ImgButtonContainer>
-              <Button variant="outlined" endIcon={<AddAPhotoIcon />} siz>
+              <Button variant="outlined" endIcon={<AddAPhotoIcon />} siz onClick={handleFileOpen}>
                 Add Image
               </Button>
+              <input
+                  type="file"
+                  hidden
+                  ref={fileInput} 
+                  onChange={handleFileChange}
+                />
             </ImgButtonContainer>
             ) : null
           }
           <ImgButtonContainer>
             <Button variant="contained" color="primary"  endIcon={<SaveIcon />} siz
               onClick={onClickSave}>
+                <input
+                  type="file"
+                  hidden
+                  />
                 Save
+              
             </Button>
           </ImgButtonContainer>
         </Typography>

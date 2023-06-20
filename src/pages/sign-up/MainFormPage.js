@@ -3,9 +3,10 @@ import * as Constantans from '../../Constants';
 import { SignUpContext } from '../../context/SignUpContexts';
 import FormPage from './FormPage';
 import { Button } from '@mui/material';
+import { DB } from '../../data/firebase';
 
 
-const MainFormPage = () => {
+const MainFormPage = ({onSave}) => {
   const {step, setStep, completed, 
       setCompleted, form, setForm, userInfo, setUserInfo} = useContext(SignUpContext);
     
@@ -16,8 +17,8 @@ const MainFormPage = () => {
     img: userInfo.img ? userInfo.img : '',
   });
   
-  function checkMainForm(form = null){
-    return true;
+  function checkMainForm(form){
+    return form.name !== '' & form.lastName !== '' & form.phone !== '';
   }
 
   function handleChange(id, event){
@@ -26,9 +27,15 @@ const MainFormPage = () => {
     setBasicInfo(newForm);
   }
 
-  function onSave(){
-    setUserInfo({...basicInfo});
-    setStep(step + 1);
+  async function onClickSave(newInfo){
+    if(checkMainForm(newInfo)){
+      setUserInfo({newInfo});
+      await onSave(newInfo);
+      let newCompleted = completed;
+      newCompleted[step] = true;
+      setCompleted(newCompleted);
+      setStep(step + 1);
+    }
   }
 
   
@@ -43,7 +50,7 @@ const MainFormPage = () => {
       condition={true}
       imgButton={true}
       userInfo={userInfo} 
-      onSave={onSave}/>
+      onSave={onClickSave}/>
     
     </>
   )

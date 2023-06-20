@@ -261,6 +261,17 @@ class DataBase {
     }
   }
 
+  async changeUserBasicInfo(id, name, lastName, phone, img) {
+    console.log("Updating user with ID ", id, name, lastName, phone, img);
+    try{
+      const userRef = doc(this.db, Constants.USERS_DB_NAME, id);
+      return updateDoc(userRef, {name: name, lastName: lastName,  phone: phone, img: img});
+    } catch (e) {
+      console.log("Error updating user with ID ", id, e);
+      return null;
+    }
+  }
+
 
 }
 
