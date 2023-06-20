@@ -17,7 +17,7 @@ export const WAIT_MENTOR_APPROVAL_PAGE = 'mantorApprovalWaitPage';
 export const MATCH_SUCCESS_PAGE = 'matchSuccessPage';
 export const MENTOR_IN_PROCESS_PAGE = 'mentorInProcessPage';
 export const NEW_FORM_PAGE = 'NewFormPage';
-
+export const PROFILE_PAGE = 'ProfilePage';
 
 // HomeContentTypes
 export const PENDINGS = 'Pending Requests';
