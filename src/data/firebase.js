@@ -12,6 +12,7 @@ import {
   addDoc,
   updateDoc
 } from "firebase/firestore";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { 
   getAuth
   , GoogleAuthProvider
@@ -51,10 +52,24 @@ class DataBase {
     this.users = collection(db, Constants.USERS_DB_NAME);
     this.interviews = collection(db, Constants.INTERVIEWERS_DB_NAME);
     this.interviewess = collection(db, Constants.INTERVIEWEES_DB_NAME);
+    this.storage = getStorage(app);
     // this.intreviwers = collection(db, 'intreviwers');
     // this.intreviewees = collection(db, 'intreviewees');
   }
 
+
+  async uploadFileAndGetURL(file, name) {
+    let uploadTask;
+    try{
+      const storageRef = ref(this.storage, name);
+      uploadTask = await uploadBytesResumable(storageRef, file);
+      const url = await getDownloadURL(uploadTask.ref);
+      return url;
+    } catch (e) {
+      console.log("Error uploading file", e);
+      return null;
+    }
+  }
   async getAllUsers() {
     // Returns a list of all users
 
@@ -263,9 +278,11 @@ class DataBase {
 
   async changeUserBasicInfo(id, name, lastName, phone, img) {
     console.log("Updating user with ID ", id, name, lastName, phone, img);
+    const downloadURL = await this.uploadFileAndGetURL( img, 'profile_img_' + id);
+    console.log("Download URL is ", downloadURL);
     try{
       const userRef = doc(this.db, Constants.USERS_DB_NAME, id);
-      return updateDoc(userRef, {name: name, lastName: lastName,  phone: phone, img: img});
+      return updateDoc(userRef, {name: name, lastName: lastName,  phone: phone, img: downloadURL});
     } catch (e) {
       console.log("Error updating user with ID ", id, e);
       return null;

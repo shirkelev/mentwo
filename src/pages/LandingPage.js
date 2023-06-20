@@ -33,7 +33,7 @@ function LandingPage() {
          <Divider orientation="vertical" flexItem='true' />
          <ButtonWrapper variant="text" color="primary" title='Sign Up' to={Constants.SIGN_UP} />
     </Box>
-    <img src={peopleImg} style={ {marginTop: '15px', height: '380px', width: '85%', display: 'block', margin: '0 auto' }}></img>
+    <img src={peopleImg} style={ {marginTop: '15px', height: '380px', width: '90%', display: 'block', margin: '0 auto' }}></img>
     <Box sx={{overflow: 'scroll',  marginTop: '20px', marginLeft: '20px', marginRight: '20px'} }>
           <Typography align='justify'>
           <span style={{ fontWeight: 'bold', color: '#64B5F6', fontSize: '18px' }}>InternView</span> is an application designed to connect experienced workers in the high-tech industry and candidates looking for their first job in the field,
