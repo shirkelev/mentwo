@@ -265,6 +265,12 @@ const SignUpFlow = ({props}) => {
 
     const to = ['./', Constants.CHOOSE_ROLE_PAGE, Constants.REG_FORM];
     
+    async function onBasicInfoSubmit(newInfo){
+        setLocalLoading(true);
+        console.log('user', user.uid, newInfo.name, newInfo.lastName,  newInfo.phone, newInfo.img)
+        await DB.changeUserBasicInfo(user.uid, newInfo.name, newInfo.lastName,  newInfo.phone, newInfo.img)
+        setLocalLoading(false);
+    }
     
     const StepContent = () => {
 
@@ -272,7 +278,7 @@ const SignUpFlow = ({props}) => {
         if(!loading && !localLoading){
             switch (step) {
                 case 0:
-                    return <MainFormPage />;
+                    return <MainFormPage onSave={onBasicInfoSubmit}/>;
                 case 1:
                     return <ChooseRolePage />;
                 case 2:
@@ -297,9 +303,10 @@ const SignUpFlow = ({props}) => {
         
         <RootContainer>
             {/* {console.log(userData, user)} */}
-            {console.log(form, role, userData, "UserInfo",userInfo)}
+            
             <SignUpContext.Provider value={{role, setRole, step, setStep, completed, 
                                         setCompleted, form, setForm, saveSuccess, userInfo, setUserInfo}}>
+                {console.log("UserInfo",userInfo, user)}
                 <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} />
                 <ContentContainer>
                     <StepContent />
