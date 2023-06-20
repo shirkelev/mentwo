@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import MySettingsIcon from './small-components/MySettingsIcon';
 import HamburgerMenuButton from './small-components/HaburgerMenuButton';
 import TopBarLogo from './small-components/TopBarLogo';
 import HamburgerMenu from './HamburgerMenu';
@@ -22,23 +23,25 @@ export default function NavigationBar({user}) {
   const {showMenu, setShowMenu} = React.useContext(HamburgerMenuContext)
   return (
       <>
-       <AppBar position="static">
-        <Toolbar>
-          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'right', width: '100%' }}>
-            <Box sx={{ flexGrow: 1 }} />
-            <TopBarLogo />
-            <Box sx={{ flexGrow: 1 }} />
-          </Box>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          >
-            <HamburgerMenuButton user={user} />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      <Box sx={{ flex: 1, style:"position: fixed;" }}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              size="large"
+              edge="start" 
+              color="inherit"
+              aria-label="menu"
+              
+            >
+              <HamburgerMenuButton user={user} />
+            </IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} />
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <TopBarLogo/>
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </Box>
       {showMenu && 
       <div style={containerStyle}>
         <HamburgerMenu user={user} />
