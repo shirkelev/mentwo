@@ -1,17 +1,17 @@
-import * as Constants from './Constants';
+import * as Constants from '../Constants';
 
-// let yuval = {id: 1, agendas: ["women"], filedsList: ["PM", "QA"], softSkills: ["English"], techSkills: ["Python", "Java", "C"]};
-// let shir = {id: 2, agendas: ["man"], filedsList: ["PM", "DS"], softSkills: [], techSkills: ["Java", "C", "C++"]};
-// let omer = {id: 3, agendas: ["man"], filedsList: ["Algo", "DS"], softSkills: [], techSkills: ["Java", "C", "C++"]};
-// let dan = {id: 4, agendas: ["man"], filedsList: ["PM", "DS"], softSkills: ["Hebrew", "smallTalk"], techSkills: ["Java", "C", "C++"]};
-// let nitsan = {id: 10, agendas: ["women"], filedsList: ["PM"], softSkills: ["Hebrew", "smallTalk"], techSkills: ["Python", "C++"]};
-// let lee = {id: 11, agendas: ["man"], filedsList: ["DS"], softSkills: ["Hebrew"], techSkills: ["Java", "C", "C++"]};
+// let yuval = {id: 1, agendas: ["women"], fields: ["PM", "QA"], softSkills: ["English"], techSkills: ["Python", "Java", "C"]};
+// let shir = {id: 2, agendas: ["man"], fields: ["PM", "DS"], softSkills: [], techSkills: ["Java", "C", "C++"]};
+// let omer = {id: 3, agendas: ["man"], fields: ["Algo", "DS"], softSkills: [], techSkills: ["Java", "C", "C++"]};
+// let dan = {id: 4, agendas: ["man"], fields: ["PM", "DS"], softSkills: ["Hebrew", "smallTalk"], techSkills: ["Java", "C", "C++"]};
+// let nitsan = {id: 10, agendas: ["women"], fields: ["PM"], softSkills: ["Hebrew", "smallTalk"], techSkills: ["Python", "C++"]};
+// let lee = {id: 11, agendas: ["man"], fields: ["DS"], softSkills: ["Hebrew"], techSkills: ["Java", "C", "C++"]};
 
 // let interviewers = [nitsan, lee];
 // let interviewees = [shir, omer, yuval, dan];
 // matchAll(interviewers, interviewees);
 
-// 	getMutualTags(nitsan, yuval);
+//  getMutualTags(nitsan, yuval);
 
 export function matchAll(interviewers, interviewees) {
     let allMatches = [];
@@ -49,8 +49,8 @@ function initIntervieweesScoresAccordingToFields(interviewer, interviewees) {
     let intervieweesScores = [];
     for (let i = 0; i < interviewees.length; i++) {
         let addInterviewee = false;
-        for (let j = 0; j < interviewer.filedsList.length; j++) {
-            if (interviewees[i].filedsList.includes(interviewer.filedsList[j])) {
+        for (let j = 0; j < interviewer.fields.length; j++) {
+            if (interviewees[i].fields.includes(interviewer.fields[j])) {
                 addInterviewee = true;
             }
         }
@@ -74,10 +74,10 @@ function calcScore(interViewerTags, intervieweeTags, weight) {
 }
 
 export function getMutualTags(interviewer, interviewee) {
-    let mutualTags = {filedsList: [], techSkills: [], softSkills: [], agendas: []};
-    for (let i = 0; i < interviewer.filedsList.length; i++) {
-        if (interviewee.filedsList.includes(interviewer.filedsList[i])) {
-            mutualTags.filedsList.push(interviewer.filedsList[i]);
+    let mutualTags = {fields: [], techSkills: [], softSkills: [], agendas: []};
+    for (let i = 0; i < interviewer.fields.length; i++) {
+        if (interviewee.fields.includes(interviewer.fields[i])) {
+            mutualTags.fields.push(interviewer.fields[i]);
         }
     }
     for (let i = 0; i < interviewer.techSkills.length; i++) {
