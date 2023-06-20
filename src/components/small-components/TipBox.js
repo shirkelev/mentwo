@@ -8,7 +8,7 @@ const TipBox = ({tipMessege: tipMessage}) => {
             Tip of the day from a satisfied user:
         </Typography>
         <Typography variant="body1" style={{ fontSize: 14 }}>{tipMessage}</Typography>
-        <TipsAndUpdatesIcon style={{marginTop: '5px', color: '#b1a5e3'}}/>
+        <TipsAndUpdatesIcon style={{marginTop: '5px', color: '#91D8E4'}}/>
         </Card>
     );
   };
