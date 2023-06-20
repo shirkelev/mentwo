@@ -40,7 +40,7 @@ export default function ProfilePage() {
                         >
                         <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={userData.img}/></Grid>
                     </Grid>
-                    <TableContainer component={Paper} sx={{ width: "100%"}}>
+                    <TableContainer component={Paper} sx={{ width: "350px"}}>
                     <Table sx={{ width: '100%' }} aria-label="simple table">
                     <TableBody>
             <TableRow
