@@ -19,7 +19,7 @@ export default function HamburgerMenu({user}) {
           <Paper sx={{ width: '230px' }}>
               <MenuList dense>
               <HamburgerMenuItem text="My Profile" icon = {AccountCircleIcon}
-              path="./" onClick={handleClick}/>
+              path={"./" + Constants.PROFILE_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="About InternView" icon = {InfoIcon}
               path = {"./" + Constants.ABOUT_PAGE} onClick={handleClick}/>
               <HamburgerMenuItem text="Log Out" icon = {LogoutIcon}

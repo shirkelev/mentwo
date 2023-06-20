@@ -25,6 +25,7 @@ import ChooseMentor from "../components/ChooseMentor";
 import MatchSuccess from "../components/MatchSuccess";
 import NewFormPage from "./sign-up/NewFormPage";
 import ButtomBar from "../components/ButtomBar";
+import ProfilePage from "../components/ProfilePage";
 
 const NavCont = styled('nav')(({ theme }) => ({
     position: 'sticky',
@@ -99,6 +100,7 @@ export default function HomePageMain() {
                         <Route path={CONSTANTS.WAIT_MENTOR_APPROVAL_PAGE} element={<MentorApproval mentee={userData} />} />
                         <Route path={CONSTANTS.MATCH_SUCCESS_PAGE} element={<MatchSuccess mentee={userData} />} />
                         <Route path={CONSTANTS.NEW_FORM_PAGE} element={<NewFormPage user={userData} />} />
+                        <Route path={CONSTANTS.PROFILE_PAGE} element={<ProfilePage user={userData} />} />
                     </Routes>
                     )
                 }
