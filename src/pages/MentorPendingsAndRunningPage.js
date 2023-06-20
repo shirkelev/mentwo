@@ -15,7 +15,7 @@ export default function MentorPendingsAndRunningPage ({user}) {
 
       </div>
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <TipBox tipMessege = {"I recommend holding an online meeting once a week between the interviewer and the interviewee, in which the current status will be aligned and requests, comments or questions can be flooded"}/>
+        <TipBox tipMessege = {"I recommend that at the end of the interview the interviewee will ask for feedback."}/>
       </div>
     </div>
     </>

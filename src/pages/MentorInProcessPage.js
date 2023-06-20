@@ -15,7 +15,7 @@ export default function MentorInProcessPage ({user}) {
         list={user.approvedMentessData ? user.approvedMentessData: []} user={user}/>
       </div>
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <TipBox tipMessege={"After the process is over, I recommend that the  interviewer ask the interviewee for a short feedback on his mentoring so that he can improve in his next mentoring processes."}/>
+        <TipBox tipMessege={"I recommend that at the end of the interview the interviewee will ask for feedback."}/>
       </div>
     </div>
   );
