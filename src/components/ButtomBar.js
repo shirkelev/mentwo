@@ -15,6 +15,7 @@ import { HamburgerMenuContext } from '../context/HamburgerMenuContexts';
 import { Box } from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import GroupsIcon from '@mui/icons-material/Groups';
+import ReviewsIcon from '@mui/icons-material/Reviews';
 
 
 
@@ -48,7 +49,7 @@ export default function BottomAppBar({user}) {
                     <HowToRegIcon/ >
                 </IconButton>
                 <IconButton color="inherit" aria-label="Mock Interviews Tips"  onClick = {() => handleClick("./" + Constants.RECOMMENDATINS_PAGE)} >
-                    <NextWeekIcon/ >
+                    <ReviewsIcon/ >
                 </IconButton>
                 </StyledToolbar>
             </AppBar>
@@ -71,7 +72,7 @@ else {
                 <AutorenewIcon />
             </IconButton>
             <IconButton color="inherit" aria-label="Mock Interviews Tips"  sx={{ margin: '0 70px' }} onClick = {() => handleClick("./" + Constants.RECOMMENDATINS_PAGE)} >
-                <NextWeekIcon/ >
+                <ReviewsIcon/ >
             </IconButton>
             </Box>
             </StyledToolbar>
