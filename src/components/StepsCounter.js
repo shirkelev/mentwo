@@ -3,11 +3,13 @@ import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import StepButton from '@mui/material/StepButton';
 import Step from '@mui/material/Step';
+
 // import StepLabel from '@mui/material/StepLabel';
 // import Button from '@mui/material/Button';
 // import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 import { SignUpContext } from '../context/SignUpContexts';
+import { StepLabel } from '@mui/material';
 
 
 
@@ -41,10 +43,9 @@ function MyStep(props){
         <Box sx={{ width: '100%'}}>
             <Stepper nonLinear activeStep={step}>
                 {steps.map((label, index) => (
-                    <Step key={label} completed={completed[index]}>
-                        <StepButton disabled color="inherit" >
-                            {label}
-                        </StepButton>
+                    <Step key={label} completed={completed[index]}  >
+                        <StepButton disabled color="inherit" />
+                        {/* <StepLabel>{label}</StepLabel> */}
                     </Step>
                 ))}
                     

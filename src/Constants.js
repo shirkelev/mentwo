@@ -129,62 +129,26 @@ export const MENTEE_QUESTIONS = [
 export const DEFAULT_QUESTIONS = [
     {
         name: 'Name',
-        id: 'firstName',
+        qid: 'name',
         placeHolder: 'First Name',
         title: 'Name'
     },
     {
         name: 'Last Name',
-        id: 'lastName',
+        qid: 'lastName',
         placeHolder: 'Last Name',
         title: 'Surname'
     },
     {
-        name: 'User Name',
-        id: 'userName',
-        placeHolder: 'User Name',
-        title: 'User Name'
-    },
-    {
-        name: 'Email',
-        id: 'email',
-        placeHolder: 'Email',
-        title: 'eMail'
-    },
-    {
         name: 'Phone Number',
-        id: 'phone',
+        qid: 'phone',
         placeHolder: 'Phone Number',
         title: 'Phone Number'
-    },
-    {
-        name: 'Age',
-        id: 'age',
-        placeHolder: 'Age',
-        title: 'age'
-    },
-    {
-        name: 'Address',
-        id: 'address',
-        placeHolder: 'address',
-        title: 'Address'
-    },
-    {
-        name: 'Password',
-        id: 'password',
-        placeHolder: 'Password',
-        title: 'Password'
-    },
-    {
-        name: 'Confirm Password',
-        id: 'confirmPassword',
-        placeHolder: 'Confirm Password',
-        title: 'Confirm Password'
     }
 ]
 // Sign Up Form Steps
 
-export const SIGN_UP_STEPS = ['Role', 'Personal Info'];
+export const SIGN_UP_STEPS = ['Personal Info','Role', 'Proffesional Info'];
 
 
 //FireBase
