@@ -122,7 +122,7 @@ const SignInPage = () => {
             <Typography variant="h5" style={{fontWeight: 'bold'}}>Sign In</Typography>
                 <FormContainer >
                     <TextContainer>
-                        <Typography variant="h6" style={{color: 'red'}}>{error}</Typography>
+                        <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{error}</Typography>
                         <TextBox title="Email" placeholder="Enter your email" onBlur={handleChangeEmail}/>
                         <TextBox title="Password" placeholder="Enter your password" onBlur={handleChangePassword}/>
                         <Stack direction="row" spacing={2}>
