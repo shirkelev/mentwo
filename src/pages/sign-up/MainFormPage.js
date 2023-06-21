@@ -18,7 +18,8 @@ const MainFormPage = ({onSave}) => {
   });
   
   function checkMainForm(form){
-    return form.name !== '' & form.lastName !== '' & form.phone !== '';
+    return form.name !== '' & form.lastName !== '' & form.phone !== '' & 
+          (!form.img || form.img.startsWith('img'));
   }
 
   function handleChange(id, event){

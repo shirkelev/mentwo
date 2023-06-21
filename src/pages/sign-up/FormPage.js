@@ -65,7 +65,7 @@ const FormPage = (props) => {
     name: userInfo.name ? userInfo.name : '',
     lastName: userInfo.lastName ? userInfo.lastName : '',
     phone: userInfo.phone ? userInfo.phone : '',
-    img: userInfo.img ? userInfo.img : '',
+    img: userInfo.img ? userInfo.img : null,
   });
 
   const [file, setFile] = useState(null);
@@ -78,9 +78,15 @@ const FormPage = (props) => {
   const handleFileChange = (event) => {
     // get selected file
     const selectedFile = event.target.files[0];
-    setBasicInfo({...basicInfo, img: selectedFile})
-    setFile(selectedFile);
-    console.log(selectedFile);
+    console.log(selectedFile.type)
+    if(selectedFile.type.startsWith('image')){
+      setBasicInfo({...basicInfo, img: selectedFile})
+      setFile(selectedFile);
+      console.log(selectedFile);
+    } else {
+      return 
+      //Add Error Message
+    }
     // Continue with upload process
   };
 
@@ -177,7 +183,7 @@ const FormPage = (props) => {
             <Button variant="contained" color="primary"  endIcon={<SaveIcon />} siz
               onClick={onClickSave}>
                 <input
-                  type="file"
+                  type="img"
                   hidden
                   />
                 Save

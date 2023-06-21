@@ -279,11 +279,18 @@ const SignUpFlow = ({props}) => {
         setLocalLoading(false);
     }
 
-    // const ProtectedMainFormPage = ({children}) => {
-    //     if(userInfo.name && userInfo.lastName && userInfo.phone && userInfo.img){
-    //         step
-
-    // }
+    const ProtectedMainFormPage = ({children}) => {
+        if(userInfo.name && userInfo.lastName && userInfo.phone && userInfo.img){
+            let newCompleted = completed;
+            newCompleted[step] = true;
+            setCompleted(newCompleted);
+            setStep(step + 1);
+            return <ChooseRolePage />;
+        }
+        else {
+            return children
+        }
+    }
     
     const StepContent = () => {
 
@@ -291,7 +298,11 @@ const SignUpFlow = ({props}) => {
         if(!loading && !localLoading){
             switch (step) {
                 case 0:
-                    return <MainFormPage onSave={onBasicInfoSubmit}/>;
+                    return (
+                    <ProtectedMainFormPage>
+                        <MainFormPage onSave={onBasicInfoSubmit}/>
+                    </ ProtectedMainFormPage>
+                    )
                 case 1:
                     return <ChooseRolePage />;
                 case 2:
