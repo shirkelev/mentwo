@@ -272,8 +272,8 @@ class DataBase {
       for(let i = 0; i < processedList.length; i++){
         const intervieweeBaseData = await getDoc(doc(this.db, Constants.USERS_DB_NAME, processedList[i]));
         const intervieweeExtraData = await getDoc(doc(this.db, Constants.INTERVIEWEES_DB_NAME, processedList[i]));
-        const interviewee = {...intervieweeBaseData.data(), ...intervieweeExtraData.data()};
-        processedInterviewees.push(interviewee);
+        const intervieweeData = {...intervieweeBaseData.data(), ...intervieweeExtraData.data()};
+        processedInterviewees.push(intervieweeData);
       }
       console.log("All processed interviewees are added");
       return processedInterviewees;
