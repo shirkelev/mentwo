@@ -139,9 +139,9 @@ export default function PersonCard({variant, mainUser, cardUser}) {
                     justifyContent="left"
                     alignItems="left"
                     spacing={1}>
-        <TagsCategory category = {Constants.TECHSKILLS} num={cardUser.mutualTags.techSkills ? cardUser.mutualTags.techSkills.length : 0}/>
-        <TagsCategory category = {Constants.SOFTSKILLS} num={cardUser.mutualTags.softSkills ? cardUser.mutualTags.softSkills.length : 0}/>
-        <TagsCategory category = {Constants.AGENDAS} num={cardUser.mutualTags.agendas ? cardUser.mutualTags.agendas.length : 0}/>
+        <TagsCategory category = {Constants.TECHSKILLS} num={cardUser.mutualTags?.techSkills ? cardUser.mutualTags.techSkills.length : 0}/>
+        <TagsCategory category = {Constants.SOFTSKILLS} num={cardUser.mutualTags?.softSkills ? cardUser.mutualTags.softSkills.length : 0}/>
+        <TagsCategory category = {Constants.AGENDAS} num={cardUser.mutualTags?.agendas ? cardUser.mutualTags.agendas.length : 0}/>
         </Stack>
         </>
       )
