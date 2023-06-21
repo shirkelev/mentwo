@@ -303,7 +303,6 @@ const SignUpFlow = ({props}) => {
     }
     useEffect(() => {
         if(!loading){
-            console.log("## HEY");
             setUserInfo(userData);
         }
     }, [loading])

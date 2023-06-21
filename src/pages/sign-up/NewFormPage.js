@@ -167,7 +167,6 @@ const NewFormPage = ({name, onClickSubmit}) => {
             setError("You must fill at least one professional field")
             setForm(curForm)
             console.log("You must fill at least one professional field")
-            
         } else {
         const curForm = {fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description};
         console.log('Form in NewFoem', curForm)
