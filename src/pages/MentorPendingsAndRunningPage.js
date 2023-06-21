@@ -6,12 +6,15 @@ import * as Constants from '../Constants';
 import { Typography } from '@mui/material';
 
 export default function MentorPendingsAndRunningPage ({user}) {
-  
+  let pendingsList = user.pendingMenteesData ? user.pendingMenteesData : [];
+  const sliceLength = pendingsList.length > 3 ? 3 : pendingsList.length;
+  pendingsList = pendingsList.slice(0, sliceLength)
+  console.log("pendingsList", pendingsList,sliceLength);
   return (
     <>
      <div style={{ width: '100vw', height: '100vh' }}>
       <div style={{ padding: '10px'}}>
-        <HomeContent headline = {Constants.PENDINGS} list={user.pendingMenteesData ? user.pendingMenteesData : []} user={user}/>
+        <HomeContent headline = {Constants.PENDINGS} list={pendingsList} user={user}/>
 
       </div>
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>

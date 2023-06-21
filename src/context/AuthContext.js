@@ -206,7 +206,7 @@ useEffect(() => {
     <AuthContext.Provider value={{ 
       googleSignIn, emailSignIn, logOut, user, setUser, 
       emailSignUp, error, userData, setUserData, loading, setLoading, 
-      setEnterHome
+      setEnterHome, fullDataFetched
       }}>
       {children}
     </AuthContext.Provider>

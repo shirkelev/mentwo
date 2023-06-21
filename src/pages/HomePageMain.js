@@ -35,10 +35,13 @@ const NavCont = styled('nav')(({ theme }) => ({
   }));
 
 export default function HomePageMain() {
+    const {user, setUser, userData, setUserData, loading, setLoading, setEnterHome, fullDataFetched} = UserAuth();
     const [showMenu, setShowMenu] = React.useState(false);
     const [bottomNavValue, setBottomNavValue] = React.useState(0);
+    const [feedData, setFeedData] = React.useState(userData);
+    const [localLoading, setLocalLoading] = React.useState(false);
     // const {user, setUser, dataBase} = useContext(UserContext);
-    const {user, setUser, userData, setUserData, loading, setLoading, setEnterHome} = UserAuth();
+    
 
     // const fetchData = async () => {
     //     if(!dataFetched) {
@@ -68,44 +71,49 @@ export default function HomePageMain() {
     
 
     useEffect(() => {
+        setLocalLoading(true);
         console.log("User is logged in and signed up, fetching data");
         setEnterHome(true);
+        if(fullDataFetched){
+            console.log("After Fetching Extra User Data ", userData);
+            setFeedData(userData);
+            setLocalLoading(false);
+        }
         
     }, []);
 
-
     return (
         <div style={{ backgroundColor: '#F8FFFF' }}>
-            {console.log("User Data", userData)}
+            {console.log("User Data", userData, feedData, fullDataFetched)}
             <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
                 <NavCont>
                     <NavigationBar user = {userData ? userData : null}/>
                 </ NavCont>
                 {
-                loading ? 
+                loading || localLoading ? 
                     ( <SignUpLoading text={"Loading..."}></SignUpLoading> )
                     :
                     (
                     <Routes>
                         <Route path="/" element={
-                            userData.type === 'mentor' ? <MentorPendingsAndRunningPage user={userData} /> : 
-                            !userData.isMatched ? <MenteeMatchingPage user={userData} /> : <MatchSuccess mentee={userData} /> } exact/>
+                            userData.type === 'mentor' ? <MentorPendingsAndRunningPage user={feedData} /> : 
+                            !userData.isMatched ? <MenteeMatchingPage user={feedData} /> : <MatchSuccess mentee={feedData} /> } exact/>
                             {/* // : <MentorApproval mentee={userData} /> } exact/> */}
-                        <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={userData} />} />
-                        <Route path={CONSTANTS.MENTOR_IN_PROCESS_PAGE} element={<MentorInProcessPage user={userData} />} />
-                        <Route path={CONSTANTS.PROCESS_COMPLETION_FORM} element={<ProcessCompletionPage user={userData} />} />
-                        <Route path={CONSTANTS.ABOUT_PAGE} element={<AboutPage user={userData} />} />
-                        <Route path={CONSTANTS.RECOMMENDATINS_PAGE} element={<Recommendations user={userData} />} />
-                        <Route path={CONSTANTS.CHOOSE_MENTOR_PAGE} element={<ChooseMentor mentee={userData} />} />
-                        <Route path={CONSTANTS.MENTEE_STATUS} element={<MenteeMatchingPage mentee={userData} />} />
-                        <Route path={CONSTANTS.WAIT_MENTOR_APPROVAL_PAGE} element={<MentorApproval mentee={userData} />} />
-                        <Route path={CONSTANTS.MATCH_SUCCESS_PAGE} element={<MatchSuccess mentee={userData} />} />
-                        <Route path={CONSTANTS.NEW_FORM_PAGE} element={<NewFormPage user={userData} />} />
-                        <Route path={CONSTANTS.PROFILE_PAGE} element={<ProfilePage user={userData} />} />
+                        <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={feedData} />} />
+                        <Route path={CONSTANTS.MENTOR_IN_PROCESS_PAGE} element={<MentorInProcessPage user={feedData} />} />
+                        <Route path={CONSTANTS.PROCESS_COMPLETION_FORM} element={<ProcessCompletionPage user={feedData} />} />
+                        <Route path={CONSTANTS.ABOUT_PAGE} element={<AboutPage user={feedData} />} />
+                        <Route path={CONSTANTS.RECOMMENDATINS_PAGE} element={<Recommendations user={feedData} />} />
+                        <Route path={CONSTANTS.CHOOSE_MENTOR_PAGE} element={<ChooseMentor mentee={feedData} />} />
+                        <Route path={CONSTANTS.MENTEE_STATUS} element={<MenteeMatchingPage mentee={feedData} />} />
+                        <Route path={CONSTANTS.WAIT_MENTOR_APPROVAL_PAGE} element={<MentorApproval mentee={feedData} />} />
+                        <Route path={CONSTANTS.MATCH_SUCCESS_PAGE} element={<MatchSuccess mentee={feedData} />} />
+                        <Route path={CONSTANTS.NEW_FORM_PAGE} element={<NewFormPage user={feedData} />} />
+                        <Route path={CONSTANTS.PROFILE_PAGE} element={<ProfilePage user={feedData} />} />
                     </Routes>
                     )
                 }
-                 <ButtomBar user={userData}></ButtomBar>
+                 <ButtomBar user={feedData}></ButtomBar>
             </HamburgerMenuContext.Provider>
            
 
