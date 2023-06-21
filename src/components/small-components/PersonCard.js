@@ -4,23 +4,27 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { Avatar } from '@mui/material';
-import { Stack } from '@mui/material';
-import PhoneIcon from '@mui/icons-material/Phone';
+import { Avatar, Box, Stack } from '@mui/material';
 import { UserModalContext } from '../../context/UserModalContext';
-import { useTheme } from '@emotion/react';
-import UserContentDetails from './UserContectDetails';
-import {UserContentDetailsContext} from '../../context/UserContentDetailsContext';
 import * as Constants from '../../Constants';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { RestaurantMenu, Tag } from '@mui/icons-material';
 import UserCardModal from '../UserCardModal';
 import TagsCategory from './TagsCategory';
 
 
 const maxLength = 70;
 
+const FiledsList = ({list}) => {
+  const itemList = list.join(",  "); 
+
+  return (
+    <div style={{ marginRight: 5, marginLeft: 5 }}>
+      <Typography variant="body2" fontWeight="bold" color="text.secondary">
+        {itemList}
+      </Typography>
+    </div>
+  );
+};
 
 
 function trimDetail(details){
@@ -129,10 +133,16 @@ export default function PersonCard({variant, mainUser, cardUser}) {
     const CardInsideContent = () => {
       return(
         <>
-        <TagsCategory category = {Constants.FIELDS}  num={cardUser.mutualTags.fields ? cardUser.mutualTags.fields.length : 0}/>
+        
+        {/* <TagsCategory category = {Constants.FIELDS}  num={cardUser.mutualTags.fields ? cardUser.mutualTags.fields.length : 0}/> */}
+        <Stack direction="column"
+                    justifyContent="left"
+                    alignItems="left"
+                    spacing={1}>
         <TagsCategory category = {Constants.TECHSKILLS} num={cardUser.mutualTags.techSkills ? cardUser.mutualTags.techSkills.length : 0}/>
         <TagsCategory category = {Constants.SOFTSKILLS} num={cardUser.mutualTags.softSkills ? cardUser.mutualTags.softSkills.length : 0}/>
         <TagsCategory category = {Constants.AGENDAS} num={cardUser.mutualTags.agendas ? cardUser.mutualTags.agendas.length : 0}/>
+        </Stack>
         </>
       )
     }
@@ -149,12 +159,11 @@ export default function PersonCard({variant, mainUser, cardUser}) {
           >
             <Avatar  sx={{ width: 70, height: 70, border: 1, margin:2}} src={cardUser.img}  borderStyle='line'/>
             
-            <Stack direction="column" justifyContent="left" alignItems="center">
-              <Typography gutterBottom variant="h5" component="div" fontWeight={'bold'}> {cardUser.name} {cardUser.lastName} </Typography>
-              <Typography variant="body2" color="text.secondary" fontWeight={'bold'}> {cardUser.profession} </Typography>
+            <Stack justifyContent="flex-start">
+              <Typography variant="h6" fontWeight={'bold'}> {cardUser.name} {cardUser.lastName} </Typography>
             </ Stack>
           </Stack>
-          
+           <FiledsList list={cardUser.fields}/>
           <CardContent>
             <CardInsideContent />
           </CardContent>
