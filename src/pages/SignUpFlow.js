@@ -271,6 +271,12 @@ const SignUpFlow = ({props}) => {
         await DB.changeUserBasicInfo(user.uid, newInfo.name, newInfo.lastName,  newInfo.phone, newInfo.img)
         setLocalLoading(false);
     }
+
+    // const ProtectedMainFormPage = ({children}) => {
+    //     if(userInfo.name && userInfo.lastName && userInfo.phone && userInfo.img){
+    //         step
+
+    // }
     
     const StepContent = () => {
 
@@ -297,7 +303,7 @@ const SignUpFlow = ({props}) => {
         if(!loading){
             setUserInfo(userData);
         }
-    }, [loading])
+    }, [loading, userData])
         
     return (
         
