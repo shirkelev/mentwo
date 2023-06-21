@@ -15,15 +15,15 @@ export default function NavigationBar({user}) {
 
   const containerStyle = {
     position: "fixed",
-    padding: "1px",
-    zIndex: 999,
+    padding: "0.5px",
+    zIndex: 9,
     
   };
 
   const {showMenu, setShowMenu} = React.useContext(HamburgerMenuContext)
   return (
       <>
-      <Box sx={{ flex: 1, style:"position: absolute;" }}>
+      <Box sx={{ flex: 1, style:"position: fixed;" }}>
         <AppBar position="fixed">
           <Toolbar>
             <IconButton

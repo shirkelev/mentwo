@@ -30,7 +30,7 @@ import ProfilePage from "../components/ProfilePage";
 import SignUpLoading from "./sign-up/SignUpLoading";
 
 const NavCont = styled('nav')(({ theme }) => ({
-    position: 'sticky',
+    // position: 'ab',
     top: 0,
     zIndex: 1
   }));
@@ -67,9 +67,9 @@ export default function HomePageMain() {
             <div style={{ backgroundColor: '#F8FFFF' }}>
                 {console.log("User Data", userData, feedData, fullDataFetched)}
                 <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
-                    <NavCont>
-                        <NavigationBar user = {userData ? userData : null}/>
-                    </ NavCont>
+                    
+                    <NavigationBar user = {userData ? userData : null}/>
+                    
 
                     <PageContainer>
                     {
