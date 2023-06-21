@@ -151,7 +151,9 @@ useEffect(() => {
             , approvedMentessData: approvedInterviewees,
              finishedMenteesData: finishedIntervieweesData
             };
-          console.log('Aprroved', userExtraData.approvedMentessData, userExtraData.approvedMentessData.length)
+          const newPendingInterviewees = pendingInterviewees.map((pi) => pi.id)
+          console.log("New Pending Interviewees", newPendingInterviewees);
+          DB.UpdatePendingMentees(user.uid, userExtraData.newPendingInterviewees);
           for(let i = 0; i < userExtraData.pendingMenteesData.length; i++) {
             console.log("Pending Mentee", userExtraData.pendingMenteesData[i]);
             userExtraData.pendingMenteesData[i].mutualTags = getMutualTags(userExtraData, userExtraData.pendingMenteesData[i]);

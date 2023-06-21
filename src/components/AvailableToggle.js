@@ -8,8 +8,10 @@ const AvailableToggle = ({isPressed=true, onClick=()=>{}}) => {
     const [pressed, setPressed] = useState(isPressed); 
 
     const handleClick = () => {
+        onClick(!pressed);
         setPressed(!pressed);
-        onClick();
+        
+        
     };
     
     const label = ( <Typography variant="subtitle2" component="div">

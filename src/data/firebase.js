@@ -310,6 +310,35 @@ class DataBase {
     }
   }
 
+  async chageInterviewerAvailability(id, availability) {
+    //Changes the availability of the interviewer, not imediatly! (changes also a field in context!)
+    try{
+      const interviewerRef = doc(this.db, Constants.INTERVIEWERS_DB_NAME, id);
+      updateDoc(interviewerRef, {available: availability}).then(() => {
+        console.log("Interviewer availability is updated");
+      });
+
+    } catch (e) {
+      console.log("Error updating interviewer availability");
+      return null;
+    }
+  }
+
+  async UpdatePendingMentees(id, newPendingInterviewees) {
+    //Updates the pending interviewees list of the interviewer
+    try{
+      const interviewerRef = doc(this.db, Constants.INTERVIEWERS_DB_NAME, id);
+      updateDoc(interviewerRef, {pendingMentees: newPendingInterviewees}).then(() => {
+        console.log("Interviewer pending interviewees are updated");
+      });
+
+    } catch (e) {
+      console.log("Error updating interviewer pending interviewees");
+      return null;
+    }
+  }
+  
+
 
 }
 
