@@ -13,6 +13,7 @@ import * as Constants from '../Constants';
 import logoW from '../data/images/new_logo.png'
 import { UserAuth } from '../context/AuthContext';
 import { useEffect, navigate } from 'react';
+import SignUpLoading from './sign-up/SignUpLoading';
 
 const RootContainer = styled(Container)(
     ({ theme }) => ({
@@ -76,9 +77,10 @@ const SignInPage = () => {
 
     const [email, setEmail] = React.useState(null);
     const [password, setPassword] = React.useState(null);
+    const [localLoading, setLocalLoading] = React.useState(false);
     
 
-    const {googleSignIn, emailSignIn, user, emailSignUp, error} = UserAuth();
+    const {googleSignIn, emailSignIn, user, emailSignUp, error, loading} = UserAuth();
 
     function handleChangeEmail(e){
         setEmail(e.target.value);
@@ -89,20 +91,27 @@ const SignInPage = () => {
     }
 
     async function handleClickSignIn(){
-       const response = await emailSignIn(email, password);
-       console.log("This is the response: ", response);
+        setLocalLoading(true);
+        const response = await emailSignIn(email, password);
+        console.log("This is the response: ", response);
+        setLocalLoading(false);
     }
 
     async function handleSignUpWithEmail(){
+        setLocalLoading(true);
         console.log("Sign up with email");
         await emailSignUp(email, password);
+        setLocalLoading(false);
     }
 
     const handleGoogleSignIn = async () => {
         try {
-          await googleSignIn();
+            setLocalLoading(true);
+            await googleSignIn();
         } catch (error) {
           console.log(error);
+        } finally {
+            setLocalLoading(false); 
         }
       };
     
@@ -116,10 +125,18 @@ const SignInPage = () => {
     return (
         
         <div>
-            {console.log("This is the cur user: ", user, email, password)}
             <RootContainer>
+            {localLoading || loading ? 
+                (
+                <div>
+                    <SignUpLoading />
+                </div> 
+                )
+            :
+            <>
             <img alt='logo' src={logoW} style={{height:'90px', width:'200px', marginBottom: '30px'}} />
             <Typography variant="h5" style={{fontWeight: 'bold'}}>Sign In</Typography>
+            {console.log("This is the cur user: ", user, email, password)}
                 <FormContainer >
                     <TextContainer>
                         <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{error}</Typography>
@@ -153,7 +170,9 @@ const SignInPage = () => {
                             <SignUpLink >Sign Up!</SignUpLink>
                         </Typography>
                     </Link> */}
-                </ FormContainer>
+                </ FormContainer>        
+            </>
+            }
             </RootContainer>
         </div>
     );

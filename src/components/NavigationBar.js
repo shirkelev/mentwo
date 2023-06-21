@@ -16,7 +16,7 @@ export default function NavigationBar({user}) {
   const containerStyle = {
     position: "fixed",
     padding: "0.5px",
-    zIndex: 9,
+    zIndex: 999,
     
   };
 

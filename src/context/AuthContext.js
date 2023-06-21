@@ -35,21 +35,21 @@ export const AuthContextProvider = ({ children }) => {
   const provider = new GoogleAuthProvider();
 
   const googleSignIn = async () => {
-   
-    // signInWithPopup(auth, provider);
-    signInWithRedirect(auth, provider)
-    .then((result) => {
+   try{
+      // signInWithPopup(auth, provider);
+      setLoading(true);
+      const result = await signInWithRedirect(auth, provider)
       const credential = provider.credentialFromResult(result);
       console.log("Signup with Google", result.user, credential);
       setUser(result.user)
       return 1
-      ;
-    })
-    .catch((error) => {
-        console.log("error Signining In with Google", error);
-        setError("Error trying to sign in with Google")
-        return -1;
-    });
+   }catch(error){
+      console.log("error Signining In with Google", error);
+      setError("Error trying to sign in with Google")
+      return -1;
+    } finally {
+      setLoading(false);
+    }
   };
 
 

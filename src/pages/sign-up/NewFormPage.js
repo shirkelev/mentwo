@@ -50,7 +50,7 @@ const ButtonWrapper = styled(Button)(({ theme }) => ({
 const ButtonSection = styled('div')(({ theme }) => ({
    display: 'flex',
    flexDirection: 'row',
-   width: '100%',
+   
    alignItems: 'center',
    justifyContent: 'center',
    gap: '20px',
@@ -97,7 +97,7 @@ const Statement = styled('h3')(({ theme }) => ({
 const CvButtonContainer = styled('div')(({ theme }) => ({
     display: 'flex',
     flexDirection: 'column',
-    width: '100%',
+    // width: '100%',
     marginTop: theme.spacing(4),
     justifyContent: 'center',
     alignItems: 'center',
