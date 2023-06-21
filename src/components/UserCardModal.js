@@ -25,8 +25,7 @@ const ModalStyle = styled('div')(({ theme }) => ({
   boxShadow: theme.shadows[6], // Adjust the shadow to your preference
   padding: theme.spacing(2),
   textAlign: 'center',
-  width: 250, // Increase the width to accommodate more space around the text
-  maxWidth: '90%', // Optional: Set a maximum width for the modal
+  width: '80%',
   borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
 }));
 
@@ -74,13 +73,14 @@ const UserCardModal = ({user, onClose}) => {
           onClose={onClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-              >
+          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          
+          >
       <ModalStyle>
         <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} marginBottom={2}>
-          <Avatar src={user.img} sx={{ width: 56, height: 56 }} borderStyle="line" />
+          <Avatar src={user.img} sx={{ width: 50, height: 50 }} borderStyle="line" />
           <Stack spacing={1}>
             <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
-            <Typography variant="subtitle1">{user.profession}</Typography>
           </Stack>
         </Stack>
         {modalType === 'about' ? 
