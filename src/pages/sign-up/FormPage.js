@@ -78,8 +78,8 @@ const FormPage = (props) => {
   const handleFileChange = (event) => {
     // get selected file
     const selectedFile = event.target.files[0];
-    setFile(selectedFile);
     setBasicInfo({...basicInfo, img: selectedFile})
+    setFile(selectedFile);
     console.log(selectedFile);
     // Continue with upload process
   };
@@ -99,9 +99,9 @@ const FormPage = (props) => {
     let curPlaceHolder = placeHolder;
     let isDisabled = false;
    
-    if(userInfo[qid]){
-      curPlaceHolder = userInfo[qid];
-      isDisabled = true;
+    if(basicInfo[qid]){
+      curPlaceHolder = basicInfo[qid];
+      isDisabled = userInfo[qid] ? true : false;
     }
     let quest;
     switch(type){
