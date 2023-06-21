@@ -96,8 +96,6 @@ const fetchUserData = async (user) => {
 
 
 
-
-
 useEffect( () => {
   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
     if (currentUser) {
@@ -180,6 +178,11 @@ useEffect(() => {
           break;
       }
       console.log("New User Data", userExtraData);
+      if(!newUser.data().img){
+        const defaultImg = newUser.data().type === 'mentee' ? IntrevieweeImg : IntreviwerImg;
+        console.log("Default Img", defaultImg, userExtraData.type);
+        userExtraData.img = defaultImg;
+      }
       setUserData({...newUser.data(), ...userExtraData});
       setFullDataFetched(true);
       setLoading(false);

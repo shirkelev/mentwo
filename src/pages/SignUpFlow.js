@@ -19,6 +19,8 @@ import SignUpLoading from './sign-up/SignUpLoading';
 import NewFormPage from './sign-up/NewFormPage';
 import { UserAuth } from '../context/AuthContext';
 import { DB } from '../data/firebase';
+import IntreviwerImg from '../data/images/interviewer.png';
+import IntrevieweeImg from '../data/images/interveiwee.png';
 
 
 const RootContainer = styled(Container)(({ theme }) => ({
@@ -232,8 +234,11 @@ const SignUpFlow = ({props}) => {
                     isMatched: false,
                     profession: '',
                 }
-                await DB.addInterviewee(user.uid, curForm)
-                console.log('added interviewee')
+            if(!curForm.img){
+                curForm.img = type === Constantans.INTERVIEWERS_DB_NAME ? IntreviwerImg : IntrevieweeImg;
+            }
+            await DB.addInterviewee(user.uid, curForm)
+            console.log('added interviewee')
             }
             await DB.updateUserProp(user.uid, true, curForm.description, userType)
             navigate('../' + Constantans.HOME_PAGE + user.uid);
