@@ -92,7 +92,7 @@ const Statement = styled('h3')(({ theme }) => ({
 const NewFormPage = ({name, onClickSubmit}) => {
 
 
-    const {form, setForm, step, setStep, role, error, setError} = useContext(SignUpContext);
+    const {form, setForm, step, setStep, role, userInfo, error, setError} = useContext(SignUpContext);
     const [fields, setFields] = useState(form.fields ? form.fields : []);
     const [techSkills, setTechSkills] = useState(form.techSkills ? form.techSkills : []);
     const [softSkills, setSoftSkills] = useState(form.softSkills ? form.softSkills : []);
@@ -169,9 +169,9 @@ const NewFormPage = ({name, onClickSubmit}) => {
             console.log("You must fill at least one professional field")
         } else {
         const curForm = {fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description};
-        console.log('Form in NewFoem', curForm)
-        console.log('Form in NewFoem', form)
-        console.log('Fields in NewFoem', fields, techSkills, softSkills, agendas, description)
+        console.log('Form in NewForm', curForm)
+        console.log('Form in NewForm', form)
+        console.log('Fields in NewForm', fields, techSkills, softSkills, agendas, description)
         console.log("Starting write new Records in data set");
         await onClickSubmit(curForm, role);
         }
@@ -206,10 +206,10 @@ const NewFormPage = ({name, onClickSubmit}) => {
         {category: Constants.AGENDAS, statement:'Share your personal characteristics so you can stand out from other interviewees', tagsNames: Constants.AGENDAS_LIST}
     ];
     
-    useEffect(() => {
-        // This will log the form data whenever it changes
-        console.log('Form in NewFoem', form)
-    }, [form]);
+    // useEffect(() => {
+    //     // This will log the form data whenever it changes
+    //     console.log('Form in NewForm', form)
+    // }, [form]);
 
     if(role === Constants.INTERVIEWERS_DB_NAME) {
         
@@ -217,7 +217,7 @@ const NewFormPage = ({name, onClickSubmit}) => {
             <>
             <RootContainer maxWidth="md">
 
-                <Title>Hey {name},</Title>
+                <Title>Hey {userInfo.name},</Title>
                 
                 <SubTitle>Tell us about yourself so we can find you the right interviewees</SubTitle>
                 {
@@ -250,7 +250,7 @@ const NewFormPage = ({name, onClickSubmit}) => {
             <>
             <RootContainer maxWidth="md">
 
-                <Title>Hey {name},</Title>
+                <Title>Hey {userInfo.name},</Title>
                 
                 <SubTitle>Tell us about yourself so we can find you the right interviewer</SubTitle>
                 {
