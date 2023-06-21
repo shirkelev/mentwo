@@ -293,11 +293,12 @@ const SignUpFlow = ({props}) => {
             }
         
     }
-    useEffect(() => {
-        if(!loading){
-            setUserInfo(userData);
-        }
-    }, [loading])
+    // useEffect(() => {
+    //     if(!loading && !userInfo){
+    //         console.log("## HEY");
+    //         setUserInfo(userData);
+    //     }
+    // }, [loading])
         
     return (
         
