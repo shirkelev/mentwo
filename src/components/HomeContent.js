@@ -47,7 +47,6 @@ export default function HomeContent ({headline, list, user}) {
 
   const handleToggle = (pressed) => {
     setFeedData({...feedData, available: pressed});
-    console.log("Pressed Is ", pressed)
     DB.chageInterviewerAvailability(feedData.id, pressed)
   }
   return (
