@@ -47,6 +47,7 @@ export const AuthContextProvider = ({ children }) => {
     })
     .catch((error) => {
         console.log("error Signining In with Google", error);
+        setError("Error trying to sign in with Google")
         return -1;
     });
   };
@@ -64,6 +65,7 @@ export const AuthContextProvider = ({ children }) => {
       console.log("Signin with email", userCredential); 
       })
       .catch((error) => {
+        setError("One or more fields have an error")
         console.log(error);
       })
   };
@@ -73,6 +75,7 @@ const emailSignUp =  (email, password) => {
     console.log("Signup with Email", userCredential);
   }).catch((error) => {
     console.log(error);
+    setError("One or more fields have an error")
   }); 
 }
 
