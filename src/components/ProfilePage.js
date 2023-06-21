@@ -32,7 +32,7 @@ export default function ProfilePage() {
                     justifyContent="center"
                     alignItems="center"
                     spacing={5}
-                    style={{width:'70%'}}>
+                    style={{width:'87%'}}>
                     <Grid  container
                         direction="row"
                         justifyContent="center"
@@ -40,7 +40,7 @@ export default function ProfilePage() {
                         >
                         <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={userData.img}/></Grid>
                     </Grid>
-                    <TableContainer component={Paper} sx={{ width: "350px"}}>
+                    <TableContainer component={Paper} style={{ width: "100%"}}>
                     <Table sx={{ width: '100%' }} aria-label="simple table">
                     <TableBody>
             <TableRow
