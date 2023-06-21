@@ -13,7 +13,7 @@ const NoShadowFab = styled(Fab)`
   pointer-events: none;
 `;
 
-const TagsCategory = ({ category, num=0, onClick=()=>{}}) => {
+const TagsCategory = ({ category, num=null, onClick=()=>{}}) => {
     
     let color;
     let Logo;
@@ -58,15 +58,17 @@ const TagsCategory = ({ category, num=0, onClick=()=>{}}) => {
     const handleClick = () => {
         onClick();
     }
-    if(num > 0 ){
+    console.log("num = " + num)
+    if (num === 0) {
+        return null
+    }
+    else {
         return (
             <NoShadowFab variant="extended" size="small" color={color} onClick={handleClick}>
             <Logo />
             <span style={{ fontWeight: 'bold' }}>{num}</span>&nbsp;&nbsp;{category}
             </NoShadowFab>
         );
-    } else {
-        return null
     }
 };
 
