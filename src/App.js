@@ -69,7 +69,8 @@ const theme = createTheme({
       },
       techSkillHeadlineColor:
       {
-        main: '#00E5FF', // $rmd-cyan-a-400
+        main: '#00B8D4', // $rmd-cyan-a-700
+        //00E5FF    $rmd-cyan-a-400
       },
       softSkillColor:
       {
@@ -81,7 +82,8 @@ const theme = createTheme({
       },
       softSkillHeadlineColor:
       {
-        main: '#1DE9B6', // $rmd-teal-a-400
+        main: '#00BFA5', // $rmd-teal-a-700
+         // 1DE9B6   $rmd-teal-a-400
       },
       agendaColor:
       {
@@ -93,7 +95,8 @@ const theme = createTheme({
       },
       agendaHeadlineColor:
       {
-        main: '#00E676', // $rmd-green-a-400
+        main: '#66BB6A', // $rmd-green-400
+         // 00E676  $rmd-green-a-400
       }
 
     },
