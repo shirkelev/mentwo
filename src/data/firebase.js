@@ -337,6 +337,48 @@ class DataBase {
       return null;
     }
   }
+
+  async UpdateFinishedMentees(id, newFinishedInterviewees) {
+    //Updates the finished interviewees list of the interviewer
+    try{
+      const interviewerRef = doc(this.db, Constants.INTERVIEWERS_DB_NAME, id);
+      updateDoc(interviewerRef, {finishedMentees: newFinishedInterviewees}).then(() => {
+        console.log("Interviewer finished interviewees are updated");
+      });
+
+    } catch (e) {
+      console.log("Error updating interviewer finished interviewees");
+      return null;
+    }
+  }
+
+  async UpdateDeclinedMentees(id, newDeclinedInterviewees) {
+    //Updates the declined interviewees list of the interviewer
+    try{
+      const interviewerRef = doc(this.db, Constants.INTERVIEWERS_DB_NAME, id);
+      updateDoc(interviewerRef, {declinedMentees: newDeclinedInterviewees}).then(() => {
+        console.log("Interviewer declined interviewees are updated");
+      });
+
+    } catch (e) {
+      console.log("Error updating interviewer declined interviewees");
+      return null;
+    }
+  }
+
+  async UpdateInProcessMentees(id, newInProcessInterviewees) {
+    //Updates the in process interviewees list of the interviewer
+    try{
+      const interviewerRef = doc(this.db, Constants.INTERVIEWERS_DB_NAME, id);
+      updateDoc(interviewerRef, {approvedMentess: newInProcessInterviewees}).then(() => {
+        console.log("Interviewer in process interviewees are updated");
+      });
+
+    } catch (e) {
+      console.log("Error updating interviewer in process interviewees");
+      return null;
+    }
+  }
   
 
 

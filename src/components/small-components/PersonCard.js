@@ -10,6 +10,13 @@ import * as Constants from '../../Constants';
 import { useNavigate } from 'react-router-dom';
 import UserCardModal from '../UserCardModal';
 import TagsCategory from './TagsCategory';
+import { UserContext } from '../../context/UserContext';
+import { DB } from '../../data/firebase';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 
 const maxLength = 70;
@@ -27,11 +34,47 @@ const FiledsList = ({list}) => {
 };
 
 
-function trimDetail(details){
-    return details.slice(0, maxLength) + (details.length > maxLength ? "..." : "");
-}
 
 export default function PersonCard({variant, mainUser, cardUser}) {
+
+  const {feedData, setFeedData} = React.useContext(UserContext);
+  const defaultDialogState = {title: ''
+  ,content: ''
+  ,open: false
+  ,onApproveFunc: () => {}
+  }
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const [dialogState, setDialogState] = React.useState(defaultDialogState);
+
+  
+
+
+  const DialogBox = ({title, content, open, onApproveFunc}) => {
+    // Our dialog box, for decline approve and finise
+    const onDecline = () => {
+      setDialogState(defaultDialogState);
+    }
+    
+    return (
+      <Dialog
+            open={open}
+            keepMounted
+            onClose={() => setDialogState(defaultDialogState)}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>{title}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                {content}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={onDecline}>No</Button>
+              <Button onClick={onApproveFunc} variant="contained">Yes</Button>
+            </DialogActions>
+          </Dialog>
+    )
+  }
 
   const navigate = useNavigate();
 
@@ -55,24 +98,121 @@ export default function PersonCard({variant, mainUser, cardUser}) {
     
   }
 
+  function moveSpecificId(id, idsFrom, objectsFrom, idsTo, objectsTo) {
+    console.log("Moving id", id, "from", idsFrom, "to", idsTo, "objects", objectsFrom, objectsTo)
+    const index = idsFrom.indexOf(id);
+    if (index !== -1) {
+      // Remove the id and object from the 'From' arrays
+      const id = idsFrom.splice(index, 1)[0];
+      const object = objectsFrom.splice(index, 1)[0];
+  
+      // Add the id and object to the 'To' arrays
+      idsTo.push(id);
+      if(objectsTo){
+        objectsTo.push(object);
+      }
+
+    }
+    return [idsFrom, objectsFrom, idsTo, objectsTo];
+    
+  }
+
   const handleClickDecline = () => {
-    mainUser.addMentee(cardUser, 'declined');
-    // todo: DB update
+    function removePending(){
+      const [pendingIds, pendingObjects, declinedIds, declinedObjects] = moveSpecificId(cardUser.id, 
+        feedData?.pendingMentees ? feedData.pendingMentees : [],  
+        feedData?.pendingMenteesData ? feedData.pendingMenteesData : [], 
+        feedData?.declinedMentees ? feedData.declinedMentees : [], 
+        feedData?.declinedMenteesData ? feedData.declinedMenteesData : []);
+    
+      console.log("Removing from pending and adding to declined",  cardUser.id);
+      
+      DB.UpdateDeclinedMentees(mainUser.id, declinedIds);
+      DB.UpdatePendingMentees(mainUser.id, pendingIds);
+      
+      setFeedData({...feedData, 
+        pendingMentees: pendingIds, 
+        pendingMenteesData: pendingObjects, 
+        declinedMentees: declinedIds, 
+        });
+      console.log("Decline");
+      setDialogState(defaultDialogState);
+    }
+    setDialogState({title: 'Decline Interviewee'
+      ,content: 'Are you sure you want to decline this interviewee?'
+      ,open:true
+      ,onApproveFunc: removePending
+    });
+    
   }
 
   const handleClickFinish = () => {
-    mainUser.addMentee(cardUser, 'finished');
-    // todo: DB update
+    
+    function moveToFinish(){
+      const [processIds, processObjects, finisheddIds, finishedObjects] = 
+      moveSpecificId(
+        cardUser.id, 
+        feedData?.approvedMentess ? feedData.approvedMentess : [], 
+        feedData?.approvedMentessData? feedData.approvedMentessData: [],
+        feedData?.finishedMentees ? feedData.finishedMentees : [], 
+        feedData?.finishedMenteesData ? feedData.finishedMenteesData : []
+        );
+    
+      console.log("Moving From In Process To Finish",  cardUser.id);
+      
+      DB.UpdateFinishedMentees(mainUser.id, finisheddIds);
+      DB.UpdateInProcessMentees(mainUser.id, processIds);
+      
+      setFeedData({...feedData, 
+        approvedMentess: processIds, 
+        approvedMenteesData: processObjects, 
+        finishedMentees: finisheddIds, 
+        finishedMenteesData: finishedObjects
+      });
+      console.log("Finished");
+      setDialogState(defaultDialogState);
+    }
+    setDialogState({title: 'Finish Process'
+      ,content: 'Have you finished the process with this interviewee?'
+      ,open:true
+      ,onApproveFunc: moveToFinish
+    });
+  }
+
+  const handleClickApprove = () => {
+    function approveInterviewee(){
+      const [pendingIds, pendingObjects, approvedIds, approvedObjects] = moveSpecificId(cardUser.id, 
+        feedData?.pendingMentees ? feedData.pendingMentees : [],  
+        feedData?.pendingMenteesData ? feedData.pendingMenteesData : [], 
+        feedData?.approvedMentess ? feedData.approvedMentess : [], 
+        feedData?.approvedMentessData ? feedData.approvedMentessData : []);
+    
+      console.log("Removing from pending and adding to declined",  cardUser.id);
+      
+      DB.UpdateInProcessMentees(mainUser.id, approvedIds);
+      DB.UpdatePendingMentees(mainUser.id, pendingIds);
+      
+      setFeedData({...feedData, 
+        pendingMentees: pendingIds, 
+        pendingMenteesData: pendingObjects, 
+        approvedMentess: approvedIds,
+        approvedMenteesData: approvedObjects 
+        });
+      console.log("Approved");
+      setDialogState(defaultDialogState);
+    }
+    setDialogState({title: 'Approve Interviewee'
+      ,content: 'Yeah! you are going to make this interviewee happy!'
+      ,open:true
+      ,onApproveFunc: approveInterviewee
+    });
   }
 
   const handleClickFeedback = () => {
     navigate('../' + Constants.PROCESS_COMPLETION_FORM);
   }
 
-  const HandleClickApprove = () => {
-    mainUser.addMentee(cardUser, 'approved');
-    // todo: DB update
-  }
+  
 
   const handleClickShare = () => { 
     return null;
@@ -95,7 +235,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
         
         return(
           <>
-          <Button size="small" onClick={HandleClickApprove} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Approve</Button>
+          <Button size="small" onClick={handleClickApprove} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Approve</Button>
           <Button size="small" onClick={handleClickDecline} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>Decline</Button> 
           <Button size="small" onClick={handleClickViewMore} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>About</Button> 
           </>
@@ -149,6 +289,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
   
   return (
       <>
+      {console.log(feedData.pendingMenteesData, "All Pending Mentees")}
       <UserModalContext.Provider value={{openUserModal, setOpenUserModal, modalType, setModalType}}>
         <Card sx={{ boxShadow:2, margin:1, padding:1, width:280, borderRadius: 8}}>
           <Stack 
@@ -173,7 +314,12 @@ export default function PersonCard({variant, mainUser, cardUser}) {
           </CardActions>
         </Card>
         <UserCardModal user={cardUser} variant={modalType} onClose={() => {setOpenUserModal(!openUserModal)}}/>
+        <DialogBox open={dialogState.open} 
+          title={dialogState.title} 
+          content={dialogState.content} 
+          onApproveFunc={dialogState.onApproveFunc} />
       </UserModalContext.Provider>
+      
       </>
     
   );
