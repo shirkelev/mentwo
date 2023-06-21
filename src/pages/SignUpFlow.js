@@ -214,6 +214,7 @@ const SignUpFlow = ({props}) => {
                 break
         }
         setLocalLoading(true);
+
         try{
             if(type === Constantans.INTERVIEWERS_DB_NAME){
                 curForm =  {
@@ -234,13 +235,12 @@ const SignUpFlow = ({props}) => {
                     isMatched: false,
                     profession: '',
                 }
-            if(!curForm.img){
-                curForm.img = type === Constantans.INTERVIEWERS_DB_NAME ? IntreviwerImg : IntrevieweeImg;
-            }
+            
             await DB.addInterviewee(user.uid, curForm)
             console.log('added interviewee')
             }
-            await DB.updateUserProp(user.uid, true, curForm.description, userType)
+            const withImg = userInfo.img ? false : true;
+            await DB.updateUserProp(user.uid, true, curForm.description, userType, withImg)
             navigate('../' + Constantans.HOME_PAGE + user.uid);
             
         } catch(error){
@@ -276,6 +276,7 @@ const SignUpFlow = ({props}) => {
         setLocalLoading(true);
         console.log('user', user.uid, newInfo.name, newInfo.lastName,  newInfo.phone, newInfo.img)
         await DB.changeUserBasicInfo(user.uid, newInfo.name, newInfo.lastName,  newInfo.phone, newInfo.img)
+        setUserInfo(newInfo);
         setLocalLoading(false);
     }
 

@@ -58,12 +58,12 @@ const TagsCategory = ({ category, num=null, onClick=()=>{}}) => {
     const handleClick = () => {
         onClick();
     }
-    console.log("num = " + num)
     if (num === 0) {
         return null
     }
     else {
         return (
+            
             <NoShadowFab variant="extended" size="small" color={color} onClick={handleClick}>
             <Logo />
             <span style={{ fontWeight: 'bold' }}>{num}</span>&nbsp;&nbsp;{category}

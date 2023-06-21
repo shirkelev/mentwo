@@ -8,6 +8,7 @@ const AvailableToggle = ({isPressed=true, onClick=()=>{}}) => {
     const [pressed, setPressed] = useState(isPressed); 
 
     const handleClick = () => {
+        console.log("State Cheged!")
         onClick(!pressed);
         setPressed(!pressed);
         

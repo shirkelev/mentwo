@@ -14,7 +14,7 @@ import { HamburgerMenuContext } from '../context/HamburgerMenuContexts';
 export default function NavigationBar({user}) {
 
   const containerStyle = {
-    position: "absolute",
+    position: "fixed",
     padding: "1px",
     zIndex: 999,
     
@@ -23,8 +23,8 @@ export default function NavigationBar({user}) {
   const {showMenu, setShowMenu} = React.useContext(HamburgerMenuContext)
   return (
       <>
-      <Box sx={{ flex: 1, style:"position: fixed;" }}>
-        <AppBar position="static">
+      <Box sx={{ flex: 1, style:"position: absolute;" }}>
+        <AppBar position="fixed">
           <Toolbar>
             <IconButton
               size="large"

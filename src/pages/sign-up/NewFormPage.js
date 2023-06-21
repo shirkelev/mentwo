@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { styled } from '@mui/system';
 import Container from '@mui/material/Container';
 import Button from '../../components/small-components/Button';
+import { Button as MuiButton } from '@mui/material';
 import Tag from '../../components/small-components/Tag';
 import TagsCategory from '../../components/small-components/TagsCategory';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +13,9 @@ import Divider from '@mui/material/Divider';
 import { SignUpContext } from '../../context/SignUpContexts';
 import { Typography } from '@mui/material';
 import IconWithMessage from '../../components/small-components/IconwithMessage';
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import {DB} from '../../data/firebase';
 
 function TagsContainer({ tagsNames, category, onTagClick, isPressedFunc}) {
     return (
@@ -90,8 +94,20 @@ const Statement = styled('h3')(({ theme }) => ({
    fontFamily: theme.typography.fontFamily,
 }));
 
-const NewFormPage = ({name, onClickSubmit}) => {
+const CvButtonContainer = styled('div')(({ theme }) => ({
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    marginTop: theme.spacing(4),
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
+    margin: theme.spacing(2),
+    
 
+  }));
+
+const NewFormPage = ({name, onClickSubmit}) => {
 
     const {form, setForm, step, setStep, role, userInfo, error, setError} = useContext(SignUpContext);
     const [fields, setFields] = useState(form.fields ? form.fields : []);
@@ -99,6 +115,9 @@ const NewFormPage = ({name, onClickSubmit}) => {
     const [softSkills, setSoftSkills] = useState(form.softSkills ? form.softSkills : []);
     const [agendas, setAgendas] = useState(form.agendas ? form.agendas : []);
     const [description, setDescription] = useState(form.description ? form.description : '');
+    const [cv, setCv] = useState(null);
+    const [cvError, setCvError] = useState(null);
+    const cvInput = useRef();
     
     function onTagClick(tag, category){
         let list;
@@ -164,12 +183,12 @@ const NewFormPage = ({name, onClickSubmit}) => {
     const doneTapped = async () => {
         // await setForm();
         if(fields.length === 0) {
-            const curForm = {fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description};
+            const curForm = {fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description, cv: cv};
             setError("You must fill at least one professional field")
             setForm(curForm)
             console.log("You must fill at least one professional field")
         } else {
-        const curForm = {fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description};
+        const curForm = {fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description, cv: cv};
         console.log('Form in NewForm', curForm)
         console.log('Form in NewForm', form)
         console.log('Fields in NewForm', fields, techSkills, softSkills, agendas, description)
@@ -211,6 +230,38 @@ const NewFormPage = ({name, onClickSubmit}) => {
     //     // This will log the form data whenever it changes
     //     console.log('Form in NewForm', form)
     // }, [form]);
+
+    const UploadIcon = () => {
+        if(!cv){
+          return <DriveFolderUploadIcon />
+        }
+        return <CheckCircleIcon />
+      }
+    
+    const handleUploadClick = (event) => {
+         // get selected file
+         const allowedTypes = [
+            'application/pdf',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            // you can add more types if needed
+            ];
+        const selectedFile = event.target.files[0];
+        const isValid = allowedTypes.includes(selectedFile.type) || selectedFile.type.startsWith('image/');
+        console.log(selectedFile.type)
+        if(isValid){
+            setCv(selectedFile);
+            console.log(selectedFile);
+        } else {
+        setCvError('Please select an readable format or img');
+        return 
+        }
+    }
+
+    const handleFileOpen = () => {
+        cvInput.current.click();
+    };
+
 
     if(role === Constants.INTERVIEWERS_DB_NAME) {
         
@@ -270,6 +321,21 @@ const NewFormPage = ({name, onClickSubmit}) => {
                     <Statement> Information you would like to share about yourself with the interviewers? </Statement>
                     <BigContentBox placeholder="For example, workplace, specialties, areas of interest, etc" onBlur={chengedDescription}/>
                 </QuestionContainer>
+                
+                <CvButtonContainer>
+                    <Typography align='center' sx={{width: '100%'}} color="red">{cvError}</Typography>
+                    <MuiButton variant="contained" color="primary"  endIcon={<UploadIcon />} siz
+                            onClick={handleFileOpen}>
+                        Upload CV
+                    </MuiButton>
+                    <input
+                        type="file"
+                        hidden
+                        ref={cvInput} 
+                        onChange={(event) => {handleUploadClick(event)}}
+                        />
+                </CvButtonContainer>
+                
 
                 <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{error}</Typography>
 
@@ -279,7 +345,8 @@ const NewFormPage = ({name, onClickSubmit}) => {
                     <ButtonWrapper variant="outlined" color="primary" onClick={backTapped} title='Back' />
                     <ButtonWrapper variant="contained" color="primary" onClick={doneTapped} title='Done!' />
                 </ButtonSection>
-
+                
+                
         </RootContainer>
         </>
         );

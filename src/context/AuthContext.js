@@ -54,10 +54,20 @@ export const AuthContextProvider = ({ children }) => {
 
 
   const logOut = () => {
-    signOut(auth)
-    window.history.pushState(null, "", "/sign-in");
+    
+    signOut(auth).then(() => {
+      setUser(null);
+      setUserData(null);
+      setFullDataFetched(false);
+      setEnterHome(false);
+      window.history.pushState(null, "", "/sign-in");
     window.location.reload();
-    };
+    }).catch((error) => {
+      console.log("Error Signing Out", error);
+      setError("Error Signing Out")
+
+    });
+  };
 
   const emailSignIn = async (email, password) => {
     signInWithEmailAndPassword(auth, email, password)
@@ -120,7 +130,7 @@ useEffect(() => {
       console.log("Fetching Extra User Data ", user.uid, " ...", userData);
       console.log("first update cur user data");
       const newUser = await DB.getUser(user.uid);
-      console.log("The user Role is ", newUser.data().type);
+      console.log("The user Role is ", newUser.data().type, newUser.data());
       let userExtraData = await DB.getRoleData(user.uid, newUser.data().type);
       userExtraData = userExtraData.data();
       console.log("User Extra Data", userExtraData);
@@ -163,7 +173,7 @@ useEffect(() => {
           }
           break;
         case "mentee":
-          console.log("Starting to fetch mentors data")
+          console.log("Starting to fetch mentee data")
           let currentMentor = null;
           if(userExtraData.currentMentor) {
             currentMentor = await DB.getInterviewerData(userExtraData.currentMentor);
@@ -178,7 +188,7 @@ useEffect(() => {
           break;
       }
       console.log("New User Data", userExtraData);
-      if(!newUser.data().img){
+      if(!(newUser.data()).img){
         const defaultImg = newUser.data().type === 'mentee' ? IntrevieweeImg : IntreviwerImg;
         console.log("Default Img", defaultImg, userExtraData.type);
         userExtraData.img = defaultImg;

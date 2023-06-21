@@ -80,7 +80,7 @@ const FormPage = (props) => {
     // get selected file
     const selectedFile = event.target.files[0];
     console.log(selectedFile.type)
-    if(selectedFile.type.startsWith('image')){
+    if((selectedFile.type).startsWith('image')){
       setBasicInfo({...basicInfo, img: selectedFile})
       setFile(selectedFile);
       console.log(selectedFile);

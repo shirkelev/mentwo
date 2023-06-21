@@ -145,6 +145,11 @@ class DataBase {
   
   async addInterviewee(id, interviewee) {
     try{
+      let downloadURL = null;
+      if(interviewee.cv){
+        downloadURL = await this.uploadFileAndGetURL( interviewee.cv, 'cv_file_' + id);
+      }
+      interviewee.cv = downloadURL;
       const docRef = doc(this.db, Constants.INTERVIEWEES_DB_NAME, id)
       return setDoc(docRef, interviewee)
     } catch (e) {
@@ -153,11 +158,21 @@ class DataBase {
     }
   }
 
-  async updateUserProp(id, signedUp, description, role) {
+  async updateUserProp(id, signedUp, description, role, withImg) {
     try{
+      console.log(withImg, "This is the with Img file")
+      let toUpdate = {type: role, description: description, signedUp: signedUp};
+      
+      if(withImg){
+        const dbFileName = role === 'mentor' ? Constants.INTERVIEWER_IMG_FILE : Constants.INTERVIEWEE_IMG_FILE ;
+        const storageRef = ref(this.storage, dbFileName);
+        const url = await getDownloadURL(storageRef);
+        toUpdate.img = url;
+        console.log("This is the url", url)
+      }
       console.log("Updating user with ID ", id);
       const userRef = doc(this.db, Constants.USERS_DB_NAME, id);
-      return updateDoc(userRef, {type: role, description: description, signedUp: signedUp});
+      return updateDoc(userRef, toUpdate);
     } catch (e) {
       console.log("Error updating user with ID ", id, e);
       return null;
@@ -299,7 +314,10 @@ class DataBase {
 
   async changeUserBasicInfo(id, name, lastName, phone, img) {
     console.log("Updating user with ID ", id, name, lastName, phone, img);
-    const downloadURL = await this.uploadFileAndGetURL( img, 'profile_img_' + id);
+    let downloadURL = null;
+    if(img){
+      downloadURL = await this.uploadFileAndGetURL( img, 'profile_img_' + id);
+    }
     console.log("Download URL is ", downloadURL);
     try{
       const userRef = doc(this.db, Constants.USERS_DB_NAME, id);
@@ -369,8 +387,8 @@ class DataBase {
   async UpdateInProcessMentees(id, newInProcessInterviewees) {
     //Updates the in process interviewees list of the interviewer
     try{
-      const interviewerRef = doc(this.db, Constants.INTERVIEWERS_DB_NAME, id);
-      updateDoc(interviewerRef, {approvedMentess: newInProcessInterviewees}).then(() => {
+        const interviewerRef = doc(this.db, Constants.INTERVIEWERS_DB_NAME, id);
+        updateDoc(interviewerRef, {approvedMentess: newInProcessInterviewees}).then(() => {
         console.log("Interviewer in process interviewees are updated");
       });
 
@@ -380,8 +398,33 @@ class DataBase {
     }
   }
   
+  async removeCurrentMentor(id) {
+    //Removes the current mentor from the interviewee
+    try{
+        const intervieweeRef = doc(this.db, Constants.INTERVIEWEES_DB_NAME, id);
+        await updateDoc(intervieweeRef, {currentMentor: null}).then(() => {
+        console.log("Interviewee current mentor is removed");
+      });
 
+    } catch (e) {
+      console.log("Error removing interviewee current mentor");
+      return null;
+    }
+  }
 
+  async addNewMentor(id, mentorId) {
+    try{
+      const intervieweeRef = doc(this.db, Constants.INTERVIEWEES_DB_NAME, id);
+      await updateDoc(intervieweeRef, {currentMentor: mentorId, isMatched: true}).then(() => {
+        console.log("Interviewee current mentor is added");
+      });
+
+    } catch (e) {
+      console.log("Error adding interviewee current mentor");
+      return null;
+    }
+
+  }
 }
 
       

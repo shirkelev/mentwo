@@ -47,6 +47,7 @@ export default function HomeContent ({headline, list, user}) {
 
   const handleToggle = (pressed) => {
     setFeedData({...feedData, available: pressed});
+    console.log("Pressed Is ", pressed)
     DB.chageInterviewerAvailability(feedData.id, pressed)
   }
   return (
@@ -57,7 +58,7 @@ export default function HomeContent ({headline, list, user}) {
         <div style={{marginTop:'10px'}}>
         {
         headline === Constants.PENDINGS ? 
-            <AvailableToggle onClick={handleToggle} pressed={feedData.available}/>
+            <AvailableToggle onClick={handleToggle} isPressed={feedData.available}/>
         : null
         }
       </div>

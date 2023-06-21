@@ -162,7 +162,8 @@ export default function PersonCard({variant, mainUser, cardUser}) {
       
       DB.UpdateFinishedMentees(mainUser.id, finisheddIds);
       DB.UpdateInProcessMentees(mainUser.id, processIds);
-      
+      DB.removeCurrentMentor(cardUser.id);
+
       setFeedData({...feedData, 
         approvedMentess: processIds, 
         approvedMenteesData: processObjects, 
@@ -191,6 +192,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
       
       DB.UpdateInProcessMentees(mainUser.id, approvedIds);
       DB.UpdatePendingMentees(mainUser.id, pendingIds);
+      DB.addNewMentor(cardUser.id, mainUser.id)
       
       setFeedData({...feedData, 
         pendingMentees: pendingIds, 

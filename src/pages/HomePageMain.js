@@ -19,6 +19,7 @@ import { styled } from '@mui/material/styles';
 import { UserContext } from "../context/UserContext";
 import { UserAuth } from "../context/AuthContext";
 import { DB } from "../data/firebase";
+import Box from '@mui/material/Box';
 
 import MentorApproval from "../components/MentorApproval";
 import ChooseMentor from "../components/ChooseMentor";
@@ -40,34 +41,6 @@ export default function HomePageMain() {
     const [bottomNavValue, setBottomNavValue] = React.useState(0);
     const [feedData, setFeedData] = React.useState(userData);
     const [localLoading, setLocalLoading] = React.useState(false);
-    // const {user, setUser, dataBase} = useContext(UserContext);
-    
-
-    // const fetchData = async () => {
-    //     if(!dataFetched) {
-    //     try{
-    //         console.log("Fetching Extra User Data ", user.uid, " ...", userData);
-    //         console.log("first update cur user data");
-    //         const newUser = await DB.getUser(user.uid);
-    //         const userExtraData = await DB.getRoleData(user.uid, newUser.data().type);
-    //         console.log("New User Data", userExtraData.data());
-    //         // setUserData({...newUser.data(), ...userExtraData.data()});
-    //         // setFeedData({...newUser.data(), ...userExtraData.data()});
-    //         // setDataFetched(true);
-    //         // setLocalLoading(false);
-
-    //     } catch (error) {
-    //         console.log(error);
-    //         setLocalLoading(false);
-    //         setDataFetched(true);
-    //     };
-    // }
-    //     if(!dataFetched && feedData) {
-    //         console.log("Setting User Data", feedData);
-    //         setDataFetched(true);
-    //         setUserData(feedData);
-            
-    //     }
     
 
     useEffect(() => {
@@ -82,6 +55,13 @@ export default function HomePageMain() {
         
     }, []);
 
+    const PageContainer = styled(Box)({
+        position: 'sticky',  // Positioned relative to its normal position
+        marginTop: '53px',  // Assuming your navbar height is 64px
+        marginBottom: '40px',  // Assuming your bottom bar height is 56px
+        
+      });
+
     return (
         <UserContext.Provider value={{feedData, setFeedData}}>
             <div style={{ backgroundColor: '#F8FFFF' }}>
@@ -90,6 +70,8 @@ export default function HomePageMain() {
                     <NavCont>
                         <NavigationBar user = {userData ? userData : null}/>
                     </ NavCont>
+
+                    <PageContainer>
                     {
                     loading | localLoading ? 
                         ( <SignUpLoading text={"Loading..."}></SignUpLoading> )
@@ -114,6 +96,7 @@ export default function HomePageMain() {
                         </Routes>
                         )
                     }
+                    </PageContainer>
                     <ButtomBar user={feedData}></ButtomBar>
                 </HamburgerMenuContext.Provider>
             </div>
