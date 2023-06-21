@@ -11,6 +11,7 @@ import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { SignUpContext } from '../../context/SignUpContexts';
 import { Typography } from '@mui/material';
+import IconWithMessage from '../../components/small-components/IconwithMessage';
 
 function TagsContainer({ tagsNames, category, onTagClick, isPressedFunc}) {
     return (
@@ -235,7 +236,9 @@ const NewFormPage = ({name, onClickSubmit}) => {
                     <BigContentBox placeholder="For example, workplace, specialties, areas of interest, etc" onBlur={chengedDescription}/>
                 </QuestionContainer>
 
-                    <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{error}</Typography>
+                <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{error}</Typography>
+
+                <IconWithMessage message="test"/>
 
                 <ButtonSection>
                     <ButtonWrapper variant="outlined" color="primary" onClick={backTapped} title='Back' />
@@ -269,7 +272,9 @@ const NewFormPage = ({name, onClickSubmit}) => {
                 </QuestionContainer>
 
                 <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{error}</Typography>
-                
+
+                <IconWithMessage message="test"/>
+
                 <ButtonSection>
                     <ButtonWrapper variant="outlined" color="primary" onClick={backTapped} title='Back' />
                     <ButtonWrapper variant="contained" color="primary" onClick={doneTapped} title='Done!' />
