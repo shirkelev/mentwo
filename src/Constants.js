@@ -46,7 +46,7 @@ export const SOFTSKILLS = 'Soft Skills';
 export const AGENDAS = 'Characteristics';
 
 // Tags Lists
-export const FIELDS_LIST = ['Data Analysis', 'UX', 'UI', 'Data Science', 'Produce Management', 'QA', 'Software Engineer', 'Web Development', 'Project Managment', 'Algorithm Development']
+export const FIELDS_LIST = ['Data Analysis', 'UX', 'UI', 'Data Science', 'Produce Management', 'QA', 'Software Engineer', 'Web Development', 'Project Managment', 'Algo Development']
 export const TECHSKILLS_LIST = ['Python', 'C', 'C++', 'Java', 'React', 'Figma', 'R', 'SQL', 'JavaScript', 'HTML', 'CSS', 'Node.js', 'Vue.js', 'PHP', 'Swift', 'C#', 'Ruby', 'Go']
 export const SOFTSKILLS_LIST = ['Articulation', 'English' , 'Self-Presentation', 'Small Talk', 'Formulation', 'Pressure Management', 'Orderly Answer', 'Enthusiasm', 'Motivation']
 export const AGENDAS_LIST = ['Combat Soldier', 'Woman', 'Man', 'Haredi', 'Religious Zionist', 'Professional conversion', 'Inexperienced', 'Periphery resident', 'ethnic minority', 'Handicapped']
