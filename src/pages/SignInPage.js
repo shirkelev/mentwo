@@ -122,9 +122,9 @@ const SignInPage = () => {
             <Typography variant="h5" style={{fontWeight: 'bold'}}>Sign In</Typography>
                 <FormContainer >
                     <TextContainer>
-                        <Typography variant="h6" style={{color: 'red'}}>{error}</Typography>
+                        <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{error}</Typography>
                         <TextBox title="Email" placeholder="Enter your email" onBlur={handleChangeEmail}/>
-                        <TextBox title="Password" placeholder="Enter your password" onBlur={handleChangePassword}/>
+                        <TextBox title="Password" placeholder="Enter your password" onBlur={handleChangePassword} isPassword={true}/>
                         <Stack direction="row" spacing={2}>
                             <ButtonWrapper variant="contained" color="primary" title='Sign In' onClick={handleClickSignIn}/>
                             <ButtonWrapper variant="outlined" color="secondary" title='Sign Up' onClick={handleSignUpWithEmail}/>

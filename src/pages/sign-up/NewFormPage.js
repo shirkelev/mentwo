@@ -10,6 +10,7 @@ import * as Constants from '../../Constants';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { SignUpContext } from '../../context/SignUpContexts';
+import { Typography } from '@mui/material';
 
 function TagsContainer({ tagsNames, category, onTagClick, isPressedFunc}) {
     return (
@@ -97,6 +98,7 @@ const NewFormPage = ({name, onClickSubmit}) => {
     const [softSkills, setSoftSkills] = useState(form.softSkills ? form.softSkills : []);
     const [agendas, setAgendas] = useState(form.agendas ? form.agendas : []);
     const [description, setDescription] = useState(form.description ? form.description : '');
+    const [emptyFieldsError, setEmptyFieldsError] = useState();
     
     function onTagClick(tag, category){
         let list;
@@ -161,14 +163,24 @@ const NewFormPage = ({name, onClickSubmit}) => {
 
     // const [doneDialogOpen, setDoneDialogOpen] = React.useState(false);
 
+    
+
     const doneTapped = async () => {
         // await setForm();
+        if(fields.length === 0) {
+            const curForm = {fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description};
+            setEmptyFieldsError("You must fill at least one professional field")
+            setForm(curForm)
+            console.log("You must fill at least one professional field")
+            
+        } else {
         const curForm = {fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description};
         console.log('Form in NewFoem', curForm)
         console.log('Form in NewFoem', form)
         console.log('Fields in NewFoem', fields, techSkills, softSkills, agendas, description)
         console.log("Starting write new Records in data set");
         await onClickSubmit(curForm, role);
+        }
         
     };
 
@@ -223,13 +235,13 @@ const NewFormPage = ({name, onClickSubmit}) => {
 
                 <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
 
-                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
-
                 <QuestionContainer>
                     <Category>About Yourself</Category>
                     <Statement> Information you would like to share about yourself with the interviewees? </Statement>
                     <BigContentBox placeholder="For example, workplace, specialties, areas of interest, etc" onBlur={chengedDescription}/>
                 </QuestionContainer>
+
+                    <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{emptyFieldsError}</Typography>
 
                 <ButtonSection>
                     <ButtonWrapper variant="outlined" color="primary" onClick={backTapped} title='Back' />
@@ -256,13 +268,13 @@ const NewFormPage = ({name, onClickSubmit}) => {
 
                 <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
 
-                <Divider style={{ width: '100%', marginTop: '16px', marginBottom: '16px' }} />
-
                 <QuestionContainer>
                     <Category>About Yourself</Category>
                     <Statement> Information you would like to share about yourself with the interviewers? </Statement>
                     <BigContentBox placeholder="For example, workplace, specialties, areas of interest, etc" onBlur={chengedDescription}/>
                 </QuestionContainer>
+
+                <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{emptyFieldsError}</Typography>
                 
                 <ButtonSection>
                     <ButtonWrapper variant="outlined" color="primary" onClick={backTapped} title='Back' />
