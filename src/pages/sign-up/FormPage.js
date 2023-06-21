@@ -69,6 +69,7 @@ const FormPage = (props) => {
   });
 
   const [file, setFile] = useState(null);
+  const [fileError, setFileError] = useState(null);
   const fileInput = useRef();
 
   const handleFileOpen = () => {
@@ -84,8 +85,8 @@ const FormPage = (props) => {
       setFile(selectedFile);
       console.log(selectedFile);
     } else {
+      setFileError('Please select an image file');
       return 
-      //Add Error Message
     }
     // Continue with upload process
   };
@@ -167,6 +168,7 @@ const FormPage = (props) => {
             imgButton ?
             (
             <ImgButtonContainer>
+              <Typography align='center' sx={{width: '100%'}} color="red">{fileError}</Typography>
               <Button variant="outlined" endIcon={<UploadIcon />} siz onClick={handleFileOpen}>
                 Add Image
               </Button>
@@ -180,6 +182,7 @@ const FormPage = (props) => {
             ) : null
           }
           <ImgButtonContainer>
+            
             <Button variant="contained" color="primary"  endIcon={<SaveIcon />} siz
               onClick={onClickSave}>
                 <input
