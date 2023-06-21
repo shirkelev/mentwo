@@ -92,13 +92,12 @@ const Statement = styled('h3')(({ theme }) => ({
 const NewFormPage = ({name, onClickSubmit}) => {
 
 
-    const {form, setForm, step, setStep, role} = useContext(SignUpContext);
+    const {form, setForm, step, setStep, role, error, setError} = useContext(SignUpContext);
     const [fields, setFields] = useState(form.fields ? form.fields : []);
     const [techSkills, setTechSkills] = useState(form.techSkills ? form.techSkills : []);
     const [softSkills, setSoftSkills] = useState(form.softSkills ? form.softSkills : []);
     const [agendas, setAgendas] = useState(form.agendas ? form.agendas : []);
     const [description, setDescription] = useState(form.description ? form.description : '');
-    const [emptyFieldsError, setEmptyFieldsError] = useState();
     
     function onTagClick(tag, category){
         let list;
@@ -159,17 +158,13 @@ const NewFormPage = ({name, onClickSubmit}) => {
     const backTapped = () => {
         setForm({fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description});
         setStep(step - 1);
-    };
-
-    // const [doneDialogOpen, setDoneDialogOpen] = React.useState(false);
-
-    
+    };    
 
     const doneTapped = async () => {
         // await setForm();
         if(fields.length === 0) {
             const curForm = {fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description};
-            setEmptyFieldsError("You must fill at least one professional field")
+            setError("You must fill at least one professional field")
             setForm(curForm)
             console.log("You must fill at least one professional field")
             
@@ -241,7 +236,7 @@ const NewFormPage = ({name, onClickSubmit}) => {
                     <BigContentBox placeholder="For example, workplace, specialties, areas of interest, etc" onBlur={chengedDescription}/>
                 </QuestionContainer>
 
-                    <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{emptyFieldsError}</Typography>
+                    <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{error}</Typography>
 
                 <ButtonSection>
                     <ButtonWrapper variant="outlined" color="primary" onClick={backTapped} title='Back' />
@@ -274,7 +269,7 @@ const NewFormPage = ({name, onClickSubmit}) => {
                     <BigContentBox placeholder="For example, workplace, specialties, areas of interest, etc" onBlur={chengedDescription}/>
                 </QuestionContainer>
 
-                <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{emptyFieldsError}</Typography>
+                <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{error}</Typography>
                 
                 <ButtonSection>
                     <ButtonWrapper variant="outlined" color="primary" onClick={backTapped} title='Back' />

@@ -111,6 +111,8 @@ const SignUpFlow = ({props}) => {
         img: userData?.img ? userData.img : null,
     });
 
+    const [error, setError] = useState();
+
     function createNewUser(form, role){
   
         if(role===Constantans.INTERVIEWERS_DB_NAME){
@@ -299,12 +301,12 @@ const SignUpFlow = ({props}) => {
             }
         
     }
-    // useEffect(() => {
-    //     if(!loading && !userInfo){
-    //         console.log("## HEY");
-    //         setUserInfo(userData);
-    //     }
-    // }, [loading])
+    useEffect(() => {
+        if(!loading){
+            console.log("## HEY");
+            setUserInfo(userData);
+        }
+    }, [loading])
         
     return (
         
@@ -312,7 +314,7 @@ const SignUpFlow = ({props}) => {
             {/* {console.log(userData, user)} */}
             
             <SignUpContext.Provider value={{role, setRole, step, setStep, completed, 
-                                        setCompleted, form, setForm, saveSuccess, userInfo, setUserInfo}}>
+                                        setCompleted, form, setForm, saveSuccess, userInfo, setUserInfo, error, setError}}>
                 {console.log("UserInfo",userInfo, user)}
                 <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} />
                 <ContentContainer>
