@@ -16,7 +16,7 @@ export default function MentorPendingsAndRunningPage ({user}) {
   const [message, setmessage] = useState(user.pendingMenteesData?.length !== 0 && user.available ? '' : "You don't have any pending interviews at the moment");
   return (
     <>
-     <div style={{ width: '100vw', height: '100vh' }}>
+     <div style={{ width: '100vw', height: '100vh'}}>
       <div style={{ padding: '10px'}}>
         <HomeContent headline = {Constants.PENDINGS} list={pendingsList} user={user}/>
         <IconWithMessage message={message} isVisible={user.pendingMenteesData?.length === 0 || !user.available}/>
@@ -25,6 +25,7 @@ export default function MentorPendingsAndRunningPage ({user}) {
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <TipBox tipMessege = {"I recommend that at the end of the interview the interviewee will ask for feedback."}/>
       </div>
+      <div style={{ height:'60px'}}></div> {/* This is a spacer */}
     </div>
     </>
   );

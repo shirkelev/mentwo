@@ -134,22 +134,28 @@ export const MENTEE_QUESTIONS = [
 ]
 export const DEFAULT_QUESTIONS = [
     {
-        name: 'Name',
+        name: 'Name*',
         qid: 'name',
         placeHolder: 'First Name',
         title: 'Name'
     },
     {
-        name: 'Last Name',
+        name: 'Last Name*',
         qid: 'lastName',
         placeHolder: 'Last Name',
         title: 'Surname'
     },
     {
-        name: 'Phone Number',
+        name: 'Phone Number*',
         qid: 'phone',
         placeHolder: 'Phone Number',
         title: 'Phone Number'
+    },
+    {
+        name: 'LinkedIn Profile',
+        qid: 'linkedin',
+        placeHolder: 'LinkedIn Profile Url',
+        title: 'LinkedIn Profile'
     }
 ]
 // Sign Up Form Steps

@@ -59,6 +59,7 @@ export default function HomePageMain() {
         position: 'sticky',  // Positioned relative to its normal position
         marginTop: '53px',  // Assuming your navbar height is 64px
         marginBottom: '40px',  // Assuming your bottom bar height is 56px
+        paddingBottom: '40px',
         
       });
 
