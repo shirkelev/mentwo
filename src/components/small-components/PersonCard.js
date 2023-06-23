@@ -69,7 +69,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick={onDecline}>No</Button>
+              <Button onClick={onDecline} color='success' variant='outlined'>No</Button>
               <Button onClick={onApproveFunc} variant="contained">Yes</Button>
             </DialogActions>
           </Dialog>
@@ -237,8 +237,8 @@ export default function PersonCard({variant, mainUser, cardUser}) {
         
         return(
           <>
-          <Button size="small" onClick={handleClickApprove} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Approve</Button>
-          <Button size="small" onClick={handleClickDecline} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>Decline</Button> 
+          <Button size="small" onClick={handleClickApprove} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }} color='success'>Approve</Button>
+          <Button size="small" onClick={handleClickDecline} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }} color='warning'>Decline</Button> 
           <Button size="small" onClick={handleClickViewMore} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>About</Button> 
           </>
         )
@@ -248,7 +248,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
       ButtonSection = () => {
         return(
           <>
-          <Button size="small" onClick={handleClickContact} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Contact</Button>
+          <Button size="small" onClick={handleClickContact} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }} color='success'>Contact</Button>
           <Button size="small" onClick={handleClickFinish} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>Finish</Button> 
           <Button size="small" onClick={handleClickViewMore} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>About</Button> 
           </>
@@ -259,7 +259,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
       ButtonSection = () => {
         return(
           <>
-          <Button size="small" onClick={handleClickContact} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }}>Contact</Button>
+          <Button size="small" onClick={handleClickContact} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }} color='success'>Contact</Button>
           <div></div> 
           <Button size="small" onClick={handleClickShare} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>Share</Button> 
           </>

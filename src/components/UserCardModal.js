@@ -167,7 +167,7 @@ const UserCardModal = ({user, onClose}) => {
                 
         <ModalContent modalType={modalType}/>
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 10 }}>
-          <Button variant="outlined" onClick={onClose} size="small">Close</Button>
+          <Button variant="outlined" color='success' onClick={onClose} size="small">Close</Button>
         </div>
       </ModalStyle>
       </Modal>

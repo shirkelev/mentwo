@@ -152,7 +152,7 @@ const SignInPage = () => {
                         <TextBox title="Password" placeholder="Enter your password" onBlur={handleChangePassword} isPassword={true}/>
                         <Stack direction="row" spacing={2}>
                             <ButtonWrapper variant="contained" color="primary" title='Sign In' onClick={handleClickSignIn}/>
-                            <ButtonWrapper variant="outlined" color="secondary" title='Sign Up' onClick={handleSignUpWithEmail}/>
+                            <ButtonWrapper variant="outlined" color="success" title='Sign Up' onClick={handleSignUpWithEmail}/>
                         </Stack>
                     </ TextContainer>
                     <div sx={{paddingTop: '20px'}}>
