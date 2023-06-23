@@ -143,7 +143,7 @@ const SignInPage = () => {
                 )
             :
             <>
-            <img alt='logo' src={logoW} style={{height:'90px', width:'200px', marginBottom: '30px'}} />
+            <img alt='logo' src={logoW} style={{width:'70vw', marginBottom: '30px'}} />
             <Typography variant="h5" style={{fontWeight: 'bold'}}>Sign In</Typography>
                 <FormContainer >
                     <TextContainer>
