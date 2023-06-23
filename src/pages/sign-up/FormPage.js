@@ -18,7 +18,7 @@ const RootContainer = styled(Container)(({ theme }) => ({
   alignContent: 'center',
   justifyContent: 'center',
   maxWidth: '100%',
-  paddingBottom: theme.spacing(5),
+  paddingBottom: theme.spacing(3),
 }));
 
 const FormContainer = styled('form')(({ theme }) => ({
@@ -27,7 +27,7 @@ const FormContainer = styled('form')(({ theme }) => ({
   alignItems: 'center',
   marginTop: theme.spacing(2),
   marginBottom: theme.spacing(2),
-  gap: theme.spacing(3),
+  gap: theme.spacing(2),
 }));
 
 
@@ -40,7 +40,7 @@ const QuestionContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   width: '100%',
-  marginBottom: theme.spacing(2),
+  marginBottom: theme.spacing(2.2),
 }));
 
 const ImgButtonContainer = styled('div')(({ theme }) => ({
@@ -150,11 +150,10 @@ const FormPage = (props) => {
     <RootContainer >
       <FormContainer>
         <Typography >
-            <Typography align='center'>
-              <Title> {title} </Title>
-            </Typography>
+          <Typography align='center'>
+            <Title> {title} </Title>
+          </Typography>
             {filedsArray.map(x =>
-            
             <WrapQuestions
             title= {x.title}
             name= {x.name}
@@ -169,7 +168,7 @@ const FormPage = (props) => {
             (
             <ImgButtonContainer>
               <Typography align='center' sx={{width: '100%'}} color="red">{fileError}</Typography>
-              <Button variant="outlined" endIcon={<UploadIcon />} siz onClick={handleFileOpen}>
+              <Button variant="outlined" color="success" endIcon={<UploadIcon />} siz onClick={handleFileOpen}>
                 Add Image
               </Button>
               <input

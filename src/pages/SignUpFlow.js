@@ -275,13 +275,14 @@ const SignUpFlow = ({props}) => {
     async function onBasicInfoSubmit(newInfo){
         setLocalLoading(true);
         console.log('user', user.uid, newInfo.name, newInfo.lastName,  newInfo.phone, newInfo.img)
-        await DB.changeUserBasicInfo(user.uid, newInfo.name, newInfo.lastName,  newInfo.phone, newInfo.img)
+        await DB.changeUserBasicInfo(user.uid, newInfo.name, newInfo.lastName,  newInfo.phone, newInfo.img, newInfo.linkedin)
         setUserInfo(newInfo);
         setLocalLoading(false);
     }
 
     const ProtectedMainFormPage = ({children}) => {
-        if(userInfo.name && userInfo.lastName && userInfo.phone && userInfo.img){
+        console.log('In Protected MAinFormPage', userInfo)
+        if(userInfo?.name && userInfo?.lastName && userInfo?.phone && userInfo?.img && userInfo?.linkedin){
             let newCompleted = completed;
             newCompleted[step] = true;
             setCompleted(newCompleted);
@@ -319,20 +320,27 @@ const SignUpFlow = ({props}) => {
         
     }
     useEffect(() => {
-        if(!loading){
+        setLocalLoading(loading)
+        if(!loading && userData){
             setUserInfo(userData);
+            setLocalLoading(false);
         }
+       
+    }, [loading, userData, localLoading, setLoading])
+
+    useEffect(() => {
+        setLocalLoading(loading)
     }, [loading])
         
     return (
         
         <RootContainer>
-            {/* {console.log(userData, user)} */}
+            {console.log('Current Status: ', user, userData, loading)}
             
             <SignUpContext.Provider value={{role, setRole, step, setStep, completed, 
                                         setCompleted, form, setForm, saveSuccess, userInfo, setUserInfo, error, setError}}>
-                {console.log("UserInfo",userInfo, user)}
-                <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} />
+                {console.log("UserInfo",userInfo, user, userData)}
+                {!loading && !localLoading ? <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} /> : null}
                 <ContentContainer>
                     <StepContent />
                 </ContentContainer>

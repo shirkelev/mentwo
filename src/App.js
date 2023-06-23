@@ -16,6 +16,7 @@ import {
 } from 'react-router-dom'
 import DataBase from './data/DataBase';
 import { UserAuth } from './context/AuthContext';
+import SignUpLoading from './pages/sign-up/SignUpLoading';
 
 import { useContext, useState, useEffect, Children} from 'react';
 //import { UserRole } from './context/UserRole';
@@ -112,7 +113,7 @@ const data = new DataBase()
 
 function App() {
   const MnM = [data.findByName('Yuval'), data.findByName('Nits')]
-  const {user, setUser, userData, setUserData, logOut, fetchExtraData} = UserAuth();
+  const {user, setUser, userData, setUserData, logOut, fetchExtraData, loading} = UserAuth();
   console.log(user?.uid ?  user.uid : null, 'Here')
   // const [users, setUsers] = useState([]);
   const [cur, setCur] = useState(0);
@@ -120,7 +121,11 @@ function App() {
 
   
   const ProtectedSignUp = ({children}) => {
+    if(loading){
+      return <SignUpLoading />
+    }
     if(!user){
+      console.log('Here')
       return <Navigate to={'../' + Constants.SIGN_IN} />;
     } else if(user && userData && userData.signedUp) {
       return <Navigate to={'../' + Constants.HOME_PAGE + user.uid} />;
@@ -129,14 +134,24 @@ function App() {
     }}
 
   const ProtectedSignIn = ({children}) => {
-    if(user){
-      return <Navigate to='/' />
+    if(loading){
+      return <SignUpLoading />
+    }
+    if(user && userData && userData.signedUp){
+      return <Navigate to={'../' + Constants.HOME_PAGE + user.uid} />
+    } else if (user && userData && !userData.signedUp){
+      return <Navigate to={'../' + Constants.SIGN_UP} />
+    } else if (user && !userData){
+      return <SignUpLoading />
     } else {
       return children;
     }}
   
   const ProtectedLanding = ({children}) => {
-    if(user && userData && userData.isSignUp ? true : false){
+    if(loading){
+      return <SignUpLoading />
+    }
+    if(user && userData && userData.signedUp){
       return <Navigate to={Constants.HOME_PAGE + user.uid} />;
     } else if(user) {
       return <Navigate to={Constants.SIGN_UP} />;
@@ -165,7 +180,8 @@ function App() {
     <>
     <ThemeProvider theme = {theme}>
     <BrowserRouter>
-        <button onClick={handelSignOut}> LgOut </button>     
+        <>  
+        <button onClick={handelSignOut}> LgOut </button>   
         <UserContext.Provider value={{}}>
             <Routes>
               <Route path={Constants.LANDING_PAGE}
@@ -219,7 +235,7 @@ function App() {
         
             </Routes>
         </UserContext.Provider>
-        
+        </>
       </ BrowserRouter>
       </ThemeProvider>
     </>

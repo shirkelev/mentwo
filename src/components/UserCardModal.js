@@ -43,6 +43,7 @@ const TagsWithHeadlineContainer = ({category, list}) => {
   if(attList.length === 0){
     return null;
   }
+  console.log(category, attList)
   return (
     <>
     <div style={{ display: 'flex'
@@ -83,6 +84,55 @@ const UserCardModal = ({user, onClose}) => {
         )
       }
     }
+
+    const ChipSection = () => {
+
+      const hasLinkedin = user.linkedin ? true : false;
+      if(hasLinkedin){
+        let linkedin = user.linkedin;
+        if(!linkedin.startsWith('http')){
+          linkedin = 'https://' + linkedin;
+        }
+        user.linkedin = linkedin;
+      }
+      const linkedinProps = {
+        color: hasLinkedin ? 'success' : 'default',
+        onClick : hasLinkedin ?  
+          () => {window.open(user.linkedin, "_blank")} : () => {},
+      }
+
+      const hasCV = user.cv ? true : false;
+      const cvProps = {
+        color: hasCV ? 'success' : 'default',
+        onClick : hasCV ?
+          () => {window.open(user.cv, "_blank")} : () => {},
+      }
+      return(
+        <Stack spacing={1} direction="row">
+          <Chip
+            label="Linkedin"
+            onClick={linkedinProps.onClick}
+            onDelete={() => {}}
+            size='small'
+            icon={<LinkedInIcon />}
+            deleteIcon={<></>}
+            variant="outlined"
+            color={linkedinProps.color}
+            
+          />
+          <Chip
+            label="CV"
+            onClick={cvProps.onClick}
+            onDelete={() => {}}
+            size='small'
+            icon={<DescriptionIcon />}
+            deleteIcon={<></>}
+            variant="outlined"
+            color={cvProps.color}
+          />
+      </Stack>
+      )
+    }
   
     return (
 
@@ -101,29 +151,7 @@ const UserCardModal = ({user, onClose}) => {
             <Stack spacing={1} direction="row">
               <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
             </Stack>
-            <Stack spacing={1} direction="row">
-              <Chip
-                label="Linkedin"
-                onClick={() => {}}
-                onDelete={() => {}}
-                size='small'
-                icon={<LinkedInIcon />}
-                deleteIcon={<></>}
-                variant="outlined"
-                color="success"
-                
-              />
-              <Chip
-                label="CV"
-                onClick={() => {}}
-                onDelete={() => {}}
-                size='small'
-                icon={<DescriptionIcon />}
-                deleteIcon={<></>}
-                variant="outlined"
-                color="default"
-              />
-            </Stack>
+            <ChipSection/>
           </Stack>
         </Stack>
         {modalType === 'about' ? 

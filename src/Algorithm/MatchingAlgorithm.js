@@ -92,7 +92,7 @@ export function getMutualTags(interviewer, interviewee) {
     }
     for (let i = 0; i < interviewer.agendas.length; i++) {
         if (interviewee.agendas.includes(interviewer.agendas[i])) {
-            mutualTags.agendas.push(interviewer.softSkills[i]);
+            mutualTags.agendas.push(interviewer.agendas[i]);
         }
     }
     return mutualTags;

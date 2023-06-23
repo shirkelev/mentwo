@@ -324,7 +324,7 @@ const NewFormPage = ({name, onClickSubmit}) => {
                 
                 <CvButtonContainer>
                     <Typography align='center' sx={{width: '100%'}} color="red">{cvError}</Typography>
-                    <MuiButton variant="contained" color="primary"  endIcon={<UploadIcon />} siz
+                    <MuiButton variant="outlined" color="success" endIcon={<UploadIcon />} siz
                             onClick={handleFileOpen}>
                         Upload CV
                     </MuiButton>

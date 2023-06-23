@@ -75,12 +75,13 @@ const SignUpLink = styled('a')(({ theme }) => ({
 
 const SignInPage = () => {
 
+    const {googleSignIn, emailSignIn, user, emailSignUp, error, loading} = UserAuth();
     const [email, setEmail] = React.useState(null);
     const [password, setPassword] = React.useState(null);
-    const [localLoading, setLocalLoading] = React.useState(false);
+    const [localLoading, setLocalLoading] = React.useState(loading);
     
 
-    const {googleSignIn, emailSignIn, user, emailSignUp, error, loading} = UserAuth();
+    
 
     function handleChangeEmail(e){
         setEmail(e.target.value);
@@ -102,6 +103,7 @@ const SignInPage = () => {
         console.log("Sign up with email");
         await emailSignUp(email, password);
         setLocalLoading(false);
+        console.log('Local loading: ', localLoading, "Loading: ", loading);
     }
 
     const handleGoogleSignIn = async () => {
@@ -111,24 +113,31 @@ const SignInPage = () => {
         } catch (error) {
           console.log(error);
         } finally {
-            setLocalLoading(false); 
+            setLocalLoading(false);
         }
       };
     
-    useEffect(() => {
-        if (user != null) {
-        //   navigate('/account');
-        console.log("User is not null", user);
-        }
-      }, [user]);
+    // useEffect(() => {
+    //     if (user != null) {
+    //     //   navigate('/account');
+    //     console.log("User is not null", user);
+    //     }
+    //   }, [user]);
+
+    // useEffect(() => {
+    //     setLocalLoading(loading);
+    // }, [loading]);
 
     return (
         
         <div>
             <RootContainer>
-            {localLoading || loading ? 
+            
+            { (localLoading  || loading) ? 
+                
                 (
                 <div>
+                    {console.log("Loading on sign in page", localLoading, loading)}
                     <SignUpLoading />
                 </div> 
                 )
@@ -136,7 +145,6 @@ const SignInPage = () => {
             <>
             <img alt='logo' src={logoW} style={{height:'90px', width:'200px', marginBottom: '30px'}} />
             <Typography variant="h5" style={{fontWeight: 'bold'}}>Sign In</Typography>
-            {console.log("This is the cur user: ", user, email, password)}
                 <FormContainer >
                     <TextContainer>
                         <Typography variant="h6" style={{color: 'red', textAlign: 'center'}}>{error}</Typography>

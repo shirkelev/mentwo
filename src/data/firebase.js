@@ -217,6 +217,9 @@ class DataBase {
         type: null,
         phone: user.phoneNumber ? user.phoneNumber : null,
         img: user.photoURL ? user.photoURL : null,
+        linkedin: null,
+        signedUp: false,
+        description: null,
       }
     )
   }
@@ -312,7 +315,7 @@ class DataBase {
     }
   }
 
-  async changeUserBasicInfo(id, name, lastName, phone, img) {
+  async changeUserBasicInfo(id, name, lastName, phone, img, linkedin=null) {
     console.log("Updating user with ID ", id, name, lastName, phone, img);
     let downloadURL = null;
     if(img){
@@ -321,7 +324,7 @@ class DataBase {
     console.log("Download URL is ", downloadURL);
     try{
       const userRef = doc(this.db, Constants.USERS_DB_NAME, id);
-      return updateDoc(userRef, {name: name, lastName: lastName,  phone: phone, img: downloadURL});
+      return updateDoc(userRef, {name: name, lastName: lastName,  phone: phone, img: downloadURL, linkedin: linkedin});
     } catch (e) {
       console.log("Error updating user with ID ", id, e);
       return null;
@@ -351,7 +354,7 @@ class DataBase {
       });
 
     } catch (e) {
-      console.log("Error updating interviewer pending interviewees");
+      console.log("Error updating interviewer pending interviewees", e);
       return null;
     }
   }
