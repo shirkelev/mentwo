@@ -43,6 +43,9 @@ const theme = createTheme({
       appBackground: {
         main: '#EAFDFC',
       },
+      success: {
+        main: '#0077b5',
+      },
       // EAFDFC
       //FEFCFF
       // F8FFFF

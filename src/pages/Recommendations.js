@@ -5,7 +5,7 @@ import SingleRecommendation from '../components/small-components/SingleRecommend
 export default function Recommendations({user}) {
     if (user.type === 'mentor') {
         return (
-            <Box style={{ margin: '20px', height:'85vh' }}>
+            <Box style={{ margin: '20px', height:'85vh', paddingTop:'50px'}}>
                 <Typography> <span style={{ fontWeight: 'bold' }}>Recommendations for the mock interview:<br /><br /></span></Typography>
                 <SingleRecommendation text="Choose a company where the interview is taking place, and tell the interviewee a little about it and the intended position." />
                 <SingleRecommendation text="Create a comfortable atmosphere but with a certain distance." />
@@ -17,7 +17,7 @@ export default function Recommendations({user}) {
     }
   else {
     return (
-        <Box style={{ margin: '20px', height:'105vh' }}>
+        <Box style={{ margin: '20px', height:'105vh', paddingTop:'50px' }}>
             <Typography> <span style={{ fontWeight: 'bold' }}>Recommendations for the mock interview:<br /><br /></span></Typography>
 
             <SingleRecommendation text="Determine with the interviewer the company and position you are interviewing for, read about them and understand why you are interested in them." />

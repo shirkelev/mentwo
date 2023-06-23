@@ -24,10 +24,10 @@ export default function NavigationBar({user}) {
   return (
       <>
       <Box sx={{ flex: 1, style:"position: fixed;" }}>
-        <AppBar position="fixed">
+        <AppBar position="fixed" >
           <Toolbar>
             <IconButton
-              size="large"
+              size="small"
               edge="start" 
               color="inherit"
               aria-label="menu"

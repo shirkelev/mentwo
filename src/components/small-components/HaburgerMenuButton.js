@@ -15,7 +15,7 @@ const HamburgerMenuButton = ({ user }) => {
   return (
     <>
       <IconButton onClick={handleClick}>
-        <Avatar alt="Remy Sharp" src={user.img}  sx={{ width: 40, height: 40 }}/>
+        <Avatar alt="Remy Sharp" src={user.img}  sx={{ width: 50, height: 50, border: 1}} borderStyle="line" size="large"/>
       </IconButton>
       
     </>

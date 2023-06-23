@@ -6,6 +6,9 @@ import styled from '@emotion/styled';
 import Tag from './small-components/Tag';
 import * as Constants from '../Constants';
 import TagsCategory from './small-components/TagsCategory';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import Chip from '@mui/material/Chip';
+import DescriptionIcon from '@mui/icons-material/Description';
 
 const h2Styles = {
   maxWidth: '100%',
@@ -29,17 +32,32 @@ const ModalStyle = styled('div')(({ theme }) => ({
   borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
 }));
 
+const TagsContainer = styled('div')(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  width: '100%',
+}));
+
 const TagsWithHeadlineContainer = ({category, list}) => {
   const attList = list ? list : [];
+  if(attList.length === 0){
+    return null;
+  }
   return (
-    <div style={{ display: 'flex', overflowX: 'auto', marginTop: 12 }}>
+    <>
+    <div style={{ display: 'flex'
+        , flexDirection:'column'
+        , overflowX: 'auto'
+        , marginTop: 16
+        , gap: 12 }}>
+    <TagsCategory category={category} num={attList.length} />
         <Box display="flex" flexWrap="wrap" gap={1}>
-          <TagsCategory category={category} num={attList.length} />
           {attList.map((badge, index) =>
           <Tag text={badge} category={category}/>
           )}
         </Box>
     </div>
+    </>
   )
 }
 
@@ -51,7 +69,7 @@ const UserCardModal = ({user, onClose}) => {
       if(modalType === 'about'){
         return(
         <>
-        <Typography><text style={h2Styles}><br></br>{user.description}</text></Typography>
+        <Typography textAlign='left'><text style={h2Styles}><br></br>{user.description}</text></Typography>
         </>
         )
       }
@@ -73,22 +91,49 @@ const UserCardModal = ({user, onClose}) => {
           onClose={onClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'scroll' }}
           
           >
       <ModalStyle>
-        <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} marginBottom={2}>
-          <Avatar src={user.img} sx={{ width: 50, height: 50 }} borderStyle="line" />
-          <Stack spacing={1}>
-            <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
+        <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} marginBottom={3}>
+          <Avatar src={user.img} sx={{ width: 50, height: 50, border: 1}} borderStyle="line"  />
+          <Stack spacing={1} direction="column">
+            <Stack spacing={1} direction="row">
+              <Typography variant="h5" style={{ fontWeight: 'bold' }}>{user.name} {user.lastName}</Typography>
+            </Stack>
+            <Stack spacing={1} direction="row">
+              <Chip
+                label="Linkedin"
+                onClick={() => {}}
+                onDelete={() => {}}
+                size='small'
+                icon={<LinkedInIcon />}
+                deleteIcon={<></>}
+                variant="outlined"
+                color="success"
+                
+              />
+              <Chip
+                label="CV"
+                onClick={() => {}}
+                onDelete={() => {}}
+                size='small'
+                icon={<DescriptionIcon />}
+                deleteIcon={<></>}
+                variant="outlined"
+                color="default"
+              />
+            </Stack>
           </Stack>
         </Stack>
         {modalType === 'about' ? 
         <>
-            <TagsWithHeadlineContainer category = {Constants.FIELDS}  list={user.mutualTags.fields ? user.mutualTags.fields : []}/>
-            <TagsWithHeadlineContainer category = {Constants.TECHSKILLS} list={user.mutualTags.techSkills ? user.mutualTags.techSkills : []}/>
-            <TagsWithHeadlineContainer category = {Constants.SOFTSKILLS} list={user.mutualTags.softSkills ? user.mutualTags.softSkills : []}/>
-            <TagsWithHeadlineContainer category = {Constants.AGENDAS} list={user.mutualTags.agendas ? user.mutualTags.agendas : []}/>
+        {/* <TagsContainer> */}
+          <TagsWithHeadlineContainer category = {Constants.FIELDS}  list={user.mutualTags.fields ? user.mutualTags.fields : []}/>
+          <TagsWithHeadlineContainer category = {Constants.TECHSKILLS} list={user.mutualTags.techSkills ? user.mutualTags.techSkills : []}/>
+          <TagsWithHeadlineContainer category = {Constants.SOFTSKILLS} list={user.mutualTags.softSkills ? user.mutualTags.softSkills : []}/>
+          <TagsWithHeadlineContainer category = {Constants.AGENDAS} list={user.mutualTags.agendas ? user.mutualTags.agendas : []}/>
+        {/* </TagsContainer> */}
         </>
                 : null}
                 
