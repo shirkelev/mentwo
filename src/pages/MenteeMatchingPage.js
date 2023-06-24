@@ -9,13 +9,15 @@ const MenteeMatchingPage = ({mentee}) => {
         height: '100vh',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        padding: '20px',
     };
 
     return(
         <div style={containerStyles}>
         <Stack direction="column" justifyContent="center" alignItems="center" spacing={20} maxWidth="100%" marginBottom={20}>
-          <CircularProgressBar></CircularProgressBar>
+          <iframe src="https://giphy.com/embed/eYaHNLXTOo1hKJu9gu" frameBorder="0" class="giphy-embed" title='Searching'></iframe>
+          {/* <CircularProgressBar /> */}
           <Typography variant="h4" component="h1" textAlign="center">
             Searching For The Best Interviewer For You!
           </Typography>

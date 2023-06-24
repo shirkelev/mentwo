@@ -28,6 +28,7 @@ import NewFormPage from "./sign-up/NewFormPage";
 import ButtomBar from "../components/ButtomBar";
 import ProfilePage from "../components/ProfilePage";
 import SignUpLoading from "./sign-up/SignUpLoading";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 const NavCont = styled('nav')(({ theme }) => ({
     // position: 'ab',
@@ -62,6 +63,15 @@ export default function HomePageMain() {
         
         
       });
+    
+    const intervieweeHomePage = () => {
+        if(userData.type === 'mentee'){
+            return !userData.isMatched ? <MenteeMatchingPage user={feedData} /> : <MatchSuccess mentee={feedData} />
+        }
+        else{
+            return <MentorPendingsAndRunningPage user={feedData} />
+        }
+    }
 
     return (
         <UserContext.Provider value={{feedData, setFeedData}}>
@@ -80,8 +90,8 @@ export default function HomePageMain() {
                         (
                         <Routes>
                             <Route path="/" element={
-                                userData.type === 'mentor' ? <MentorPendingsAndRunningPage user={feedData} /> : 
-                                !userData.isMatched ? <MenteeMatchingPage user={feedData} /> : <MatchSuccess mentee={feedData} /> } exact/>
+                                feedData.type === 'mentor' ? <MentorPendingsAndRunningPage user={feedData} /> : 
+                                !feedData.isMatched ? <MenteeMatchingPage user={feedData} /> : <MatchSuccess mentee={feedData} /> } exact/>
                                 {/* // : <MentorApproval mentee={userData} /> } exact/> */}
                             <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={feedData} />} />
                             <Route path={CONSTANTS.MENTOR_IN_PROCESS_PAGE} element={<MentorInProcessPage user={feedData} />} />

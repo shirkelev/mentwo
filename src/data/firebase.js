@@ -405,7 +405,7 @@ class DataBase {
     //Removes the current mentor from the interviewee
     try{
         const intervieweeRef = doc(this.db, Constants.INTERVIEWEES_DB_NAME, id);
-        await updateDoc(intervieweeRef, {currentMentor: null}).then(() => {
+        await updateDoc(intervieweeRef, {currentMentor: null, isMatched:false}).then(() => {
         console.log("Interviewee current mentor is removed");
       });
 

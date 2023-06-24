@@ -29,6 +29,8 @@ const ModalStyle = styled('div')(({ theme }) => ({
   padding: theme.spacing(2),
   textAlign: 'center',
   width: '80%',
+  maxHeight: '92%',
+  overflowY: 'auto',
   borderRadius: theme.shape.borderRadius, // Use the theme's border radius for consistency
 }));
 
@@ -120,6 +122,7 @@ const UserCardModal = ({user, onClose}) => {
             color={linkedinProps.color}
             
           />
+          {user.type === 'mentee' ?
           <Chip
             label="CV"
             onClick={cvProps.onClick}
@@ -130,6 +133,7 @@ const UserCardModal = ({user, onClose}) => {
             variant="outlined"
             color={cvProps.color}
           />
+          : null}
       </Stack>
       )
     }
@@ -141,10 +145,11 @@ const UserCardModal = ({user, onClose}) => {
           onClose={onClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'scroll' }}
+          sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center',  }}
+          
           
           >
-      <ModalStyle>
+      <ModalStyle >
         <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} marginBottom={3}>
           <Avatar src={user.img} sx={{ width: 50, height: 50, border: 1}} borderStyle="line"  />
           <Stack spacing={1} direction="column">

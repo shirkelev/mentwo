@@ -21,6 +21,7 @@ export default function MentorFinishedPage ({user}) {
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <TipBox tipMessege={"I recommend that at the end of the interview the interviewee will ask for feedback."}/>
       </div>
+      <div style={{ height: '50px'}} ></div>
     </div>
   );
 };

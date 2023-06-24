@@ -38,8 +38,10 @@ export function matchInterviewer(interviewer, interviewees) {
     // console.log("matches for interviewer " + interviewer.id + " :");
     let matches = [];
     for (let i = 0; i < Math.min(intervieweesScores.length, Constants.NUM_OF_MATCHES); i++) {
-        matches.push(intervieweesScores[i][0].id);
+        if(!interviewer.declinedMentees?.includes(intervieweesScores[i][0].id) && !interviewer.finishedMentees?.includes(intervieweesScores[i][0].id)){
+            matches.push(intervieweesScores[i][0].id);
         // console.log("match " + i + ": id "+  matches[i]);
+        }
     }
     
     return {interviewerId: interviewer.id, matches: matches};

@@ -26,7 +26,7 @@ const TagsWithHeadlineContainer = ({category, list}) => {
 export default function ProfilePage() {
     const {user, setUser, userData, setUserData, loading, setLoading, setEnterHome} = UserAuth();
     return( 
-        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' , marginTop: '2rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' , paddingTop: '30px'}}>
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop: '1rem', marginBottom: '5rem' }}>
             <Stack direction="column"
                     justifyContent="center"
@@ -38,7 +38,7 @@ export default function ProfilePage() {
                         justifyContent="center"
                         alignItems="center"
                         >
-                        <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={userData.img}/></Grid>
+                        <Grid item><Avatar  sx={{ width: 100, height: 100, border:1 }} src={userData.img}/></Grid>
                     </Grid>
                     <TableContainer component={Paper} style={{ width: "100%"}}>
                     <Table sx={{ width: '100%' }} aria-label="simple table">

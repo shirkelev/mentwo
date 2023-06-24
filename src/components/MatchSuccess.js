@@ -27,8 +27,8 @@ export default function MatchSuccess({mentee}) {
                         justifyContent="center"
                         alignItems="center"
                         >
-                        <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.img ? mentee.img : null}/></Grid>
-                        <Grid item><Avatar  sx={{ width: 100, height: 100 }} src={mentee.currentMentorData.img ? mentee.currentMentorData.img : null}/> </Grid>
+                        <Grid item><Avatar  sx={{ width: 100, height: 100, border:1}} src={mentee.img ? mentee.img : null} /></Grid>
+                        <Grid item><Avatar  sx={{ width: 100, height: 100, border:1 }} src={mentee.currentMentorData.img ? mentee.currentMentorData.img : null}/> </Grid>
                     </Grid>
                     {console.log(mentee)}
                     <PersonCard mainUser={mentee} cardUser={mentee.currentMentorData} variant={Constants.PROCESS}/>

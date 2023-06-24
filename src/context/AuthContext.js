@@ -227,8 +227,11 @@ useEffect(() => {
           let currentMentor = null;
           if(userExtraData.currentMentor) {
             currentMentor = await DB.getInterviewerData(userExtraData.currentMentor);
+            currentMentor.mutualTags = getMutualTags( userExtraData, currentMentor);
           }
+
           userExtraData.currentMentorData = currentMentor;
+          // userExtraData.currentMentor['mutualTags'] = currentMentorMutualTags;
           break;
         case "admin":
           console.log("Admin Data", userExtraData.data());

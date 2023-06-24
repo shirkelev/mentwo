@@ -47,8 +47,6 @@ export default function PersonCard({variant, mainUser, cardUser}) {
   const [dialogState, setDialogState] = React.useState(defaultDialogState);
 
   
-
-
   const DialogBox = ({title, content, open, onApproveFunc}) => {
     // Our dialog box, for decline approve and finise
     const onDecline = () => {
@@ -147,36 +145,61 @@ export default function PersonCard({variant, mainUser, cardUser}) {
   }
 
   const handleClickFinish = () => {
-    
-    function moveToFinish(){
-      const [processIds, processObjects, finisheddIds, finishedObjects] = 
+    function moveToFinish(mentorData, menteeData){
+      const [processIds, processObjects, finishedIds, finishedObjects] = 
       moveSpecificId(
-        cardUser.id, 
-        feedData?.approvedMentess ? feedData.approvedMentess : [], 
-        feedData?.approvedMentessData? feedData.approvedMentessData: [],
-        feedData?.finishedMentees ? feedData.finishedMentees : [], 
-        feedData?.finishedMenteesData ? feedData.finishedMenteesData : []
+        menteeData.id, 
+        mentorData?.approvedMentess ? mentorData.approvedMentess : [], 
+        mentorData?.approvedMentessData? mentorData.approvedMentessData: [],
+        mentorData?.finishedMentees ? mentorData.finishedMentees : [], 
+        mentorData?.finishedMenteesData ? mentorData.finishedMenteesData : []
         );
     
       console.log("Moving From In Process To Finish",  cardUser.id);
       
-      DB.UpdateFinishedMentees(mainUser.id, finisheddIds);
-      DB.UpdateInProcessMentees(mainUser.id, processIds);
-      DB.removeCurrentMentor(cardUser.id);
-
-      setFeedData({...feedData, 
-        approvedMentess: processIds, 
-        approvedMenteesData: processObjects, 
-        finishedMentees: finisheddIds, 
-        finishedMenteesData: finishedObjects
-      });
-      console.log("Finished");
-      setDialogState(defaultDialogState);
+      DB.UpdateFinishedMentees(mentorData.id, finishedIds);
+      DB.UpdateInProcessMentees(mentorData.id, processIds);
+      DB.removeCurrentMentor(menteeData.id);
+      return [processIds, processObjects, finishedIds, finishedObjects];
+      
     }
-    setDialogState({title: 'Finish Process'
-      ,content: 'Have you finished this process?'
-      ,open:true
-      ,onApproveFunc: moveToFinish
+    function onApprove(){
+      switch (mainUser.type){ 
+
+        case 'mentor':
+          const [processIds, processObjects, finisheddIds, finishedObjects] = moveToFinish(feedData, cardUser);
+          setFeedData({...feedData, 
+            approvedMentess: processIds, 
+            approvedMenteesData: processObjects, 
+            finishedMentees: finisheddIds, 
+            finishedMenteesData: finishedObjects
+          });
+          console.log("Finished Mentor Process Update");
+          setDialogState(defaultDialogState);
+          break;
+
+        case 'mentee':
+          setFeedData({...feedData, 
+            currentMentor: null,
+            currentMentorData: null,
+            isMatched: false
+          });
+          navigate('../')
+          moveToFinish(feedData.currentMentorData, mainUser);
+          console.log("Finished Mentor Process Update");
+          setDialogState(defaultDialogState);
+          break;
+
+        default:
+          break;
+      }
+    }
+  setDialogState(
+    {
+    title: 'Finish Process'
+    ,content: 'Have you finished this process?'
+    ,open:true
+    ,onApproveFunc: onApprove
     });
   }
 
