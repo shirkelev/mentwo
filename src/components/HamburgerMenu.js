@@ -6,6 +6,9 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import InfoIcon from '@mui/icons-material/Info';
 import { UserAuth } from '../context/AuthContext'
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+
+
 
 import * as Constants from '../Constants';
 import { HamburgerMenuContext } from '../context/HamburgerMenuContexts';
@@ -24,6 +27,7 @@ export default function HamburgerMenu({user}) {
   }
 
       return (
+        <ClickAwayListener onClickAway={() => setShowMenu(false)}>
           <Paper sx={{ width: '230px' }}>
               <MenuList dense>
               <HamburgerMenuItem text="My Profile" icon = {AccountCircleIcon}
@@ -34,6 +38,7 @@ export default function HamburgerMenu({user}) {
               path = {'../'} onClick={handelSignOut}/>
               </MenuList>
           </Paper>
+        </ClickAwayListener>
       );
   }
 

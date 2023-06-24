@@ -24,7 +24,7 @@ export default function NavigationBar({user}) {
   const {showMenu, setShowMenu} = React.useContext(HamburgerMenuContext)
   return (
       <>
-        <ClickAwayListener onClickAway={() => setShowMenu(false)}>
+        
           <Box sx={{ flex: 1, style:"position: fixed;" }}>
             <AppBar position="fixed" >
               <Toolbar>
@@ -45,11 +45,14 @@ export default function NavigationBar({user}) {
             </AppBar>
           
           </Box>
-        </ClickAwayListener>
+        
         {showMenu && 
         <div style={containerStyle}>
-          <HamburgerMenu user={user} />
+          <ClickAwayListener onClickAway={() => setShowMenu(false)}>
+            <HamburgerMenu user={user} />
+          </ClickAwayListener>
         </div>}
+        
       
     </>
   );
