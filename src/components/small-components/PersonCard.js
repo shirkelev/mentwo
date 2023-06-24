@@ -174,7 +174,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
       setDialogState(defaultDialogState);
     }
     setDialogState({title: 'Finish Process'
-      ,content: 'Have you finished the process with this interviewee?'
+      ,content: 'Have you finished this process?'
       ,open:true
       ,onApproveFunc: moveToFinish
     });
