@@ -28,7 +28,7 @@ import NewFormPage from "./sign-up/NewFormPage";
 import ButtomBar from "../components/ButtomBar";
 import ProfilePage from "../components/ProfilePage";
 import SignUpLoading from "./sign-up/SignUpLoading";
-import ClickAwayListener from '@mui/material/ClickAwayListener';
+
 
 const NavCont = styled('nav')(({ theme }) => ({
     // position: 'ab',
@@ -58,7 +58,7 @@ export default function HomePageMain() {
 
     const PageContainer = styled(Box)({
         position: 'sticky',  // Positioned relative to its normal position
-        marginTop: '45px',  // Assuming your navbar height is 64px
+        marginTop: '60px',  // Assuming your navbar height is 64px
         marginBottom: '40px',  // Assuming your bottom bar height is 56px
         
         

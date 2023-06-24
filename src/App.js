@@ -181,7 +181,7 @@ function App() {
     <ThemeProvider theme = {theme}>
     <BrowserRouter>
         <>  
-        <button onClick={handelSignOut}> LgOut </button>   
+        {/* <button onClick={handelSignOut}> LgOut </button>    */}
         <UserContext.Provider value={{}}>
             <Routes>
               <Route path={Constants.LANDING_PAGE}

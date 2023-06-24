@@ -96,7 +96,7 @@ const SignUpFlow = ({props}) => {
 
     const [completed, setCompleted] = useState(createCompleted(steps));
 
-    const [localLoading, setLocalLoading] = useState(false);
+    const [localLoading, setLocalLoading] = useState(loading);
 
     const [form, setForm] = useState({
         fields: [],
@@ -326,11 +326,11 @@ const SignUpFlow = ({props}) => {
             setLocalLoading(false);
         }
        
-    }, [loading, userData, localLoading, setLoading])
+    }, [loading, userData, setLoading])
 
-    useEffect(() => {
-        setLocalLoading(loading)
-    }, [loading])
+    // useEffect(() => {
+    //     setLocalLoading(loading)
+    // }, [loading])
         
     return (
         
@@ -340,7 +340,7 @@ const SignUpFlow = ({props}) => {
             <SignUpContext.Provider value={{role, setRole, step, setStep, completed, 
                                         setCompleted, form, setForm, saveSuccess, userInfo, setUserInfo, error, setError}}>
                 {console.log("UserInfo",userInfo, user, userData)}
-                {!loading && !localLoading ? <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} /> : null}
+                {!loading && !localLoading ? <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} /> : <SignUpLoading text="Loading you data..."/>}
                 <ContentContainer>
                     <StepContent />
                 </ContentContainer>

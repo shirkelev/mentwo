@@ -58,7 +58,7 @@ export default function HomeContent ({headline, list, user}) {
         {
         headline === Constants.PENDINGS ? 
             <AvailableToggle onClick={handleToggle} isPressed={feedData.available}/>
-        : null
+        : <div style={{height: '50px'}}></div>
         }
       </div>
     </div>

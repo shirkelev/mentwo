@@ -9,14 +9,13 @@ import HamburgerMenuButton from './small-components/HaburgerMenuButton';
 import TopBarLogo from './small-components/TopBarLogo';
 import HamburgerMenu from './HamburgerMenu';
 import { HamburgerMenuContext } from '../context/HamburgerMenuContexts';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-
 
 export default function NavigationBar({user}) {
 
   const containerStyle = {
     position: "fixed",
     padding: "0.5px",
+    marginTop: "15px",
     zIndex: 999,
     
   };
@@ -48,9 +47,7 @@ export default function NavigationBar({user}) {
         
         {showMenu && 
         <div style={containerStyle}>
-          <ClickAwayListener onClickAway={() => setShowMenu(false)}>
             <HamburgerMenu user={user} />
-          </ClickAwayListener>
         </div>}
         
       

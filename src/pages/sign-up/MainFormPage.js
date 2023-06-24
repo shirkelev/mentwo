@@ -30,7 +30,7 @@ const MainFormPage = ({onSave}) => {
 
   async function onClickSave(newInfo){
     if(checkMainForm(newInfo)){
-      setUserInfo(newInfo);
+      // setUserInfo(newInfo);
       await onSave(newInfo);
       let newCompleted = completed;
       newCompleted[step] = true;
