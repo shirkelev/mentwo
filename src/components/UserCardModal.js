@@ -139,17 +139,15 @@ const UserCardModal = ({user, onClose}) => {
     }
   
     return (
-
+      
       <Modal
           open={openUserModal}
           onClose={onClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
           sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center',  }}
-          
-          
           >
-      <ModalStyle >
+      <ModalStyle > 
         <Stack direction="row" justifyContent="flex-start" alignItems="center" spacing={2} marginBottom={3}>
           <Avatar src={user.img} sx={{ width: 50, height: 50, border: 1}} borderStyle="line"  />
           <Stack spacing={1} direction="column">
@@ -160,15 +158,15 @@ const UserCardModal = ({user, onClose}) => {
           </Stack>
         </Stack>
         {modalType === 'about' ? 
-        <>
-        {/* <TagsContainer> */}
-          <TagsWithHeadlineContainer category = {Constants.FIELDS}  list={user.mutualTags.fields ? user.mutualTags.fields : []}/>
-          <TagsWithHeadlineContainer category = {Constants.TECHSKILLS} list={user.mutualTags.techSkills ? user.mutualTags.techSkills : []}/>
-          <TagsWithHeadlineContainer category = {Constants.SOFTSKILLS} list={user.mutualTags.softSkills ? user.mutualTags.softSkills : []}/>
-          <TagsWithHeadlineContainer category = {Constants.AGENDAS} list={user.mutualTags.agendas ? user.mutualTags.agendas : []}/>
-        {/* </TagsContainer> */}
-        </>
-                : null}
+          <>
+          {/* <TagsContainer> */}
+            <TagsWithHeadlineContainer category = {Constants.FIELDS}  list={user.mutualTags.fields ? user.mutualTags.fields : []}/>
+            <TagsWithHeadlineContainer category = {Constants.TECHSKILLS} list={user.mutualTags.techSkills ? user.mutualTags.techSkills : []}/>
+            <TagsWithHeadlineContainer category = {Constants.SOFTSKILLS} list={user.mutualTags.softSkills ? user.mutualTags.softSkills : []}/>
+            <TagsWithHeadlineContainer category = {Constants.AGENDAS} list={user.mutualTags.agendas ? user.mutualTags.agendas : []}/>
+          {/* </TagsContainer> */}
+          </>
+              : null}
                 
         <ModalContent modalType={modalType}/>
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 10 }}>

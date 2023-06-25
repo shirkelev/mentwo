@@ -229,7 +229,13 @@ useEffect(() => {
             currentMentor = await DB.getInterviewerData(userExtraData.currentMentor);
             currentMentor.mutualTags = getMutualTags( userExtraData, currentMentor);
           }
-
+          let finishedMentorsData;
+          if(userExtraData.finishedMentors && userExtraData.finishedMentors.length > 0) {
+            finishedMentorsData = await DB.getFinishedMentors(userExtraData.finishedMentors);
+            userExtraData.finishedMentorsData = finishedMentorsData;
+          } else {
+            userExtraData.finishedMentorsData = [];
+          }
           userExtraData.currentMentorData = currentMentor;
           // userExtraData.currentMentor['mutualTags'] = currentMentorMutualTags;
           break;

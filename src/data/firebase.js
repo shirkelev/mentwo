@@ -315,6 +315,22 @@ class DataBase {
     }
   }
 
+  async getFinishedMentors(finishedList) {
+    let finishedMentorsData = [];
+    try{
+      for(let i = 0; i < finishedList.length; i++){
+        const curMentorData = await this.getInterviewerData(finishedList[i]);
+        finishedMentorsData.push(curMentorData);
+      }
+      console.log("All finished mentors are added");
+      return finishedMentorsData;
+    } catch (e) {
+      console.log("Error getting all finished mentors");
+      return [];
+    }
+  }
+
+
   async changeUserBasicInfo(id, name, lastName, phone, img, linkedin=null) {
     console.log("Updating user with ID ", id, name, lastName, phone, img);
     let downloadURL = null;
@@ -401,11 +417,12 @@ class DataBase {
     }
   }
   
-  async removeCurrentMentor(id) {
+  async removeCurrentMentor(id, finishedMentors=[]) {
     //Removes the current mentor from the interviewee
     try{
         const intervieweeRef = doc(this.db, Constants.INTERVIEWEES_DB_NAME, id);
-        await updateDoc(intervieweeRef, {currentMentor: null, isMatched:false}).then(() => {
+
+        await updateDoc(intervieweeRef, {currentMentor: null, isMatched:false, finishedMentors: finishedMentors}).then(() => {
         console.log("Interviewee current mentor is removed");
       });
 

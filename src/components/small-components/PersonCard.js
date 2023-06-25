@@ -159,7 +159,9 @@ export default function PersonCard({variant, mainUser, cardUser}) {
       
       DB.UpdateFinishedMentees(mentorData.id, finishedIds);
       DB.UpdateInProcessMentees(mentorData.id, processIds);
-      DB.removeCurrentMentor(menteeData.id);
+      let newFinishedMentors = menteeData.finishedMentors ? menteeData.finishedMentors : [];
+      newFinishedMentors.push(mentorData.id);
+      DB.removeCurrentMentor(menteeData.id, newFinishedMentors);
       return [processIds, processObjects, finishedIds, finishedObjects];
       
     }
@@ -168,6 +170,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
 
         case 'mentor':
           const [processIds, processObjects, finisheddIds, finishedObjects] = moveToFinish(feedData, cardUser);
+          setModalType('contact');
           setFeedData({...feedData, 
             approvedMentess: processIds, 
             approvedMenteesData: processObjects, 
@@ -179,10 +182,17 @@ export default function PersonCard({variant, mainUser, cardUser}) {
           break;
 
         case 'mentee':
+          const newFinishedMentors = feedData.finishedMentors ? feedData.finishedMentors : [];
+          const newFinishedMntorsData = feedData.finishedMentorsData ? feedData.finishedMentorsData : [];
+          newFinishedMentors.push(feedData.currentMentor);
+          newFinishedMntorsData.push(feedData.currentMentorData);
+          setModalType('contact');
           setFeedData({...feedData, 
             currentMentor: null,
             currentMentorData: null,
-            isMatched: false
+            isMatched: false,
+            finishedMentors: newFinishedMentors,
+            finishedMentorsData: newFinishedMntorsData
           });
           navigate('../')
           moveToFinish(feedData.currentMentorData, mainUser);
@@ -201,6 +211,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
     ,open:true
     ,onApproveFunc: onApprove
     });
+  
   }
 
   const handleClickApprove = () => {
@@ -314,7 +325,6 @@ export default function PersonCard({variant, mainUser, cardUser}) {
   
   return (
       <>
-      {console.log(feedData.pendingMenteesData, "All Pending Mentees")}
       <UserModalContext.Provider value={{openUserModal, setOpenUserModal, modalType, setModalType}}>
         <Card sx={{ boxShadow:2, margin:1, padding:1, width:280, borderRadius: 8}}>
           <Stack 
@@ -330,9 +340,11 @@ export default function PersonCard({variant, mainUser, cardUser}) {
             </ Stack>
           </Stack>
            <FiledsList list={cardUser.fields}/>
+          {variant !==  Constants.FINISHED ?
           <CardContent>
             <CardInsideContent />
           </CardContent>
+          : null}
           
           <CardActions sx={{justifyContent:'center', paddingBottom:2}}>
             <ButtonSection />

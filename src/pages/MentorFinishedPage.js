@@ -9,13 +9,24 @@ import { useState } from 'react';
 import IconWithMessage from '../components/small-components/IconwithMessage';
 
 export default function MentorFinishedPage ({user}) {
-  const [message, setmessage] = useState(user?.finishedMenteesData?.length === 0 || !user.finishedMenteesData ?  "You don't have any completed interviews yet" : '');
+  let finishedList = [];
+  switch(user.type){
+    case 'mentor':
+      finishedList = user.finishedMenteesData ? user.finishedMenteesData : [];
+      break;
+    case 'mentee':
+      finishedList = user.finishedMentorsData ? user.finishedMentorsData : [];
+      break;
+    default:
+      finishedList = [];
+  }
+  const [message, setmessage] = useState(finishedList.length === 0 || !finishedList.length ?  "You don't have any completed interviews yet" : '');
 
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <div style={{ padding: '10px'}}>
-        <HomeContent headline = {Constants.FINISHED} list={user.finishedMenteesData ? user.finishedMenteesData : []} user={user}/>
-        <IconWithMessage message={message} isVisible={user?.finishedMenteesData?.length === 0 || !user.finishedMenteesData}/>
+        <HomeContent headline = {Constants.FINISHED} list={finishedList ? finishedList : []} user={user}/>
+        <IconWithMessage message={message} isVisible={finishedList.length === 0 }/>
 
       </div>
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
