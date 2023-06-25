@@ -78,7 +78,7 @@ const SignInPage = () => {
     const {googleSignIn, emailSignIn, user, emailSignUp, error, loading} = UserAuth();
     const [email, setEmail] = React.useState(null);
     const [password, setPassword] = React.useState(null);
-    const [localLoading, setLocalLoading] = React.useState(loading);
+    const [localLoading, setLocalLoading] = React.useState(user ? true : loading);
     
 
     
