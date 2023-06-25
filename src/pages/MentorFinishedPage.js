@@ -9,13 +9,13 @@ import { useState } from 'react';
 import IconWithMessage from '../components/small-components/IconwithMessage';
 
 export default function MentorFinishedPage ({user}) {
-  const [message, setmessage] = useState(user.finishedMenteesData.length !== 0 ? '' : "You don't have any completed interviews yet");
+  const [message, setmessage] = useState(user?.finishedMenteesData?.length === 0 || !user.finishedMenteesData ?  "You don't have any completed interviews yet" : '');
 
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <div style={{ padding: '10px'}}>
         <HomeContent headline = {Constants.FINISHED} list={user.finishedMenteesData ? user.finishedMenteesData : []} user={user}/>
-        <IconWithMessage message={message} isVisible={user.finishedMenteesData.length === 0}/>
+        <IconWithMessage message={message} isVisible={user?.finishedMenteesData?.length === 0 || !user.finishedMenteesData}/>
 
       </div>
       <div style={{ padding: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

@@ -254,9 +254,9 @@ const NewFormPage = ({name, onClickSubmit}) => {
             setCvError(null);
             console.log(selectedFile);
         } else {
-        setCvError('Please select an readable format or img');
-        setCv(null);
-        return 
+            setCvError('Please select an readable format or img');
+            setCv(null);
+            return 
         }
     }
 

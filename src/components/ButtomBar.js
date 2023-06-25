@@ -72,7 +72,7 @@ else {
                 <AutorenewIcon />
             </IconButton>
             <IconButton color="inherit" aria-label="Finished Interviews"  
-           // onClick = {() => handleClick('./' + Constants.MENTOR_FINISHED_PAGE)} 
+           onClick = {() => handleClick('./' + Constants.MENTOR_FINISHED_PAGE)} 
             >
                     <HowToRegIcon/ >
             </IconButton>

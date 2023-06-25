@@ -98,6 +98,7 @@ const SignUpFlow = ({props}) => {
 
     const [localLoading, setLocalLoading] = useState(loading);
 
+
     const [form, setForm] = useState({
         fields: [],
         techSkills: [],
