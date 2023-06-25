@@ -28,6 +28,7 @@ import NewFormPage from "./sign-up/NewFormPage";
 import ButtomBar from "../components/ButtomBar";
 import ProfilePage from "../components/ProfilePage";
 import SignUpLoading from "./sign-up/SignUpLoading";
+import IntervieweeFinishPage from "./IntervieweeFinishPage";
 
 
 const NavCont = styled('nav')(({ theme }) => ({
@@ -104,6 +105,7 @@ export default function HomePageMain() {
                             <Route path={CONSTANTS.MATCH_SUCCESS_PAGE} element={<MatchSuccess mentee={feedData} />} />
                             <Route path={CONSTANTS.NEW_FORM_PAGE} element={<NewFormPage user={feedData} />} />
                             <Route path={CONSTANTS.PROFILE_PAGE} element={<ProfilePage user={feedData} />} />
+                            <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<IntervieweeFinishPage user={feedData} />} />
                         </Routes>
                         )
                     }
