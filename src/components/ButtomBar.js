@@ -29,8 +29,9 @@ export default function BottomAppBar({user}) {
     }
     const StyledToolbar = styled(Toolbar)({
         justifyContent: 'space-between',
+        margin: '2px',
       });
-    //todo: ask shir
+    
 
     const {showMenu, setShowMenu} = React.useContext(HamburgerMenuContext);
     if (!user || user.type === 'mentor') { // todo: change when we have global var of user!
@@ -65,13 +66,17 @@ else {
             <StyledToolbar>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
             <IconButton color="inherit" aria-label="Current Status" 
-                sx={{ margin: '0 70px' }}
                 onClick = {() => user.currentMentor != null
                     ? handleClick("./" + Constants.MATCH_SUCCESS_PAGE) 
                     :  handleClick("./" + Constants.MENTEE_STATUS) }>
                 <AutorenewIcon />
             </IconButton>
-            <IconButton color="inherit" aria-label="Mock Interviews Tips"  sx={{ margin: '0 70px' }} onClick = {() => handleClick("./" + Constants.RECOMMENDATINS_PAGE)} >
+            <IconButton color="inherit" aria-label="Finished Interviews"  
+           // onClick = {() => handleClick('./' + Constants.MENTOR_FINISHED_PAGE)} 
+            >
+                    <HowToRegIcon/ >
+            </IconButton>
+            <IconButton color="inherit" aria-label="Mock Interviews Tips"  onClick = {() => handleClick("./" + Constants.RECOMMENDATINS_PAGE)} >
                 <ReviewsIcon/ >
             </IconButton>
             </Box>
