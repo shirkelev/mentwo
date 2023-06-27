@@ -125,7 +125,7 @@ const fetchUserData = async (user) => {
   }
   else{
     setUserData(data);
-    setUser(user)
+    setUser(user);
     setLoading(false);
   }
 }
