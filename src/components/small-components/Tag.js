@@ -9,7 +9,7 @@ const NoShadowFab = styled(Fab)`
   height: 26px;
 `;
 
-const Tag = ({ category, text, isPressed=false, onClick=()=>{}}) => {
+const Tag = ({ category, text, isPressed=false, onClick=()=>{}, textColor=null, fontStyle=null}) => {
     const [pressed, setPressed] = useState(isPressed);
 
     const updateColor = (pressed) => {
@@ -40,10 +40,11 @@ const Tag = ({ category, text, isPressed=false, onClick=()=>{}}) => {
         setColor(updateColor(pressed));
         onClick();
     }
-
+    textColor = textColor ? textColor : 'black'
+    const fontSize = fontStyle ? '20px' : '13px'
     return (
         <NoShadowFab variant="extended" size="small" color={color} onClick={handleClick}>
-            <Typography variant="body2" style={{ fontSize: '13px' }}>
+            <Typography variant="body2" style={{ fontSize: {fontSize}}} color={textColor} fontWeight={fontStyle}>
                 {text}
             </Typography>
         </NoShadowFab>

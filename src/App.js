@@ -91,16 +91,20 @@ const theme = createTheme({
       },
       agendaColor:
       {
-        main: '#e0f1e1', // $rmd-green-70~
+        // main: '#e0f1e1', // $rmd-green-70~
+        main: '#FFFFFF'
+        
       },
       agendaPressedColor:
       {
-        main: '#81C784', // $rmd-green-300
+        main: '#ededed', // $rmd-green-300
       },
       agendaHeadlineColor:
       {
-        main: '#66BB6A', // $rmd-green-400
+        // main: '#66BB6A', // $rmd-green-400 // color before
          // 00E676  $rmd-green-a-400
+        // main: '#FFFFFF'
+        main: Constants.AGENDAS_BOX_COLOR_AND_BG
       }
 
     },

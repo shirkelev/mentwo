@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
+import Stack from '@mui/material';
 import { styled } from '@mui/system';
 import Container from '@mui/material/Container';
 import Button from '../../components/small-components/Button';
@@ -17,7 +18,7 @@ import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {DB} from '../../data/firebase';
 
-function TagsContainer({ tagsNames, category, onTagClick, isPressedFunc}) {
+function TagsContainer({ tagsNames, category, onTagClick, isPressedFunc, textColor=null, fontStyle=null}) {
     return (
         <Box display="flex" flexWrap="wrap" gap={1}>
             {tagsNames.map((tag, index) => (
@@ -28,6 +29,8 @@ function TagsContainer({ tagsNames, category, onTagClick, isPressedFunc}) {
                     category={category}
                     onClick={() => onTagClick(tag, category)} 
                     isPressed={isPressedFunc(tag,category)}
+                    textColor={textColor}
+                    fontStyle={fontStyle}
                     />
                 </>
             ))}
@@ -203,6 +206,32 @@ const NewFormPage = ({name, onClickSubmit}) => {
     };
 
     function TagsSection({category, statement, tagsNames, isPressedFunc, onTagClick}) {
+        if(category === Constants.AGENDAS){
+            const bgcolor = Constants.AGENDAS_BOX_COLOR_AND_BG
+            const categoryTitle =  role === Constants.INTERVIEWERS_DB_NAME ? 
+                Constants.AGENDAS_TITLE_FOR_INTERVIEWER : Constants.AGENDAS_TITLE_FOR_INTERVIEWEE 
+            return(
+            <Box
+            sx={{
+              bgcolor: bgcolor, // Change this to the exact color you want
+              borderRadius: '20px',  
+            //   margin: 1,
+              px: 2, // Add padding as per your needs
+              py: 0.5,
+              boxShadow: 3,
+              marginBottom: 2,
+            }}> 
+                <QuestionContainer>
+                    <TagsCategory category= {category} fontWeight={'bold'} categoryTitle={categoryTitle}/> 
+                    <Statement>{statement}</Statement>
+                    <TagsContainer tagsNames={tagsNames} category={category} onTagClick={onTagClick} isPressedFunc={isPressedFunc} 
+                    textColor={'#D29EFC'}
+                    fontStyle={'bold'}/>
+                </QuestionContainer>
+            </Box>
+            );
+            
+        } else {
         return (
             <QuestionContainer>
                 <TagsCategory category= {category}/>
@@ -211,19 +240,23 @@ const NewFormPage = ({name, onClickSubmit}) => {
             </QuestionContainer>
         );
     }
+    }
 
     const mentorTags = [
+        {category: Constants.AGENDAS, statement:"Identify the communities you'd like to inspire. Your insights can be the stepping stone to their dream job in the tech industry"
+        , tagsNames: Constants.AGENDAS_LIST},
         {category: Constants.FIELDS, statement: 'For which professional fields would you like to interview?', tagsNames: Constants.FIELDS_LIST},
         {category: Constants.TECHSKILLS, statement:'What technical skills would you like to interview about?', tagsNames: Constants.TECHSKILLS_LIST},
-        {category: Constants.SOFTSKILLS, statement:'What soft skills do you want to focus on as an interviewer?', tagsNames: Constants.SOFTSKILLS_LIST},
-        {category: Constants.AGENDAS, statement:'Which populations would you like to promote and integrate into the industry?', tagsNames: Constants.AGENDAS_LIST}
+        {category: Constants.SOFTSKILLS, statement:'What soft skills do you want to focus on as an interviewer?', tagsNames: Constants.SOFTSKILLS_LIST}
+        
     ];
 
     const menteeTags = [
+        {category: Constants.AGENDAS, statement:'Share your personal characteristics so you can stand out from other interviewees', tagsNames: Constants.AGENDAS_LIST},
         {category: Constants.FIELDS, statement: 'For which professional fields would you like to be interviewed?', tagsNames: Constants.FIELDS_LIST},
         {category: Constants.TECHSKILLS, statement:'What technical skills would you like to be interviewed about?', tagsNames: Constants.TECHSKILLS_LIST},
-        {category: Constants.SOFTSKILLS, statement:'What soft skills do you want to focus on as an interviewee?', tagsNames: Constants.SOFTSKILLS_LIST},
-        {category: Constants.AGENDAS, statement:'Share your personal characteristics so you can stand out from other interviewees', tagsNames: Constants.AGENDAS_LIST}
+        {category: Constants.SOFTSKILLS, statement:'What soft skills do you want to focus on as an interviewee?', tagsNames: Constants.SOFTSKILLS_LIST}
+        
     ];
     
     // useEffect(() => {
