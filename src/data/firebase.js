@@ -76,7 +76,7 @@ class DataBase {
     let usersList = [];
     try{
       getDocs(this.users).then((querySnapshot) => {querySnapshot.forEach((doc) => {
-      console.log('Get All Docs', {...doc.data(), id: doc.id});
+      // console.log('Get All Docs', {...doc.data(), id: doc.id});
       usersList.push(doc.data())
       })});
       console.log("All users are added");
@@ -255,13 +255,13 @@ class DataBase {
       allDocs.forEach(doc => {
         if(!doc.data().isMatched){
           const interveiweeData = {...doc.data(), id: doc.id};
-          console.log('Getting all intervieww, interview: ', interveiweeData);
+          // console.log('Getting all intervieww, interview: ', interveiweeData);
           intervieweesList.push(interveiweeData);
         }
       });
-      console.log("All unmatched interviewees are added");
+      // console.log("All unmatched interviewees are added");
     } catch (e) {
-      console.log("Error getting all interviewees");
+      // console.log("Error getting all interviewees");
     }
     return intervieweesList;
   }
@@ -332,12 +332,12 @@ class DataBase {
 
 
   async changeUserBasicInfo(id, name, lastName, phone, img, linkedin=null) {
-    console.log("Updating user with ID ", id, name, lastName, phone, img);
+    // console.log("Updating user with ID ", id, name, lastName, phone, img);
     let downloadURL = null;
     if(img){
       downloadURL = await this.uploadFileAndGetURL( img, 'profile_img_' + id);
     }
-    console.log("Download URL is ", downloadURL);
+    // console.log("Download URL is ", downloadURL);
     try{
       const userRef = doc(this.db, Constants.USERS_DB_NAME, id);
       return updateDoc(userRef, {name: name, lastName: lastName,  phone: phone, img: downloadURL, linkedin: linkedin});
