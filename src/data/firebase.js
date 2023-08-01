@@ -22,6 +22,7 @@ import {
   ,onAuthStateChanged
 } from "firebase/auth";
 import * as Constants from '../Constants';
+import { type } from "@testing-library/user-event/dist/type";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBS1VZCQRZHQUQjWoK9aXAvl1YuKwCpZPo",
@@ -335,10 +336,15 @@ class DataBase {
     // console.log("Updating user with ID ", id, name, lastName, phone, img);
     // Check if img is url or a file
     let downloadURL = null;
-    if(img && !img.startsWith('https://')){
-      downloadURL = await this.uploadFileAndGetURL( img, 'profile_img_' + id);
-    } else {
-      downloadURL = img ? img : null;
+    try{
+      if(img && typeof img !== 'string'){
+        downloadURL = await this.uploadFileAndGetURL( img, 'profile_img_' + id);
+      } else {
+        downloadURL = img ? img : null;
+      }
+    } catch (e) {
+      console.log("Error uploading file");
+      downloadURL = null;
     }
     // console.log("Download URL is ", downloadURL);
     try{
