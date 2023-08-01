@@ -43,9 +43,9 @@ export const AGENDA = 'agenda';
 export const FIELDS = 'Fields';
 export const TECHSKILLS = 'Tech Skills';
 export const SOFTSKILLS = 'Soft Skills';
-export const AGENDAS = 'Characteristics';
+export const AGENDAS = 'Community';
 export const AGENDAS_TITLE_FOR_INTERVIEWER = 'Make a Difference';
-export const AGENDAS_TITLE_FOR_INTERVIEWEE = 'Interviewer Characteristics';
+export const AGENDAS_TITLE_FOR_INTERVIEWEE = 'Your Journey, Your Story';
 export const AGENDAS_BOX_COLOR_AND_BG = '#EDD6F8';
 
 // Tags Lists

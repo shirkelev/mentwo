@@ -118,7 +118,7 @@ const NewFormPage = ({name, onClickSubmit}) => {
     const [softSkills, setSoftSkills] = useState(form.softSkills ? form.softSkills : []);
     const [agendas, setAgendas] = useState(form.agendas ? form.agendas : []);
     const [description, setDescription] = useState(form.description ? form.description : '');
-    const [cv, setCv] = useState(null);
+    const [cv, setCv] = useState(form.cv ? form.cv : null);
     const [cvError, setCvError] = useState(null);
     const cvInput = useRef();
     
@@ -179,7 +179,7 @@ const NewFormPage = ({name, onClickSubmit}) => {
     const navigate = useNavigate();
 
     const backTapped = () => {
-        setForm({fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description});
+        setForm({fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description, cv: cv});
         setStep(step - 1);
     };    
 
@@ -252,7 +252,7 @@ const NewFormPage = ({name, onClickSubmit}) => {
     ];
 
     const menteeTags = [
-        {category: Constants.AGENDAS, statement:'Share your personal characteristics so you can stand out from other interviewees', tagsNames: Constants.AGENDAS_LIST},
+        {category: Constants.AGENDAS, statement:'We celebrate diversity. Share your affiliations to help us tailor a supportive and inclusive interview practice experience for you', tagsNames: Constants.AGENDAS_LIST},
         {category: Constants.FIELDS, statement: 'For which professional fields would you like to be interviewed?', tagsNames: Constants.FIELDS_LIST},
         {category: Constants.TECHSKILLS, statement:'What technical skills would you like to be interviewed about?', tagsNames: Constants.TECHSKILLS_LIST},
         {category: Constants.SOFTSKILLS, statement:'What soft skills do you want to focus on as an interviewee?', tagsNames: Constants.SOFTSKILLS_LIST}
@@ -285,7 +285,7 @@ const NewFormPage = ({name, onClickSubmit}) => {
         if(isValid){
             setCv(selectedFile);
             setCvError(null);
-            console.log(selectedFile);
+            // console.log(selectedFile);
         } else {
             setCvError('Please select an readable format or img');
             setCv(null);

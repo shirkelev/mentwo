@@ -9,7 +9,7 @@ const NoShadowFab = styled(Fab)`
   height: 26px;
 `;
 
-const Tag = ({ category, text, isPressed=false, onClick=()=>{}, textColor=null, fontStyle=null}) => {
+const Tag = ({ category, text, isPressed=false, onClick=()=>{}, textColor=null, fontStyle=null, clickAble=true}) => {
     const [pressed, setPressed] = useState(isPressed);
 
     const updateColor = (pressed) => {
@@ -36,9 +36,11 @@ const Tag = ({ category, text, isPressed=false, onClick=()=>{}, textColor=null, 
     const [color, setColor] = useState(updateColor(pressed));
 
     const handleClick = () => {
-        setPressed(!pressed);
-        setColor(updateColor(pressed));
-        onClick();
+        if (clickAble) {
+            setPressed(!pressed);
+            setColor(updateColor(pressed));
+            onClick();
+        }
     }
     textColor = textColor ? textColor : 'black'
     const fontSize = fontStyle ? '20px' : '13px'

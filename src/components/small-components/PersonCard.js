@@ -315,9 +315,9 @@ export default function PersonCard({variant, mainUser, cardUser}) {
                     justifyContent="left"
                     alignItems="left"
                     spacing={1}>
-        <TagsCategory category = {Constants.TECHSKILLS} num={cardUser.mutualTags?.techSkills ? cardUser.mutualTags.techSkills.length : 0}/>
-        <TagsCategory category = {Constants.SOFTSKILLS} num={cardUser.mutualTags?.softSkills ? cardUser.mutualTags.softSkills.length : 0}/>
-        <TagsCategory category = {Constants.AGENDAS} num={cardUser.mutualTags?.agendas ? cardUser.mutualTags.agendas.length : 0}/>
+          <TagsCategory category = {Constants.AGENDAS} num={cardUser.mutualTags?.agendas ? cardUser.mutualTags.agendas.length : 0}/>                      
+          <TagsCategory category = {Constants.TECHSKILLS} num={cardUser.mutualTags?.techSkills ? cardUser.mutualTags.techSkills.length : 0}/>
+          <TagsCategory category = {Constants.SOFTSKILLS} num={cardUser.mutualTags?.softSkills ? cardUser.mutualTags.softSkills.length : 0}/>
         </Stack>
         </>
       )
@@ -330,9 +330,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
           <Stack 
           direction="row"
           justifyContent="left"
-          alignItems="center"
-
-          >
+          alignItems="center">
             <Avatar  sx={{ width: 70, height: 70, border: 1, margin:2}} src={cardUser.img}  borderStyle='line'/>
             
             <Stack justifyContent="flex-start">

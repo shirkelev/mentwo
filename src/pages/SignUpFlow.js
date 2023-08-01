@@ -24,7 +24,7 @@ import IntrevieweeImg from '../data/images/interveiwee.png';
 
 
 const RootContainer = styled(Container)(({ theme }) => ({
-    padding: theme.spacing(5),
+    padding: theme.spacing(3),
     alignContent: 'center',
     alignItems: 'center',
     justifyContent: 'center',
