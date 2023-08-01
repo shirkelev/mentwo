@@ -6,7 +6,10 @@ import { Typography } from '@mui/material';
 
 const NoShadowFab = styled(Fab)`
   box-shadow: none !important;
-  height: 26px;
+  height: auto;
+  text-overflow: hidden;
+  white-space: normal;
+  padding: 3px 8px; // Add some padding for better aesthetics
 `;
 
 const Tag = ({ category, text, isPressed=false, onClick=()=>{}, textColor=null, fontStyle=null, clickAble=true}) => {
@@ -46,7 +49,7 @@ const Tag = ({ category, text, isPressed=false, onClick=()=>{}, textColor=null, 
     const fontSize = fontStyle ? '20px' : '13px'
     return (
         <NoShadowFab variant="extended" size="small" color={color} onClick={handleClick}>
-            <Typography variant="body2" style={{ fontSize: {fontSize}}} color={textColor} fontWeight={fontStyle}>
+            <Typography variant="body2" style={{ fontSize: {fontSize},  width: '100%', wordBreak: 'break-word'}} color={textColor} fontWeight={fontStyle}>
                 {text}
             </Typography>
         </NoShadowFab>

@@ -135,7 +135,7 @@ function sameLists(list1, list2){
     return false;
   }
   for(let i = 0; i < list1.length; i++){
-    if(!list1[i].includes(list2[i])){ 
+    if(list1[i] && list2[i] && !list1[i].includes(list2[i])){ 
       return false;
     }
   }

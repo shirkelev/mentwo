@@ -16,7 +16,7 @@ const TagsWithHeadlineContainer = ({category, list}) => {
       <div style={{ display: 'flex', overflowX: 'auto', marginTop: 12 }}>
           <Box display="flex" flexWrap="wrap" gap={1}>
             {list.map((badge, index) =>
-            <Tag text={badge} category={category}/>
+            <Tag text={badge} category={category} isPressed={category === Constants.AGENDAS ? true : false}/>
             )}
           </Box>
       </div>

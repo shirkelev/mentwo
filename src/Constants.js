@@ -49,7 +49,7 @@ export const AGENDAS_TITLE_FOR_INTERVIEWEE = 'Your Journey, Your Story';
 export const AGENDAS_BOX_COLOR_AND_BG = '#EDD6F8';
 
 // Tags Lists
-export const FIELDS_LIST = ['Data Analysis', 'UX', 'UI', 'Data Science', 'Produce Management', 'QA', 'Software Engineer', 'Web Development', 'Project Managment', 'Algo Development']
+export const FIELDS_LIST = ['Data Analysis', 'UX', 'UI', 'Data Science', 'Product Management', 'QA', 'Software Engineer', 'Web Development', 'Project Managment', 'Algo Development']
 export const TECHSKILLS_LIST = ['Python', 'C', 'C++', 'Java', 'React', 'Figma', 'R', 'SQL', 'JavaScript', 'HTML', 'CSS', 'Node.js', 'Vue.js', 'PHP', 'Swift', 'C#', 'Ruby', 'Go']
 export const SOFTSKILLS_LIST = ['Articulation', 'English' , 'Self-Presentation', 'Small Talk', 'Formulation', 'Pressure Management', 'Orderly Answer', 'Enthusiasm', 'Motivation', 'F2F']
 export const AGENDAS_LIST = ['Combat Soldier', 'Woman', 'Man', 'Haredi', 'Orthodox','Ex-Orthdox', 'Inexperienced', 'Periphery resident', 'disadvantaged', 'ethnic minority', 'Handicapped', 'LGBTQ', 'Vegan']
