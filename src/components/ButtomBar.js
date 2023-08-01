@@ -54,7 +54,7 @@ export default function BottomAppBar({user}) {
                 </IconButton>
                 </StyledToolbar>
             </AppBar>
-            { console.log(user.type)}
+            {/* { console.log(user.type)} */}
             </React.Fragment>
   );
 }
