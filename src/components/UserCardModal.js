@@ -45,7 +45,7 @@ const TagsWithHeadlineContainer = ({category, list}) => {
   if(attList.length === 0){
     return null;
   }
-  console.log(category, attList)
+  // console.log(category, attList)
   return (
     <>
     <div style={{ display: 'flex'

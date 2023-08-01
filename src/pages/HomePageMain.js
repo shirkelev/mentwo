@@ -46,10 +46,10 @@ export default function HomePageMain() {
 
     useEffect(() => {
         setLocalLoading(true);
-        console.log("User is logged in and signed up, fetching data");
+        // console.log("User is logged in and signed up, fetching data");
         setEnterHome(true);
         if(fullDataFetched){
-            console.log("After Fetching Extra User Data ", userData);
+            // console.log("After Fetching Extra User Data ");
             setFeedData(userData);
             setLocalLoading(false);
         }
