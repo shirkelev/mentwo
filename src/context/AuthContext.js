@@ -43,13 +43,13 @@ export const AuthContextProvider = ({ children }) => {
       setLoading(true);
       const result = await signInWithPopup(auth, provider);
       // const credential = await provider.credentialFromResult(result);
-      console.log("Signup with Google", result.user);
+      // console.log("Signup with Google", result.user);
       fetchUserData(result.user); 
       setUser(result.user)
       setClickSign(false);
       return 1
    }catch(error){
-      console.log("error Signining In with Google", error);
+      // console.log("error Signining In with Google", error);
       setError("Error trying to sign in with Google");
       setLoading(false);
       return -1;
@@ -67,7 +67,7 @@ export const AuthContextProvider = ({ children }) => {
       window.history.pushState(null, "", "/sign-in");
     window.location.reload();
     }).catch((error) => {
-      console.log("Error Signing Out", error);
+      // console.log("Error Signing Out", error);
       setError("Error Signing Out")
       setLoading(false);
       setClickSign(false);
@@ -80,14 +80,14 @@ export const AuthContextProvider = ({ children }) => {
     setClickSign(true);
     try{
       const userCredential = await signInWithEmailAndPassword(auth, email, password)
-      console.log("Signin with email", userCredential);
+      // console.log("Signin with email", userCredential);
       fetchUserData(userCredential.user);
       setUser(userCredential.user);
       
     }catch(error){
       setError("One or more fields have an error")
       setLoading(false);
-      console.log(error);
+      // console.log(error);
     } finally {
       setClickSign(false);
     }
@@ -98,11 +98,11 @@ const emailSignUp =  async (email, password) => {
   setClickSign(true);
   try{
     const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-    console.log("Signup with Email", userCredential);
+    // console.log("Signup with Email", userCredential);
     fetchUserData(userCredential.user);
     setUser(userCredential.user);
   }catch(error){
-    console.log(error);
+    // console.log(error);
     setError("One or more fields have an error")
     setLoading(false);
   } finally {
@@ -117,7 +117,7 @@ const fetchUserData = async (user) => {
     await DB.addUser(user);
   }
   const userData = await DB.getUser(user.uid);
-  console.log("User Data Gotten", userData.data());
+  // console.log("User Data Gotten", userData.data());
   let data = userData.data();
   if(data?.signedUp){
     setEnterHome(true);
@@ -149,11 +149,11 @@ useEffect( () => {
       setLoading(true);
     }
     if (currentUser) {
-      console.log("User is logged in", currentUser);
+      // console.log("User is logged in", currentUser);
       // setUser(currentUser);
       fetchUserData(currentUser);
     } else {
-      console.log("User is logged out");
+      // console.log("User is logged out");
       setUser(null);
     };
     setLoading(false);
@@ -171,59 +171,59 @@ useEffect(() => {
   const fetchExtraData = async () => {
     try{
       setLoading(true);
-      console.log("Fetching Extra User Data ", user.uid, " ...", userData);
-      console.log("first update cur user data");
+      // console.log("Fetching Extra User Data ", user.uid, " ...", userData);
+      // console.log("first update cur user data");
       const newUser = await DB.getUser(user.uid);
-      console.log("The user Role is ", newUser.data().type, newUser.data());
+      // console.log("The user Role is ", newUser.data().type, newUser.data());
       let userExtraData = await DB.getRoleData(user.uid, newUser.data().type);
       userExtraData = userExtraData.data();
-      console.log("User Extra Data", userExtraData);
+      // console.log("User Extra Data", userExtraData);
       switch (newUser.data().type) {
         case "mentor":
-          console.log("Starting to fetch interviewees data")
-          console.log("Pending Mentees", userExtraData.pendingMentees ? userExtraData.pendingMentees : [])
-          console.log("Approved Mentees", userExtraData.approvedMentess ? userExtraData.approvedMentess : [])
-          console.log("Finished Mentees", userExtraData.finishedMentees ? userExtraData.finishedMentees : [])
+          // console.log("Starting to fetch interviewees data")
+          // console.log("Pending Mentees", userExtraData.pendingMentees ? userExtraData.pendingMentees : [])
+          // console.log("Approved Mentees", userExtraData.approvedMentess ? userExtraData.approvedMentess : [])
+          // console.log("Finished Mentees", userExtraData.finishedMentees ? userExtraData.finishedMentees : [])
           if(userExtraData.pendingMentees.length <= 3) {
             const availbleInterviewees = await DB.getUnmatchedInterviewees();
-            console.log("Available Interviewees", availbleInterviewees);
+            // console.log("Available Interviewees", availbleInterviewees);
             const matches = matchInterviewer(userExtraData, availbleInterviewees);
-            console.log("Matches", matches);
+            // console.log("Matches", matches);
             userExtraData.pendingMentees = matches? matches.matches : [];
             
             // Todo update pending interviewees for interviewer in DB
           }
-          console.log("Approved Ids ", userExtraData.approvedMentess)
+          // console.log("Approved Ids ", userExtraData.approvedMentess)
           const pendingInterviewees = await DB.getPendingInterviewees(userExtraData.pendingMentees ? userExtraData.pendingMentees : [] );
           const approvedInterviewees = await DB.getProcessedInterviewees(userExtraData.approvedMentess ? userExtraData.approvedMentess : []);
           const finishedIntervieweesData= await DB.getFinishedInterviewees(userExtraData.finishedMentees ? userExtraData.finishedMentees : []);
-          console.log('Approved: ', approvedInterviewees)
+          // console.log('Approved: ', approvedInterviewees)
           userExtraData = {...userExtraData
             , pendingMenteesData: pendingInterviewees
             , approvedMentessData: approvedInterviewees,
              finishedMenteesData: finishedIntervieweesData
             };
           const newPendingInterviewees = pendingInterviewees.map((pi) => pi.id)
-          console.log("New Pending Interviewees", newPendingInterviewees);
+          // console.log("New Pending Interviewees", newPendingInterviewees);
           if(!sameLists(newPendingInterviewees, userExtraData.pendingMentees)){
-            console.log("Updating Pending Mentees", newPendingInterviewees, userExtraData.pendingMentees);
+            // console.log("Updating Pending Mentees", newPendingInterviewees, userExtraData.pendingMentees);
             DB.UpdatePendingMentees(user.uid, newPendingInterviewees);
           }
           for(let i = 0; i < userExtraData.pendingMenteesData.length; i++) {
-            console.log("Pending Mentee", userExtraData.pendingMenteesData[i]);
+            // console.log("Pending Mentee", userExtraData.pendingMenteesData[i]);
             const mutualTags = getMutualTags(userExtraData, userExtraData.pendingMenteesData[i]);
-            console.log("Mutual Tags From Func", mutualTags)
+            // console.log("Mutual Tags From Func", mutualTags)
             userExtraData.pendingMenteesData[i].mutualTags = mutualTags;
-            console.log("Mutual Tags", userExtraData.pendingMenteesData[i].mutualTags)
+            // console.log("Mutual Tags", userExtraData.pendingMenteesData[i].mutualTags)
           }
-          console.log('My Int', userExtraData.approvedMentess, userExtraData.approvedMentess.length)
+          // console.log('My Int', userExtraData.approvedMentess, userExtraData.approvedMentess.length)
           for(let i = 0; i < userExtraData.approvedMentessData.length; i++) {
-            console.log("Approved Mentee", userExtraData.approvedMentessData[i])
+            // console.log("Approved Mentee", userExtraData.approvedMentessData[i])
             userExtraData.approvedMentessData[i].mutualTags = getMutualTags(userExtraData, userExtraData.approvedMentessData[i]);
           }
           break;
         case "mentee":
-          console.log("Starting to fetch mentee data")
+          // console.log("Starting to fetch mentee data")
           let currentMentor = null;
           if(userExtraData.currentMentor) {
             currentMentor = await DB.getInterviewerData(userExtraData.currentMentor);
@@ -246,10 +246,10 @@ useEffect(() => {
           console.log("No User Data");
           break;
       }
-      console.log("New User Data", userExtraData);
+      // console.log("New User Data", userExtraData);
       if(!(newUser.data()).img){
         const defaultImg = newUser.data().type === 'mentee' ? IntrevieweeImg : IntreviwerImg;
-        console.log("Default Img", defaultImg, userExtraData.type);
+        // console.log("Default Img", defaultImg, userExtraData.type);
         userExtraData.img = defaultImg;
       }
       setUserData({...newUser.data(), ...userExtraData});
@@ -261,12 +261,12 @@ useEffect(() => {
   }
   const onEnterHome = async () => {
     if(enterHome && !fullDataFetched){
-      console.log("User is logged in and signed up, fetching data");
+      // console.log("User is logged in and signed up, fetching data");
       await fetchExtraData();
     } else if (enterHome && fullDataFetched) {
-      console.log("User is logged in and signed up, data already fetched");
+      // console.log("User is logged in and signed up, data already fetched");
     } else {
-      console.log("???", enterHome, fullDataFetched, loading);
+      // console.log("???", enterHome, fullDataFetched, loading);
       setLoading(false);
     }
     

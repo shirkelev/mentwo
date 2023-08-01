@@ -76,7 +76,7 @@ function calcScore(interViewerTags, intervieweeTags, weight) {
 }
 
 export function getMutualTags(interviewer, interviewee) {
-    console.log("interviewer: " + interviewer.id + " interviewee: " + interviewee.id);
+    // console.log("interviewer: " + interviewer.id + " interviewee: " + interviewee.id);
     let mutualTags = {fields: [], techSkills: [], softSkills: [], agendas: []};
     for (let i = 0; i < interviewer.fields.length; i++) {
         if (interviewee.fields?.includes(interviewer.fields[i])) {
