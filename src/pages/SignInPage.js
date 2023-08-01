@@ -137,7 +137,7 @@ const SignInPage = () => {
                 
                 (
                 <div>
-                    {console.log("Loading on sign in page", localLoading, loading)}
+                    {/* {console.log("Loading on sign in page", localLoading, loading)} */}
                     <SignUpLoading />
                 </div> 
                 )

@@ -118,7 +118,7 @@ const data = new DataBase()
 function App() {
   const MnM = [data.findByName('Yuval'), data.findByName('Nits')]
   const {user, setUser, userData, setUserData, logOut, fetchExtraData, loading} = UserAuth();
-  console.log(user?.uid ?  user.uid : null, 'Here')
+  // console.log(user?.uid ?  user.uid : null, 'Here')
   // const [users, setUsers] = useState([]);
   const [cur, setCur] = useState(0);
   // const [dataBase, setDataBase] = useState(DB);
@@ -129,7 +129,7 @@ function App() {
       return <SignUpLoading />
     }
     if(!user){
-      console.log('Here')
+      // console.log('Here')
       return <Navigate to={'../' + Constants.SIGN_IN} />;
     } else if(user && userData && userData.signedUp) {
       return <Navigate to={'../' + Constants.HOME_PAGE + user.uid} />;
@@ -226,7 +226,7 @@ function App() {
                 }
                   exact />;
               
-              <Route path={Constants.PROCESS_COMPLETION_FORM}
+              {/* <Route path={Constants.PROCESS_COMPLETION_FORM}
                   action={({ params }) => {}}
                   element = {<ProcessCompletionPage user={user}/>}
                   exact
@@ -235,7 +235,7 @@ function App() {
                   action={({ params }) => {}}
                   element = {<NewFormPage user={user}/>}
                   exact
-                  />;
+                  />; */}
         
             </Routes>
         </UserContext.Provider>

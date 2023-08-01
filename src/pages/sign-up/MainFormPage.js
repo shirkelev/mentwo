@@ -18,7 +18,7 @@ const MainFormPage = ({onSave}) => {
   });
   
   function checkMainForm(form){
-    console.log(form)
+    // console.log(form)
     return form.name !== '' && form.lastName !== '' && form.phone !== '' 
   }
 

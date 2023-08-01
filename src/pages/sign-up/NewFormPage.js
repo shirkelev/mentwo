@@ -192,10 +192,10 @@ const NewFormPage = ({name, onClickSubmit}) => {
             console.log("You must fill at least one professional field")
         } else {
         const curForm = {fields: fields, techSkills: techSkills, softSkills: softSkills, agendas: agendas, description: description, cv: cv};
-        console.log('Form in NewForm', curForm)
-        console.log('Form in NewForm', form)
-        console.log('Fields in NewForm', fields, techSkills, softSkills, agendas, description)
-        console.log("Starting write new Records in data set");
+        // console.log('Form in NewForm', curForm)
+        // console.log('Form in NewForm', form)
+        // console.log('Fields in NewForm', fields, techSkills, softSkills, agendas, description)
+        // console.log("Starting write new Records in data set");
         await onClickSubmit(curForm, role);
         }
         

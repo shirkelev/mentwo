@@ -14,7 +14,7 @@ export default function MentorInProcessPage ({user}) {
   return (
     <>
     <div style={{ width: '100vw', height: '100vh'}}>
-      {console.log(user.approvedMentessData.length, message)}
+      {/* {console.log(user.approvedMentessData.length, message)} */}
       <div style={{ padding: '10px'}}>
         <HomeContent headline = {Constants.PROCESS} 
         list={user.approvedMentessData ? user.approvedMentessData: []} user={user}/>

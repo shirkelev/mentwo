@@ -11,7 +11,7 @@ export default function MentorPendingsAndRunningPage ({user}) {
   let pendingsList = user.pendingMenteesData && user.available ? user.pendingMenteesData : [];
   const sliceLength = pendingsList.length > 3 ? 3 : pendingsList.length;
   pendingsList = pendingsList.slice(0, sliceLength)
-  console.log("pendingsList", pendingsList,sliceLength);
+  // console.log("pendingsList", pendingsList,sliceLength);
 
   const [message, setmessage] = useState(user.pendingMenteesData?.length !== 0 && user.available ? '' : "You don't have any pending interviews at the moment");
   return (

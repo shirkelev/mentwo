@@ -76,7 +76,7 @@ export default function HomePageMain() {
     return (
         <UserContext.Provider value={{feedData, setFeedData}}>
             <div style={{ backgroundColor: '#F8FFFF' }}>
-                {console.log("User Data", userData, feedData, fullDataFetched)}
+                {/* {console.log("User Data", userData, feedData, fullDataFetched)} */}
                 <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
                     
                     <NavigationBar user = {userData ? userData : null}/>
