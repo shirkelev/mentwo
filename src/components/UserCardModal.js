@@ -53,7 +53,7 @@ const TagsWithHeadlineContainer = ({category, list}) => {
         , overflowX: 'auto'
         , marginTop: 16
         , gap: 12 }}>
-    <TagsCategory category={category} num={attList.length} />
+    <TagsCategory category={category}  />
         <Box display="flex" flexWrap="wrap" gap={1}>
           {attList.map((badge, index) =>
           <Tag text={badge} category={category} clickAble={false} isPressed={category === Constants.AGENDAS}/>
