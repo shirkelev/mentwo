@@ -138,7 +138,7 @@ const FormPage = (props) => {
   };
 
   const UploadIcon = () => {
-    if(!file){
+    if(!file && !userInfo.img){
       return <AddAPhotoIcon />
     }
     return <CheckCircleIcon />
@@ -146,7 +146,7 @@ const FormPage = (props) => {
 
   return (
     <>
-    {console.log('FormPage', file)}
+    {/* {console.log('FormPage', file)} */}
     <RootContainer >
       <FormContainer>
         <Typography >

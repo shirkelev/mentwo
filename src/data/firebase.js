@@ -333,9 +333,12 @@ class DataBase {
 
   async changeUserBasicInfo(id, name, lastName, phone, img, linkedin=null) {
     // console.log("Updating user with ID ", id, name, lastName, phone, img);
+    // Check if img is url or a file
     let downloadURL = null;
-    if(img){
+    if(img && !img.startsWith('https://')){
       downloadURL = await this.uploadFileAndGetURL( img, 'profile_img_' + id);
+    } else {
+      downloadURL = img ? img : null;
     }
     // console.log("Download URL is ", downloadURL);
     try{

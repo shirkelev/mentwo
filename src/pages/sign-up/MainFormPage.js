@@ -44,6 +44,7 @@ const MainFormPage = ({onSave}) => {
   return (
 
     <>
+    {/* {console.log(userInfo.img)} */}
     <FormPage filedsArray = {Constantans.DEFAULT_QUESTIONS} 
       title='Basic Info'
       nextTo= {''}

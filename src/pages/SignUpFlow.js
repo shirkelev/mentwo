@@ -275,14 +275,14 @@ const SignUpFlow = ({props}) => {
     
     async function onBasicInfoSubmit(newInfo){
         setLocalLoading(true);
-        console.log('user', user.uid, newInfo.name, newInfo.lastName,  newInfo.phone, newInfo.img)
+        // console.log('user', user.uid, newInfo.name, newInfo.lastName,  newInfo.phone, newInfo.img)
         await DB.changeUserBasicInfo(user.uid, newInfo.name, newInfo.lastName,  newInfo.phone, newInfo.img, newInfo.linkedin)
         setUserInfo(newInfo);
         setLocalLoading(false);
     }
 
     const ProtectedMainFormPage = ({children}) => {
-        console.log('In Protected MAinFormPage', userInfo)
+        // console.log('In Protected MAinFormPage', userInfo)
         if(userInfo?.name && userInfo?.lastName && userInfo?.phone && userInfo?.img && userInfo?.linkedin){
             let newCompleted = completed;
             newCompleted[step] = true;
@@ -336,11 +336,11 @@ const SignUpFlow = ({props}) => {
     return (
         
         <RootContainer>
-            {console.log('Current Status: ', user, userData, loading)}
+            {/* console.log('Current Status: ', user, userData, loading)*/}
             
             <SignUpContext.Provider value={{role, setRole, step, setStep, completed, 
                                         setCompleted, form, setForm, saveSuccess, userInfo, setUserInfo, error, setError}}>
-                {console.log("UserInfo",userInfo, user, userData)}
+                {/*console.log("UserInfo",userInfo, user, userData)*/}
                 {!loading && !localLoading ? <StepsCounter steps={steps} completed={completed} to={to} activeStep={step} /> : <SignUpLoading text="Loading you data..."/>}
                 <ContentContainer>
                     <StepContent />
