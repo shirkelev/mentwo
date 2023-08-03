@@ -97,7 +97,7 @@ const theme = createTheme({
       },
       agendaPressedColor:
       {
-        main: '#ededed', // $rmd-green-300
+        main: '#afb1f0', // $rmd-green-300
       },
       agendaHeadlineColor:
       {

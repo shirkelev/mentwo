@@ -46,7 +46,7 @@ export const SOFTSKILLS = 'Soft Skills';
 export const AGENDAS = 'Community';
 export const AGENDAS_TITLE_FOR_INTERVIEWER = 'Make a Difference';
 export const AGENDAS_TITLE_FOR_INTERVIEWEE = 'Your Journey, Your Story';
-export const AGENDAS_BOX_COLOR_AND_BG = '#EDD6F8';
+export const AGENDAS_BOX_COLOR_AND_BG = '#dadbf5'; // '#EDD6F8';
 
 // Tags Lists
 export const FIELDS_LIST = ['Data Analysis', 'UX', 'UI', 'Data Science', 'Product Management', 'QA', 'Software Engineer', 'Web Development', 'Project Managment', 'Algo Development']

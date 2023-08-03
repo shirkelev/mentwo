@@ -225,7 +225,7 @@ const NewFormPage = ({name, onClickSubmit}) => {
                     <TagsCategory category= {category} fontWeight={'bold'} categoryTitle={categoryTitle}/> 
                     <Statement>{statement}</Statement>
                     <TagsContainer tagsNames={tagsNames} category={category} onTagClick={onTagClick} isPressedFunc={isPressedFunc} 
-                    textColor={'#D29EFC'}
+                    textColor={'#4846c2'}
                     fontStyle={'bold'}/>
                 </QuestionContainer>
             </Box>
