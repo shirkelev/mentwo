@@ -11,7 +11,9 @@ import MentorInProcessPage from "./MentorInProcessPage";
 import {
    
     Routes,
-    Route
+    Route,
+    Switch, 
+    useLocation 
 } from "react-router-dom";  
 import * as CONSTANTS from '../Constants';
 import { HamburgerMenuContext } from "../context/HamburgerMenuContexts";
@@ -42,6 +44,17 @@ export default function HomePageMain() {
     const [bottomNavValue, setBottomNavValue] = React.useState(0);
     const [feedData, setFeedData] = React.useState(userData);
     const [localLoading, setLocalLoading] = React.useState(false);
+
+    function ScrollToTop() {
+        const { pathname } = useLocation();
+      
+        useEffect(() => {
+          // Scroll to the top of the page when the pathname changes
+          window.scrollTo(0, 0);
+        }, [pathname]);
+      
+        return null; // This component doesn't render anything
+      }
     
 
     useEffect(() => {
@@ -83,12 +96,14 @@ export default function HomePageMain() {
                     
 
                     <PageContainer>
+                    <ScrollToTop />
                     {
                     loading | localLoading ? 
                         ( <SignUpLoading text={"Loading..."}></SignUpLoading> )
                         :
                         (
                         <Routes>
+                            
                             <Route path="/" element={
                                 feedData.type === 'mentor' ? <MentorPendingsAndRunningPage user={feedData} /> : 
                                 !feedData.isMatched ? <MenteeMatchingPage user={feedData} /> : <MatchSuccess mentee={feedData} /> } exact/>
