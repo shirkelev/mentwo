@@ -250,9 +250,27 @@ export default function PersonCard({variant, mainUser, cardUser}) {
 
   
 
-  const handleClickShare = () => { 
-    return null;
-    // todo: do something (modal?)
+  
+
+  const handleClickShare = async () => {
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'I helped someone today!',
+            text: 'Using the woderfull app Internview, I helped' + cardUser.name + ' '
+                  + cardUser.lastName + ' by conducting a mock interview. You can help someone too!',
+            url: window.location.href,
+          });
+          console.log('Shared successfully');
+        } catch (error) {
+          console.error('Error sharing:', error);
+        }
+      } else {
+        // Fallback for browsers that don't support Web Share API
+        console.log('Web Share API not supported');
+        // You can provide an alternative sharing option here
+      };
   }
 
   const MAIN_CTA = {
