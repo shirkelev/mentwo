@@ -258,7 +258,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
         try {
           await navigator.share({
             title: 'I helped someone today!',
-            text: 'Using the woderfull app Internview, I helped' + cardUser.name + ' '
+            text: 'Using the woderfull app Internview, I helped ' + cardUser.name + ' '
                   + cardUser.lastName + ' by conducting a mock interview. You can help someone too!',
             url: window.location.href,
           });
