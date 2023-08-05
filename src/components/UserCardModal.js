@@ -108,7 +108,8 @@ const UserCardModal = ({user, onClose}) => {
             try{window.open(user.linkedin, "_blank")}
             catch(e){
               console.log(e)
-              window.open('https://www.linkedin.com/', "_blank")}
+              window.open('https://www.linkedin.com/', "_blank")
+            }
              } : () => {},
       }
 
