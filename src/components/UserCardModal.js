@@ -93,14 +93,23 @@ const UserCardModal = ({user, onClose}) => {
       if(hasLinkedin){
         let linkedin = user.linkedin;
         if(!linkedin.startsWith('http')){
+          if(!linkedin.includes('www.linkedin.com/')){
+            linkedin = 'www.linkedin.com/' + linkedin;
+          };
           linkedin = 'https://' + linkedin;
         }
-        user.linkedin = linkedin;
+        user.linkedin = linkedin
+        
       }
       const linkedinProps = {
         color: hasLinkedin ? 'success' : 'default',
         onClick : hasLinkedin ?  
-          () => {window.open(user.linkedin, "_blank")} : () => {},
+          () => {
+            try{window.open(user.linkedin, "_blank")}
+            catch(e){
+              console.log(e)
+              window.open('https://www.linkedin.com/', "_blank")}
+             } : () => {},
       }
 
       const hasCV = user.cv ? true : false;
