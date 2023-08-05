@@ -145,72 +145,74 @@ export default function PersonCard({variant, mainUser, cardUser}) {
   }
 
   const handleClickFinish = () => {
-    function moveToFinish(mentorData, menteeData){
-      const [processIds, processObjects, finishedIds, finishedObjects] = 
-      moveSpecificId(
-        menteeData.id, 
-        mentorData?.approvedMentess ? mentorData.approvedMentess : [], 
-        mentorData?.approvedMentessData? mentorData.approvedMentessData: [],
-        mentorData?.finishedMentees ? mentorData.finishedMentees : [], 
-        mentorData?.finishedMenteesData ? mentorData.finishedMenteesData : []
-        );
+    navigate('../' + Constants.PROCESS_COMPLETION_FORM);
+  // TODO Change function!
+  //   function moveToFinish(mentorData, menteeData){
+  //     const [processIds, processObjects, finishedIds, finishedObjects] = 
+  //     moveSpecificId(
+  //       menteeData.id, 
+  //       mentorData?.approvedMentess ? mentorData.approvedMentess : [], 
+  //       mentorData?.approvedMentessData? mentorData.approvedMentessData: [],
+  //       mentorData?.finishedMentees ? mentorData.finishedMentees : [], 
+  //       mentorData?.finishedMenteesData ? mentorData.finishedMenteesData : []
+  //       );
     
-      console.log("Moving From In Process To Finish",  cardUser.id);
+  //     console.log("Moving From In Process To Finish",  cardUser.id);
       
-      DB.UpdateFinishedMentees(mentorData.id, finishedIds);
-      DB.UpdateInProcessMentees(mentorData.id, processIds);
-      let newFinishedMentors = menteeData.finishedMentors ? menteeData.finishedMentors : [];
-      newFinishedMentors.push(mentorData.id);
-      DB.removeCurrentMentor(menteeData.id, newFinishedMentors);
-      return [processIds, processObjects, finishedIds, finishedObjects];
+  //     DB.UpdateFinishedMentees(mentorData.id, finishedIds);
+  //     DB.UpdateInProcessMentees(mentorData.id, processIds);
+  //     let newFinishedMentors = menteeData.finishedMentors ? menteeData.finishedMentors : [];
+  //     newFinishedMentors.push(mentorData.id);
+  //     DB.removeCurrentMentor(menteeData.id, newFinishedMentors);
+  //     return [processIds, processObjects, finishedIds, finishedObjects];
       
-    }
-    function onApprove(){
-      switch (mainUser.type){ 
+  //   }
+  //   function onApprove(){
+  //     switch (mainUser.type){ 
 
-        case 'mentor':
-          const [processIds, processObjects, finisheddIds, finishedObjects] = moveToFinish(feedData, cardUser);
-          setModalType('contact');
-          setFeedData({...feedData, 
-            approvedMentess: processIds, 
-            approvedMenteesData: processObjects, 
-            finishedMentees: finisheddIds, 
-            finishedMenteesData: finishedObjects
-          });
-          console.log("Finished Mentor Process Update");
-          setDialogState(defaultDialogState);
-          break;
+  //       case 'mentor':
+  //         const [processIds, processObjects, finisheddIds, finishedObjects] = moveToFinish(feedData, cardUser);
+  //         setModalType('contact');
+  //         setFeedData({...feedData, 
+  //           approvedMentess: processIds, 
+  //           approvedMenteesData: processObjects, 
+  //           finishedMentees: finisheddIds, 
+  //           finishedMenteesData: finishedObjects
+  //         });
+  //         console.log("Finished Mentor Process Update");
+  //         setDialogState(defaultDialogState);
+  //         break;
 
-        case 'mentee':
-          const newFinishedMentors = feedData.finishedMentors ? feedData.finishedMentors : [];
-          const newFinishedMntorsData = feedData.finishedMentorsData ? feedData.finishedMentorsData : [];
-          newFinishedMentors.push(feedData.currentMentor);
-          newFinishedMntorsData.push(feedData.currentMentorData);
-          setModalType('contact');
-          setFeedData({...feedData, 
-            currentMentor: null,
-            currentMentorData: null,
-            isMatched: false,
-            finishedMentors: newFinishedMentors,
-            finishedMentorsData: newFinishedMntorsData
-          });
-          navigate('../')
-          moveToFinish(feedData.currentMentorData, mainUser);
-          console.log("Finished Mentor Process Update");
-          setDialogState(defaultDialogState);
-          break;
+  //       case 'mentee':
+  //         const newFinishedMentors = feedData.finishedMentors ? feedData.finishedMentors : [];
+  //         const newFinishedMntorsData = feedData.finishedMentorsData ? feedData.finishedMentorsData : [];
+  //         newFinishedMentors.push(feedData.currentMentor);
+  //         newFinishedMntorsData.push(feedData.currentMentorData);
+  //         setModalType('contact');
+  //         setFeedData({...feedData, 
+  //           currentMentor: null,
+  //           currentMentorData: null,
+  //           isMatched: false,
+  //           finishedMentors: newFinishedMentors,
+  //           finishedMentorsData: newFinishedMntorsData
+  //         });
+  //         navigate('../')
+  //         moveToFinish(feedData.currentMentorData, mainUser);
+  //         console.log("Finished Mentor Process Update");
+  //         setDialogState(defaultDialogState);
+  //         break;
 
-        default:
-          break;
-      }
-    }
-  setDialogState(
-    {
-    title: 'Finish Process'
-    ,content: 'Have you finished this process?'
-    ,open:true
-    ,onApproveFunc: onApprove
-    });
+  //       default:
+  //         break;
+  //     }
+  //   }
+  // setDialogState(
+  //   {
+  //   title: 'Finish Process'
+  //   ,content: 'Have you finished this process?'
+  //   ,open:true
+  //   ,onApproveFunc: onApprove
+  //   });
   
   }
 
@@ -291,7 +293,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
           <>
           <Button size="small" onClick={handleClickApprove} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }} color='success'>Approve</Button>
           <Button size="small" onClick={handleClickDecline} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }} color='warning'>Decline</Button> 
-          <Button size="small" onClick={handleClickViewMore} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>About</Button> 
+          <Button size="small" onClick={handleClickViewMore} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }} color='success'>About</Button> 
           </>
         )
       };

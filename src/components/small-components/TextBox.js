@@ -12,7 +12,7 @@ const TextBox = ({ title, placeholder, onChange, onBlur=() => {}, isDisabled=fal
       placeholder={placeholder}
       onChange={onChange}
       onBlur={onBlur}
-      disabled
+      // disabled
       type={isPassword ? "password" : "text"}
     /> :
     <TextField
