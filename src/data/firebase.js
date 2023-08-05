@@ -454,6 +454,25 @@ class DataBase {
     }
 
   }
+
+  async addNewFeedbackForm(interviwerId, intervieweeId, feedbackForm) {
+  
+    try{
+      const formId = interviwerId + "_" + intervieweeId;
+      const feedbackRef = doc(this.db, Constants.FEEDBACKS_DB_NAME, formId);
+      await setDoc(feedbackRef, {
+        ...feedbackForm,
+        interviewerId: interviwerId,
+        intervieweeId: intervieweeId,
+      }).then(() => {
+        console.log("Feedback form is added");
+      });
+      
+    } catch (e) {
+      console.log("Error adding feedback form", e);
+      return null;
+    }
+  }
 }
 
       

@@ -22,13 +22,17 @@ import TextBox from '../components/small-components/TextBox';
 import * as Constants from '../Constants';
 import { Stack } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import Fab from '@mui/material/Fab';
+import { DB } from '../data/firebase';
+
 
 const RootContainer = styled(Container)(({ theme }) => ({
    display: 'flex',
    flexDirection: 'column',
    alignItems: 'center',
    justifyContent: 'center',
-   paddingTop: theme.spacing(4),
+   paddingTop: theme.spacing(1),
    paddingBottom: theme.spacing(10),
    paddingLeft: theme.spacing(3),
     paddingRight: theme.spacing(3),
@@ -135,10 +139,35 @@ const TitleAndAvatar = styled('div')(({ theme }) => ({
     // marginTop: theme.spacing(3),
     alignItems: 'center',
     justifyContent: 'center',
+    gap: '40px',
 }));
 
+const DialogBox = ({title, content, open, onApproveFunc, onDecline, setDialogState}) => {
+    // Our dialog box, for decline approve and finise
+    
+    return (
+      <Dialog
+            open={open}
+            keepMounted
+            onClose={() => setDialogState(false)}
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle>{title}</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                {content}
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={onDecline} color='success' variant='outlined'>No</Button>
+              <Button onClick={onApproveFunc} variant="contained">Yes</Button>
+            </DialogActions>
+          </Dialog>
+    )
+  }
 
-const ProcessCompletionPage = ({user, partner}) => {
+
+const ProcessCompletionPage = ({user, partner, formId=null}) => {
 
     if(!partner) {
         partner = user;
@@ -160,10 +189,11 @@ const ProcessCompletionPage = ({user, partner}) => {
     const navigate = useNavigate();
 
     const backTapped = () => {
-        navigate(Constants.HOME_PAGE);
+        setSaveDialogOpen(true);
     };
 
     const [doneDialogOpen, setDoneDialogOpen] = React.useState(false);
+    const [saveDialogOpen, setSaveDialogOpen] = React.useState(false);
 
     const doneTapped = () => {
         setDoneDialogOpen(true);
@@ -201,11 +231,27 @@ const ProcessCompletionPage = ({user, partner}) => {
         setSelectedRadioOption(event.target.value);
     };
 
-    function SkillInput({ placeholder, index=1, isDisabled=false }) {
-        const [skill, setSkill] = useState('');
+    function SkillInput({ placeholder, index=1, isDisabled=false, keepOrImprove="keep" }) {
     
         const handleSkillChange = (event) => {
-            setSkill(event.target.value);
+            if(event.target.value === "") {
+                return;
+            }
+            if(keepOrImprove === "keep"){
+                let newList = [...feedbackForm.toKeepList];
+                newList[parseInt(index) - 1] = event.target.value;
+                setFeedbackForm({
+                    ...feedbackForm,
+                    toKeepList: newList
+                });
+            } else {
+                let newList = [...feedbackForm.toImproveList];
+                newList[parseInt(index) - 1] = event.target.value;
+                setFeedbackForm({
+                    ...feedbackForm,
+                    toImproveList: newList
+                });
+            }
         };
     
         return( 
@@ -218,14 +264,81 @@ const ProcessCompletionPage = ({user, partner}) => {
                         label={placeholder}
                         variant="filled"
                         placeholder={placeholder}
-                        onChange={() => handleSkillChange}
-                        onBlur={() => handleSkillChange}
-                        
+                        onBlur={(e) => handleSkillChange(e)}
                         isDisabled={isDisabled}
                         type={"text"}
                     />;
             </SingleSkillContainer>
         );
+    }
+
+    const onChangeFreeText = (event, type) => {
+        if(type === "keep") {
+            setFeedbackForm({
+                ...feedbackForm,
+                toKeepText: event.target.value
+            });
+        }
+        else if(type === "improve") {
+            setFeedbackForm({
+                ...feedbackForm,
+                toImproveText: event.target.value
+            });
+        }
+        else if(type === "free") {
+            setFeedbackForm({
+                ...feedbackForm,
+                freeText: event.target.value
+            });
+        }
+    }
+
+
+    const fabStyle = {
+        position: 'sticky',
+        top: '83vh',
+        bottom: '85vh',
+        left: '85vw',
+      };
+    
+    const fixFeedbackForm = () => {
+        let newForm = {...feedbackForm};
+        // go over all attributes, if null fill with empty string
+        for (const [key, value] of Object.entries(newForm)) {
+            if(value === null || value === undefined) {
+                newForm[key] = "";
+            }
+        }
+        for(let i=0; i<newForm.toKeepList.length; i++) {
+            if(newForm.toKeepList[i] === null || newForm.toKeepList[i] === undefined) {
+                newForm.toKeepList[i] = "Skill " + (i+1);
+            }
+        }
+        for(let i=0; i<newForm.toImproveList.length; i++) {
+            if(newForm.toImproveList[i] === null || newForm.toImproveList[i] === undefined) {
+                newForm.toImproveList[i] = "Skill " + (i+1);
+            }
+        }
+        return newForm;
+        }
+
+    const onClickSave = async () => {
+        // Save the feedback form
+        let finalForm = fixFeedbackForm()
+        finalForm = {...finalForm, isDone: false};
+        console.log(finalForm);
+        await DB.addNewFeedbackForm(user.id, partner.id, finalForm);
+        setSaveDialogOpen(false);
+        navigate('../');
+    };
+
+    const onClickDone = async () => {
+        let finalForm = fixFeedbackForm()
+        finalForm = {...finalForm, isDone: true};
+        console.log(finalForm);
+        await DB.addNewFeedbackForm(user.id, partner.id, finalForm);
+        setDoneDialogOpen(false);
+        navigate('../');
     }
 
     useEffect(() => {
@@ -252,14 +365,20 @@ const ProcessCompletionPage = ({user, partner}) => {
     }
     else {
         return (
-            <>
-            <div style={{ backgroundColor: '#F8FFFF' }}>
-            <RootContainer maxWidth="md">
+        <>
+        
+        <Fab color="primary" aria-label="add" size="small" sx={fabStyle} onClick={() => setSaveDialogOpen(true)}>
+                <ArrowBackIcon />
+        </ Fab>
+        <div style={{ backgroundColor: '#F8FFFF' }}>
+        <RootContainer maxWidth="md">
+            
             <TitleAndAvatar>
+                
                 <div>
                     <Avatar alt="Remy Sharp" src={partner.img}  sx={{ width: 70, height: 70, border: 1}} borderStyle="line" size="large"/>
                 </div>
-                <Title>Give {partner.name + ' ' + partner.lastName} Feedback </Title>
+                <Title>Give {partner.name} Feedback </Title>
             </TitleAndAvatar>
 
             
@@ -269,25 +388,7 @@ const ProcessCompletionPage = ({user, partner}) => {
             </ Typography>
 
             <FormContainer>
-                
-                {/* <FeedbackContainer>
-                    <Question>Did you help your interviewee find a job?</Question>
-                    <RadioGroup 
-                        row
-                        value={selectedRadioOption}
-                        onChange={handleRadioOptionChange}
-                    >
-                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="No" />
-                        <FormControlLabel value="other" control={<Radio />} label="Other" />
-                    </RadioGroup>
-                </FeedbackContainer> */}
-
-                {/* <FeedbackContainer>
-                    <Question>Please rate your interviewee</Question>
-                    <Rating size="large" defaultValue={0} precision={0.5} />
-                </FeedbackContainer> */}
-
+        
                 <FeedbackContainer>
                     <Statement> Top 3 Keepers</Statement>
                     <Question>Top 3 skills that {partner.name} sholud keep</Question>
@@ -295,13 +396,13 @@ const ProcessCompletionPage = ({user, partner}) => {
                         {/* <ol> */}
                             <SkillInput placeholder={feedbackForm.toKeepList.length >= 1 ?
                                                         feedbackForm.toKeepList[0] :  "Skill 1"} index='1' 
-                                                        isDisabled={feedbackForm.toKeepList.length >= 1}/>
+                                                        isDisabled={false}/>
                             <SkillInput placeholder={feedbackForm.toKeepList.length >= 2 ?
                                                         feedbackForm.toKeepList[1] :  "Skill 2"}  index='2'
-                                                        isDisabled={feedbackForm.toKeepList.length >= 2}/>
+                                                        isDisabled={false}/>
                             <SkillInput placeholder={feedbackForm.toKeepList.length >= 3 ?
                                                         feedbackForm.toKeepList[2] :  "Skill 3"} index='3'
-                                                        isDisabled={feedbackForm.toKeepList.length >= 3}/>
+                                                        isDisabled={false}/>
                         {/* </ol> */}
                     </ ListContainer>
                 </FeedbackContainer>
@@ -311,7 +412,8 @@ const ProcessCompletionPage = ({user, partner}) => {
                     <Question>Please tell {partner.name} what s/he was good at!</Question>
                     <BigContentBox placeholder={ feedbackForm.toKeepText ? feedbackForm.toKeepText :
                         "Tell " + partner.name + 'what was great!'
-                        } variant={feedbackForm.toKeepText ? 'filled' : 'outlined'} />
+                        } 
+                        onBlur={(e) => onChangeFreeText(e, "keep")}/>
                 </FeedbackContainer>
 
                 <FeedbackContainer>
@@ -322,26 +424,31 @@ const ProcessCompletionPage = ({user, partner}) => {
                             <SkillInput placeholder={feedbackForm.toImproveList.length >= 1? 
                                                     feedbackForm.toImproveList[0] : "Skill 1"} 
                                                     index='1' 
-                                                    isDisabled={feedbackForm.toImproveList.length >= 1}
+                                                    isDisabled={false}
+                                                    keepOrImprove="improve"
                                                     />
                             <SkillInput placeholder={feedbackForm.toImproveList.length >= 2? 
                                                     feedbackForm.toImproveList[1] : "Skill 2"} 
                                                     index='2' 
-                                                    isDisabled={feedbackForm.toImproveList.length >= 2}/>
+                                                    isDisabled={false}
+                                                    keepOrImprove="improve"
+                                                    />
                             <SkillInput placeholder={feedbackForm.toImproveList.length >= 3? 
                                                     feedbackForm.toImproveList[2] : "Skill 3"} 
                                                     index='3' 
-                                                    isDisabled={feedbackForm.toImproveList.length >= 3}/>
+                                                    isDisabled={false}
+                                                    keepOrImprove="improve"
+                                                    />
                         {/* </ol> */}
                     </ ListContainer>
                 </FeedbackContainer>
 
                 <FeedbackContainer>
-                    <Statement> To Improv - Free Text</Statement>
+                    <Statement> To Improve - Free Text</Statement>
                     <Question>Please tell {partner.name} what s/he should improve!</Question>
                     <BigContentBox placeholder={ feedbackForm.toImproveText ? feedbackForm.toImproveText : 
                                 "Tell " + partner.name + ' what can be better!'} 
-                                variant={feedbackForm.toImproveText ? "filled" : 'outlined'}/>
+                                onBlur={(e) => onChangeFreeText(e, "improve")}/>
                 </FeedbackContainer>
 
                 <FeedbackContainer>
@@ -352,7 +459,8 @@ const ProcessCompletionPage = ({user, partner}) => {
                         feedbackForm.freeText ? feedbackForm.freeText :  
                         "Enter your Tips, general impression, etc" 
                         } 
-                        variant={feedbackForm.freeText ? "filled" : 'outlined'}/>
+                        
+                        onBlur={(e) => onChangeFreeText(e, "free")}/>
                 </FeedbackContainer>
 
                 {/* <FeedbackContainer>
@@ -369,157 +477,44 @@ const ProcessCompletionPage = ({user, partner}) => {
                 </ButtonSection> */}
 
                 <ButtonSection>
-                    <ButtonWrapper variant="outlined" color="primary" onClick={backTapped} title='Save' />
+                    <ButtonWrapper variant="outlined" color="success" onClick={backTapped} title='Save' />
                     <ButtonWrapper variant="contained" color="primary" onClick={doneTapped} title='Done' />
                 </ButtonSection>
             </FormContainer>
+            
+            <DialogBox 
+                open={doneDialogOpen} 
+                setDialogState={setDoneDialogOpen} 
+                title='Thank you for your feedback!'
+                content='We appreciate your contribution to our community. 
+                are you sure you are done with your feedback?'
+                button1='No'
+                button2='Yes'
+                onApproveFunc={onClickDone}
+                onDecline={() => setDoneDialogOpen(false)}
+                >
+            </DialogBox>
 
-            <Modal
-                open={doneDialogOpen}
-                onClose={mentorDialogClosed}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <ModalStyle>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Thank you for your feedback!
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        We appreciate your contribution to our community.
-                    </Typography>
-                </ModalStyle>
-            </Modal>
-
-            <Modal
-                open={shareModalOpen}
-                onClose={shareModalClosed}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-            >
-                <ModalStyle>
-                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Sharing is caring!
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                        Your process has been successfully published.
-                    </Typography>
-                </ModalStyle>
-            </Modal>
+            <DialogBox 
+                open={saveDialogOpen} 
+                setDialogState={setSaveDialogOpen} 
+                title='It seems like you didnt finish...'
+                content='Do you want to save the feedback you already gave and return late?'
+                button1='No'
+                button2='Yes'
+                onApproveFunc={onClickSave}
+                onDecline={() => {
+                    setSaveDialogOpen(false)
+                    navigate('../')
+                }}
+                >
+            </DialogBox>
+            
 
         </RootContainer>
         </div>
         </>
         );
-    // } else {
-    //     return (
-    //         <>
-    //         <div style={{ backgroundColor: '#F8FFFF' }}>
-    //         <RootContainer maxWidth="md">
-
-    //         <Title>Tell us about the process</Title>
-        
-    //         <FormContainer>
-                
-    //             <FeedbackContainer>
-    //                 <Question>Did the app help you find a job?</Question>
-    //                 <RadioGroup 
-    //                     row
-    //                     value={selectedRadioOption}
-    //                     onChange={handleRadioOptionChange}
-    //                 >
-    //                     <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-    //                     <FormControlLabel value="no" control={<Radio />} label="No" />
-    //                     <FormControlLabel value="other" control={<Radio />} label="Other" />
-    //                 </RadioGroup>
-    //             </FeedbackContainer>
-        
-    //             <FeedbackContainer>
-    //                 <Question>Please rate your interviewer</Question>
-    //                 <Rating size="large" defaultValue={0} precision={0.5} />
-    //             </FeedbackContainer>
-        
-    //             <FeedbackContainer>
-    //             <Statement> Feedback is a gift</Statement>
-    //                 <Question>Please tell us what your interviewer was good at, and what he could improve on</Question>
-    //                 <BigContentBox placeholder="Enter your feedback" />
-    //             </FeedbackContainer>
-        
-    //             <FeedbackContainer>
-    //                 <Statement> Your experience can help others</Statement>
-    //                 <Question>Do you have any tips to help future generations succeed?</Question>
-    //                 <BigContentBox placeholder="Enter your Tips" />
-    //             </FeedbackContainer>
-        
-    //             <FeedbackContainer>
-    //                 <Statement> We will be happy to improve </Statement>
-    //                 <Question>Is there anything else you would like to tell us?</Question>
-    //                 <BigContentBox placeholder="Tell us more" />
-    //             </FeedbackContainer>
-
-    //             <ButtonSection>
-    //             <IconButton  onClick={shareTapped} size='small' style={{ color: selectedRadioOption !== 'yes' ? 'grey' : '#0A66C2' }} disabled={selectedRadioOption !== 'yes'} >
-    //                 <Typography>Share this process</Typography>
-    //                 <LinkedInIcon style={{ color: selectedRadioOption !== 'yes' ? 'grey' : '#0A66C2' }} fontSize="large" />
-    //             </IconButton>
-    //             </ButtonSection>
-                
-    //             <ButtonSection>
-    //                 <ButtonWrapper variant="outlined" color="primary" onClick={backTapped} title='Back' />
-    //                 <ButtonWrapper variant="contained" color="primary" onClick={doneTapped} title='Done' />
-    //             </ButtonSection>
-        
-    //         </FormContainer>
-
-    //         <Dialog
-    //             open={doneDialogOpen}
-    //             onClose={menteeDialogClosedWithNo}
-    //             aria-labelledby="alert-dialog-title"
-    //             aria-describedby="alert-dialog-description"
-    //         >
-    //             <DialogTitle id="alert-dialog-title">
-    //                 {"Want to be a mentor yourself?"}
-    //             </DialogTitle>
-    //             <DialogContent>
-    //                 <DialogContentText id="alert-dialog-description">
-    //                     If you have found a job, you can help others and accompany them in their job-finding process.
-    //                 </DialogContentText>
-    //             </DialogContent>
-    //             <DialogActions >
-
-    //                 <Button variant='outlined' onClick={menteeDialogClosedWithNo}>
-    //                     <Typography variant="body1" fontWeight="bold">
-    //                         No
-    //                     </Typography>
-    //                 </Button>
-    //                 <Button variant='contained' onClick={menteeDialogClosedWithYes} autoFocus>
-    //                     <Typography variant="body1" fontWeight="bold">
-    //                         Yes
-    //                     </Typography>
-    //                 </Button>
-    //             </DialogActions>
-    //         </Dialog>
-
-    //         <Modal
-    //             open={shareModalOpen}
-    //             onClose={shareModalClosed}
-    //             aria-labelledby="modal-modal-title"
-    //             aria-describedby="modal-modal-description"
-    //         >
-    //             <ModalStyle>
-    //                 <Typography id="modal-modal-title" variant="h6" component="h2">
-    //                     Sharing is caring!
-    //                 </Typography>
-    //                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-    //                     Your process has been successfully published.
-    //                 </Typography>
-    //             </ModalStyle>
-    //         </Modal>
-        
-    //     </RootContainer>
-    //     </div>
-    //     </>
-    //     );
-    // }  
     }
 };
 
