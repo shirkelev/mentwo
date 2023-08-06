@@ -17,6 +17,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import Badge from '@mui/material/Badge';
 
 
 const maxLength = 70;
@@ -305,6 +306,28 @@ export default function PersonCard({variant, mainUser, cardUser}) {
       };
   }
 
+  const FeedbackButton = () => {
+    if(mainUser.type === 'mentor' && (!cardUser.feedbackForm || !cardUser.feedbackForm.isDone)){
+      return (
+        <Badge badgeContent={'+'} color="error" anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+            }} size='small'>
+          <Button size="small" onClick={handleClickShare} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}
+                color='error'>
+                  Feedback
+          </Button>
+        </Badge> 
+      );
+    }
+    else{
+      return (
+        <Button size="small" onClick={handleClickShare} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}
+            color='success'>Share</Button> 
+      );
+      }
+  }
+
   const MAIN_CTA = {
     variant: 'outlined',
     color: 'primary',
@@ -346,9 +369,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
           <Button size="small" onClick={handleClickContact} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }} color='success'>Contact</Button>
           <Button size="small" onClick={handleClickShare} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}
             color='success'>Share</Button> 
-          <Button size="small" onClick={handleClickFeedback} 
-            variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }} color={cardUser.feedbackForm?.isDone ? 'success' : 'secondary'}>
-              Feedback</Button> 
+          <FeedbackButton />
           </>
         )
       };
