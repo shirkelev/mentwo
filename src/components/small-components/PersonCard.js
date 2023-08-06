@@ -313,7 +313,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
           vertical: 'top',
           horizontal: 'right',
             }} size='small'>
-          <Button size="small" onClick={handleClickShare} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}
+          <Button size="small" onClick={handleClickFeedback} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}
                 color='error'>
                   Feedback
           </Button>
@@ -322,8 +322,10 @@ export default function PersonCard({variant, mainUser, cardUser}) {
     }
     else{
       return (
-        <Button size="small" onClick={handleClickShare} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}
-            color='success'>Share</Button> 
+        <Button size="small" onClick={handleClickFeedback} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}
+                color='success'>
+                  Feedback
+          </Button>
       );
       }
   }
