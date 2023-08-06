@@ -323,7 +323,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
     else{
       return (
         <Button size="small" onClick={handleClickFeedback} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}
-                color='success'>
+                color={cardUser.feedbackForm && cardUser.feedbackForm.isDone ? 'success' : 'secondary'}>
                   Feedback
           </Button>
       );
