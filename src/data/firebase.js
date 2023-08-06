@@ -267,13 +267,15 @@ class DataBase {
     return intervieweesList;
   }
 
-  async getFinishedInterviewees(finishedList) {
+  async getFinishedInterviewees(intreviwerId, finishedList) {
     let finishedInterviewees = [];
     try{
       for(let i = 0; i < finishedList.length; i++){
         const intervieweeBaseData = await getDoc(doc(this.db, Constants.USERS_DB_NAME, finishedList[i]));
         const intervieweeExtraData = await getDoc(doc(this.db, Constants.INTERVIEWEES_DB_NAME, finishedList[i]));
-        const interviewee = {...intervieweeBaseData.data(), ...intervieweeExtraData.data()};
+        const intervieweeFeedbackForm = await this.getFeedbackForm(intreviwerId, finishedList[i])
+        const interviewee = {...intervieweeBaseData.data(), ...intervieweeExtraData.data() 
+                                  ,feedbackForm: intervieweeFeedbackForm};
         finishedInterviewees.push(interviewee);
       }
       console.log("All finished interviewees are added");
@@ -316,12 +318,14 @@ class DataBase {
     }
   }
 
-  async getFinishedMentors(finishedList) {
+  async getFinishedMentors(intervieweeId, finishedList) {
     let finishedMentorsData = [];
     try{
       for(let i = 0; i < finishedList.length; i++){
         const curMentorData = await this.getInterviewerData(finishedList[i]);
-        finishedMentorsData.push(curMentorData);
+        const curMentorFeedbackForm = await this.getFeedbackForm(finishedList[i], intervieweeId);
+        const mentorFinalData = {...curMentorData, feedbackForm: curMentorFeedbackForm};
+        finishedMentorsData.push(mentorFinalData);
       }
       console.log("All finished mentors are added");
       return finishedMentorsData;
@@ -470,6 +474,24 @@ class DataBase {
       
     } catch (e) {
       console.log("Error adding feedback form", e);
+      return null;
+    }
+  }
+
+  async getFeedbackForm(interviwerId, intervieweeId) {
+    try{
+      const formId = interviwerId + "_" + intervieweeId;
+      const feedbackRef = doc(this.db, Constants.FEEDBACKS_DB_NAME, formId);
+      const feedbackDoc = await getDoc(feedbackRef);
+      if (feedbackDoc.exists()) {
+        console.log("Feedback form added");
+        return feedbackDoc.data();
+      } else {
+        console.log("No such feedback form");
+        return null;
+      }
+    } catch (e) {
+      console.log("Error getting feedback form", e);
       return null;
     }
   }

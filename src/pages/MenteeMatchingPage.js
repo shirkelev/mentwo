@@ -16,11 +16,14 @@ const MenteeMatchingPage = ({mentee}) => {
     return(
         <div style={containerStyles}>
         <Stack direction="column" justifyContent="center" alignItems="center" spacing={20} maxWidth="100%" marginBottom={20}>
-          <iframe src="https://giphy.com/embed/eYaHNLXTOo1hKJu9gu" frameBorder="0" class="giphy-embed" title='Searching'></iframe>
-          {/* <CircularProgressBar /> */}
-          <Typography variant="h4" component="h1" textAlign="center">
-            Searching For The Best Interviewer For You!
-          </Typography>
+            <Typography variant="h4" component="h1" textAlign="center">
+              Searching For The Best Interviewer For You!
+            </Typography>
+            <iframe src="https://giphy.com/embed/eYaHNLXTOo1hKJu9gu" frameBorder="0" class="giphy-embed" title='Searching'></iframe>
+            {/* <CircularProgressBar /> */}
+            <Typography variant="h5" component="h1" textAlign="center" textStyle='italic'>
+              We first need an interviewer to approve you, dont waste you time now, we will ping you when the right match is found!
+            </Typography>
         </Stack>
       </div>
         );

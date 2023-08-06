@@ -196,7 +196,8 @@ useEffect(() => {
           // console.log("Approved Ids ", userExtraData.approvedMentess)
           const pendingInterviewees = await DB.getPendingInterviewees(userExtraData.pendingMentees ? userExtraData.pendingMentees : [] );
           const approvedInterviewees = await DB.getProcessedInterviewees(userExtraData.approvedMentess ? userExtraData.approvedMentess : []);
-          const finishedIntervieweesData= await DB.getFinishedInterviewees(userExtraData.finishedMentees ? userExtraData.finishedMentees : []);
+          const finishedIntervieweesData= await DB.getFinishedInterviewees(user.uid
+                                                      ,userExtraData.finishedMentees ? userExtraData.finishedMentees : []);
           // console.log('Approved: ', approvedInterviewees)
           userExtraData = {...userExtraData
             , pendingMenteesData: pendingInterviewees
@@ -231,7 +232,7 @@ useEffect(() => {
           }
           let finishedMentorsData;
           if(userExtraData.finishedMentors && userExtraData.finishedMentors.length > 0) {
-            finishedMentorsData = await DB.getFinishedMentors(userExtraData.finishedMentors);
+            finishedMentorsData = await DB.getFinishedMentors(user.uid, userExtraData.finishedMentors);
             userExtraData.finishedMentorsData = finishedMentorsData;
           } else {
             userExtraData.finishedMentorsData = [];

@@ -45,7 +45,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
   }
   const [openDialog, setOpenDialog] = React.useState(false);
   const [dialogState, setDialogState] = React.useState(defaultDialogState);
-  const {setFeedBackFormInterviewee} = React.useContext(UserContext);
+  const {setFeedBackFormPartner} = React.useContext(UserContext);
 
   
   const DialogBox = ({title, content, open, onApproveFunc}) => {
@@ -177,7 +177,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
             ,content: cardUser.name + 'Would really like to hear your feedback on the process!'
             ,open:true
             ,onApproveFunc: () => {
-              setFeedBackFormInterviewee(cardUser);
+              setFeedBackFormPartner(cardUser);
               navigate('../' + Constants.PROCESS_COMPLETION_FORM + 'id=' + cardUser.id);
               }
             });
@@ -226,6 +226,34 @@ export default function PersonCard({variant, mainUser, cardUser}) {
   
   }
 
+  const handleClickFeedback = () => {
+    // console.log(cardUser.feedbackForm);
+    switch (mainUser.type){
+      case 'mentor':
+        if(!cardUser.feedbackForm || !cardUser.feedbackForm.isDone){
+          setFeedBackFormPartner(cardUser);
+          navigate('../' + Constants.PROCESS_COMPLETION_FORM + 'id=' + cardUser.id);
+        } 
+        else if(cardUser.feedbackForm.isDone){
+          setFeedBackFormPartner(cardUser);
+          navigate('../' + Constants.FEEDBACK_FORM_PRESENT_PAGE + 'id=' + cardUser.id);
+        }
+        break;
+      case 'mentee':
+        if(!cardUser.feedbackForm || !cardUser.feedbackForm.isDone){
+          console.log("Feedback not given");
+          return;
+        }
+        else if(cardUser.feedbackForm.isDone){
+          setFeedBackFormPartner(cardUser);
+          navigate('../' + Constants.FEEDBACK_FORM_PRESENT_PAGE + 'id=' + cardUser.id);
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
   const handleClickApprove = () => {
     function approveInterviewee(){
       const [pendingIds, pendingObjects, approvedIds, approvedObjects] = moveSpecificId(cardUser.id, 
@@ -255,14 +283,6 @@ export default function PersonCard({variant, mainUser, cardUser}) {
       ,onApproveFunc: approveInterviewee
     });
   }
-
-  const handleClickFeedback = () => {
-    navigate('../' + Constants.PROCESS_COMPLETION_FORM);
-  }
-
-  
-
-  
 
   const handleClickShare = async () => {
 
@@ -324,8 +344,11 @@ export default function PersonCard({variant, mainUser, cardUser}) {
         return(
           <>
           <Button size="small" onClick={handleClickContact} variant={MAIN_CTA.variant} style={{ fontWeight: 'bold' }} color='success'>Contact</Button>
-          <div></div> 
-          <Button size="small" onClick={handleClickShare} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}>Share</Button> 
+          <Button size="small" onClick={handleClickShare} variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }}
+            color='success'>Share</Button> 
+          <Button size="small" onClick={handleClickFeedback} 
+            variant={SECONDARY_CTA.variant} style={{ fontWeight: 'bold' }} color={cardUser.feedbackForm?.isDone ? 'success' : 'secondary'}>
+              Feedback</Button> 
           </>
         )
       };

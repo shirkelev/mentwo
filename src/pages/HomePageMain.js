@@ -30,6 +30,7 @@ import NewFormPage from "./sign-up/NewFormPage";
 import ButtomBar from "../components/ButtomBar";
 import ProfilePage from "../components/ProfilePage";
 import SignUpLoading from "./sign-up/SignUpLoading";
+import FeedbackFormPageShown from "./FeedbackFormPageShow";
 
 
 const NavCont = styled('nav')(({ theme }) => ({
@@ -44,7 +45,7 @@ export default function HomePageMain() {
     const [bottomNavValue, setBottomNavValue] = React.useState(0);
     const [feedData, setFeedData] = React.useState(userData);
     const [localLoading, setLocalLoading] = React.useState(false);
-    const [feedBackFormInterviewee, setFeedBackFormInterviewee] = React.useState();
+    const [feedBackFormPartner, setFeedBackFormPartner] = React.useState();
 
     function ScrollToTop() {
         const { pathname } = useLocation();
@@ -89,7 +90,7 @@ export default function HomePageMain() {
 
     return (
         <UserContext.Provider value={{feedData, setFeedData, 
-                feedBackFormInterviewee, setFeedBackFormInterviewee, setLocalLoading}}>
+                feedBackFormInterviewee: feedBackFormPartner, setFeedBackFormPartner, setLocalLoading}}>
             <div style={{ backgroundColor: '#F8FFFF' }}>
                 {/* {console.log("User Data", userData, feedData, fullDataFetched)} */}
                 <HamburgerMenuContext.Provider value={{showMenu, setShowMenu}}>
@@ -112,8 +113,14 @@ export default function HomePageMain() {
                                 {/* // : <MentorApproval mentee={userData} /> } exact/> */}
                             <Route path={CONSTANTS.MENTOR_FINISHED_PAGE} element={<MentorFinishedPage user={feedData} />} />
                             <Route path={CONSTANTS.MENTOR_IN_PROCESS_PAGE} element={<MentorInProcessPage user={feedData} />} />
-                            <Route path={CONSTANTS.PROCESS_COMPLETION_FORM + 'id=' + (feedBackFormInterviewee?.id ? feedBackFormInterviewee.id : '')} 
-                                    element={<ProcessCompletionPage user={feedData} partner={feedBackFormInterviewee} />} />
+
+                            <Route path={CONSTANTS.PROCESS_COMPLETION_FORM + 'id=' + (feedBackFormPartner?.id ? feedBackFormPartner.id : '')} 
+                                    element={<ProcessCompletionPage user={feedData} partner={feedBackFormPartner} />} />
+
+                            <Route path={CONSTANTS.FEEDBACK_FORM_PRESENT_PAGE + 'id=' + (feedBackFormPartner?.id ? feedBackFormPartner.id : '')} 
+                                    element={<FeedbackFormPageShown user={feedData} partner={feedBackFormPartner} />} />
+
+                                    
                             <Route path={CONSTANTS.ABOUT_PAGE} element={<AboutPage user={feedData} />} />
                             <Route path={CONSTANTS.RECOMMENDATINS_PAGE} element={<Recommendations user={feedData} />} />
                             <Route path={CONSTANTS.CHOOSE_MENTOR_PAGE} element={<ChooseMentor mentee={feedData} />} />

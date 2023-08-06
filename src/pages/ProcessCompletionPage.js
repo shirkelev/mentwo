@@ -25,6 +25,7 @@ import Avatar from '@mui/material/Avatar';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Fab from '@mui/material/Fab';
 import { DB } from '../data/firebase';
+import { UserContext } from '../context/UserContext';
 
 
 const RootContainer = styled(Container)(({ theme }) => ({
@@ -169,9 +170,11 @@ const DialogBox = ({title, content, open, onApproveFunc, onDecline, setDialogSta
 
 const ProcessCompletionPage = ({user, partner, formId=null}) => {
 
-    if(!partner) {
-        partner = user;
-    }
+    // if(!partner) {
+    //     partner = user;
+    // }
+
+    const {setFeedData} = React.useContext(UserContext); 
 
     const [feedbackForm, setFeedbackForm] = useState(
         partner?.feedbackForm ? partner.feedbackForm : {
@@ -201,7 +204,7 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
 
     const menteeDialogClosedWithNo = () => {
         setDoneDialogOpen(false);
-        navigate('../');
+        navigate('../' + Constants.MENTOR_FINISHED_PAGE);
     };
 
     const menteeDialogClosedWithYes = () => {
@@ -211,7 +214,7 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
 
     const mentorDialogClosed = () => {
         setDoneDialogOpen(false);
-        navigate('../');
+        navigate('../' + Constants.MENTOR_FINISHED_PAGE);
     };
 
     const [shareModalOpen, setShareModalOpen] = React.useState(false);
@@ -253,6 +256,7 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
                 });
             }
         };
+        const defaultValue = placeholder !== "Skill " + index ? placeholder : null;
     
         return( 
             <SingleSkillContainer>
@@ -263,7 +267,8 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
                         id="outlined-basic"
                         label={placeholder}
                         variant="filled"
-                        placeholder={placeholder}
+                        placeholder={defaultValue ? null : placeholder}
+                        defaultValue={defaultValue ? defaultValue : null}
                         onBlur={(e) => handleSkillChange(e)}
                         isDisabled={isDisabled}
                         type={"text"}
@@ -296,7 +301,7 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
 
     const fabStyle = {
         position: 'sticky',
-        top: '83vh',
+        top: '88vh',
         bottom: '85vh',
         left: '85vw',
       };
@@ -320,16 +325,30 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
             }
         }
         return newForm;
-        }
+        };
+    
+    const updateFeedData = (finalForm) => {
+        let newFeedData = {...user};
+        newFeedData.finishedMenteesData = newFeedData.finishedMenteesData.map((mentee) => {
+            if (mentee.id === partner.id) {
+                // Update the properties of the matching entry here
+                return { ...mentee, feedbackForm: {...finalForm, intreviewerId: user.id, intervieweeId: partner.id} };
+            }
+            return {...mentee};
+        });
+        console.log(newFeedData.finishedMenteesData)
+        setFeedData(newFeedData);
+    }
 
     const onClickSave = async () => {
         // Save the feedback form
         let finalForm = fixFeedbackForm()
-        finalForm = {...finalForm, isDone: false};
+        finalForm = {...finalForm, isDone: finalForm.isDone ? true : false};
         console.log(finalForm);
         await DB.addNewFeedbackForm(user.id, partner.id, finalForm);
+        updateFeedData(finalForm);
         setSaveDialogOpen(false);
-        navigate('../');
+        navigate('../' + Constants.MENTOR_FINISHED_PAGE);
     };
 
     const onClickDone = async () => {
@@ -337,8 +356,10 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
         finalForm = {...finalForm, isDone: true};
         console.log(finalForm);
         await DB.addNewFeedbackForm(user.id, partner.id, finalForm);
+        updateFeedData(finalForm);
         setDoneDialogOpen(false);
-        navigate('../');
+        // Set the feed data in the place of the current finished interviewee feedback form
+        navigate('../' + Constants.MENTOR_FINISHED_PAGE);
     }
 
     useEffect(() => {
@@ -410,9 +431,10 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
                 <FeedbackContainer>
                     <Statement> Keepers - Free Text</Statement>
                     <Question>Please tell {partner.name} what s/he was good at!</Question>
-                    <BigContentBox placeholder={ feedbackForm.toKeepText ? feedbackForm.toKeepText :
+                    <BigContentBox placeholder={ feedbackForm.toKeepText ? null :
                         "Tell " + partner.name + 'what was great!'
                         } 
+                        defaultValue={feedbackForm.toKeepText ? feedbackForm.toKeepText : null}
                         onBlur={(e) => onChangeFreeText(e, "keep")}/>
                 </FeedbackContainer>
 
@@ -446,8 +468,9 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
                 <FeedbackContainer>
                     <Statement> To Improve - Free Text</Statement>
                     <Question>Please tell {partner.name} what s/he should improve!</Question>
-                    <BigContentBox placeholder={ feedbackForm.toImproveText ? feedbackForm.toImproveText : 
+                    <BigContentBox placeholder={ feedbackForm.toImproveText ? null : 
                                 "Tell " + partner.name + ' what can be better!'} 
+                                defaultValue={feedbackForm.toKeepText ? feedbackForm.toKeepText : null}
                                 onBlur={(e) => onChangeFreeText(e, "improve")}/>
                 </FeedbackContainer>
 
@@ -456,9 +479,10 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
                     <Question>Anything else you would like to add ? </Question>
                     <BigContentBox 
                         placeholder={
-                        feedbackForm.freeText ? feedbackForm.freeText :  
+                        feedbackForm.freeText ? null :  
                         "Enter your Tips, general impression, etc" 
                         } 
+                        defaultValue={feedbackForm.freeText ? feedbackForm.freeText : null}
                         
                         onBlur={(e) => onChangeFreeText(e, "free")}/>
                 </FeedbackContainer>
@@ -505,7 +529,7 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
                 onApproveFunc={onClickSave}
                 onDecline={() => {
                     setSaveDialogOpen(false)
-                    navigate('../')
+                    navigate('../' + Constants.MENTOR_FINISHED_PAGE)
                 }}
                 >
             </DialogBox>

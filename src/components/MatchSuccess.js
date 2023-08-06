@@ -13,6 +13,7 @@ export default function MatchSuccess({mentee}) {
         window.location.reload();
     }
     return( 
+        
         <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' , marginTop: '2rem' }}>
             {/* <StageStepper activeStage={2} style={{width:'100%'}} />  */}
             <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center',marginTop: '1rem', marginBottom: '5rem' }}>

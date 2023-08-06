@@ -7,6 +7,7 @@ const BigContentBox = ({
     ,onBlur=() => {}
     ,onChange=() => {}
     ,variant="outlined"
+    ,defaultValue=null
   }) => {
   return (
     <TextField
@@ -18,6 +19,7 @@ const BigContentBox = ({
     onClick={onClick}
     onBlur={onBlur}
     onChange={onChange}
+    defaultValue={defaultValue}
   />
 
   );
