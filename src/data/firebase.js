@@ -235,7 +235,8 @@ class DataBase {
         const intervieweeBaseData = await getDoc(doc(this.db, Constants.USERS_DB_NAME, pendingList[i]));
         const intervieweeExtraData = await getDoc(doc(this.db, Constants.INTERVIEWEES_DB_NAME, pendingList[i]));
         const interviewee = {...intervieweeBaseData.data(), ...intervieweeExtraData.data()};
-        if(!interviewee.isMatched){
+        if(intervieweeBaseData.exists() && intervieweeExtraData.exists() &&
+                !interviewee.isMatched && interviewee.signedUp ){
           pendingInterviewees.push(interviewee);
         }
       }
@@ -276,7 +277,12 @@ class DataBase {
         const intervieweeFeedbackForm = await this.getFeedbackForm(intreviwerId, finishedList[i])
         const interviewee = {...intervieweeBaseData.data(), ...intervieweeExtraData.data() 
                                   ,feedbackForm: intervieweeFeedbackForm};
-        finishedInterviewees.push(interviewee);
+        if(intervieweeBaseData.exists() && intervieweeExtraData.exists()){
+            finishedInterviewees.push(interviewee);
+        }
+        else {
+          console.log("Intreviewee with ID ", finishedList[i], " does not exist");
+        }
       }
       console.log("All finished interviewees are added");
       return finishedInterviewees;
@@ -294,7 +300,11 @@ class DataBase {
         const intervieweeBaseData = await getDoc(doc(this.db, Constants.USERS_DB_NAME, processedList[i]));
         const intervieweeExtraData = await getDoc(doc(this.db, Constants.INTERVIEWEES_DB_NAME, processedList[i]));
         const intervieweeData = {...intervieweeBaseData.data(), ...intervieweeExtraData.data()};
-        processedInterviewees.push(intervieweeData);
+        if(intervieweeBaseData.exists() && intervieweeExtraData.exists()){
+          processedInterviewees.push(intervieweeData);
+        } else {
+          console.log("Intreviewee with ID ", processedList[i], " does not exist");
+        }
       }
       console.log("All processed interviewees are added");
       return processedInterviewees;
@@ -310,8 +320,13 @@ class DataBase {
       const interviewerBaseData = await getDoc(doc(this.db, Constants.USERS_DB_NAME, id));
       const interviewerExtraData = await getDoc(doc(this.db, Constants.INTERVIEWERS_DB_NAME, id));
       const interviewer = {...interviewerBaseData.data(), ...interviewerExtraData.data()};
-      console.log("Interviewer data is added");
-      return interviewer;
+      if(interviewerBaseData.exists() && interviewerExtraData.exists()){
+        console.log("Interviewer data is added");
+        return interviewer;
+      } else {
+        console.log("Interviewer with ID ", id, " does not exist");
+        return null;
+      }
     } catch (e) {
       console.log("Error getting interviewer data");
       return null;
@@ -325,7 +340,11 @@ class DataBase {
         const curMentorData = await this.getInterviewerData(finishedList[i]);
         const curMentorFeedbackForm = await this.getFeedbackForm(finishedList[i], intervieweeId);
         const mentorFinalData = {...curMentorData, feedbackForm: curMentorFeedbackForm};
-        finishedMentorsData.push(mentorFinalData);
+        if(curMentorData){
+          finishedMentorsData.push(mentorFinalData);
+        } else {
+          console.log("Mentor with ID ", finishedList[i], " does not exist");
+        }
       }
       console.log("All finished mentors are added");
       return finishedMentorsData;

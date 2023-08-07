@@ -145,7 +145,7 @@ const FeedbackFormPageShown = ({user, partner}) => {
     
         return( 
             <SingleSkillContainer>
-                <SkillNumber> {index} </SkillNumber>
+                <SkillNumber> {index + 1} </SkillNumber>
                 {/* <Typography variant="h6" gutterBottom component="div"> {index} </Typography> */}
                 <Typography variant='h6' > {text} </Typography>
             </SingleSkillContainer>

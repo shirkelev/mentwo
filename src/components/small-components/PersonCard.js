@@ -23,7 +23,7 @@ import Badge from '@mui/material/Badge';
 const maxLength = 70;
 
 const FiledsList = ({list}) => {
-  const itemList = list.join(",  "); 
+  const itemList = list?.length > 0 ? list.join(",  ") : null; 
 
   return (
     <div style={{ marginRight: 5, marginLeft: 5 }}>
