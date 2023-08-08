@@ -109,7 +109,7 @@ export default function ProfilePage() {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-              <Typography variant="body2" fontWeight="bold">Characteristics</Typography>
+              <Typography variant="body2" fontWeight="bold">Community</Typography>
               </TableCell>
               <TableCell align="right">
                 <TagsWithHeadlineContainer category ={Constants.AGENDAS} list={userData.agendas}/></TableCell>

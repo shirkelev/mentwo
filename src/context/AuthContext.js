@@ -177,6 +177,7 @@ useEffect(() => {
       // console.log("The user Role is ", newUser.data().type, newUser.data());
       let userExtraData = await DB.getRoleData(user.uid, newUser.data().type);
       userExtraData = userExtraData.data();
+      userExtraData = {...newUser.data(), ...userExtraData};
       // console.log("User Extra Data", userExtraData);
       switch (newUser.data().type) {
         case "mentor":
@@ -184,17 +185,20 @@ useEffect(() => {
           // console.log("Pending Mentees", userExtraData.pendingMentees ? userExtraData.pendingMentees : [])
           // console.log("Approved Mentees", userExtraData.approvedMentess ? userExtraData.approvedMentess : [])
           // console.log("Finished Mentees", userExtraData.finishedMentees ? userExtraData.finishedMentees : [])
-          if(userExtraData.pendingMentees.length <= 3) {
+          if(userExtraData.pendingMentees.length <= 5) {
             const availbleInterviewees = await DB.getUnmatchedInterviewees();
             // console.log("Available Interviewees", availbleInterviewees);
             const matches = matchInterviewer(userExtraData, availbleInterviewees);
+            console.log("Matches", matches.matches);
             // console.log("Matches", matches);
             userExtraData.pendingMentees = matches? matches.matches : [];
             
             // Todo update pending interviewees for interviewer in DB
           }
           // console.log("Approved Ids ", userExtraData.approvedMentess)
+          console.log("Pending Ids ", userExtraData.pendingMentees)
           const pendingInterviewees = await DB.getPendingInterviewees(userExtraData.pendingMentees ? userExtraData.pendingMentees : [] );
+          console.log("Pending", pendingInterviewees.length)
           const approvedInterviewees = await DB.getProcessedInterviewees(userExtraData.approvedMentess ? userExtraData.approvedMentess : []);
           const finishedIntervieweesData= await DB.getFinishedInterviewees(user.uid
                                                       ,userExtraData.finishedMentees ? userExtraData.finishedMentees : []);

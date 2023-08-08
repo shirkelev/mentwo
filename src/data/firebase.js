@@ -236,8 +236,10 @@ class DataBase {
         const intervieweeExtraData = await getDoc(doc(this.db, Constants.INTERVIEWEES_DB_NAME, pendingList[i]));
         const interviewee = {...intervieweeBaseData.data(), ...intervieweeExtraData.data()};
         if(intervieweeBaseData.exists() && intervieweeExtraData.exists() &&
-                !interviewee.isMatched && interviewee.signedUp ){
+                !interviewee.isMatched ){
           pendingInterviewees.push(interviewee);
+        } else {
+          console.log("Interviewee with ID ", pendingList[i], " does not exist");
         }
       }
       console.log("All pending interviewees are added");

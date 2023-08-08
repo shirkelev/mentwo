@@ -470,7 +470,7 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
                     <Question>Please tell {partner.name} what s/he should improve!</Question>
                     <BigContentBox placeholder={ feedbackForm.toImproveText ? null : 
                                 "Tell " + partner.name + ' what can be better!'} 
-                                defaultValue={feedbackForm.toKeepText ? feedbackForm.toKeepText : null}
+                                defaultValue={feedbackForm.toImproveText ? feedbackForm.toImproveText : null}
                                 onBlur={(e) => onChangeFreeText(e, "improve")}/>
                 </FeedbackContainer>
 

@@ -60,7 +60,7 @@ export const AGENDAS_LIST = ['Combat Soldier', 'Woman', 'Man', 'Haredi', 'Orthod
 export const AGENDA_WEIGHT = 2;
 export const TECHSKILLS_WEIGHT = 1;
 export const SOFTSKILLS_WEIGHT = 1;
-export const NUM_OF_MATCHES = 5;
+export const NUM_OF_MATCHES = 10;
 
 // Sign Up Form Questions
 export const MENTOR_QUESTIONS = [
