@@ -69,7 +69,7 @@ const UserCardModal = ({user, onClose}) => {
 
     const { openUserModal, setOpenUserModal, modalType, setModalType } = useContext(UserModalContext);
     const userWhatsapp = user.phone?.startsWith('0') ? '+972' + user.phone.substr(1) : user.phone;
-    const whatsappLink = `https://wa.me/'${userWhatsapp}'?text=Hi%20${user.name}%20${user.lastName}`;
+    const whatsappLink = `https://wa.me/'${userWhatsapp}'?text=Hi%20${user.name}%20${user.lastName}!%20Im%20%20From%20InterView!`;
     const whatsappProps = {
       color: user.phone ? 'success' : 'default',
       onClick : user.phone ?
