@@ -300,6 +300,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
             text: 'Using the woderfull app Internview, I helped ' + cardUser.name + ' '
                   + cardUser.lastName + ' by conducting a mock interview. You can help someone too!',
             url: 'https://internview-af2ef.web.app',
+            
           });
           console.log('Shared successfully');
         } catch (error) {
