@@ -49,9 +49,10 @@ export default function PersonCard({variant, mainUser, cardUser}) {
   const {setFeedBackFormPartner} = React.useContext(UserContext);
 
   
-  const DialogBox = ({title, content, open, onApproveFunc}) => {
+  const DialogBox = ({title, content, open, onApproveFunc, onDeclineFunc= () => null }) => {
     // Our dialog box, for decline approve and finise
     const onDecline = () => {
+      onDeclineFunc();
       setDialogState(defaultDialogState);
     }
     
@@ -99,7 +100,7 @@ export default function PersonCard({variant, mainUser, cardUser}) {
   }
 
   function moveSpecificId(id, idsFrom, objectsFrom, idsTo, objectsTo) {
-    console.log("Moving id", id, "from", idsFrom, "to", idsTo, "objects", objectsFrom, objectsTo)
+    // console.log("Moving id", id, "from", idsFrom, "to", idsTo, "objects", objectsFrom, objectsTo)
     const index = idsFrom.indexOf(id);
     if (index !== -1) {
       // Remove the id and object from the 'From' arrays
@@ -169,8 +170,8 @@ export default function PersonCard({variant, mainUser, cardUser}) {
       
     }
     function onApprove(){
+      const [processIds, processObjects, finisheddIds, finishedObjects] = moveToFinish(feedData, cardUser);
       switch (mainUser.type){ 
-
         case 'mentor':
           setDialogState(
             {
@@ -181,15 +182,20 @@ export default function PersonCard({variant, mainUser, cardUser}) {
               setFeedBackFormPartner(cardUser);
               navigate('../' + Constants.PROCESS_COMPLETION_FORM + 'id=' + cardUser.id);
               }
+            ,onDeclineFunc: () => {
+              console.log("Decline Pressed");
+              setFeedData({...feedData, 
+                approvedMentess: processIds, 
+                approvedMenteesData: processObjects, 
+                finishedMentees: finisheddIds, 
+                finishedMenteesData: finishedObjects
+              })
+              setModalType('contact');
+            }
             });
-          const [processIds, processObjects, finisheddIds, finishedObjects] = moveToFinish(feedData, cardUser);
-          setModalType('contact');
-          // setFeedData({...feedData, 
-          //   approvedMentess: processIds, 
-          //   approvedMenteesData: processObjects, 
-          //   finishedMentees: finisheddIds, 
-          //   finishedMenteesData: finishedObjects
-          // });
+            setModalType('contact');
+          
+          
           console.log("Finished Mentor Process Update");
           
           break;
@@ -428,7 +434,8 @@ export default function PersonCard({variant, mainUser, cardUser}) {
         <DialogBox open={dialogState.open} 
           title={dialogState.title} 
           content={dialogState.content} 
-          onApproveFunc={dialogState.onApproveFunc} />
+          onApproveFunc={dialogState.onApproveFunc}
+          onDeclineFunc={dialogState.onDeclineFunc ? dialogState.onDeclineFunc : () => null } />
       </UserModalContext.Provider>
       
       </>

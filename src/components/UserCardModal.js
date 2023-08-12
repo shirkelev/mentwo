@@ -7,6 +7,7 @@ import Tag from './small-components/Tag';
 import * as Constants from '../Constants';
 import TagsCategory from './small-components/TagsCategory';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import Chip from '@mui/material/Chip';
 import DescriptionIcon from '@mui/icons-material/Description';
 
@@ -67,6 +68,20 @@ const TagsWithHeadlineContainer = ({category, list}) => {
 const UserCardModal = ({user, onClose}) => {
 
     const { openUserModal, setOpenUserModal, modalType, setModalType } = useContext(UserModalContext);
+    const userWhatsapp = user.phone?.startsWith('0') ? '+972' + user.phone.substr(1) : user.phone;
+    const whatsappLink = `https://wa.me/'${userWhatsapp}'?text=Hi%20${user.name}%20${user.lastName}`;
+    const whatsappProps = {
+      color: user.phone ? 'success' : 'default',
+      onClick : user.phone ?
+      () => {
+        try{window.open(whatsappLink, "_blank")}
+        catch(e){
+          console.log(e)
+          window.open('https://www.whatsapp.com/', "_blank")
+        }
+      } 
+      : () => {},
+    }
 
     function ModalContent({modalType}){
       if(modalType === 'about'){
@@ -81,6 +96,17 @@ const UserCardModal = ({user, onClose}) => {
           <>
           <Typography variant="body1" sx={{ mb: 1 }}>Email: {user.email}</Typography>
           <Typography variant="body1" sx={{ mb: 1 }}>Phone: {user.phone}</Typography>
+          <Chip
+            label="Caht On Whatsapp"
+            onClick={whatsappProps.onClick}
+            onDelete={() => {}}
+            size='small'
+            icon={<WhatsAppIcon />}
+            deleteIcon={<></>}
+            variant="outlined"
+            color={whatsappProps.color}
+            
+          />
           </>
           
         )
@@ -112,7 +138,7 @@ const UserCardModal = ({user, onClose}) => {
             }
              } : () => {},
       }
-
+      
       const hasCV = user.cv ? true : false;
       const cvProps = {
         color: hasCV ? 'success' : 'default',

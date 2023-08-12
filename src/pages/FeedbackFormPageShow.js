@@ -17,7 +17,7 @@ const RootContainer = styled(Container)(({ theme }) => ({
    flexDirection: 'column',
    alignItems: 'center',
    justifyContent: 'center',
-   paddingTop: theme.spacing(1),
+   paddingTop: theme.spacing(3),
    paddingBottom: theme.spacing(10),
    paddingLeft: theme.spacing(3),
     paddingRight: theme.spacing(3),
@@ -152,19 +152,25 @@ const FeedbackFormPageShown = ({user, partner}) => {
         );
     }
 
-    const fabStyle = {
-        position: 'sticky',
-        top: '88vh',
-        bottom: '85vh',
-        left: '85vw',
+    const FabContainerStyle = styled('div')(({ theme }) => ({
+        position: 'fixed',
+        bottom: 45,
+        right: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        margin: '20px',
+        gap: '10px',
+      }));
+      
+      const fabStyle = {
+        position: 'relative',
+        marginBottom: '8px',
       };
-    
-    const editFabStyle = {
-        position: 'sticky',
-        top: '80vh',
-        bottom: '85vh',
-        left: '85vw',
-        };
+      
+      const editFabStyle = {
+        position: 'relative',
+      };
       
     const mainTitle = user.type === 'mentor' ? 'Your Feedback to ' + partner.name :
                     partner.name + ' Feedback';
@@ -192,15 +198,17 @@ const FeedbackFormPageShown = ({user, partner}) => {
 
         return (
         <>
-        {user.type === 'mentor' ? 
-         <Fab color="primary" aria-label="add" size="small" sx={editFabStyle} onClick={onEditTapped}>
-            <EditIcon />
-        </ Fab>
-         
-         : null}
-        <Fab color="primary" aria-label="add" size="small" sx={fabStyle} onClick={backTapped}>
-                <ArrowBackIcon />
-        </ Fab>
+        <FabContainerStyle>
+            {user.type === 'mentor' ? 
+            <Fab color="primary" aria-label="add" size="small" sx={editFabStyle} onClick={onEditTapped}>
+                <EditIcon />
+            </ Fab>
+            
+            : null}
+            <Fab color="primary" aria-label="add" size="small" sx={fabStyle} onClick={backTapped}>
+                    <ArrowBackIcon />
+            </ Fab>
+        </FabContainerStyle>
         <div style={{ backgroundColor: '#F8FFFF' }}>
         <RootContainer maxWidth="md">
             
@@ -248,6 +256,11 @@ const FeedbackFormPageShown = ({user, partner}) => {
                 <FeedbackContainer>
                     <Statement> To Improve - Free Text</Statement>
                     <FreeTextBox  text={feedbackForm.toImproveText} />
+                </FeedbackContainer>
+
+                <FeedbackContainer>
+                    <Statement>General Feedback, Tips and More</Statement>
+                    <FreeTextBox  text={feedbackForm.freeText} />
                 </FeedbackContainer>
                 
             </FormContainer>

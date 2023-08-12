@@ -299,12 +299,21 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
     }
 
 
+    const FabContainerStyle = styled('div')(({ theme }) => ({
+        position: 'fixed',
+        bottom: 45,
+        right: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        margin: '20px',
+        gap: '10px',
+      }));
+      
     const fabStyle = {
-        position: 'sticky',
-        top: '88vh',
-        bottom: '85vh',
-        left: '85vw',
-      };
+        position: 'relative',
+        marginBottom: '8px',
+    };
     
     const fixFeedbackForm = () => {
         let newForm = {...feedbackForm};
@@ -336,7 +345,7 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
             }
             return {...mentee};
         });
-        console.log(newFeedData.finishedMenteesData)
+        // console.log(newFeedData.finishedMenteesData)
         setFeedData(newFeedData);
     }
 
@@ -344,7 +353,7 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
         // Save the feedback form
         let finalForm = fixFeedbackForm()
         finalForm = {...finalForm, isDone: finalForm.isDone ? true : false};
-        console.log(finalForm);
+        // console.log(finalForm);
         await DB.addNewFeedbackForm(user.id, partner.id, finalForm);
         updateFeedData(finalForm);
         setSaveDialogOpen(false);
@@ -387,10 +396,11 @@ const ProcessCompletionPage = ({user, partner, formId=null}) => {
     else {
         return (
         <>
-        
-        <Fab color="primary" aria-label="add" size="small" sx={fabStyle} onClick={() => setSaveDialogOpen(true)}>
+        <FabContainerStyle>
+            <Fab color="primary" aria-label="add" size="small" sx={fabStyle} onClick={() => setSaveDialogOpen(true)}>
                 <ArrowBackIcon />
-        </ Fab>
+            </ Fab>
+        </FabContainerStyle>
         <div style={{ backgroundColor: '#F8FFFF' }}>
         <RootContainer maxWidth="md">
             
